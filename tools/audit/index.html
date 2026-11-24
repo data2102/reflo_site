@@ -1,0 +1,292 @@
+<!doctype html>
+<html lang="ko" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>내 파일 검산기 — 리플로 무료 도구</title>
+<meta name="description" content="엑셀·CSV 파일을 넣으면 합계가 틀릴 자리를 찾아 드려요. 섞여 있는 소계 줄, 글자로 된 날짜와 금액, 같은 줄, 표기가 다른 이름. 파일은 브라우저 밖으로 나가지 않아요.">
+<link rel="canonical" href="https://reflo-works.netlify.app/tools/audit/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="리플로 Reflo">
+<meta property="og:title" content="내 파일 검산기 — 리플로 무료 도구">
+<meta property="og:description" content="보고하기 전에 파일을 한 번 넣어 보세요. 합계가 틀릴 자리를 몇 번째 줄인지까지 찾아 드려요.">
+<meta property="og:url" content="https://reflo-works.netlify.app/tools/audit/">
+<meta property="og:image" content="https://reflo-works.netlify.app/og.png">
+<link rel="stylesheet" href="/tokens.css">
+<link rel="stylesheet" href="/marketing.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.24.0/dist/tabler-icons.min.css">
+<link rel="stylesheet" href="/tools/tools.css">
+<style>
+.pickrow{display:flex;flex-wrap:wrap;align-items:center;gap:10px 18px;margin-top:14px;font-size:var(--fs-caption);color:var(--text-secondary)}
+.pickrow select,.pickrow input{height:34px;padding:0 8px;border:1px solid var(--border-strong);border-radius:var(--radius-sm);font:inherit;color:var(--text-primary);background:var(--surface)}
+.pickrow input{width:64px}
+.verdict{margin:28px 0 0;padding:20px 22px;border-radius:var(--radius-xl);font-size:var(--fs-subhead);line-height:1.6}
+.verdict.warn{background:var(--warm-bg);color:var(--warm)}
+.verdict.good{background:var(--accent-bg);color:var(--accent-strong)}
+.verdict b{font-weight:var(--fw-bold)}
+.verdict small{display:block;margin-top:6px;font-size:var(--fs-caption);color:var(--text-secondary)}
+.find{margin-top:14px;border:1px solid var(--border);border-radius:var(--radius-xl);padding:20px 22px;background:var(--surface)}
+.find h3{margin:0;font-size:var(--fs-subhead);font-weight:var(--fw-bold);display:flex;flex-wrap:wrap;align-items:center;gap:8px}
+.find h3 .n{padding:2px 10px;border-radius:var(--radius-pill);background:var(--warm-bg);color:var(--warm);font-size:var(--fs-footnote);font-weight:var(--fw-medium)}
+.find p{margin:8px 0 12px;font-size:var(--fs-caption);color:var(--text-secondary);line-height:var(--lh-body)}
+.find .tablewrap{border-radius:var(--radius-md)}
+.find .more{margin:10px 0 0;font-size:var(--fs-footnote);color:var(--text-tertiary)}
+.rowno{font-family:var(--font-mono);white-space:nowrap;color:var(--text-primary)}
+.t td.diff{color:var(--danger-strong);font-weight:var(--fw-medium)}
+.limits{margin:36px 0 0;padding:18px 22px;border-radius:var(--radius-lg);background:var(--surface-sunken);font-size:var(--fs-caption);color:var(--text-secondary);line-height:1.8}
+.limits b{color:var(--text-primary)}
+.limits ul{margin:6px 0 0;padding-left:18px}
+</style>
+</head>
+<body>
+
+<div class="ds-hero-wrap">
+  <div class="nav">
+    <a class="brand" href="/"><span class="mark">R</span> 리플로</a>
+    <a class="navback" href="/tools/">리플로 실험실 →</a>
+  </div>
+  <header class="ds-hero tool-hero">
+    <span class="eyebrow">무료 도구</span>
+    <h1>이 파일의 합계,<br><span class="accent">맞을까요?</span></h1>
+    <p class="lead">보고하기 전에 파일을 한 번 넣어 보세요.
+      합계가 틀릴 자리를 몇 번째 줄인지까지 찾아 드려요.</p>
+  </header>
+</div>
+
+<main class="tool">
+
+  <label class="drop" id="drop" for="pick">
+    <i class="ti ti-file-search"></i>
+    <b>파일을 여기에 끌어다 놓거나 눌러서 고르세요</b>
+    <span>엑셀(.xlsx, .xls)과 CSV · 한 번에 하나</span>
+    <input type="file" id="pick" accept=".xlsx,.xlsm,.xls,.csv,.txt">
+  </label>
+  <p class="privacy"><i class="ti ti-lock"></i> 파일은 이 브라우저 안에서만 읽어요. 어디로도 보내지 않아요.
+    <button type="button" class="linkbtn" id="sample">파일이 없으면 예시로 해보기</button></p>
+
+  <section id="work" hidden>
+    <h2 class="t-h2">넣은 파일 <small id="fname"></small></h2>
+    <div class="pickrow">
+      <label id="sheetbox">시트 <select id="sheet"></select></label>
+      <label>머리글이 있는 줄 <input type="number" id="head" min="1"></label>
+      <span class="dim" id="headhint"></span>
+    </div>
+
+    <div id="out"></div>
+
+    <div class="limits">
+      <b>이 도구가 본 것과 보지 않은 것</b>
+      <ul>
+        <li>본 것은 다섯 가지뿐이에요. 섞여 있는 합계·소계 줄, 날짜 열의 글자, 숫자 열의 글자, 모든 칸이 같은 줄, 표기만 다른 이름.</li>
+        <li>값이 옳은지, 수식이 맞는지, 숨겨진 행과 다른 시트는 보지 않았어요.</li>
+        <li>「합계」로 시작하는 이름(예: 합계산업)은 합계 줄로 잘못 볼 수 있어요. 찾은 줄을 직접 확인해 주세요.</li>
+        <li>아무것도 고치지 않아요. 넣으신 파일은 그대로예요.</li>
+      </ul>
+    </div>
+    <div class="dl"><button type="button" class="linkbtn" id="reset" style="margin-left:0">다른 파일 넣기</button></div>
+  </section>
+</main>
+
+<section class="ds-mkt-section">
+  <h2 class="ds-mkt-h2">숫자를 다 맞게 넣고도 합계가 틀리는 자리</h2>
+  <p class="ds-mkt-lead">엑셀은 틀렸다고 알려 주지 않아요. 조용히 건너뛰거나, 조용히 두 번 더해요.</p>
+  <div class="ds-feature-grid">
+    <div class="ds-feature-card">
+      <div class="ds-feature-ico"><i class="ti ti-sum"></i></div>
+      <h3>소계 줄을 같이 더해요</h3>
+      <p>내려받은 파일 사이사이에 「소계」「합계」 줄이 있으면, 범위를 잡아 더할 때 그 줄까지 들어가요. 합계가 두 배 가까이 부풀어요.</p>
+    </div>
+    <div class="ds-feature-card">
+      <div class="ds-feature-ico"><i class="ti ti-calendar-off"></i></div>
+      <h3>글자로 된 날짜가 빠져요</h3>
+      <p>「11월 5일」처럼 손으로 적은 날짜는 엑셀에게 날짜가 아니에요. 11월 매출을 뽑으면 그 줄만 세지 않아요.</p>
+    </div>
+    <div class="ds-feature-card">
+      <div class="ds-feature-ico"><i class="ti ti-abc"></i></div>
+      <h3>글자가 든 금액이 빠져요</h3>
+      <p>「1,200원」「확인중」이 든 칸은 합계 수식이 말없이 건너뛰어요. 오류 표시도 없어요.</p>
+    </div>
+  </div>
+</section>
+
+<div class="ds-cta-band">
+  <h2>매달 이 확인을 손으로 하고 계신가요</h2>
+  <p class="ds-mkt-lead" style="margin-bottom:28px">자료만 붙여 넣으면 검산까지 끝난 한 화면이 나오게 만들어 드려요. 처음 세 곳은 10만원이에요.</p>
+  <div class="ds-hero-cta">
+    <a class="ds-btn-pill primary" href="/pilot/?from=audit" data-track="open_pilot">어떻게 만들어 주는지 보기</a>
+    <a class="ds-btn-pill ghost" href="/tools/merge/" data-track="audit_to_merge">파일 여러 개 합치기</a>
+  </div>
+</div>
+
+<footer>
+  <p>만든 곳 — 리플로 Reflo ·
+    <a href="/tools/">리플로 실험실</a> ·
+    <a href="/">작업물 보기</a> ·
+    <a href="https://blog.naver.com/reflo2026">블로그</a></p>
+  <p style="margin-top:9px">잘못 찾았거나 못 찾은 곳이 있으면
+    <span class="mono">reflo2026@naver.com</span> 으로 알려주세요. 고쳐서 다시 올려요.</p>
+  <p style="margin-top:9px">방문 수를 세기 위해 Google Analytics 쿠키를 써요. 넣으신 파일의 이름과 내용은 세지도, 보내지도 않아요.</p>
+</footer>
+
+<script src="/tools/lib/xlsx.full.min.js"></script>
+<script src="/tools/merge/merge.js"></script>
+<script src="audit.js"></script>
+<script>
+(function () {
+  "use strict";
+  var M = window.합치기도구, A = window.검산도구, $ = function (id) { return document.getElementById(id); };
+  var 시트들 = [], 파일명 = "", csv = false, 최대줄 = 15;
+
+  function esc(s) { return String(s).replace(/[&<>"]/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]; }); }
+  function 수(n) { return (Math.round(n * 100) / 100).toLocaleString("ko-KR"); }
+  function 센다(이름, 값) { try { if (window.gtag) window.gtag("event", 이름, 값 || {}); } catch (e) {} }
+
+  function 넣기(name, buf) {
+    파일명 = name; csv = /\.(csv|txt|tsv)$/i.test(name);
+    try { 시트들 = M.읽기(name, buf, XLSX); } catch (e) { 시트들 = []; }
+    $("work").hidden = false;
+    $("fname").textContent = name;
+    if (!시트들.length) { $("sheetbox").hidden = true; $("out").innerHTML = '<p class="verdict warn"><b>파일을 열지 못했어요.</b><small>암호가 걸렸거나 엑셀·CSV 파일이 아니에요.</small></p>'; return false; }
+    $("sheetbox").hidden = 시트들.length < 2;
+    $("sheet").innerHTML = 시트들.map(function (s, i) { return '<option value="' + i + '">' + esc(s.시트) + " (" + 수(s.줄들.length) + "줄)</option>"; }).join("");
+    $("sheet").value = "0";
+    시트고름();
+    return true;
+  }
+
+  function 시트고름() {
+    var s = 시트들[+$("sheet").value];
+    $("head").max = Math.max(1, s.줄들.length);
+    $("head").value = s.머리글행 + 1;
+    그리기();
+  }
+
+  function 표(머리, 줄들) {
+    return '<div class="tablewrap"><table class="t"><tr>' + 머리.map(function (h) { return "<th>" + esc(h) + "</th>"; }).join("") + "</tr>"
+      + 줄들.join("") + "</table></div>";
+  }
+  function 더(전체) { return 전체 > 최대줄 ? '<p class="more">앞 ' + 최대줄 + "건만 보여 드려요 · 전체 " + 수(전체) + "건</p>" : ""; }
+
+  function 카드(f) {
+    var h = "", 본 = f.줄.slice(0, 최대줄);
+    if (f.종류 === "합계줄") {
+      h = '<h3>합계·소계 줄이 자료 사이에 있어요 <span class="n">' + 수(f.건수) + "줄</span></h3>"
+        + "<p>이 줄까지 범위에 넣고 더하면 합계가 부풀어요. 피벗이나 집계를 돌리기 전에 빼야 해요.</p>"
+        + 표(["줄", "내용"], 본.map(function (x) { return '<tr><td class="rowno">' + x.행 + "행</td><td>" + esc(x.보임) + "</td></tr>"; })) + 더(f.줄.length);
+    } else if (f.종류 === "날짜") {
+      h = "<h3>「" + esc(f.열) + '」 열에 날짜가 아닌 칸이 있어요 <span class="n">' + 수(f.건수) + "칸</span></h3>"
+        + "<p>엑셀은 이 칸을 날짜로 읽지 못해요. 기간으로 집계하면 이 줄은 조용히 빠져요.</p>"
+        + 표(["줄", "적힌 값"], 본.map(function (x) { return '<tr><td class="rowno">' + x.행 + '행</td><td class="diff">' + esc(x.값) + "</td></tr>"; })) + 더(f.줄.length);
+    } else if (f.종류 === "날짜전부글자") {
+      h = "<h3>「" + esc(f.열) + '」 열의 날짜가 전부 글자로 들어 있어요 <span class="n">' + 수(f.건수) + "칸</span></h3>"
+        + "<p>눈에는 날짜로 보이지만 엑셀에게는 글자예요. 날짜로 거는 조건(이번 달, 지난주)과 정렬이 기대와 다르게 움직일 수 있어요. 「텍스트 나누기」로 날짜로 바꾼 뒤 쓰는 편이 안전해요.</p>";
+    } else if (f.종류 === "숫자") {
+      h = "<h3>「" + esc(f.열) + '」 열에 글자가 든 칸이 있어요 <span class="n">' + 수(f.건수) + "칸</span></h3>"
+        + "<p>합계 수식은 이 칸을 말없이 건너뛰어요."
+        + (f.빠진건 ? " 숫자로 읽을 수 있는 " + 수(f.빠진건) + "칸만 더해도 <b>" + 수(f.빠진합) + "</b>이 합계에서 빠져 있어요." : "") + "</p>"
+        + 표(["줄", "적힌 값", "숫자로 읽으면"], 본.map(function (x) {
+          return '<tr><td class="rowno">' + x.행 + '행</td><td class="diff">' + esc(x.값) + '</td><td class="num">' + (x.읽으면 === null ? '<span class="dim">읽을 수 없음</span>' : 수(x.읽으면)) + "</td></tr>";
+        })) + 더(f.줄.length);
+    } else if (f.종류 === "중복") {
+      h = '<h3>모든 칸이 같은 줄이 있어요 <span class="n">' + 수(f.건수) + "줄</span></h3>"
+        + "<p>붙여 넣다가 두 번 들어간 것일 수 있어요. 실제로 같은 거래가 두 건일 수도 있으니 확인해 보세요.</p>"
+        + 표(["줄", "내용"], 본.map(function (x) { return '<tr><td class="rowno">' + x.행.join("행, ") + "행</td><td>" + esc(x.보임) + "</td></tr>"; })) + 더(f.줄.length);
+    } else if (f.종류 === "표기") {
+      h = "<h3>「" + esc(f.열) + '」 열에 표기만 다른 이름이 있어요 <span class="n">' + 수(f.건수) + "묶음</span></h3>"
+        + "<p>띄어쓰기나 (주) 표시만 달라도 엑셀은 다른 이름으로 봐요. 이름별로 집계하면 따로 나뉘어요. 같은 곳인지 확인해 보세요.</p>"
+        + 표(["같아 보이는 이름", "줄 수"], 본.map(function (g) {
+          return "<tr><td>" + g.map(function (x) { return "「" + esc(x.값).replace(/ /g, "␣") + "」"; }).join(" · ") + '</td><td class="num">' + g.map(function (x) { return 수(x.건수); }).join(" · ") + "</td></tr>";
+        })) + 더(f.줄.length);
+    }
+    return '<div class="find">' + h + "</div>";
+  }
+
+  function 그리기() {
+    var s = 시트들[+$("sheet").value];
+    var v = parseInt($("head").value, 10);
+    if (v >= 1 && v <= s.줄들.length) s.머리글행 = v - 1;
+    var r = A.검산(s, XLSX, { csv: csv });
+    if (r.문제) { $("out").innerHTML = '<p class="verdict warn"><b>' + esc(r.문제) + ".</b><small>머리글이 있는 줄 번호를 직접 넣어 주세요.</small></p>"; return r; }
+
+    var 열들 = r.열.filter(function (c) { return c.이름; });
+    $("headhint").textContent = "머리글: " + 열들.slice(0, 6).map(function (c) { return c.이름; }).join(", ") + (열들.length > 6 ? " 외 " + (열들.length - 6) + "개" : "");
+
+    var h = '<div class="tiles" style="margin-top:22px">'
+      + '<div class="tile"><span>자료 줄</span><b>' + 수(r.줄수.자료) + "</b></div>"
+      + '<div class="tile"><span>합계·소계 줄</span><b>' + 수(r.줄수.합계) + "</b></div>"
+      + '<div class="tile"><span>빈 줄</span><b>' + 수(r.줄수.빈) + "</b></div>"
+      + '<div class="tile"><span>확인할 곳</span><b>' + 수(r.찾은것.length) + "</b></div></div>";
+
+    var 다른 = r.숫자열.filter(function (x) { return x.그대로 !== x.걸러 || x.글자라빠진건; });
+    if (r.깨끗) {
+      h += '<p class="verdict good"><b>다섯 가지 가운데 걸린 것이 없어요.</b><small>아래 「본 것과 보지 않은 것」까지가 이 확인의 범위예요.</small></p>';
+    } else {
+      var 큰 = 다른.slice().sort(function (a, b) { return Math.abs(b.그대로 - b.걸러) - Math.abs(a.그대로 - a.걸러); })[0];
+      h += '<p class="verdict warn"><b>확인할 곳이 ' + 수(r.찾은것.length) + "가지 있어요.</b>"
+        + (큰 && 큰.그대로 !== 큰.걸러 ? "<small>「" + esc(큰.열) + "」 열을 그대로 다 더하면 <b>" + 수(큰.그대로) + "</b>, 합계·소계 줄을 빼면 <b>" + 수(큰.걸러) + "</b>이에요.</small>" : "") + "</p>";
+    }
+
+    if (r.숫자열.length) {
+      h += '<h2 class="t-h2">숫자 열을 더해 보면 <small>그대로 더한 값과 걸러 낸 값</small></h2>'
+        + 표(["열", "그대로 다 더하면", "합계·소계 줄을 빼면", "글자라서 빠진 값"], r.숫자열.map(function (x) {
+          var 틀림 = x.그대로 !== x.걸러;
+          return "<tr><td><b>" + esc(x.열) + '</b></td><td class="num' + (틀림 ? " diff" : "") + '">' + 수(x.그대로) + '</td><td class="num">' + 수(x.걸러)
+            + '</td><td class="num">' + (x.글자라빠진건 ? '<span class="bad">' + 수(x.글자라빠진) + "</span> <span class=\"dim\">(" + 수(x.글자라빠진건) + "칸)</span>"
+              : (x.글자칸 ? '<span class="dim">읽을 수 없는 글자 ' + 수(x.글자칸) + "칸</span>" : '<span class="dim">없음</span>')) + "</td></tr>";
+        }));
+    }
+    if (r.찾은것.length) h += '<h2 class="t-h2">찾은 곳 <small>줄 번호는 파일에서 위에서부터 센 줄이에요</small></h2>' + r.찾은것.map(카드).join("");
+    $("out").innerHTML = h;
+    return r;
+  }
+
+  function 파일(list) {
+    var f = list && list[0];
+    if (!f) return;
+    var rd = new FileReader();
+    rd.onload = function () {
+      if (넣기(f.name, rd.result)) { var r = A.검산(시트들[0], XLSX, { csv: csv }); 센다("tool_audit_run", { issues: r.찾은것.length }); }
+      $("work").scrollIntoView({ behavior: "smooth", block: "start" });
+    };
+    rd.onerror = function () { 넣기(f.name, new ArrayBuffer(0)); };
+    rd.readAsArrayBuffer(f);
+  }
+
+  $("pick").addEventListener("change", function (e) { 파일(e.target.files); e.target.value = ""; });
+  var drop = $("drop");
+  ["dragenter", "dragover"].forEach(function (n) { drop.addEventListener(n, function (e) { e.preventDefault(); drop.classList.add("on"); }); });
+  ["dragleave", "drop"].forEach(function (n) { drop.addEventListener(n, function (e) { e.preventDefault(); drop.classList.remove("on"); }); });
+  drop.addEventListener("drop", function (e) { 파일(e.dataTransfer.files); });
+  $("sheet").addEventListener("change", 시트고름);
+  $("head").addEventListener("change", 그리기);
+  $("reset").addEventListener("click", function () { 시트들 = []; $("work").hidden = true; $("out").innerHTML = ""; window.scrollTo({ top: 0, behavior: "smooth" }); });
+
+  // 예시 — 지어낸 11월 거래 내역. 다섯 가지가 한 번씩 들어 있어요.
+  $("sample").addEventListener("click", function () {
+    function 날(n) { return { t: "n", v: n, z: "yyyy-mm-dd" }; }
+    var aoa = [["11월 거래 내역 (예시 자료 · 지어낸 값)"], [],
+      ["날짜", "거래처", "품목", "수량", "금액"],
+      [날(46327), "한빛상사", "사무용품", 12, 384000],
+      [날(46328), "대성유통", "포장재", 40, 520000],
+      [날(46329), "한빛 상사", "사무용품", 5, 160000],
+      ["11월 5일", "미래물산", "소모품", 8, 96000],
+      [날(46331), "대성유통", "포장재", 25, "확인중"],
+      [null, "소계", null, 90, 1160000],
+      [날(46334), "미래물산", "소모품", 20, 240000],
+      [날(46335), "(주)한빛상사", "사무용품", 9, "288,000원"],
+      [날(46336), "새봄상회", "포장재", 30, 390000],
+      [날(46336), "새봄상회", "포장재", 30, 390000],
+      [날(46337), "대성유통", "소모품", 14, 168000],
+      [null, "소계", null, 103, 1188000],
+      [null, "합계", null, 193, 2348000]];
+    var wb = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(wb, XLSX.utils.aoa_to_sheet(aoa), "11월");
+    넣기("예시_11월거래내역.xlsx", XLSX.write(wb, { type: "array", bookType: "xlsx" }));
+    센다("tool_audit_sample");
+    $("work").scrollIntoView({ behavior: "smooth", block: "start" });
+  });
+})();
+</script>
+<script src="/analytics.js"></script>
+</body>
+</html>

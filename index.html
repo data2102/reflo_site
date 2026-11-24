@@ -1,0 +1,1369 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>리플로 · 작은 회사 운영 노트</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="description" content="전산·운영을 맡을 사람이 따로 없는 작은 회사에서 자주 끊기는 곳을 정리해요. 인수인계서 양식, 파일 검산기 같은 무료 도구와 운영 노트.">
+<link rel="canonical" href="https://reflo-works.netlify.app/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="리플로 Reflo">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:url" content="https://reflo-works.netlify.app/">
+<meta property="og:title" content="리플로 · 작은 회사 운영 노트">
+<meta property="og:description" content="전산·운영을 맡을 사람이 따로 없는 작은 회사에서 자주 끊기는 곳을 정리해요. 인수인계서 양식, 파일 검산기 같은 무료 도구와 운영 노트.">
+<meta property="og:image" content="https://reflo-works.netlify.app/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="리플로 · 작은 회사 운영 노트 — 사람 하나 빠져도 안쪽 일이 돌아가게">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="리플로 · 작은 회사 운영 노트">
+<meta name="twitter:description" content="전산·운영을 맡을 사람이 따로 없는 작은 회사에서 자주 끊기는 곳을 정리해요. 인수인계서 양식, 파일 검산기 같은 무료 도구와 운영 노트.">
+<meta name="twitter:image" content="https://reflo-works.netlify.app/og.png">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Noto+Sans+KR:wght@400;500;700&display=swap">
+<link rel="stylesheet" href="tokens.css">
+<link rel="stylesheet" href="marketing.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.24.0/dist/tabler-icons.min.css">
+<style>
+/* 레이아웃 — 좌측 정렬 한 단 문서. 작업물마다 직접 돌려볼 수 있는 데모를 둔다. */
+:root{
+  /* 토큰은 tokens.css 에서 온다 (github.com/data2102/design-system) */
+  /* ───── 이 사이트가 쓰는 이름 → 여백 토큰으로 연결 ───── */
+  --paper:var(--bg); --card:var(--surface); --sunken:var(--surface-sunken);
+  --ink:var(--text-primary); --ink2:var(--text-secondary); --ink3:var(--text-tertiary);
+  --rule:var(--border); --rule2:var(--border-strong);
+  --accent-soft:var(--accent-bg); --accent-ink:var(--accent-strong);
+  --ok:var(--success-strong); --ok-soft:var(--success-bg);
+  --warn:var(--warning-strong); --warn-soft:var(--warning-bg);
+  --no:var(--danger-strong); --no-soft:var(--danger-bg);
+  --sans:var(--font-sans); --mono:var(--font-mono);
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  /* 여백 .theme-dark 값 */
+  --accent:#22d3ee; --accent-hover:#38dcf0; --accent-pressed:#0fb9d4;
+  --accent-bg:#10313a; --on-accent:#06232a; --accent-strong:#22d3ee;
+  --text-primary:#e6e8ee; --text-secondary:#c5c9d3; --text-tertiary:#8a90a2; --text-disabled:#565b68;
+  --bg:#0f1117; --surface:#181b24; --surface-sunken:#12141b;
+  --border:#1e2129; --border-strong:#262a35;
+  --success:#34d399; --success-bg:#0f2e26; --success-strong:#34d399;
+  --warning:#fbbf24; --warning-bg:#2e2408; --warning-strong:#fbbf24;
+  --danger:#f87171;  --danger-bg:#2e1414;  --danger-strong:#f87171;
+  --shadow-card:0 1px 3px rgba(0,0,0,.4); --shadow-popover:0 8px 24px rgba(0,0,0,.5);
+  --shadow-focus:0 0 0 3px rgba(34,211,238,.35);
+  color-scheme:dark;
+}}
+:root[data-theme="dark"]{
+  /* 여백 .theme-dark 값 */
+  --accent:#22d3ee; --accent-hover:#38dcf0; --accent-pressed:#0fb9d4;
+  --accent-bg:#10313a; --on-accent:#06232a; --accent-strong:#22d3ee;
+  --text-primary:#e6e8ee; --text-secondary:#c5c9d3; --text-tertiary:#8a90a2; --text-disabled:#565b68;
+  --bg:#0f1117; --surface:#181b24; --surface-sunken:#12141b;
+  --border:#1e2129; --border-strong:#262a35;
+  --success:#34d399; --success-bg:#0f2e26; --success-strong:#34d399;
+  --warning:#fbbf24; --warning-bg:#2e2408; --warning-strong:#fbbf24;
+  --danger:#f87171;  --danger-bg:#2e1414;  --danger-strong:#f87171;
+  --shadow-card:0 1px 3px rgba(0,0,0,.4); --shadow-popover:0 8px 24px rgba(0,0,0,.5);
+  --shadow-focus:0 0 0 3px rgba(34,211,238,.35);
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--paper);color:var(--ink);
+  font-family:var(--sans);font-size:17px;line-height:1.75;-webkit-font-smoothing:antialiased}
+.wrap{max-width:860px;margin:0 auto;
+  padding-left:max(16px,env(safe-area-inset-left,0px));
+  padding-right:max(16px,env(safe-area-inset-right,0px))}
+section{padding-block:clamp(40px,6vw,68px);border-top:1px solid var(--rule)}
+section:first-of-type{border-top:0}
+.eyebrow{font:600 12px/1 var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--ink3);
+  display:flex;align-items:center;gap:10px;margin:0 0 20px}
+.eyebrow::after{content:"";flex:1;height:1px;background:var(--rule)}
+h1{font-size:clamp(31px,5.8vw,47px);font-weight:700;line-height:1.24;letter-spacing:-.03em;
+  margin:0 0 18px;text-wrap:balance}
+h2{font-size:clamp(21px,3.4vw,26px);font-weight:700;line-height:1.35;letter-spacing:-.022em;
+  margin:0 0 12px;text-wrap:balance}
+h3{font-size:19px;font-weight:600;margin:0 0 8px;letter-spacing:-.015em}
+p{margin:0 0 14px;color:var(--ink2)}
+p.lead{font-size:clamp(16px,2.1vw,18px);color:var(--ink2);max-width:62ch}
+strong{color:var(--ink);font-weight:600}
+a{color:var(--accent-ink);text-underline-offset:3px}
+
+.hero{padding-block:clamp(48px,8vw,86px) clamp(36px,5vw,56px)}
+.brand{display:flex;align-items:baseline;gap:11px;margin-bottom:28px}
+.brand b{font:600 16px/1 var(--mono);letter-spacing:-.01em;color:var(--ink)}
+.brand span{font:400 12px/1 var(--mono);letter-spacing:.12em;color:var(--ink3);text-transform:uppercase}
+.hero h1 em{font-style:normal;color:var(--accent)}
+.cta{display:flex;flex-wrap:wrap;gap:10px;margin-top:26px}
+.btn{display:inline-flex;align-items:center;padding:12px 19px;border-radius:7px;
+  font-size:15px;font-weight:600;text-decoration:none;border:1px solid transparent}
+.btn.fill{background:var(--accent);color:#fff}
+.btn.line{border-color:var(--rule2);color:var(--ink)}
+.btn:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.prod{display:block;border:1px solid var(--rule2);border-radius:var(--radius-lg);
+  background:var(--card);padding:22px 24px;text-decoration:none;color:inherit;
+  transition:border-color .12s ease,background-color .12s ease}
+.prod:hover{border-color:var(--accent);background:var(--accent-soft)}
+.prod:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.prod .tag{display:block;font:600 11.5px/1 var(--mono);letter-spacing:.1em;
+  text-transform:uppercase;color:var(--accent);margin-bottom:11px}
+.prod b{display:block;font-size:clamp(18px,3vw,21px);font-weight:600;
+  letter-spacing:-.02em;margin-bottom:8px;color:var(--ink)}
+.prod .d{display:block;font-size:15px;line-height:1.75;color:var(--ink2)}
+.prod .d em{font-style:normal;color:var(--ink);font-weight:600}
+.prod .go{display:inline-block;margin-top:15px;font:600 13.5px/1 var(--sans);color:var(--accent-ink)}
+.prod:hover .go{text-decoration:underline}
+
+.probs{list-style:none;margin:0;padding:0;display:grid;gap:1px;background:var(--rule);
+  border:1px solid var(--rule);border-radius:10px;overflow:hidden}
+.probs li{background:var(--card);padding:15px 19px;display:flex;gap:14px;align-items:flex-start}
+.probs .n{font:500 12px/1.6 var(--mono);color:var(--ink3);flex:none;padding-top:3px}
+.probs p{margin:0;font-size:16px}
+
+.work{border:1px solid var(--rule);border-radius:var(--radius-lg);background:var(--card);overflow:hidden;
+  margin-bottom:12px}
+.work summary{padding:20px 24px;cursor:pointer;list-style:none;position:relative}
+.work summary::-webkit-details-marker{display:none}
+.work summary h2{margin:0 0 6px;font-size:clamp(19px,3vw,23px)}
+.work summary p{margin:0;font-size:15px}
+.work-no{display:block;font:600 12px/1 var(--mono);letter-spacing:.1em;
+  color:var(--accent);margin-bottom:9px}
+.work .more{display:inline-flex;align-items:center;gap:6px;margin-top:12px;
+  font:600 13.5px/1 var(--sans);color:var(--accent-ink)}
+.work .more::after{content:"▾";font-size:11px}
+.work[open] .more::after{content:"▴"}
+.work[open] summary{border-bottom:1px solid var(--rule)}
+.work summary:focus-visible{outline:2px solid var(--accent);outline-offset:-2px}
+.work summary:hover .more{text-decoration:underline}
+.facts{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:1px;background:var(--rule)}
+.fact{background:var(--card);padding:14px 20px;min-width:0}
+.fact dt{font:500 11px/1 var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--ink3);margin-bottom:6px}
+.fact dd{margin:0;font-size:14.5px;line-height:1.6;color:var(--ink2)}
+.fact dd b{color:var(--ink);font-weight:600;font-variant-numeric:tabular-nums}
+.note{padding:0 24px 20px;font-size:13px;color:var(--ink3);margin:0}
+
+/* 직접 해보기 */
+.demo{border-top:1px solid var(--rule);padding:20px 24px;background:var(--paper)}
+.dh{margin:0 0 14px;font-size:14px;color:var(--ink2)}
+.dh b{color:var(--ink)}
+.dg{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media (max-width:660px){.dg{grid-template-columns:1fr}}
+.dt{margin:0 0 7px;font:600 11.5px/1 var(--mono);letter-spacing:.09em;
+  text-transform:uppercase;color:var(--ink3)}
+.dt em{font-style:normal;color:var(--accent);margin-left:5px;text-transform:none;letter-spacing:0}
+.tw{overflow-x:auto;border:1px solid var(--rule);border-radius:8px;background:var(--card);min-width:0}
+.tw table{border-collapse:collapse;width:100%;font-size:13px;font-variant-numeric:tabular-nums}
+.tw th,.tw td{border-bottom:1px solid var(--rule);border-right:1px solid var(--rule);
+  padding:7px 9px;text-align:left;white-space:nowrap}
+.tw th{background:var(--paper);font-weight:600;font-size:11.5px;color:var(--ink3)}
+.tw tr:last-child td{border-bottom:0}
+.tw th:last-child,.tw td:last-child{border-right:0}
+.tw td.ed{background:var(--accent-soft);cursor:text}
+.tw td.ed:focus{outline:2px solid var(--accent);outline-offset:-2px}
+.tw td.gone{color:var(--ink3);font-style:italic}
+.tw td.ok{color:var(--ok);font-weight:600}
+.tw td.no{color:var(--no);font-weight:600}
+.tw td.warn{color:var(--warn);font-weight:600}
+.tw tr.rno td{background:var(--no-soft)}
+.tw tr.rwarn td{background:var(--warn-soft)}
+.tw tr.rok td{background:var(--ok-soft)}
+textarea.din{width:100%;min-height:140px;resize:vertical;border:1px solid var(--rule);
+  border-radius:8px;background:var(--card);color:var(--ink);padding:10px 12px;
+  font:400 12.5px/1.75 var(--mono);white-space:pre}
+textarea.din:focus{outline:2px solid var(--accent);outline-offset:-2px}
+.tally{display:grid;grid-template-columns:repeat(auto-fit,minmax(110px,1fr));gap:1px;
+  background:var(--rule);border:1px solid var(--rule);border-radius:8px;overflow:hidden;margin:14px 0}
+.tally div{background:var(--card);padding:12px 14px;min-width:0}
+.tally dt{font:500 11px/1 var(--mono);letter-spacing:.08em;text-transform:uppercase;
+  color:var(--ink3);margin-bottom:6px}
+.tally dd{margin:0;font-size:21px;font-weight:700;font-variant-numeric:tabular-nums;letter-spacing:-.02em}
+.tally dd small{font-size:13px;font-weight:500;color:var(--ink3);margin-left:3px}
+.tally .hi dd{color:var(--no)}
+.tally .go dd{color:var(--ok)}
+.seg{display:inline-flex;border:1px solid var(--rule2);border-radius:7px;overflow:hidden;margin-bottom:14px}
+.seg button{border:0;background:var(--card);color:var(--ink2);font:600 13.5px/1 var(--sans);
+  padding:10px 15px;cursor:pointer}
+.seg button+button{border-left:1px solid var(--rule2)}
+.seg button[aria-pressed="true"]{background:var(--accent);color:#fff}
+.seg button:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.bars{display:flex;align-items:flex-end;gap:2px;height:72px;margin:4px 0 12px;
+  border-bottom:1px solid var(--rule2);padding-bottom:1px}
+.bars i{flex:1;background:var(--accent);border-radius:2px 2px 0 0;min-width:3px;
+  transition:height .25s ease}
+.bars i.z{background:var(--no)}
+@media (prefers-reduced-motion:reduce){.bars i{transition:none}}
+pre.vba{margin:14px 0 0;background:#171c23;color:#c9d1d9;border-radius:8px;padding:16px 18px;
+  overflow-x:auto;font:400 12.5px/1.8 var(--mono);white-space:pre}
+pre.vba .c{color:#7ee2b8}
+
+.minis{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:1px;
+  background:var(--rule);border:1px solid var(--rule);border-radius:11px;overflow:hidden}
+.mini{background:var(--card);padding:19px 21px;min-width:0}
+.mini h3{font-size:17px;margin-bottom:7px;letter-spacing:-.018em}
+.mini p{margin:0;font-size:15px;line-height:1.7}
+
+.ways{display:grid;gap:1px;background:var(--rule);border:1px solid var(--rule);
+  border-radius:10px;overflow:hidden}
+.ways.minor{grid-template-columns:repeat(auto-fit,minmax(290px,1fr));margin-top:14px}
+.ways.minor .way{padding:16px 19px}
+.ways.minor h3{font-size:15.5px;margin-bottom:5px}
+.ways.minor p{font-size:14px;line-height:1.65}
+.ways.major .way{padding:24px 25px}
+.ways.major h3{font-size:20px;margin-bottom:9px;letter-spacing:-.022em}
+.ways.major p{font-size:16px}
+.way{background:var(--card);min-width:0}
+.way h3{display:flex;align-items:baseline;gap:10px}
+.way h3 i{font:600 12px/1 var(--mono);color:var(--accent);font-style:normal;flex:none}
+.way p{margin:0}
+.way .ev{margin-top:12px;background:var(--paper);border:1px solid var(--rule);
+  border-radius:7px;padding:10px 12px;overflow-x:auto;
+  font:400 12px/1.75 var(--mono);color:var(--ink2);white-space:pre}
+
+.voice .quote{margin:0;background:var(--accent-soft);border-radius:12px;padding:28px 30px}
+.voice blockquote{margin:0;font-size:clamp(16px,2.3vw,19px);line-height:1.8;
+  color:var(--ink);letter-spacing:-.015em}
+.voice figcaption{display:flex;flex-wrap:wrap;gap:6px 14px;align-items:baseline;
+  margin-top:16px;font-size:13.5px;color:var(--ink2)}
+.voice .stars{font:600 15px/1 var(--mono);color:var(--accent-ink)}
+
+.run{border:1px solid var(--rule);border-radius:11px;overflow:hidden;background:var(--rule);display:grid;gap:1px}
+.rh,.rr{display:grid;grid-template-columns:1.1fr 1fr 1.4fr;gap:1px;background:var(--rule)}
+.rh>span{background:var(--paper);padding:12px 18px;
+  font:600 12px/1 var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--ink3)}
+.rr>div{background:var(--card);padding:15px 18px;font-size:15px;line-height:1.65;color:var(--ink2);min-width:0}
+.rr .a{color:var(--ink);font-weight:600}
+.rr .b b{color:var(--accent-ink)}
+@media (max-width:620px){
+  .rh{display:none}
+  .rr{grid-template-columns:1fr;gap:0;padding-block:4px}
+  .rr>div{padding:6px 17px}
+  .rr .a{padding-top:14px}
+  .rr .c{padding-bottom:14px;font-size:14px;color:var(--ink3)}
+}
+
+.scope{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:14px}
+.sc{border-radius:10px;padding:18px 20px;min-width:0}
+.sc h3{font:600 15px/1 var(--sans);margin-bottom:12px}
+.sc ul{margin:0;padding-left:17px;font-size:15px;line-height:1.9;color:var(--ink2)}
+.sc.m{background:var(--warn-soft)} .sc.m h3{color:var(--warn)}
+.sc.n{background:var(--no-soft)} .sc.n h3{color:var(--no)}
+
+.contact{background:var(--card);border:1px solid var(--rule);border-radius:12px;padding:26px 25px}
+.rows{display:grid;gap:1px;background:var(--rule);border-top:1px solid var(--rule);margin-top:18px}
+.row{background:var(--card);display:flex;flex-wrap:wrap;gap:6px 16px;align-items:baseline;padding:13px 0}
+.row dt{font:500 12px/1.6 var(--mono);letter-spacing:.08em;text-transform:uppercase;
+  color:var(--ink3);flex:none;width:92px}
+.row dd{margin:0;font-size:16px}
+.row dd .mono{font-family:var(--mono);font-size:15px}
+footer{padding-block:30px 52px;border-top:1px solid var(--rule);
+  font-size:13px;color:var(--ink3);display:flex;flex-wrap:wrap;gap:8px 18px;justify-content:space-between}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+.proof{margin:16px 0 0;padding:15px 17px;border-left:3px solid var(--accent);
+  background:var(--accent-soft);border-radius:0 8px 8px 0;font-size:14.5px;line-height:1.72;color:var(--ink2)}
+.proof b{color:var(--ink)}
+.proof code{font:500 13px/1 var(--mono);background:var(--card);border:1px solid var(--rule);
+  border-radius:4px;padding:2px 6px;color:var(--ink)}
+.more-ways{margin-top:14px}
+.more-ways summary{cursor:pointer;list-style:none;display:inline-flex;align-items:center;gap:7px;
+  font:600 14px/1 var(--sans);color:var(--accent-ink);padding:9px 0}
+.more-ways summary::-webkit-details-marker{display:none}
+.more-ways summary::after{content:"▾";font-size:11px}
+.more-ways[open] summary::after{content:"▴"}
+.more-ways summary:hover span{text-decoration:underline}
+.more-ways .ways{margin-top:10px}
+.terms{display:grid;gap:10px;margin:0}
+.term{display:grid;grid-template-columns:120px 1fr;gap:18px;align-items:start;
+  padding:17px 19px;border:1px solid var(--rule);border-radius:var(--radius-lg);background:var(--card);
+  box-shadow:var(--shadow-card)}
+.term dt{font:600 13px/1.5 var(--mono);letter-spacing:.04em;color:var(--accent-ink);margin:0}
+.term dd{margin:0;font-size:15px;line-height:1.75;color:var(--ink2)}
+.term dd b{color:var(--ink)}
+@media (max-width:620px){.term{grid-template-columns:1fr;gap:7px}}
+.ds-btn-pill{text-decoration:none}
+
+/* ───── 마케팅 섹션 리듬 (/mailer 와 같은 뼈대) ───── */
+.wrap{max-width:1040px}
+section{padding-block:clamp(56px,7vw,80px);text-align:center}
+section > :not(.eyebrow):not(h2):not(.lead){text-align:left}
+section > .eyebrow{display:inline-flex;align-items:center;background:var(--card);
+  border:1px solid var(--rule2);border-radius:999px;padding:7px 15px;margin-bottom:16px;
+  font:500 13px/1 var(--sans);letter-spacing:0;text-transform:none;
+  color:var(--accent-strong);box-shadow:var(--shadow-card)}
+section > .eyebrow::after{display:none}
+section > h2{font-size:clamp(26px,4vw,36px);letter-spacing:-.8px;line-height:1.3}
+section > .lead{max-width:30em;margin-left:auto;margin-right:auto;
+  font-size:16.5px;color:var(--ink2)}
+/* 본문 블록은 읽기 좋은 폭으로 되돌린다 */
+section > .probs,section > .works,section > .term,section > .quote,
+section > details.work,section > .note,section > .prod,section > ul,
+section > ol,section > table,section > .rows,section > p:not(.lead):not(.eyebrow){
+  max-width:860px;margin-left:auto;margin-right:auto}
+
+/* 맡기는 일 — 번호 목록 대신 카드로 */
+.jobs{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;
+  max-width:1000px;margin:40px auto 0;text-align:left}
+.job{background:var(--card);border:1px solid var(--rule);border-radius:var(--radius-lg);
+  padding:22px 24px;box-shadow:var(--shadow-card)}
+.job .ico{width:44px;height:44px;border-radius:13px;background:var(--accent-bg);
+  color:var(--accent);display:flex;align-items:center;justify-content:center;font-size:22px}
+.job p{margin:13px 0 0;font-size:15px;line-height:1.7;color:var(--ink2)}
+.job p strong{color:var(--ink);font-weight:600}
+@media(max-width:860px){.jobs{grid-template-columns:1fr 1fr}}
+@media(max-width:560px){.jobs{grid-template-columns:1fr}}
+
+/* 정기 보고 데모 — 증감(방향이 있는 값)이라 0을 기준으로 좌우로 뻗는 막대 */
+.rcap{margin:16px 0 8px;font-size:13px;color:var(--ink3)}
+.rbars{display:grid;gap:9px;position:relative}
+.rrow{display:grid;grid-template-columns:86px 1fr 64px;gap:10px;align-items:center;font-size:13.5px}
+.rrow .nm{color:var(--ink2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.rrow .tr{position:relative;height:22px;cursor:default}
+.rrow .tr::before{content:"";position:absolute;left:50%;top:0;bottom:0;width:1px;background:var(--rule2)}
+.rrow .br{position:absolute;top:5px;height:12px}
+.rrow .br.up{left:50%;background:var(--accent);border-radius:0 4px 4px 0}
+.rrow .br.dn{right:50%;background:var(--warm);border-radius:4px 0 0 4px}
+.rrow .vl{text-align:right;font-variant-numeric:tabular-nums;color:var(--ink);font-weight:600}
+.rrow:hover .nm{color:var(--ink)}
+.rleg{display:flex;gap:16px;margin:10px 0 0;font-size:12.5px;color:var(--ink3)}
+.rleg span{display:inline-flex;align-items:center;gap:6px}
+.rk{width:10px;height:10px;border-radius:3px;display:inline-block}
+.rk.up{background:var(--accent)}.rk.dn{background:var(--warm)}
+.rtip{position:fixed;z-index:1500;pointer-events:none;background:var(--ink);color:var(--card);
+  font-size:12.5px;line-height:1.6;padding:8px 11px;border-radius:8px;opacity:0;transition:opacity .1s;
+  font-variant-numeric:tabular-nums;white-space:nowrap}
+@media(max-width:560px){.rrow{grid-template-columns:68px 1fr 56px}}
+
+/* 마무리 CTA 밴드 */
+.endband{text-align:center;padding:clamp(60px,8vw,88px) 24px;
+  background:linear-gradient(180deg,var(--card) 0%,var(--accent-bg) 100%);
+  border-top:1px solid var(--rule)}
+.endband h2{font-size:clamp(26px,4.4vw,38px);letter-spacing:-1px;margin:0 0 12px}
+.endband p{margin:0 0 28px;color:var(--ink2);font-size:16.5px}
+body > footer{max-width:1040px;margin:0 auto}
+.topnav{display:flex;align-items:center;justify-content:space-between;
+  max-width:1040px;margin:0 auto;padding:20px 24px}
+.brandmark{display:flex;align-items:center;gap:9px;font-weight:700;font-size:18px;color:var(--ink)}
+.heronote{margin:18px 0 0;font-size:13.5px;color:var(--ink3)}
+.toplinks{display:flex;gap:18px;align-items:center;flex-wrap:wrap;justify-content:flex-end}
+.topnav .mark{width:30px;height:30px;border-radius:9px;background:var(--ink);color:var(--card);
+  display:flex;align-items:center;justify-content:center;font-weight:700;font-size:15px}
+.toplink{font-size:13px;color:var(--ink3);text-decoration:none}
+.toplink:hover{color:var(--accent-strong)}
+@media(max-width:560px){.toplink{display:none}.toplink.keep{display:inline}}
+:focus-visible{outline:none;box-shadow:var(--shadow-focus)}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+a.job{text-decoration:none;color:inherit;transition:border-color .15s}
+a.job:hover{border-color:var(--accent)}
+a.job:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.maker p{margin:0;font-size:16px;line-height:1.8;color:var(--ink2)}
+.maker p+p{margin-top:12px}
+.maker strong{color:var(--ink)}
+</style>
+</head>
+
+<body>
+
+<div class="ds-hero-wrap">
+  <div class="topnav">
+    <span class="brandmark"><span class="mark">R</span> 리플로</span>
+    <span class="toplinks"><a class="toplink keep" href="tools/" data-track="view_tools">무료 도구</a>
+      <a class="toplink keep" href="https://blog.naver.com/reflo2026" data-track="go_blog">운영 노트</a>
+      <a class="toplink" href="https://www.instagram.com/reflo.note/" data-track="go_insta">인스타그램 →</a></span>
+  </div>
+  <header class="ds-hero">
+    <span class="eyebrow">작은 회사 운영 노트</span>
+    <h1>사람 하나 빠져도<br><span class="accent">안쪽 일이 돌아가게</span></h1>
+    <p class="lead">전산·운영을 맡을 사람이 따로 없는 작은 회사에서 자주 끊기는 곳을 정리해요.
+      사장님은 영업에 집중하시도록.</p>
+    <div class="ds-hero-cta">
+      <a class="ds-btn-pill primary" href="tools/handover/" data-track="main_handover">인수인계서 양식 받기</a>
+      <a class="ds-btn-pill ghost" href="https://blog.naver.com/reflo2026" data-track="go_blog">운영 노트 읽기</a>
+    </div>
+    <p class="heronote">서비스 운영 일을 하면서 겪고 정리한 것들이에요</p>
+  </header>
+</div>
+
+<div class="wrap">
+
+<section>
+  <p class="eyebrow">이런 순간</p>
+  <h2>이런 순간, 있으셨죠</h2>
+  <p class="lead">누르면 그 순간을 줄이는 무료 양식·도구로 가요.</p>
+  <div class="jobs">
+    <a class="job" href="tools/handover/" data-track="pain_handover_main"><div class="ico"><i class="ti ti-user-minus"></i></div>
+      <p>직원이 갑자기 그만뒀는데 <strong>관리자 계정을 아무도 몰라요</strong></p></a>
+    <a class="job" href="tools/audit/" data-track="pain_audit_main"><div class="ico"><i class="ti ti-file-search"></i></div>
+      <p>매주 엑셀을 손으로 정리하는데 <strong>합계가 맞는지 불안해요</strong></p></a>
+    <a class="job" href="pilot/" data-track="pain_pilot_main"><div class="ico"><i class="ti ti-chart-bar"></i></div>
+      <p>그 사람이 없으면 <strong>사장님이 숫자를 못 봐요</strong></p></a>
+    <a class="job" href="kit/see/#reply" data-track="pain_reply_main"><div class="ico"><i class="ti ti-message-2"></i></div>
+      <p>같은 문의에 <strong>매번 답을 새로 써요</strong></p></a>
+    <a class="job" href="mailer/" data-track="pain_mailer_main"><div class="ico"><i class="ti ti-mail-forward"></i></div>
+      <p>거래처 안내를 <strong>하나씩 만들어 보내요</strong></p></a>
+    <a class="job" href="tools/merge/" data-track="pain_merge_main"><div class="ico"><i class="ti ti-arrows-join"></i></div>
+      <p>여러 곳에서 온 파일을 합쳤더니 <strong>합계가 안 맞아요</strong></p></a>
+  </div>
+</section>
+
+<section>
+  <p class="eyebrow">만드는 사람</p>
+  <h2>운영해 본 사람이 정리해요</h2>
+  <div class="contact maker">
+    <p>서비스 운영 일을 하고 있어요. 문의를 받아 원인을 확인하고, 개발·운영 쪽에 확인을 요청하고, 공지를 쓰고, 숫자를 정리해 보고하는 일이에요.</p>
+    <p>정산을 맡던 동료가 갑자기 그만둬서 그 일을 넘겨받은 적이 있어요. 인수인계라고 할 만한 게 거의 없어서, 여기저기 묻고 지난 기록을 뒤져 가며 맞춰 갔어요.
+      매일 아침 손으로 가공하던 숫자는 지금은 버튼 한 번으로 끝나게 바꿔 뒀고요.</p>
+    <p>그래서 정리하는 건 하나예요. <strong>사람 하나 빠져도 안쪽 일이 돌아가게.</strong></p>
+  </div>
+</section>
+
+<section>
+  <p class="eyebrow">맡기실 때</p>
+  <h2>안쪽 일을 맡기고 싶으시다면</h2>
+  <p class="lead">무엇이 어디에 있는지 적어 두는 것부터 해요. 되풀이되는 일은 자동으로, 그 뒤로는 매달 굴려요.</p>
+  <div class="scope">
+    <div class="sc m"><h3>맡는 일</h3>
+      <ul><li>시스템·계정·맡긴 업체·반복 업무를 한 장으로 정리</li><li>되풀이되는 일의 자동화 (검산, 정기 보고, 안내 메일)</li>
+        <li>업체에 무엇을 요청할지 정리하고 결과 확인</li><li>매달 최신으로 유지</li></ul></div>
+    <div class="sc n"><h3>맡지 않는 일</h3>
+      <ul><li>인사·급여·세무</li><li>남이 만든 시스템의 장애를 직접 고치기</li>
+        <li>비밀번호를 받아 보관하기</li></ul></div>
+  </div>
+</section>
+
+<section>
+  <p class="eyebrow">작업물</p>
+  <h2>만든 것 — 직접 돌려 보세요</h2>
+  <p class="lead" style="margin-bottom:26px">건마다 <strong>직접 돌려보실 데모</strong>가 있어요. 값을 바꿔 가며 눌러보세요.<br>
+    만드는 건 누구나 하니까, <strong>조용히 틀릴 뻔한 걸 어떻게 잡았는지</strong>도 같이 적었어요.</p>
+
+  <details class="work">
+    <summary>
+      <span class="work-no">01 · 정기 보고 대시보드</span>
+      <h2>매달 만드는 실적 보고를 한 장으로</h2>
+      <p>엑셀을 넣으면 거래처별 증감이 한 장에 나와요. 10개월 치를 12개월 치와 비교하는 실수는 막아요.</p>
+      <span class="more">직접 해보기</span>
+    </summary>
+
+    <dl class="facts">
+      <div class="fact"><dt>함정</dt><dd>올해 <b>1~10월</b>을 작년 <b>1~12월</b>과 비교</dd></div>
+      <div class="fact"><dt>그대로 두면</dt><dd>늘어난 거래처도 <b>전부 줄어든 것</b>으로 보임</dd></div>
+      <div class="fact"><dt>한 일</dt><dd><b>같은 기간끼리</b> 비교하고 합계를 원본과 대조</dd></div>
+    </dl>
+    <div class="demo">
+      <p class="dh"><b>직접 해보세요</b> — 숫자를 고치면 아래 보고가 바로 바뀝니다 (거래처｜작년 전체｜작년 1~10월｜올해 1~10월)</p>
+      <textarea class="din" id="rIn" spellcheck="false" aria-label="거래처별 실적"></textarea>
+      <div class="seg" id="rSeg" style="margin-top:14px">
+        <button type="button" data-v="raw" aria-pressed="true">작년 전체와 비교</button>
+        <button type="button" data-v="same" aria-pressed="false">같은 기간끼리 비교</button>
+      </div>
+      <dl class="tally" id="rTally"></dl>
+      <p class="rcap" id="rCap"></p>
+      <div class="rbars" id="rBars" role="img" aria-label="거래처별 증감률 막대"></div>
+      <p class="rleg"><span><i class="rk up"></i>늘어남</span><span><i class="rk dn"></i>줄어듦</span></p>
+      <p id="rSay" style="margin:14px 0 0;font-size:15px"></p>
+      <div class="tw" id="rOut" style="margin-top:14px"></div>
+    </div>
+    <p class="note">예시 데이터입니다. 거래처 이름과 금액은 지어낸 값이고, 단위는 만원입니다.</p>
+    <p class="note">내 보고에 맞춰 만들어 받으려면 <a href="https://kmong.com/gig/863835" data-track="go_kmong_report">크몽 정기 보고 서비스</a> · 온라인 판매자라면 <a href="pilot/" data-track="open_pilot">파일럿(처음 세 곳)</a></p>
+  </details>
+
+  <details class="work">
+    <summary>
+      <span class="work-no">02 · 엑셀 반복 작업을 매크로로</span>
+      <h2>매달 손으로 하던 엑셀 작업을 버튼 하나로</h2>
+      <p>전·후 파일만 주시면 절차를 읽어 만들어요. 셋 중 둘만 맞는 규칙은 만들지 않아요.</p>
+      <span class="more">직접 해보기</span>
+    </summary>
+
+    <dl class="facts">
+      <div class="fact"><dt>자동으로 읽음</dt><dd>계산 열 <b>3개</b> + 이름 변경 + 행 삭제</dd></div>
+      <div class="fact"><dt>함정</dt><dd>그럴듯한데 틀린 규칙 <b>1개</b></dd></div>
+      <div class="fact"><dt>한 일</dt><dd>그 열만 <b>만들지 않고</b> 질문으로 돌려드림</dd></div>
+    </dl>
+    <div class="demo">
+      <p class="dh"><b>직접 해보세요</b> — 오른쪽 표의 값을 고치면 일치율이 바로 바뀝니다</p>
+      <div class="dg">
+        <div><p class="dt">전 · 받으신 파일</p><div class="tw"><table id="tA"></table></div></div>
+        <div><p class="dt">후 · 손으로 고치신 파일 <em>고쳐 보세요</em></p><div class="tw"><table id="tB"></table></div></div>
+      </div>
+      <p class="dt" style="margin-top:16px">읽은 규칙</p>
+      <div class="tw"><table id="tC"></table></div>
+      <p class="dt" style="margin-top:16px">나오는 매크로</p>
+      <pre class="vba" id="tV"></pre>
+    </div>
+    <p class="note">예시 데이터입니다. 퍼센트는 이 자리에서 계산한 값이고 하드코딩이 없습니다.</p>
+  </details>
+
+  <details class="work">
+    <summary>
+      <span class="work-no">03 · 흩어진 자료 정리</span>
+      <h2>여러 곳에서 온 명단을 하나로 합쳐요</h2>
+      <p>엑셀 중복 제거 버튼으로는 10명이 6명이 돼요. 표기가 다른 같은 사람을 찾아내요.</p>
+      <span class="more">직접 해보기</span>
+    </summary>
+
+    <dl class="facts">
+      <div class="fact"><dt>함정</dt><dd>이름 뒤 공백, 전화 표기 흔들림, 같은 사람 다른 표기</dd></div>
+      <div class="fact"><dt>그대로 두면</dt><dd>사람이 <b>조용히 사라짐</b></dd></div>
+      <div class="fact"><dt>한 일</dt><dd>지우지 않고 <b>사유와 함께</b> 표시</dd></div>
+    </dl>
+    <div class="demo">
+      <p class="dh"><b>직접 해보세요</b> — 줄을 고치거나 더 넣어 보시면 결과가 바로 바뀝니다</p>
+      <p class="dt">받은 명단 <em>고쳐 보세요</em></p>
+      <textarea class="din" id="nIn" spellcheck="false"></textarea>
+      <dl class="tally" id="nTally"></dl>
+      <div class="tw"><table id="nOut"></table></div>
+    </div>
+    <p class="note">예시 데이터입니다. 실제 의뢰 건의 자료는 쓰지 않습니다.</p>
+  </details>
+
+  <details class="work">
+    <summary>
+      <span class="work-no">04 · 집계와 보고서</span>
+      <h2>매달 쓰던 집계 보고서를 자동으로</h2>
+      <p>0건인 날이 빠지면 일평균이 올라가요. 빠진 날을 채워서 셉니다.</p>
+      <span class="more">직접 해보기</span>
+    </summary>
+
+    <dl class="facts">
+      <div class="fact"><dt>함정</dt><dd>주문이 0건인 날은 <b>행 자체가 없음</b></dd></div>
+      <div class="fact"><dt>그대로 두면</dt><dd>분모가 <b>31일</b>이 아니라 <b>25일</b></dd></div>
+      <div class="fact"><dt>또 하나</dt><dd>“가장 적은 날”이 <b>사실이 아님</b></dd></div>
+    </dl>
+    <div class="demo">
+      <p class="dh"><b>직접 해보세요</b> — 버튼을 눌러 보시면 같은 자료로 두 개의 평균이 나옵니다</p>
+      <div class="seg" id="zSeg">
+        <button type="button" data-v="raw" aria-pressed="true">원본 그대로</button>
+        <button type="button" data-v="fill" aria-pressed="false">0건인 날 채우기</button>
+      </div>
+      <div class="bars" id="zBars"></div>
+      <dl class="tally" id="zTally"></dl>
+      <p id="zSay" style="margin:0;font-size:15px"></p>
+    </div>
+    <p class="note">예시 데이터입니다. 10월 31일치이고 0건인 날이 6일 섞여 있습니다.</p>
+  </details>
+
+  <details class="work">
+    <summary>
+      <span class="work-no">05 · 단체 메일 발송</span>
+      <h2>단체 메일을 빠진 사람 없이 보내요</h2>
+      <p>엑셀에서 긁어 온 명단을 그대로 붙여넣어도 돼요. 보내기 전에 못 받을 사람을 보여드려요.</p>
+      <span class="more">직접 해보기</span>
+    </summary>
+
+    <dl class="facts">
+      <div class="fact"><dt>함정</dt><dd>형식이 틀린 주소를 <b>조용히 버림</b></dd></div>
+      <div class="fact"><dt>그대로 두면</dt><dd>명단 <b>500명</b> 중 실제 수신 <b>497명</b></dd></div>
+      <div class="fact"><dt>한 일</dt><dd>버리지 않고 <b>왜 빠지는지</b>와 함께 돌려드림</dd></div>
+    </dl>
+    <div class="demo">
+      <p class="dh"><b>직접 해보세요</b> — 500줄짜리 예시 명단입니다. 줄을 고치거나 지워 보세요</p>
+      <p class="dt">붙여넣은 명단 <em>고쳐 보세요</em></p>
+      <textarea class="din" id="mIn" spellcheck="false" style="min-height:120px"></textarea>
+      <dl class="tally" id="mTally"></dl>
+      <div class="tw"><table id="mOut"></table></div>
+    </div>
+    <p class="note">예시 명단입니다. 쉼표·세미콜론·줄바꿈·탭으로 구분하고 머리글 줄은 건너뜁니다.</p>
+  </details>
+
+  <details class="work">
+    <summary>
+      <span class="work-no">06 · 웹에서 표 가져오기</span>
+      <h2>웹 페이지의 표를 엑셀로 가져와요</h2>
+      <p>주소 하나만 주시면 돼요. 매주 돌리면 바뀐 것만 따로 보여드려요.</p>
+      <span class="more">직접 해보기</span>
+    </summary>
+
+    <dl class="facts">
+      <div class="fact"><dt>함정</dt><dd>한 건이 실패하면 전체가 멈추거나 빈칸이 채워짐</dd></div>
+      <div class="fact"><dt>한 일</dt><dd>실패한 행만 <b>사유와 함께</b> 남기고 나머지는 끝까지</dd></div>
+      <div class="fact"><dt>매주</dt><dd>전부 다시 읽는 대신 <b>달라진 줄만</b></dd></div>
+    </dl>
+    <div class="demo">
+      <p class="dh"><b>직접 해보세요</b> — 이번 수집 표의 값을 고치면 변경 목록이 바로 바뀝니다</p>
+      <div class="dg">
+        <div><p class="dt">지난번 수집</p><div class="tw"><table id="dA"></table></div></div>
+        <div><p class="dt">이번 수집 <em>고쳐 보세요</em></p><div class="tw"><table id="dB"></table></div></div>
+      </div>
+      <p class="dt" style="margin-top:16px">달라진 것</p>
+      <div class="tw"><table id="dC"></table></div>
+    </div>
+    <p class="note">수집 자체는 브라우저에서 못 합니다. 수집한 뒤의 비교만 그대로 옮겨 뒀습니다.</p>
+  </details>
+
+  <details class="work">
+    <summary>
+      <span class="work-no">07 · 문서 점검</span>
+      <h2>보내기 전에 개인정보가 섞였는지 봐드려요</h2>
+      <p>주민번호·연락처·계좌가 있으면 멈춰요. 눈으로 훑어서는 못 찾고, 한 번 나가면 못 거둬요.</p>
+      <span class="more">직접 해보기</span>
+    </summary>
+    <dl class="facts">
+      <div class="fact"><dt>함정</dt><dd>개인정보·깨진 링크·빠진 항목이 <b>조용히 섞임</b></dd></div>
+      <div class="fact"><dt>한 일</dt><dd>내보내기 전에 <b>전수 검사</b></dd></div>
+      <div class="fact"><dt>원칙</dt><dd><b>고치지 않고 보고만</b> 합니다</dd></div>
+    </dl>
+    <div class="demo">
+      <p class="dh"><b>직접 해보세요</b> — 글을 고치거나 붙여넣으면 바로 다시 검사합니다</p>
+      <p class="dt">검사할 문서 <em>고쳐 보세요</em></p>
+      <textarea class="din" id="cIn" spellcheck="false"></textarea>
+      <dl class="tally" id="cTally"></dl>
+      <div class="tw"><table id="cOut"></table></div>
+      <p style="margin:14px 0 0;font-size:15px">자동으로 <strong>고치지 않습니다.</strong>
+        사람이 판단해야 하는 값을 도구가 바꿔 놓으면 그게 더 위험합니다.</p>
+    </div>
+    <p class="note">예시 문서입니다. 검사 규칙은 실제로 쓰는 것과 같습니다.</p>
+  </details>
+
+  <details class="work">
+    <summary>
+      <span class="work-no">08 · 폴더 정리</span>
+      <h2>흩어진 파일에서 원본만 남겨요</h2>
+      <p>이름만 다르고 내용이 같은 파일을 찾아내요. 지우지 않고 옮기기만 해요.</p>
+      <span class="more">직접 해보기</span>
+    </summary>
+    <dl class="facts">
+      <div class="fact"><dt>제약</dt><dd>문서 보안 때문에 <b>파일 내용을 못 염</b></dd></div>
+      <div class="fact"><dt>한 일</dt><dd>이름·크기·수정시각으로 판정</dd></div>
+      <div class="fact"><dt>원칙</dt><dd>지우지 않고 <b>옮기고, 되돌릴 수 있게</b></dd></div>
+    </dl>
+    <div class="demo">
+      <p class="dh"><b>직접 해보세요</b> — 줄을 고치면 판정이 바로 바뀝니다 (이름｜크기｜수정시각｜폴더)</p>
+      <p class="dt">파일 목록 <em>고쳐 보세요</em></p>
+      <textarea class="din" id="fIn" spellcheck="false" style="min-height:150px"></textarea>
+      <dl class="tally" id="fTally"></dl>
+      <div class="tw"><table id="fOut"></table></div>
+      <p style="margin:14px 0 0;font-size:15px"><strong>날짜만 다른 것은 안 옮깁니다.</strong>
+        둘 중 어느 쪽이 최신인지는 사람이 봐야 합니다.</p>
+    </div>
+    <p class="note">예시 목록입니다. 실제로는 내용을 열지 않고 이름·크기·시각만 봅니다.</p>
+  </details>
+
+  <p class="note" style="margin-top:22px;padding:0;text-align:center">위 작업물은 보여드리려고 <strong>예시 데이터로 다시 만든 것</strong>이에요.
+    실제 의뢰 건의 자료는 쓰지 않고, 받은 파일은 작업이 끝나면 지워요.</p>
+</section>
+
+<section>
+  <p class="eyebrow">원칙</p>
+  <h2>자동화에서 배운 것</h2>
+  <p class="lead" style="margin-bottom:26px">틀려 보면서 생긴 것들이에요.
+    말로만 하면 누구나 하니까 <strong>어디에 박혀 있는지</strong>를 같이 적었어요.</p>
+  <div class="ways major">
+    <div class="way"><h3><i>01</i>확신이 95%를 못 넘기면 만들지 않습니다</h3>
+      <p>열 개 중 일곱이 맞고 셋이 조용히 틀리는 쪽이 훨씬 위험합니다. 그 칸은 비워 두고 여쭤봅니다.</p>
+      <pre class="ev"><span class="c">' 5) 아래 열은 규칙이 확정되지 않아 자동 생성하지 않았습니다.
+'    - 등급: 신뢰도 67%, 자동 반영 안 함</span></pre></div>
+    <div class="way"><h3><i>02</i>없는 값은 지어내지 않습니다</h3>
+      <p>빈칸은 눈에 띄지만 틀린 값은 안 띕니다. 마스터에 없는 거래처도 비슷한 걸로 맞추지 않습니다.</p></div>
+    <div class="way"><h3><i>03</i>자동화의 경계선은 “판단이 필요한 칸”입니다</h3>
+      <p>매번 같은 값과 건마다 다른 값은 채우고, 사람이 판단할 값은 안 채웁니다. 이 구분이 먼저입니다.</p></div>
+  </div>
+  <details class="more-ways">
+    <summary><span>나머지 여덟 가지 보기</span></summary>
+  <div class="ways minor">
+    <div class="way"><h3><i>04</i>채운 칸마다 근거의 세기를 표시합니다</h3>
+      <p>전례·공통은 믿어도 되지만 유사는 사람이 봐야 합니다. 근거가 없으면 <strong>확인 필요</strong>를 답니다.</p></div>
+    <div class="way"><h3><i>05</i>비교 대상이 없으면 빈칸이 정상입니다</h3>
+      <p>첫 거래처나 바뀐 양식에서 빈칸이 많은 초안이 나오는 게 올바른 동작입니다.</p></div>
+    <div class="way"><h3><i>06</i>코드가 스스로 설명하게 만듭니다</h3>
+      <p>별도 설명서는 안 읽히거나 석 달 뒤에 이미 틀려 있습니다.</p></div>
+    <div class="way"><h3><i>07</i>열 번호를 박아 두지 않습니다</h3>
+      <p>열이 하나 늘면 번호가 밀려 <strong>엉뚱한 열을 계산합니다.</strong> 머리글 글자로 찾습니다.</p></div>
+    <div class="way"><h3><i>08</i>한 건이 실패해도 멈추지 않습니다</h3>
+      <p>실패한 자리에 이유를 적어 두고 나머지는 끝까지 갑니다.</p></div>
+    <div class="way"><h3><i>09</i>같은 모델로 검사하면 같은 실수를 확인해 줄 뿐입니다</h3>
+      <p>만든 쪽과 다른 회사의 모델이 독립적으로 재검사하게 합니다.</p></div>
+    <div class="way"><h3><i>10</i>정리만 해두고 끝나면 폴더가 예뻐질 뿐입니다</h3>
+      <p>다음 달에 손이 덜 가는지로 끝났는지를 봅니다.</p></div>
+    <div class="way"><h3><i>11</i>안 써본 절차는 실제 업무와 어긋나 있습니다</h3>
+      <p>실제 건으로 한 번 돌려 보고 어긋난 데를 고친 뒤에 드립니다.</p></div>
+  </div>
+  </details>
+
+</section>
+
+<section>
+  <p class="eyebrow">범위</p>
+  <h2>안 되는 것부터 말씀드릴게요</h2>
+  <p class="lead" style="margin-bottom:22px"><strong>안 되는 걸 된다고 하지 않아요.</strong>
+    주소나 파일을 보고 이 단계에서 말씀드려요.</p>
+  <div class="scope">
+    <div class="sc m"><h3>협의 필요</h3>
+      <ul><li>셀 병합이 많은 파일</li><li>한 시트에 표가 여러 개</li>
+        <li>회사 고유 양식 재현</li><li>수집량이 많아 비용이 올라가는 경우</li></ul></div>
+    <div class="sc n"><h3>안 됩니다</h3>
+      <ul><li>스캔본·이미지 PDF</li><li>사내 시스템·ERP 직접 연동</li>
+        <li>로그인해야 보이는 페이지</li><li>이름·연락처 수집</li><li>차단·캡차 우회</li></ul></div>
+  </div>
+</section>
+
+<section>
+  <p class="eyebrow">맡기시기 전에</p>
+  <h2>이 네 가지는 미리 정해 뒀어요</h2>
+  <p class="lead" style="margin-bottom:22px">일이 끝난 뒤에 말이 갈리는 지점들이에요.
+    <strong>먼저 적어 두는 쪽이 서로 편해요.</strong></p>
+  <dl class="terms">
+    <div class="term"><dt>전달물</dt>
+      <dd>쓰실 분에 맞춘 <b>형태 하나</b>로 드립니다. 위 표에서 고르셔도 되고,
+        파일을 보고 제가 권해 드려도 됩니다.</dd></div>
+    <div class="term"><dt>비용</dt>
+      <dd>수집·변환에 <b>외부 서비스 비용이 드는 경우 단가에 넣습니다.</b>
+        작업이 끝난 뒤 따로 청구하지 않습니다.</dd></div>
+    <div class="term"><dt>유지보수</dt>
+      <dd>받으신 결과물 <b>재수정 1회까지 무료</b>입니다.
+        그 뒤로는 범위를 보고 다시 말씀드립니다.</dd></div>
+    <div class="term"><dt>받은 파일</dt>
+      <dd>작업이 끝나면 <b>7일 뒤에 지웁니다.</b> 더 빨리 지워 달라고 하시면 그때 지우고 알려드립니다.
+        남의 문서에서 주민번호를 찾아내는 일을 하는 사람이
+        <b>자기가 받은 파일을 안 지우면 말이 안 됩니다.</b></dd></div>
+  </dl>
+</section>
+
+<section id="contact">
+  <p class="eyebrow">문의</p>
+  <div class="contact">
+    <h2>어디서부터 정리할지 같이 봐요</h2>
+    <p>지금 어떤 일이 사람에 묶여 있는지 한두 줄만 적어 보내 주세요. <strong>가능 여부와 범위</strong>를 먼저 말씀드려요.</p>
+    <dl class="rows">
+      <div class="row"><dt>메일</dt><dd><span class="mono">reflo2026@naver.com</span></dd></div>
+      <div class="row"><dt>운영 노트</dt><dd><a href="https://blog.naver.com/reflo2026">blog.naver.com/reflo2026</a> · 인스타그램 <a href="https://www.instagram.com/reflo.note/">@reflo.note</a></dd></div>
+      <div class="row"><dt>크몽</dt><dd><a href="https://kmong.com/@%EB%A6%AC%ED%94%8C%EB%A1%9CReflo">kmong.com/@리플로Reflo</a></dd></div>
+    </dl>
+  </div>
+</section>
+
+</div>
+
+<div class="endband">
+  <h2>사람 하나 빠져도 돌아가게</h2>
+  <p>먼저 무료 양식으로 지금 무엇이 한 사람에게 묶여 있는지 적어 보세요.</p>
+  <div class="ds-hero-cta">
+    <a class="ds-btn-pill primary" href="tools/handover/" data-track="main_handover_end">인수인계서 양식 받기</a>
+    <a class="ds-btn-pill ghost" href="#contact">맡기기 문의</a>
+  </div>
+</div>
+
+<footer>
+  <span>리플로(Reflo) · 작은 회사 운영 노트 · <a href="kit/" data-track="open_kit" style="color:inherit">스타터 키트</a> · <a href="tools/" data-track="view_tools" style="color:inherit">실험실</a></span>
+  <span>작업물의 수치는 예시 데이터로 재현한 거예요</span>
+  <span>방문 수를 세기 위해 Google Analytics 쿠키를 써요. 개인을 식별하지 않아요.</span>
+</footer>
+
+
+<script>
+(function(){
+"use strict";
+var $ = function(id){ return document.getElementById(id); };
+var esc = function(t){ return String(t).replace(/[&<>]/g, function(c){
+  return {"&":"&amp;","<":"&lt;",">":"&gt;"}[c]; }); };
+var 숫 = function(v){ return typeof v === "number" ? v
+  : (v === "" || v == null ? null : Number(String(v).replace(/,/g,""))); };
+var 같 = function(x,y){ return String(x).trim() === String(y).trim(); };
+var pct = function(n){ return n.toFixed(1) + "%"; };
+
+function 표(el, 머리, 줄들, 옵션){
+  옵션 = 옵션 || {};
+  var h = "<tr>" + 머리.map(function(x){ return "<th>" + esc(x) + "</th>"; }).join("") + "</tr>";
+  var b = 줄들.map(function(r, ri){
+    var cls = 옵션.줄클래스 ? 옵션.줄클래스(r, ri) : "";
+    return "<tr" + (cls ? ' class="' + cls + '"' : "") + ">" + r.map(function(v, ci){
+      var c = 옵션.칸클래스 ? 옵션.칸클래스(r, ri, ci) : "";
+      var e = 옵션.고침 && 옵션.고침(r, ri, ci);
+      return "<td" + (c ? ' class="' + c + '"' : "")
+        + (e ? ' contenteditable="true" data-r="' + ri + '" data-c="' + ci + '"' : "")
+        + ">" + (v === "" || v == null ? "&nbsp;" : esc(v)) + "</td>";
+    }).join("") + "</tr>";
+  }).join("");
+  el.innerHTML = h + b;
+}
+function 집계(el, 칸들){
+  el.innerHTML = 칸들.map(function(c){
+    return '<div class="' + (c.톤 || "") + '"><dt>' + esc(c.이름) + "</dt><dd>"
+      + esc(c.값) + (c.꼬리 ? "<small>" + esc(c.꼬리) + "</small>" : "") + "</dd></div>";
+  }).join("");
+}
+
+/* ── 01 전/후에서 규칙 읽기 ───────────────────────────── */
+(function(){
+  var AH = ["코드","업체명","1022","1023","1024","담당자메모"];
+  var AV = [["A101","가나상사",300,380,420,"정기"],["A102","다라유통",500,460,440,"재협의"],
+            ["A103","마바산업",200,250,310,"신규"],["A104","사아물산",150,140,120,"보류"],
+            ["A105","자차상사",380,400,450,"정기"],["A106","카타유통",290,270,260,"휴면"],
+            ["","합계",1820,1900,2000,""]];
+  var BH = ["코드","업체명","1022","1023","1024","비고","증감","증감률","구분","등급"];
+  var BV = [["A101","가나상사",300,380,420,"정기",40,10.5,"증가","주요"],
+            ["A102","다라유통",500,460,440,"재협의",-20,-4.3,"감소","주요"],
+            ["A103","마바산업",200,250,310,"신규",60,24,"증가","일반"],
+            ["A104","사아물산",150,140,120,"보류",-20,-14.3,"감소","일반"],
+            ["A105","자차상사",380,400,450,"정기",50,12.5,"증가","주요"],
+            ["A106","카타유통",290,270,260,"휴면",-10,-3.7,"감소","일반"]];
+  var 한계 = 95, 날짜 = ["1024","1023","1022"];   // 최근 쌍을 먼저 본다
+  var 칸 = function(h){ return AH.indexOf(h); };
+  var 사라진 = AH.filter(function(h){ return BH.indexOf(h) < 0; });
+
+  function 가설(){
+    var g = [];
+    사라진.forEach(function(d){
+      g.push({ 말:'"' + d + '" 와 값이 같음. 이름만 바뀜', 종:"rename", 원:d,
+               f:function(a){ return a[칸(d)]; } });
+    });
+    날짜.forEach(function(x){ 날짜.forEach(function(y){ if (x === y) return;
+      g.push({ 말:'"' + x + '" − "' + y + '"', 종:"diff", a:x, b:y,
+               f:function(r){ return 숫(r[칸(x)]) - 숫(r[칸(y)]); } });
+      g.push({ 말:'("' + x + '" / "' + y + '" − 1) × 100', 종:"pct", a:x, b:y,
+               f:function(r){ return Math.round((숫(r[칸(x)])/숫(r[칸(y)]) - 1) * 1000) / 10; } });
+    }); });
+    return g;
+  }
+  function 분기(값들){
+    var 종류 = [];
+    값들.forEach(function(v){ if (종류.indexOf(String(v)) < 0) 종류.push(String(v)); });
+    if (종류.length !== 2) return [];
+    var g = [];
+    날짜.forEach(function(x){ 날짜.forEach(function(y){ if (x === y) return;
+      [[0,1],[1,0]].forEach(function(pq){
+        g.push({ 말:'"' + x + '" 가 "' + y + '" 보다 크면 "' + 종류[pq[0]]
+                   + '", 작으면 "' + 종류[pq[1]] + '"', 종:"if", a:x, b:y,
+                 아:종류[pq[0]], 어:종류[pq[1]],
+                 f:function(r){ return 숫(r[칸(x)]) > 숫(r[칸(y)]) ? 종류[pq[0]] : 종류[pq[1]]; } });
+      });
+    }); });
+    return g;
+  }
+  function 읽기(){
+    var A = {};
+    AV.forEach(function(r){ if (String(r[0]).trim()) A[r[0]] = r; });
+    var 짝 = BV.map(function(r){ return [r, A[r[0]]]; })
+               .filter(function(x){ return x[1]; });
+    return BH.filter(function(h){ return AH.indexOf(h) < 0; }).map(function(h){
+      var i = BH.indexOf(h);
+      var 최고 = { 말:"설명할 규칙을 찾지 못했습니다", 율:0, 종:"none" };
+      가설().concat(분기(BV.map(function(r){ return r[i]; }))).forEach(function(g){
+        var 맞 = 0;
+        짝.forEach(function(p){
+          var v; try { v = g.f(p[1]); } catch (e) { return; }
+          if (v !== null && v !== undefined && !(typeof v === "number" && isNaN(v))
+              && 같(v, p[0][i])) 맞++;
+        });
+        var 율 = 짝.length ? 맞 / 짝.length * 100 : 0;
+        if (율 > 최고.율) { 최고 = g; 최고.율 = 율; }
+      });
+      return { 열:h, 규:최고 };
+    });
+  }
+  function vba(rs){
+    var AP = String.fromCharCode(39);
+    var C = function(t){ return '    <span class="c">' + AP + t + '</span>'; };
+    var L = ['<span class="c">' + AP + ' 전/후 비교로 만든 매크로</span>', "Sub TransformSheet()"];
+    var 이름 = rs.filter(function(r){ return r.규.종 === "rename" && r.규.율 >= 한계; });
+    if (이름.length) {
+      L.push(C(' 2) 열 이름 변경 (값은 그대로 유지)'));
+      이름.forEach(function(r){
+        L.push('    RenameHeader ws, headerRow, "' + r.규.원 + '", "' + r.열 + '"'); });
+      L.push("");
+    }
+    L.push(C(' 3) "코드" 가 빈 값인 행 삭제 (합계행/공백행 포함)'));
+    L.push('    DeleteBlankRows ws, headerRow, "코드"');
+    L.push("");
+    var 계산 = rs.filter(function(r){
+      return r.규.율 >= 한계 && (r.규.종 === "diff" || r.규.종 === "pct" || r.규.종 === "if"); });
+    if (계산.length) {
+      L.push(C(' 4) 계산 열 추가 (패턴 매칭으로 자동 추론된 수식)'));
+      계산.forEach(function(r){
+        L.push(C('    - ' + r.열 + ": " + r.규.말.replace(/"/g, "")
+                 + " (신뢰도 " + Math.round(r.규.율) + "%)"));
+        L.push('    AddColumn ws, headerRow, "' + r.열 + '"');
+      });
+      L.push("");
+    }
+    var 미정 = rs.filter(function(r){ return r.규.율 < 한계; });
+    if (미정.length) {
+      L.push(C(' 5) 아래 열은 규칙이 확정되지 않아 자동 생성하지 않았습니다.'));
+      L.push(C('    규칙을 알려주시면 반영해 드립니다.'));
+      미정.forEach(function(r){
+        L.push(C('    - ' + r.열 + ": 최선 추정 = " + r.규.말.replace(/"/g, "")
+                 + " (신뢰도 " + Math.round(r.규.율) + "%, 자동 반영 안 함)")); });
+    }
+    L.push("End Sub");
+    return L.join("\n");
+  }
+  function 그리기(){
+    var rs = 읽기();
+    $("tC").innerHTML = "<tr><th>새로 생긴 열</th><th>읽은 규칙</th><th>일치율</th><th></th></tr>"
+      + rs.map(function(r){
+          var ok = r.규.율 >= 한계, c = ok ? "ok" : "no";
+          return "<tr" + (ok ? "" : ' class="rno"') + "><td>" + esc(r.열) + "</td><td>"
+            + esc(r.규.말) + "</td><td class=\"" + c + "\">" + pct(r.규.율) + "</td>"
+            + "<td class=\"" + c + "\">" + (ok ? "만듭니다" : "만들지 않고 여쭤봅니다") + "</td></tr>";
+        }).join("")
+      + '<tr><td>— 행 삭제</td><td>"코드" 가 빈 행을 지움 (합계행)</td>'
+      + '<td class="ok">100.0%</td><td class="ok">만듭니다</td></tr>';
+    $("tV").innerHTML = vba(rs);
+  }
+  if (!$("tA")) return;
+  표($("tA"), AH, AV, { 칸클래스:function(r){ return String(r[0]).trim() ? "" : "gone"; } });
+  표($("tB"), BH, BV, { 고침:function(r, ri, ci){ return ci >= 2; } });
+  그리기();
+  $("tB").addEventListener("input", function(e){
+    var td = e.target;
+    if (!td.dataset || td.dataset.r === undefined) return;
+    var v = td.textContent.trim();
+    BV[+td.dataset.r][+td.dataset.c] = (v !== "" && !isNaN(Number(v))) ? Number(v) : v;
+    그리기();
+  });
+})();
+
+/* ── 02 명단 정리 ─────────────────────────────────────── */
+(function(){
+  if (!$("nIn")) return;
+  var 씨앗 = ["이름,연락처","김민준 ,010-1234-5678","이서연,01023456789","박도윤,010 3456 7890",
+    "김민준,010-1234-5678","최하은,010-4567-89","정시우,0104567-8901","강지유 ,010 5678 9012",
+    "이서연,010-2345-6789","윤건우,","한예준,010-6789-0123"].join("\n");
+  var 머리 = ["이름","연락처","name","phone","전화","전화번호","휴대폰","성명"];
+  function 전화(v){
+    var d = String(v || "").replace(/\D/g, "");
+    if (!d) return { 값:"", 사유:"연락처가 비어 있음" };
+    if (d.length === 11 && d.indexOf("01") === 0)
+      return { 값:d.replace(/(\d{3})(\d{4})(\d{4})/, "$1-$2-$3"), 사유:"" };
+    if (d.length === 10 && d.indexOf("01") === 0)
+      return { 값:d.replace(/(\d{3})(\d{3})(\d{4})/, "$1-$2-$3"), 사유:"" };
+    return { 값:"", 사유:"자릿수가 맞지 않음 (" + d.length + "자리)" };
+  }
+  function 돌리기(){
+    var 줄 = $("nIn").value.split(/\r?\n/).filter(function(l){ return l.trim(); });
+    var 본 = {}, 결과 = [], 정상 = 0, 중복 = 0, 확인 = 0;
+    줄.forEach(function(l, i){
+      var p = l.split(","), 이름 = (p[0] || "").replace(/\s+/g, " ").trim();
+      var 원전화 = (p[1] || "").trim();
+      if (p.length < 2 && 머리.indexOf(이름) >= 0) return;
+      if (머리.indexOf(이름) >= 0 && 머리.indexOf(원전화) >= 0) return;
+      var t = 전화(원전화), 사유 = [];
+      if (!이름) 사유.push("이름이 비어 있음");
+      if (t.사유) 사유.push(t.사유);
+      var 상태 = 사유.length ? "확인 필요" : "정상";
+      if (이름 && t.값) {
+        var k = 이름 + "|" + t.값;
+        if (본[k]) { 상태 = "중복"; 사유.push(본[k] + "번째 줄과 같음"); }
+        else 본[k] = i + 1;
+      }
+      if (상태 === "정상") 정상++; else if (상태 === "중복") 중복++; else 확인++;
+      결과.push([i + 1, l.trim(), 이름 + (t.값 ? " · " + t.값 : ""), 상태, 사유.join(" · ")]);
+    });
+    집계($("nTally"), [
+      { 이름:"입력 줄", 값:결과.length },
+      { 이름:"실제 인원", 값:정상, 톤:"go" },
+      { 이름:"중복", 값:중복, 톤:중복 ? "hi" : "" },
+      { 이름:"확인 필요", 값:확인, 톤:확인 ? "hi" : "" }
+    ]);
+    표($("nOut"), ["줄","받은 그대로","정리하면","상태","사유"], 결과, {
+      줄클래스:function(r){ return r[3] === "중복" ? "rwarn" : (r[3] === "확인 필요" ? "rno" : ""); },
+      칸클래스:function(r, ri, ci){
+        if (ci !== 3) return "";
+        return r[3] === "정상" ? "ok" : (r[3] === "중복" ? "warn" : "no");
+      }
+    });
+  }
+  $("nIn").value = 씨앗;
+  $("nIn").addEventListener("input", 돌리기);
+  돌리기();
+})();
+
+/* ── 03 0건인 날 ──────────────────────────────────────── */
+(function(){
+  if (!$("zBars")) return;
+  var 일 = [152,87,0,0,86,122,122,87,0,61,0,117,141,132,140,122,41,0,143,105,83,105,107,40,0,108,83,124,86,142,48];
+  var 모드 = "raw";
+  function 그리기(){
+    var 쓰는 = 모드 === "raw" ? 일.filter(function(v){ return v > 0; }) : 일;
+    var 합 = 일.reduce(function(a, b){ return a + b; }, 0);
+    var 평균 = 합 / 쓰는.length;
+    var 최저 = Math.min.apply(null, 쓰는);
+    var 최대 = Math.max.apply(null, 일);
+    $("zBars").innerHTML = 일.map(function(v){
+      if (모드 === "raw" && v === 0) return "";
+      return '<i class="' + (v === 0 ? "z" : "") + '" style="height:'
+        + Math.max(2, v / 최대 * 100) + '%"></i>';
+    }).join("");
+    집계($("zTally"), [
+      { 이름:"분모가 되는 날", 값:쓰는.length, 꼬리:"일", 톤:모드 === "raw" ? "hi" : "go" },
+      { 이름:"일평균 주문", 값:평균.toFixed(1), 꼬리:"건", 톤:모드 === "raw" ? "hi" : "go" },
+      { 이름:"가장 적은 날", 값:최저, 꼬리:"건", 톤:모드 === "raw" ? "hi" : "go" }
+    ]);
+    $("zSay").innerHTML = 모드 === "raw"
+      ? '0건인 날 <strong>6일</strong>이 원본에 없어서 분모에서 빠집니다. '
+        + '일평균이 <strong style="color:var(--no)">24.0% 높게</strong> 나오고, '
+        + '“가장 적은 날 40건”은 사실이 아닙니다.'
+      : '0으로 채우면 분모가 31일이 됩니다. <strong>없는 날과 0인 날은 다릅니다.</strong> '
+        + '채워야 평균도 최저값도 맞습니다.';
+  }
+  $("zSeg").addEventListener("click", function(e){
+    var b = e.target.closest("button");
+    if (!b) return;
+    모드 = b.dataset.v;
+    Array.prototype.forEach.call($("zSeg").querySelectorAll("button"), function(x){
+      x.setAttribute("aria-pressed", String(x === b)); });
+    그리기();
+  });
+  그리기();
+})();
+
+/* ── 04 발송 전 검증 ──────────────────────────────────── */
+(function(){
+  if (!$("mIn")) return;
+  var 도 = ["gmail.com","naver.com","daum.net","hanmail.net","kakao.com","nate.com"];
+  var 씨 = 7, 난수 = function(){ 씨 = (씨 * 1103515245 + 12345) % 2147483648; return 씨 / 2147483648; };
+  var 명단 = [];
+  for (var i = 0; i < 500; i++) {
+    var n = ("00" + i).slice(-3);
+    명단.push("user" + n + "@" + 도[Math.floor(난수() * 도.length)]);
+  }
+  명단[47] = "user047@gmail,com";      // 점 대신 쉼표
+  명단[188] = "user188@navercom";      // 점이 빠짐
+  명단[301] = "user301@ gmail.com";    // 가운데 공백
+  명단.push(명단[412].toUpperCase());   // 대소문자만 다른 중복
+  명단.push("이메일");                   // 엑셀에서 같이 붙여넣은 머리글
+
+  var 형식 = /^[^\s@\x00-\x1f]+@[^\s@\x00-\x1f]+\.[^\s@\x00-\x1f]+$/;
+  var 머리말 = ["email","e-mail","mail","이메일","메일","주소","이메일주소","수신자"];
+  function 돌리기(){
+    var 조각 = $("mIn").value.split(/[,;\n\r\t]+/);
+    var 통과 = [], 제외 = [], 중복 = [], 본 = {};
+    조각.forEach(function(t){
+      var raw = t.trim().replace(/^<+|>+$/g, "").trim();
+      if (!raw) return;
+      if (머리말.indexOf(raw.toLowerCase()) >= 0) return;
+      if (!형식.test(raw)) { 제외.push([raw, "이메일 형식이 아닙니다"]); return; }
+      var k = raw.toLowerCase();
+      if (본[k]) { 중복.push(raw); return; }
+      본[k] = 1; 통과.push(raw);
+    });
+    집계($("mTally"), [
+      { 이름:"입력 줄", 값:통과.length + 제외.length + 중복.length },
+      { 이름:"발송 대상", 값:통과.length, 톤:"go" },
+      { 이름:"제외", 값:제외.length, 톤:제외.length ? "hi" : "" },
+      { 이름:"중복", 값:중복.length }
+    ]);
+    var 줄 = 제외.map(function(r){ return [r[0], r[1]]; })
+      .concat(중복.map(function(v){ return [v, "앞줄과 같은 주소 (두 번 보내지 않습니다)"]; }));
+    표($("mOut"), ["걸러낸 값","사유"], 줄.length ? 줄 : [["—", "걸러낼 것이 없습니다"]], {
+      줄클래스:function(r){ return r[1].indexOf("같은 주소") >= 0 ? "rwarn" : "rno"; }
+    });
+  }
+  $("mIn").value = 명단.join("\n");
+  $("mIn").addEventListener("input", 돌리기);
+  돌리기();
+})();
+
+/* ── 05 변경 추적 ─────────────────────────────────────── */
+(function(){
+  if (!$("dA")) return;
+  var H = ["상품코드","상품명","가격","재고"];
+  var 지난 = [["P-01","탁상 달력 A형","3,200원","품절"],["P-02","벽걸이 달력 B형","5,800원","판매중"],
+             ["P-03","데스크 패드","12,000원","판매중"],["P-04","머그컵 세트","9,900원","판매중"]];
+  var 이번 = [["P-01","탁상 달력 A형","3,200원","판매중"],["P-02","벽걸이 달력 B형","5,800원","판매중"],
+             ["P-03","데스크 패드","10,500원","판매중"],["P-04","머그컵 세트","9,900원","판매중"],
+             ["P-05","2027 포켓 다이어리","7,400원","판매중"],["P-06","가죽 명함지갑","23,000원","판매중"]];
+  function 그리기(){
+    var 옛 = {};
+    지난.forEach(function(r){ 옛[r[0]] = r; });
+    var 줄 = [];
+    이번.forEach(function(r){
+      var o = 옛[r[0]];
+      if (!o) { 줄.push(["새 항목", r[1], "—", "—", "이번에 처음 올라옴"]); return; }
+      H.forEach(function(h, i){
+        if (i === 0 || i === 1) return;
+        if (String(o[i]) !== String(r[i])) 줄.push(["바뀜", r[1], h, o[i], r[i]]);
+      });
+    });
+    표($("dC"), ["구분","항목","바뀐 열","지난번","이번"],
+      줄.length ? 줄 : [["—","달라진 것이 없습니다","","",""]], {
+      줄클래스:function(r){ return r[0] === "새 항목" ? "rok" : (r[0] === "바뀜" ? "rwarn" : ""); },
+      칸클래스:function(r, ri, ci){
+        if (ci !== 0) return "";
+        return r[0] === "새 항목" ? "ok" : (r[0] === "바뀜" ? "warn" : "");
+      }
+    });
+  }
+  표($("dA"), H, 지난, {});
+  표($("dB"), H, 이번, { 고침:function(r, ri, ci){ return ci >= 2; } });
+  그리기();
+  $("dB").addEventListener("input", function(e){
+    var td = e.target;
+    if (!td.dataset || td.dataset.r === undefined) return;
+    이번[+td.dataset.r][+td.dataset.c] = td.textContent.trim();
+    그리기();
+  });
+})();
+
+/* ── 06 문서 점검 ─────────────────────────────────────── */
+(function(){
+  if (!$("cIn")) return;
+  var 문서 = [
+    "---",
+    "문서명: 2026년 상반기 협력사 운영 안내",
+    "작성자:",
+    "갱신일: 2026-03-11",
+    "---",
+    "",
+    "## 1. 개요",
+    "",
+    "담당자 확인용으로 받은 주민번호는 880101-1234567 입니다.",
+    "연락처 010-1234-5678 / 환급 계좌 110-234-567890 (신한)",
+    "",
+    "자세한 절차는 [운영 지침](./docs/운영지침_v3.md) 과",
+    "[양식 모음](./forms/양식.xlsx) 을 함께 보시면 됩니다.",
+    "",
+    "## 2. 신청 방법",
+    "",
+    "{{담당부서}} 앞으로 접수하시면 됩니다.",
+    "문의는 OOO 과장(내선 0000)께 부탁드립니다.",
+    "",
+    "연동 테스트 계정 V90012345678 은 가상값이라 그대로 둡니다."
+  ].join("\n");
+
+  var 있는파일 = ["./docs/운영지침_v3.md", "./README.md", "./docs/서식.md"];
+  var 필수 = ["문서명", "작성자", "갱신일"];
+
+  function 가리기(v){
+    var 반 = Math.ceil(v.length / 2);
+    return v.slice(0, 반) + Array(v.length - 반 + 1).join("●");
+  }
+
+  var 규칙 = [
+    { 종:"주민등록번호 형태", re:/\b\d{6}-[1-4]\d{6}\b/g,        급:"멈춤" },
+    { 종:"휴대전화 형태",     re:/\b01[016-9]-?\d{3,4}-?\d{4}\b/g, 급:"멈춤" },
+    { 종:"계좌번호 형태",     re:/\b\d{2,3}-\d{2,6}-\d{5,6}\b/g,   급:"멈춤" },
+    { 종:"채우지 않은 자리",  re:/\{\{[^}]+\}\}|\bO{3,}\b|\b0{4,}\b/g, 급:"확인" }
+  ];
+
+  function 돌리기(){
+    var 줄들 = $("cIn").value.split("\n");
+    var 찾음 = [], 넘김 = 0;
+
+    줄들.forEach(function(줄, i){
+      var no = i + 1;
+
+      // 필수 항목이 비었는지 (문서 머리말)
+      필수.forEach(function(k){
+        var m = 줄.match(new RegExp("^" + k + "\\s*:\\s*(.*)$"));
+        if (m && m[1].trim() === "")
+          찾음.push([no, "비어 있는 필수 항목", k, "확인", "값이 없습니다"]);
+      });
+
+      // 사내 코드 — 가상값(V900…)은 넘긴다
+      (줄.match(/\b[VK]\d{11,12}\b/g) || []).forEach(function(v){
+        if (v.indexOf("V900") === 0) { 넘김++; return; }
+        찾음.push([no, "사내 식별 코드", 가리기(v), "멈춤", "가상값이 아닙니다"]);
+      });
+
+      규칙.forEach(function(r){
+        var m; r.re.lastIndex = 0;
+        while ((m = r.re.exec(줄)) !== null)
+          찾음.push([no, r.종, r.급 === "멈춤" ? 가리기(m[0]) : m[0], r.급,
+                     r.급 === "멈춤" ? "지우거나 가려야 합니다" : "사람이 채워야 합니다"]);
+      });
+
+      // 가리킨 파일이 실제로 있는지
+      var L; var 링 = /\]\(([^)]+)\)/g;
+      while ((L = 링.exec(줄)) !== null) {
+        if (있는파일.indexOf(L[1]) >= 0) { 넘김++; continue; }
+        찾음.push([no, "가리킨 파일이 없음", L[1], "확인", "경로를 확인해 주세요"]);
+      }
+    });
+
+    var 멈 = 찾음.filter(function(r){ return r[3] === "멈춤"; }).length;
+    집계($("cTally"), [
+      { 이름:"검사한 줄", 값:줄들.length },
+      { 이름:"내보내면 안 됨", 값:멈, 톤:멈 ? "hi" : "go" },
+      { 이름:"확인 필요", 값:찾음.length - 멈 },
+      { 이름:"보고 넘긴 것", 값:넘김, 꼬리:"가상값·정상 링크" }
+    ]);
+    표($("cOut"), ["줄", "걸린 것", "찾은 값", "등급", "해야 할 일"],
+       찾음.length ? 찾음 : [["—", "걸린 것이 없습니다", "", "", ""]],
+       { 줄클래스:function(r){ return r[3] === "멈춤" ? "rno" : (r[3] === "확인" ? "rwarn" : ""); } });
+  }
+  $("cIn").value = 문서;
+  $("cIn").addEventListener("input", 돌리기);
+  돌리기();
+})();
+
+/* ── 07 폴더 중복 정리 ────────────────────────────────── */
+(function(){
+  if (!$("fIn")) return;
+  var 목록 = [
+    "2026년_1분기_실적.xlsx|184320|2026-03-11 14:22|01_보고",
+    "2026년_1분기_실적.xlsx|184320|2026-03-11 14:22|99_임시_보관함",
+    "2026년_1분기_실적.xlsx|184320|2026-03-11 14:22|99_임시_보관함/정리중",
+    "협력사_명단_최종.xlsx|52736|2026-02-04 09:10|02_명단",
+    "협력사_명단_최종.xlsx|52736|2026-02-18 17:45|99_임시_보관함",
+    "협력사_명단_최종(1).xlsx|52736|2026-02-04 09:10|99_임시_보관함",
+    "회의록_0211.docx|31744|2026-02-11 16:03|03_회의",
+    "사업계획_v2.pptx|2097152|2026-01-20 11:30|01_보고",
+    "사업계획_v2.pptx|2097152|2026-01-20 11:30|99_임시_보관함"
+  ].join("\n");
+  var 보관 = "99_임시_보관함";
+
+  function 바이트(n){
+    if (n >= 1048576) return (n / 1048576).toFixed(1) + " MB";
+    if (n >= 1024) return Math.round(n / 1024) + " KB";
+    return n + " B";
+  }
+
+  function 돌리기(){
+    var 파일 = [];
+    $("fIn").value.split("\n").forEach(function(줄){
+      var t = 줄.split("|").map(function(x){ return x.trim(); });
+      if (t.length < 4 || !t[0]) return;
+      파일.push({ 이름:t[0], 크기:Number(t[1]) || 0, 시각:t[2], 폴더:t[3] });
+    });
+
+    // 같은 파일 = 이름·크기·수정시각이 모두 일치
+    var 묶음 = {};
+    파일.forEach(function(f){
+      var k = f.이름 + "|" + f.크기 + "|" + f.시각;
+      (묶음[k] = 묶음[k] || []).push(f);
+    });
+    // 이름·크기만 같고 시각이 다른 것 찾기
+    var 이름크기 = {};
+    파일.forEach(function(f){
+      var k = f.이름 + "|" + f.크기;
+      (이름크기[k] = 이름크기[k] || {})[f.시각] = 1;
+    });
+
+    var 옮김 = 0, 남김 = 0, 보류 = 0, 겹 = 0;
+    파일.forEach(function(f){
+      var 떼 = 묶음[f.이름 + "|" + f.크기 + "|" + f.시각];
+      var 시각여럿 = Object.keys(이름크기[f.이름 + "|" + f.크기]).length > 1;
+      if (떼.length > 1) {
+        // 보관함 밖에 있는 것을 원본으로 남긴다. 전부 보관함이면 경로가 짧은 쪽.
+        var 밖 = 떼.filter(function(x){ return x.폴더.indexOf(보관) !== 0; });
+        var 원본 = 밖.length ? 밖[0]
+          : 떼.slice().sort(function(a,b){ return a.폴더.length - b.폴더.length; })[0];
+        if (f === 원본) { f.판 = "남김"; f.왜 = "원본으로 둡니다"; 남김++; }
+        else { f.판 = "옮김"; f.왜 = "같은 파일이 " + 원본.폴더 + " 에 있습니다"; 옮김++; }
+      } else if (시각여럿) {
+        f.판 = "보류"; f.왜 = "크기는 같은데 수정시각이 다릅니다"; 보류++;
+      } else {
+        var 같크기 = 파일.filter(function(x){ return x !== f && x.크기 === f.크기; });
+        if (같크기.length) { f.판 = "보류"; f.왜 = "크기만 같습니다 (이름이 다릅니다)"; 겹++; }
+        else { f.판 = "남김"; f.왜 = "겹치는 것이 없습니다"; 남김++; }
+      }
+    });
+
+    집계($("fTally"), [
+      { 이름:"검사한 파일", 값:파일.length },
+      { 이름:"옮길 것", 값:옮김, 톤:옮김 ? "hi" : "" },
+      { 이름:"그대로 둘 것", 값:남김, 톤:"go" },
+      { 이름:"사람이 볼 것", 값:보류 + 겹, 꼬리:"판정하지 않음" }
+    ]);
+    표($("fOut"), ["파일", "크기", "수정시각", "폴더", "판정", "이유"],
+       파일.map(function(f){
+         return [f.이름, 바이트(f.크기), f.시각, f.폴더, f.판, f.왜];
+       }),
+       { 줄클래스:function(r){
+           return r[4] === "옮김" ? "rwarn" : (r[4] === "보류" ? "rno" : "rok"); } });
+  }
+  $("fIn").value = 목록;
+  $("fIn").addEventListener("input", 돌리기);
+  돌리기();
+})();
+})();
+</script>
+
+<script>
+(function(){
+"use strict";
+var $ = function(id){ return document.getElementById(id); };
+var 예시 = [
+  "한빛상사｜2400｜1980｜2150",
+  "대성유통｜1800｜1500｜1320",
+  "미래물산｜960｜790｜900",
+  "동아기획｜720｜610｜650",
+  "새한무역｜540｜430｜500",
+  "우리산업｜300｜260｜180"
+].join("\n");
+var 모드 = "raw", tip;
+function 수(v){ var n = Number(String(v).replace(/[,\s]/g, "")); return isFinite(n) ? n : NaN; }
+function 천(n){ return Math.round(n).toLocaleString("ko-KR"); }
+function 율(n){ return (n > 0 ? "+" : "") + n.toFixed(1) + "%"; }
+function 읽기(text){
+  var 줄 = [], 못읽음 = [];
+  text.split(/\n/).forEach(function(l){
+    l = l.trim(); if (!l) return;
+    var c = l.split(/[｜|\t,]/).map(function(x){ return x.trim(); });
+    var 전체 = 수(c[1]), 같은 = 수(c[2]), 올해 = 수(c[3]);
+    if (c.length < 4 || !c[0] || isNaN(전체) || isNaN(같은) || isNaN(올해) || 전체 <= 0 || 같은 <= 0) { 못읽음.push(l); return; }
+    줄.push({ 이름:c[0], 전체:전체, 같은:같은, 올해:올해 });
+  });
+  return { 줄:줄, 못읽음:못읽음 };
+}
+function 그리기(){
+  var r = 읽기($("rIn").value), 줄 = r.줄;
+  var 기준 = function(d){ return 모드 === "raw" ? d.전체 : d.같은; };
+  줄.forEach(function(d){ d.증감 = (d.올해 - 기준(d)) / 기준(d) * 100; });
+  var 정렬 = 줄.slice().sort(function(a, b){ return b.증감 - a.증감; });
+  var 합올해 = 0, 합기준 = 0;
+  줄.forEach(function(d){ 합올해 += d.올해; 합기준 += 기준(d); });
+  var 전체율 = 합기준 ? (합올해 - 합기준) / 합기준 * 100 : 0;
+  var 늘 = 줄.filter(function(d){ return d.증감 > 0; }).length;
+  var 줄어 = 줄.filter(function(d){ return d.증감 < 0; }).length;
+
+  $("rTally").innerHTML =
+    "<div><dt>전체 증감</dt><dd>" + (줄.length ? 율(전체율) : "–") + "</dd></div>" +
+    "<div><dt>늘어난 곳</dt><dd>" + 늘 + "<small>곳</small></dd></div>" +
+    "<div><dt>줄어든 곳</dt><dd>" + 줄어 + "<small>곳</small></dd></div>" +
+    "<div><dt>올해 합계</dt><dd>" + 천(합올해) + "<small>만원</small></dd></div>";
+
+  $("rCap").textContent = "거래처별 증감률 — 올해 1~10월 ÷ " + (모드 === "raw" ? "작년 1~12월" : "작년 1~10월");
+  var 최대 = Math.max.apply(null, [10].concat(정렬.map(function(d){ return Math.abs(d.증감); })));
+  $("rBars").innerHTML = 정렬.map(function(d, i){
+    var w = Math.abs(d.증감) / 최대 * 48;
+    return '<div class="rrow" data-i="' + i + '"><span class="nm">' + d.이름.replace(/</g, "&lt;") + '</span>' +
+      '<span class="tr"><span class="br ' + (d.증감 >= 0 ? "up" : "dn") + '" style="width:' + w.toFixed(1) + '%"></span></span>' +
+      '<span class="vl">' + 율(d.증감) + '</span></div>';
+  }).join("");
+  $("rBars")._d = 정렬;
+
+  $("rSay").innerHTML = !줄.length ? "읽을 수 있는 줄이 없어요. <b>거래처｜작년 전체｜작년 1~10월｜올해 1~10월</b> 순서로 적어 주세요."
+    : 모드 === "raw"
+      ? "이대로 보고하면 <b>" + 줄.length + "곳 중 " + 줄어 + "곳이 줄어든 것</b>으로 나가요. 10개월 치를 12개월 치와 비교했기 때문이에요."
+      : "같은 기간끼리 놓으면 <b>늘어난 곳이 " + 늘 + "곳</b>이에요. 실제로 살펴봐야 할 곳은 줄어든 " + 줄어 + "곳이에요.";
+
+  var h = "<table><tr><th>거래처</th><th>" + (모드 === "raw" ? "작년 1~12월" : "작년 1~10월") + "</th><th>올해 1~10월</th><th>증감률</th></tr>";
+  정렬.forEach(function(d){
+    h += "<tr><td>" + d.이름.replace(/</g, "&lt;") + "</td><td>" + 천(기준(d)) + "</td><td>" + 천(d.올해) + "</td><td>" + 율(d.증감) + "</td></tr>";
+  });
+  h += "<tr><td><b>합계</b></td><td><b>" + 천(합기준) + "</b></td><td><b>" + 천(합올해) + "</b></td><td><b>" + (줄.length ? 율(전체율) : "–") + "</b></td></tr>";
+  if (r.못읽음.length) h += '<tr class="rno"><td colspan="4">읽지 못한 줄 ' + r.못읽음.length + "건은 합계에 넣지 않았어요 — " +
+    r.못읽음.slice(0, 3).join(" / ").replace(/</g, "&lt;") + "</td></tr>";
+  $("rOut").innerHTML = h + "</table>";
+}
+function 말풍선(e){
+  var row = e.target.closest ? e.target.closest(".rrow") : null;
+  if (!tip) { tip = document.createElement("div"); tip.className = "rtip"; document.body.appendChild(tip); }
+  if (!row) { tip.style.opacity = 0; return; }
+  var d = $("rBars")._d[+row.getAttribute("data-i")];
+  var 기준 = 모드 === "raw" ? d.전체 : d.같은;
+  tip.innerHTML = "<b>" + d.이름.replace(/</g, "&lt;") + "</b><br>" + (모드 === "raw" ? "작년 1~12월 " : "작년 1~10월 ") + 천(기준) +
+    "<br>올해 1~10월 " + 천(d.올해) + "<br>증감 " + 율(d.증감);
+  tip.style.opacity = 1;
+  tip.style.left = Math.min(e.clientX + 14, window.innerWidth - tip.offsetWidth - 8) + "px";
+  tip.style.top = (e.clientY + 14) + "px";
+}
+$("rIn").value = 예시;
+$("rIn").addEventListener("input", 그리기);
+$("rBars").addEventListener("mousemove", 말풍선);
+$("rBars").addEventListener("mouseleave", function(){ if (tip) tip.style.opacity = 0; });
+[].forEach.call($("rSeg").querySelectorAll("button"), function(b){
+  b.addEventListener("click", function(){
+    모드 = b.getAttribute("data-v");
+    [].forEach.call($("rSeg").querySelectorAll("button"), function(x){ x.setAttribute("aria-pressed", x === b ? "true" : "false"); });
+    그리기();
+  });
+});
+그리기();
+})();
+</script>
+
+<script src="/analytics.js"></script>
+</body>
+</html>

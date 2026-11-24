@@ -1,0 +1,405 @@
+<!doctype html>
+<html lang="ko" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>5일 과정 — 내 반복 업무 하나를 AI에게 넘기기 | 리플로</title>
+<meta name="description" content="퇴근 후 20분, 5일. 매달 되풀이하는 일 하나를 골라 Claude가 같은 모양으로 해내게 만드는 무료 과정. 혼자 따라 해요.">
+<link rel="canonical" href="https://reflo-works.netlify.app/course/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="리플로 Reflo">
+<meta property="og:title" content="5일 과정 — 내 반복 업무 하나를 AI에게 넘기기">
+<meta property="og:description" content="퇴근 후 20분, 5일. 매달 되풀이하는 일 하나를 Claude가 같은 모양으로 해내게 만들어요. 무료.">
+<meta property="og:url" content="https://reflo-works.netlify.app/course/">
+<meta property="og:image" content="https://reflo-works.netlify.app/og.png">
+<link rel="stylesheet" href="/tokens.css">
+<link rel="stylesheet" href="/marketing.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.24.0/dist/tabler-icons.min.css">
+<link rel="stylesheet" href="/tools/tools.css">
+<style>
+  .wrap{max-width:760px;margin:0 auto}
+  .plan{max-width:760px;margin:36px auto 0;display:grid;gap:8px;text-align:left}
+  .plan a{display:grid;grid-template-columns:64px 1fr auto;gap:14px;align-items:center;text-decoration:none;
+    border:1px solid var(--border);border-radius:var(--radius-lg);padding:15px 20px;background:var(--surface)}
+  .plan a:hover{border-color:var(--accent)}
+  .plan b{font-size:var(--fs-caption);color:var(--accent-strong)}
+  .plan span{font-size:var(--fs-body);color:var(--text-primary);font-weight:var(--fw-medium)}
+  .plan em{font-style:normal;font-size:var(--fs-caption);color:var(--text-tertiary)}
+  .plan a.done b::after{content:" ✓"}
+  .plan a.done span{color:var(--text-tertiary)}
+  .day{max-width:760px;margin:0 auto;padding:64px 20px 0;scroll-margin-top:8px;text-align:left}
+  .day .tag{display:inline-block;font-size:var(--fs-footnote);font-weight:var(--fw-bold);letter-spacing:.06em;color:var(--accent-strong);
+    background:var(--accent-bg);border-radius:var(--radius-pill);padding:5px 12px}
+  .day h2{margin:12px 0 6px;font-size:clamp(24px,3.6vw,30px);font-weight:var(--fw-bold);letter-spacing:var(--ls-tight)}
+  .day .goal{margin:0 0 22px;font-size:var(--fs-subhead);color:var(--text-secondary);line-height:var(--lh-body)}
+  .day h3{margin:26px 0 10px;font-size:var(--fs-subhead);font-weight:var(--fw-bold)}
+  .day ol,.day ul{margin:0;padding-left:21px;font-size:var(--fs-body);line-height:1.85;color:var(--text-secondary)}
+  .day li{margin:5px 0}.day li b{color:var(--text-primary);font-weight:var(--fw-medium)}
+  .day a{color:var(--accent-strong)}
+  .pbox{position:relative;background:var(--surface-sunken);border-radius:var(--radius-lg);padding:18px 20px}
+  .pbox pre{margin:0;white-space:pre-wrap;word-break:keep-all;font-family:var(--font-sans);
+    font-size:var(--fs-caption);line-height:1.8;color:var(--text-primary);padding-right:64px}
+  .cp{position:absolute;top:12px;right:12px;display:flex;align-items:center;gap:5px;height:32px;padding:0 12px;
+    border:1px solid var(--border-strong);border-radius:var(--radius-pill);background:var(--surface);
+    font:inherit;font-size:var(--fs-footnote);color:var(--text-secondary);cursor:pointer}
+  .cp:hover{border-color:var(--accent);color:var(--accent-strong)}
+  .cp:focus-visible{outline:none;box-shadow:var(--shadow-focus)}
+  .pc h3{display:flex;align-items:center;gap:6px;margin:16px 0 6px;font-size:var(--fs-caption);
+    font-weight:var(--fw-bold);color:var(--success-strong)}
+  .pc ul{margin:0;padding-left:19px;font-size:var(--fs-body);line-height:1.8;color:var(--text-secondary)}
+  @media(max-width:560px){.pbox pre{padding-right:0;padding-top:34px}}
+  .pbox{margin:12px 0}
+  .pbox pre{padding-right:84px}
+  .ex{margin-top:22px;border-radius:var(--radius-lg);background:var(--surface-sunken);padding:18px 20px}
+  .ex .et{margin:0 0 8px;font-size:var(--fs-footnote);font-weight:var(--fw-bold);color:var(--text-tertiary);letter-spacing:.04em}
+  .ex p{margin:0 0 8px;font-size:var(--fs-caption);line-height:1.75;color:var(--text-secondary)}
+  .ex pre{margin:8px 0 0;white-space:pre-wrap;word-break:keep-all;font-family:var(--font-sans);font-size:var(--fs-caption);line-height:1.75;
+    color:var(--text-primary);background:var(--surface);border-radius:var(--radius-md);padding:12px 14px}
+  .pass{margin-top:22px;border:1px solid var(--border);border-radius:var(--radius-lg);padding:16px 20px}
+  .pass .pt{margin:0 0 8px;font-size:var(--fs-caption);font-weight:var(--fw-bold);color:var(--success-strong)}
+  .pass label{display:flex;gap:10px;align-items:flex-start;font-size:var(--fs-body);line-height:1.6;color:var(--text-secondary);padding:4px 0;cursor:pointer}
+  .pass input{margin-top:4px;width:16px;height:16px;accent-color:var(--accent);flex:none}
+  .stuck{margin:16px 0 0;font-size:var(--fs-caption);color:var(--text-tertiary);line-height:1.7}
+  .honest{max-width:720px;margin:64px auto 0;padding:18px 22px;border-radius:var(--radius-lg);background:var(--warm-bg);
+    font-size:var(--fs-body);line-height:var(--lh-body);color:var(--text-secondary);text-align:left}
+  .honest b{color:var(--warm)}
+  .cpin{height:40px;border:0;font-family:inherit;font-size:var(--fs-caption);padding:0 18px}
+  @media(max-width:560px){.plan a{grid-template-columns:52px 1fr}.plan em{display:none}.day{padding-top:48px}}
+</style>
+</head>
+<body>
+
+<div class="ds-hero-wrap">
+  <div class="nav">
+    <a class="brand" href="/"><span class="mark">R</span> 리플로</a>
+    <a class="navback" href="/kit/">스타터 키트 →</a>
+  </div>
+  <header class="ds-hero">
+    <span class="eyebrow">5일 과정 · 무료 · 혼자 따라 하기</span>
+    <h1>퇴근 후 20분, 5일.<br>반복 업무 하나를 <span class="accent" style="white-space:nowrap">AI에게 넘겨요</span></h1>
+    <p class="lead">매달 되풀이하는 일 하나를 골라, Claude가 매번 같은 모양으로 해내게 만들어요.
+      새 직원에게 인수인계하는 순서 그대로예요.</p>
+    <div class="ds-hero-cta">
+      <a class="ds-btn-pill primary" href="#d1">1일차 시작하기</a>
+      <a class="ds-btn-pill ghost" href="/free/reflo-starter-kit.zip" download data-track="download_kit"><i class="ti ti-download"></i> 키트 받기</a>
+    </div>
+    <p class="sec-note">Claude 앱(claude.ai)이 필요해요 · 수업이 아니에요, 편한 날 하나씩 하면 돼요 · 2일차부터 키트를 써요<br>
+      Claude 공식 안내로는 무료 요금제에서도 프로젝트(다섯 개까지)와 스킬을 쓸 수 있어요. 이 과정은 유료 요금제에서 따라 해 봤어요</p>
+  </header>
+</div>
+
+<section class="ds-mkt-section">
+  <h2 class="ds-mkt-h2">닷새 동안 하는 일</h2>
+  <p class="ds-mkt-lead">하루에 하나씩, 끝나면 손에 남는 것이 있어요.</p>
+  <div class="plan" id="plan">
+    <a href="#d1" data-d="1"><b>1일차</b><span>근무 수칙 주기 — 같은 요청을 두 번 시켜 보기</span><em>지어내지 않는 Claude</em></a>
+    <a href="#d2" data-d="2"><b>2일차</b><span>회사와 나를 소개하기 — 내 메일로 말투 익히게 하기</span><em>내 말투가 담긴 프로필</em></a>
+    <a href="#d3" data-d="3"><b>3일차</b><span>업무 매뉴얼을 우리 양식으로 — 보고서 양식 바꾸기</span><em>회사 양식으로 나오는 절차</em></a>
+    <a href="#d4" data-d="4"><b>4일차</b><span>내 일을 인수인계하기 — 반복 업무 하나를 새 절차로</span><em>내 업무 전용 절차</em></a>
+    <a href="#d5" data-d="5"><b>5일차</b><span>수습 평가 — 세 번 돌려 보고 팀과 나누기</span><em>믿고 맡길 근거</em></a>
+  </div>
+  <p class="sec-note">각 날의 「통과」 칸을 모두 체크하면 위 목록에 표시돼요. 이 브라우저에만 저장돼요.</p>
+</section>
+
+<!-- ───────── 1일차 ───────── -->
+<section class="day" id="d1">
+  <span class="tag">1일차 · 15분</span>
+  <h2>근무 수칙 주기</h2>
+  <p class="goal">규칙을 넣기 전과 넣은 뒤, 같은 요청에 Claude가 어떻게 달라지는지 직접 봐요.</p>
+
+  <h3>따라 하기</h3>
+  <ol>
+    <li><b>먼저 규칙 없이 시켜요.</b> claude.ai에서 새 대화를 열고 아래 메모를 넣어요. 결과를 그대로 둬요.
+      <div class="pbox"><pre id="t1">이번 주 주간보고 써줘.
+- 월: 거래처 3곳 견적 회신
+- 수: 10월 실적 자료 취합
+- 금: 신규 거래처 미팅</pre><button type="button" class="cp" data-cp="t1"><i class="ti ti-copy"></i> 복사</button></div></li>
+    <li><b>규칙을 복사해요.</b>
+      <p style="margin:8px 0"><button type="button" class="ds-btn-pill primary cpin" id="cprules"><i class="ti ti-copy"></i> 규칙 복사하기</button>
+      <span id="cpmsg" class="dim" style="margin-left:10px;font-size:var(--fs-caption)"></span></p></li>
+    <li><b>프로젝트를 만들고 규칙을 넣어요.</b> 왼쪽 메뉴 「프로젝트」 → 새 프로젝트 → 오른쪽의 「지침 — 추가」에 붙여 넣어요.
+      맨 아래 세 줄(이름, 부서, 직무)을 내 것으로 고치고 저장해요.</li>
+    <li><b>프로젝트 안에서 같은 메모를 넣어요.</b> 프로젝트 화면 가운데 입력창이에요.</li>
+  </ol>
+
+  <div class="ex">
+    <p class="et">만든 사람이 해 봤을 때</p>
+    <p>규칙 없이는 주지 않은 「차주 계획」 세 줄이 채워져 나왔어요. 규칙을 넣으니 세 번 모두 계획을 지어내지 않고,
+      모르는 곳 서너 군데를 표시한 뒤 질문 세 개로 물어봤어요.</p>
+    <p><b>다만 목차는 세 번 다 달랐어요.</b> 규칙은 "지어내지 않게" 하지만 "같은 모양으로" 만들지는 못해요. 모양은 3일차에 잡아요.</p>
+  </div>
+
+  <div class="pass" data-day="1">
+    <p class="pt">이렇게 되면 통과</p>
+    <label><input type="checkbox"> 프로젝트 안의 결과에 <b>[[확인필요: …]]</b> 표시가 있어요</label>
+    <label><input type="checkbox"> 주지 않은 계획이나 숫자를 채워 넣지 않았어요</label>
+    <label><input type="checkbox"> 끝에 "아래 몇 가지만 알려주시면…" 하고 한 번에 물어봐요</label>
+  </div>
+  <p class="stuck">규칙이 안 먹는 것 같다면 — 규칙을 채팅창에 붙여 넣지 않았는지 보세요. 프로젝트의 「지침」 칸에 넣어야 매번 적용돼요.</p>
+</section>
+
+<!-- ───────── 2일차 ───────── -->
+<section class="day" id="d2">
+  <span class="tag">2일차 · 25분</span>
+  <h2>회사와 나를 소개하기</h2>
+  <p class="goal">키트를 넣고, 내가 보낸 메일로 내 말투와 자주 주고받는 사람을 익히게 해요.</p>
+
+  <h3>따라 하기</h3>
+  <ol>
+    <li><b>키트를 받아 압축을 풀어요.</b> <a href="/free/reflo-starter-kit.zip" download data-track="download_kit">키트 받기</a></li>
+    <li><b>지침을 키트의 것으로 바꿔요.</b> 어제 만든 프로젝트의 「지침」을 열어, 키트 폴더 맨 위에 있는 <b>프로젝트-지침.md</b>의 내용으로 통째로 바꿔요.
+      맨 아래에 <b>내-프로필.md</b>의 세 줄을 채워 이어 붙여요. 프로필을 채팅창에 넣으면 그 대화에서만 적용돼요. 꼭 지침 칸에 넣어요.</li>
+    <li><b>기록 파일을 올려요.</b> 오른쪽의 「컨텍스트 — 추가」에 <b>학습-기록.md</b>와 <b>답변-자산.md</b>를 올려요.</li>
+    <li><b>절차를 올려요.</b> 먼저 설정 → 기능에서 「코드 실행과 파일 생성」이 켜져 있는지 봐요. 그다음 왼쪽 메뉴 「사용자 지정」 → Skills → Skill 업로드에 <b>skills-zip</b> 폴더의 zip 파일을 전부 한꺼번에 끌어다 놓아요.</li>
+    <li><b>보낸 메일을 보여 줘요.</b> 보낸편지함에서 10~15통을 골라 프로젝트에 붙여 넣고 이렇게 말해요.
+      <div class="pbox"><pre id="t2">내 메일 보고 익혀줘. 내가 보낸 메일이야.
+
+[메일을 여기에 붙여 넣기 — 이름·연락처·금액은 지우거나 바꿔도 돼요]</pre><button type="button" class="cp" data-cp="t2"><i class="ti ti-copy"></i> 복사</button></div></li>
+    <li><b>추정에 답해요.</b> Claude가 「확실 / 추정 / 모르겠는 것」으로 나눠 보여 줘요. 추정에는 맞다·틀리다만 답하면 돼요.</li>
+    <li><b>기록을 반영해요.</b> 보여 준 줄을 내 PC의 <b>학습-기록.md</b>에 붙여 넣고, 「컨텍스트」의 옛 파일을 지운 뒤 다시 올려요.</li>
+  </ol>
+
+  <div class="ex">
+    <p class="et">만든 사람이 해 봤을 때</p>
+    <p>메일 5통을 줬더니 먼저 "5통으로는 말투 경향을 판단하기 어렵습니다"라고 했어요. 한 번 나온 약어는 뜻을 짐작하지 않고
+      "무엇의 약어인가요?"라고 물었고, 사람 세 명은 「추정」으로 넘겨 맞는지 확인을 받았어요.</p>
+  </div>
+
+  <div class="pass" data-day="2">
+    <p class="pt">이렇게 되면 통과</p>
+    <label><input type="checkbox"> 「주간보고 써줘」에 <b>요약 / 주요 실적 / 이슈 및 요청사항 / 다음 주 계획</b> 순서로 나와요 (절차가 올라간 거예요)</label>
+    <label><input type="checkbox"> Claude가 뽑은 내 말투가 실제 내 메일과 같아요</label>
+    <label><input type="checkbox"> 틀리게 뽑은 것을 고치거나 지웠어요. 틀리면 안 되는 호칭에는 「확정 O」를 적었어요</label>
+  </div>
+  <p class="stuck">이름이 비어 나오거나 질문이 여섯 개씩 온다면 — 프로젝트 밖에서 시킨 거예요. 절차(스킬)는 어느 대화에서나 불리지만,
+    규칙과 프로필은 <b>그 프로젝트 안에서만</b> 적용돼요. 왼쪽 「프로젝트」에서 프로젝트를 열고 그 안의 입력창에서 시키세요.</p>
+  <p class="stuck">회사 메일을 AI에 올려도 되는지 모르겠다면 — 이 단계는 건너뛰고 프로필 세 줄만으로 가도 돼요. 회사 규정이 먼저예요.</p>
+</section>
+
+<!-- ───────── 3일차 ───────── -->
+<section class="day" id="d3">
+  <span class="tag">3일차 · 20분</span>
+  <h2>업무 매뉴얼을 우리 양식으로</h2>
+  <p class="goal">기본 양식으로 나오는 주간보고를 우리 회사 양식으로 바꿔요. 직접 고치지 않고 Claude에게 시켜요.</p>
+
+  <h3>따라 하기</h3>
+  <ol>
+    <li><b>절차 파일을 첨부해요.</b> 키트 폴더의 <b>skills → weekly-report → SKILL.md</b>를 프로젝트 대화창에 첨부해요. <b>skills-zip</b> 폴더가 아니에요. (회의록을 바꾸고 싶으면 meeting-notes)</li>
+    <li><b>회사 양식을 붙이고 시켜요.</b>
+      <div class="pbox"><pre id="t3">첨부한 SKILL.md는 주간보고를 만드는 절차야.
+아래는 우리 회사 주간보고 양식이야. 「출력 형식」 부분만 이 양식에 맞게 바꿔 줘.
+
+- 다른 부분(처리 절차, 규칙)은 건드리지 마.
+- 맨 위의 name과 description도 그대로 둬.
+- 바꾼 SKILL.md 전체를 파일로 줘.
+
+[회사 양식을 여기에 붙여 넣기]</pre><button type="button" class="cp" data-cp="t3"><i class="ti ti-copy"></i> 복사</button></div></li>
+    <li><b>Claude가 묻는 것에 답해요.</b> 양식에 안 적힌 규칙(주차를 세는 기준 같은 것)은 정하지 않고 물어봐요. 답을 주고 다시 받아요.</li>
+    <li><b>「Skill 업데이트」 카드를 눌러요.</b> 고친 파일과 함께 「현재 /weekly-report 대신 사용됩니다」라는 카드가 떠요. 누르면 바로 바뀌어요.
+      카드가 안 뜨면 받은 SKILL.md를 「사용자 지정 → Skills → Skill 업로드」에 올려요.</li>
+    <li><b>새 대화에서 두 번 시켜요.</b> 1일차의 메모를 그대로 써요.</li>
+  </ol>
+
+  <div class="ex">
+    <p class="et">만든 사람이 해 봤을 때</p>
+    <p>「1. 금주 실적 / 2. 차주 계획 / 3. 협조·건의 사항」으로 된 양식을 줬어요. 출력 형식만 바뀐 파일이 왔고,
+      "주차를 세는 기준은 양식에 없어서 임의로 정하지 않았습니다"라고 했어요. 바꾼 절차로 두 번 시키니 두 번 다 이렇게 나왔어요.</p>
+    <pre>[주간업무보고] 서비스운영팀 / 11월 [[확인필요: 주차 산정 기준]]
+작성자: 김민지 매니저   보고일: 11월 13일(금)
+
+1. 금주 실적
+ 가. 거래처 견적 회신 : 3개 거래처 견적 회신 (완료)
+ …
+2. 차주 계획
+3. 협조·건의 사항
+ 가. 특이사항 없음</pre>
+  </div>
+
+  <div class="pass" data-day="3">
+    <p class="pt">이렇게 되면 통과</p>
+    <label><input type="checkbox"> 두 번 모두 <b>우리 회사 양식</b>으로 나와요</label>
+    <label><input type="checkbox"> 두 번의 제목과 항목 순서가 같아요</label>
+    <label><input type="checkbox"> Claude가 물어본 규칙에 답해서 절차에 넣었어요</label>
+  </div>
+  <p class="stuck">한 번은 맞고 한 번은 다르다면 — 다른 부분을 보여 주고 "출력 형식에 이 부분을 못 박아 줘"라고 하세요. 만든 사람도 제목의 날짜 표기를 그렇게 고쳤어요.</p>
+</section>
+
+<!-- ───────── 4일차 ───────── -->
+<section class="day" id="d4">
+  <span class="tag">4일차 · 30분</span>
+  <h2>내 일을 인수인계하기</h2>
+  <p class="goal">키트에 없는 내 반복 업무 하나를 골라 새 절차로 만들어요. 이 과정의 가장 중요한 날이에요.</p>
+
+  <h3>무슨 일을 고를까</h3>
+  <ul>
+    <li><b>매주·매달 되풀이</b>하고</li>
+    <li>결과물의 <b>모양이 정해져</b> 있고</li>
+    <li>하는 순서를 <b>말로 설명할 수 있는</b> 일</li>
+  </ul>
+  <p class="stuck" style="margin-top:8px">정산 안내 메일, 월간 현황 보고, 신규 거래처 안내문, 회의 소집 공지 같은 것이 좋아요.
+    판단이 많이 드는 일은 판단하기 전까지의 준비만 맡기세요. 고르기 어려우면 <a href="/tools/check/">3분 진단</a>을 해 보세요.</p>
+
+  <h3>따라 하기</h3>
+  <ol>
+    <li><b>지난 두 번치를 준비해요.</b> 받은 자료와, 그때 내가 만든 결과물을 두 달치(또는 두 주치) 모아요. 이름과 금액은 바꿔도 돼요.</li>
+    <li><b>키트의 절차-뼈대.md를 첨부하고 시켜요.</b>
+      <div class="pbox"><pre id="t4">내가 매달 하는 일을 절차(스킬)로 만들고 싶어. 첨부한 절차-뼈대.md의 칸에 맞춰 SKILL.md를 써 줘.
+
+[하는 일] (한 줄로. 예: 매달 초 거래처에 지난달 이용료 정산 안내 메일을 보낸다)
+[받는 자료 → 만든 결과] 두 달치를 붙일게. 무엇이 어떻게 바뀌는지 규칙을 찾아 줘.
+
+(지난달 자료) …
+(지난달에 만든 결과) …
+
+(지지난달 자료) …
+(지지난달에 만든 결과) …
+
+- 예시만으로 확실하지 않은 규칙은 정하지 말고 나한테 물어봐.
+- 내 답을 듣기 전에는 SKILL.md를 쓰지 마.
+- 자료에 없는 숫자는 만들지 않는다는 규칙을 꼭 넣어 줘.</pre><button type="button" class="cp" data-cp="t4"><i class="ti ti-copy"></i> 복사</button></div></li>
+    <li><b>질문에 답해요.</b> 여기서 나오는 질문이 그동안 내가 감으로 하던 규칙이에요.</li>
+    <li><b>Skill 카드에서 저장해요.</b> 절차를 다 쓰면 Skill 카드가 뜨고, 저장하면 「저장됨: /내-절차-이름」으로 바뀌어요.
+      카드가 안 뜨면 받은 SKILL.md를 「사용자 지정 → Skills → Skill 업로드」에 올려요.</li>
+  </ol>
+
+  <div class="ex">
+    <p class="et">만든 사람이 해 봤을 때 — 매달 보내는 정산 안내 메일</p>
+    <p>두 달치 메일을 줬더니 절차를 쓰지 않고 이것부터 물었어요.</p>
+    <pre>1. 입금 기한은 어떻게 정하나요? 10월 15일(목)과 11월 16일(월)만 보입니다.
+   보내는 달 15일이고 주말이면 다음 월요일인가요? 공휴일도 다음 영업일로 미루나요?
+2. 거래처 한 곳씩 보내나요? 단가가 거래처마다 다르면 그때그때 준 자료의 단가를 쓰면 되나요?
+3. 이용 0건인 달, 최소 청구액이나 할인 같은 예외가 있나요?</pre>
+    <p style="margin-top:10px">두 번의 메일만 보고 "15일, 주말이면 다음 날"을 짐작해 냈지만 <b>정하지 않고 물었어요.</b>
+      답을 주자 절차를 썼고, 그 파일이 키트의 <b>예시/settlement-notice/SKILL.md</b>예요.</p>
+  </div>
+
+  <div class="pass" data-day="4">
+    <p class="pt">이렇게 되면 통과</p>
+    <label><input type="checkbox"> Claude가 절차를 쓰기 전에 <b>질문부터</b> 했어요</label>
+    <label><input type="checkbox"> 질문에 답하면서 "아, 이건 내가 감으로 하던 거구나" 싶은 규칙을 하나 이상 찾았어요</label>
+    <label><input type="checkbox"> 받은 절차의 「출력 형식」이 내가 실제로 만들던 결과물과 같아요</label>
+  </div>
+  <p class="stuck">질문에 답을 못 하겠다면 — 그 규칙은 나도 정해 두지 않은 거예요. 절차로 만들기 전에 팀에서 먼저 정해야 해요.<br>
+    여기서 막히는 분이 가장 많아요. 팀의 일을 한 번에 절차로 만들고 싶으시면 <a href="https://kmong.com/@%EB%A6%AC%ED%94%8C%EB%A1%9CReflo" data-track="go_kmong">맡기실 수도 있어요</a>.</p>
+</section>
+
+<!-- ───────── 5일차 ───────── -->
+<section class="day" id="d5">
+  <span class="tag">5일차 · 20분</span>
+  <h2>수습 평가</h2>
+  <p class="goal">새 절차를 실제 일에 쓰기 전에 세 가지를 확인해요. 한 번 잘 나온 것과 매번 잘 나오는 것은 달라요.</p>
+
+  <h3>따라 하기</h3>
+  <ol>
+    <li><b>같은 자료로 세 번.</b> 프로젝트 안에서 새 대화를 세 번 열어 똑같은 자료를 넣어요. 세 번의 결과가 같아야 해요.
+      결과를 만드는 데 꼭 필요한 값(몇 월분인지 같은 것)은 자료에 넣어 주세요. 빠지면 만들지 않고 물어봐요.</li>
+    <li><b>값 하나를 지우고 한 번.</b> 자료에서 숫자 하나를 일부러 빼고 시켜요. 지어내지 않고 물어봐야 해요.</li>
+    <li><b>지난달 자료로 한 번.</b> 지난달 자료를 넣어, 지난달에 내가 손으로 만든 결과물과 맞춰 봐요. 숫자가 하나라도 다르면 규칙이 빠진 거예요.</li>
+    <li><b>달라진 곳이 있으면 고쳐요.</b> 다른 부분을 Claude에게 보여 주고 "절차에 이걸 못 박아 줘"라고 해요. 고친 뒤 다시 세 번.</li>
+    <li><b>팀과 나눠요.</b> 통과한 절차(zip), 공통 규칙, 답변 자산은 같이 써요. 프로필은 각자 채워요.</li>
+  </ol>
+
+  <div class="ex">
+    <p class="et">만든 사람이 해 봤을 때 — 4일차의 정산 안내 절차</p>
+    <p><b>같은 자료로 세 번</b> — 제목과 본문 네 줄이 세 번 모두 글자까지 같았어요.</p>
+    <pre>제목: [정산] 미래물산 10월 이용료 안내
+
+안녕하세요, 서비스운영팀 김민지입니다.
+10월 이용료는 512,500원입니다. (2,050건 × 250원, 부가세 별도)
+입금 기한은 11월 16일(월)입니다.
+감사합니다.</pre>
+    <p style="margin-top:10px"><b>단가를 빼고</b> — 금액을 만들지 않고 "건당 단가가 얼마인가요?"라고 물었어요.<br>
+      <b>이용이 0건인 자료</b> — 메일을 만들지 않고 "0건이라 만들지 않았습니다" 한 줄만 냈어요. 4일차에 답해 준 규칙 그대로예요.<br>
+      <b>몇 월분인지 빼고</b> — claude.ai 화면에서 월 없이 자료만 넣었더니 메일을 쓰지 않고 "몇 월 이용분인가요?"부터 물었어요.
+      이용료 512,500원은 월과 상관없다고 먼저 계산해 두고요.</p>
+  </div>
+
+  <div class="pass" data-day="5">
+    <p class="pt">이렇게 되면 통과</p>
+    <label><input type="checkbox"> 같은 자료 세 번의 결과가 <b>같은 모양</b>이에요</label>
+    <label><input type="checkbox"> 값을 지웠을 때 <b>지어내지 않고</b> 물어봤어요</label>
+    <label><input type="checkbox"> 지난달 자료의 결과가 지난달에 손으로 만든 것과 <b>숫자까지</b> 같아요</label>
+  </div>
+  <p class="stuck">세 가지를 통과하기 전에는 실제 업무에 쓰지 마세요. 통과했다면, 이제 그 일은 자료를 붙여 넣고 한마디만 하면 돼요.</p>
+</section>
+
+<p class="honest wrap" style="margin-left:auto;margin-right:auto"><b>이 과정에 대해.</b> 2026년 11월에 만든 과정이고 아직 따라 해 본 분의 후기가 없어요.
+  「만든 사람이 해 봤을 때」는 지어낸 자료로 Claude에게 직접 시켜 본 결과를 옮긴 거예요. 회사명과 이름은 실제가 아니에요.
+  3~5일차는 11월 16일에 claude.ai 화면에서 한 번 더 따라 해 보고, 화면과 다르던 안내를 고쳤어요.
+  예시는 하나씩뿐이라 여러분의 일에서는 다르게 나올 수 있어요. 어색한 곳이 있으면 알려 주세요. 고쳐서 다시 올려요.</p>
+
+<div class="ds-cta-band" style="margin-top:72px">
+  <h2>다음 반복 업무도 같은 순서로</h2>
+  <p class="ds-mkt-lead" style="margin-bottom:28px">4일차와 5일차를 되풀이하면 절차가 하나씩 늘어요. 팀 단위로 한 번에 하고 싶으시면 맡기셔도 돼요.</p>
+  <div class="ds-hero-cta">
+    <a class="ds-btn-pill primary" href="/kit/" data-track="open_kit">스타터 키트 살펴보기</a>
+    <a class="ds-btn-pill ghost" href="https://kmong.com/@%EB%A6%AC%ED%94%8C%EB%A1%9CReflo" data-track="go_kmong">맞춤 세팅 문의하기</a>
+  </div>
+  <p class="sec-note">회사 자료를 AI에 올려도 되는지는 회사 규정을 먼저 확인하세요</p>
+</div>
+
+<footer>
+  <p>만든 곳 — 리플로 Reflo ·
+    <a href="/kit/">스타터 키트</a> ·
+    <a href="/tools/">리플로 실험실</a> ·
+    <a href="https://kmong.com/@%EB%A6%AC%ED%94%8C%EB%A1%9CReflo">크몽</a> ·
+    <a href="https://blog.naver.com/reflo2026">블로그</a></p>
+  <p style="margin-top:9px">따라 하다 막히는 곳이 있으면 <span class="mono">reflo2026@naver.com</span> 으로 알려주세요.</p>
+  <p style="margin-top:9px">방문 수를 세기 위해 Google Analytics 쿠키를 써요. 체크한 내용은 이 브라우저에만 저장되고 어디로도 보내지 않아요.</p>
+</footer>
+
+<script src="/kit/rules.js"></script>
+<script>
+(function () {
+  "use strict";
+  function 센다(n, v) { try { if (window.gtag) window.gtag("event", n, v || {}); } catch (e) {} }
+
+  // 문장 복사
+  document.addEventListener("click", function (ev) {
+    var b = ev.target.closest ? ev.target.closest("[data-cp]") : null;
+    if (!b) return;
+    var t = document.getElementById(b.getAttribute("data-cp")).textContent;
+    function 됨() { b.innerHTML = '<i class="ti ti-check"></i> 복사했어요'; setTimeout(function () { b.innerHTML = '<i class="ti ti-copy"></i> 복사'; }, 1800); }
+    if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(t).then(됨, function () {});
+    센다("course_copy", { which: b.getAttribute("data-cp") });
+  });
+
+  // 규칙 복사
+  document.getElementById("cprules").addEventListener("click", function () {
+    var m = document.getElementById("cpmsg"), t = window.리플로규칙 || "";
+    function 됨() { m.textContent = "복사했어요. 프로젝트의 지침 칸에 붙여 넣으세요."; }
+    function 안됨() { m.textContent = "복사가 막혀 있어요. 키트의 「프로젝트-지침.md」를 여세요."; }
+    if (!t) return 안됨();
+    if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(t).then(됨, 안됨); else 안됨();
+    센다("copy_rules", { from: "course" });
+  });
+
+  // 통과 체크 — 이 브라우저에만 남긴다. 저장이 막혀 있어도 화면은 그대로 동작한다.
+  var KEY = "reflo_course_v1", 상태 = {};
+  try { 상태 = JSON.parse(localStorage.getItem(KEY) || "{}") || {}; } catch (e) { 상태 = {}; }
+  var boxes = document.querySelectorAll(".pass input");
+  function 반영() {
+    document.querySelectorAll(".pass").forEach(function (p) {
+      var d = p.getAttribute("data-day"), all = p.querySelectorAll("input"), n = 0;
+      all.forEach(function (c) { if (c.checked) n++; });
+      var a = document.querySelector('#plan a[data-d="' + d + '"]');
+      if (a) a.classList.toggle("done", n === all.length);
+    });
+  }
+  boxes.forEach(function (c, i) {
+    c.checked = !!상태[i];
+    c.addEventListener("change", function () {
+      상태[i] = c.checked;
+      try { localStorage.setItem(KEY, JSON.stringify(상태)); } catch (e) {}
+      반영();
+      var p = c.closest(".pass"), all = p.querySelectorAll("input"), n = 0;
+      all.forEach(function (x) { if (x.checked) n++; });
+      if (c.checked && n === all.length) 센다("course_day_done", { day: p.getAttribute("data-day") });
+    });
+  });
+  반영();
+})();
+</script>
+<script src="/analytics.js"></script>
+</body>
+</html>

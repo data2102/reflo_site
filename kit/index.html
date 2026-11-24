@@ -1,0 +1,296 @@
+<!doctype html>
+<html lang="ko" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>스타터 키트 — Claude에 한 번 세팅하고 말 한마디로 | 리플로</title>
+<meta name="description" content="새 직원에게 인수인계하듯 Claude에게 우리 방식을 한 번 알려 두는 무료 키트. 같은 요청에 같은 모양이 나오고, 모르는 것은 지어내지 않고 물어봐요.">
+<link rel="canonical" href="https://reflo-works.netlify.app/kit/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="리플로 Reflo">
+<meta property="og:title" content="스타터 키트 — Claude에 한 번 세팅하고 말 한마디로">
+<meta property="og:description" content="같은 요청에 같은 모양이 나오고, 모르는 것은 지어내지 않고 물어봐요. 무료.">
+<meta property="og:url" content="https://reflo-works.netlify.app/kit/">
+<meta property="og:image" content="https://reflo-works.netlify.app/og.png">
+<link rel="stylesheet" href="/tokens.css">
+<link rel="stylesheet" href="/marketing.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.24.0/dist/tabler-icons.min.css">
+<link rel="stylesheet" href="/tools/tools.css">
+<style>
+  .wrap{max-width:920px;margin:0 auto}
+  .cmp{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:36px;text-align:left}
+  .col{border:1px solid var(--border);border-radius:var(--radius-xl);padding:24px;background:var(--surface)}
+  .col.kit{border-color:var(--accent);background:var(--accent-bg)}
+  .col h3{margin:0 0 4px;font-size:var(--fs-subhead);font-weight:var(--fw-bold)}
+  .col .sub{margin:0 0 16px;font-size:var(--fs-caption);color:var(--text-tertiary)}
+  .run{display:flex;gap:10px;align-items:baseline;padding:9px 0;border-top:1px solid var(--border);font-size:var(--fs-caption);line-height:1.6}
+  .col.kit .run{border-top-color:color-mix(in srgb,var(--accent) 22%,transparent)}
+  .run b{flex:none;width:44px;color:var(--text-tertiary);font-weight:var(--fw-medium)}
+  .run span{color:var(--text-secondary)}
+  .verdict{margin:14px 0 0;font-size:var(--fs-caption);font-weight:var(--fw-medium)}
+  .verdict.bad{color:var(--danger-strong)}.verdict.ok{color:var(--success-strong)}
+  .quote{margin:0;padding:14px 16px;border-radius:var(--radius-md);background:var(--surface-sunken);
+    font-size:var(--fs-caption);line-height:1.75;color:var(--text-secondary);white-space:pre-line}
+  .col.kit .quote{background:var(--surface)}
+  .method{max-width:720px;margin:22px auto 0;font-size:var(--fs-footnote);color:var(--text-tertiary);line-height:1.7;text-align:center}
+  .steps{max-width:720px;margin:36px auto 0;display:grid;gap:10px;text-align:left}
+  .step{display:flex;gap:16px;align-items:flex-start;background:var(--surface);border:1px solid var(--border);
+    border-radius:var(--radius-lg);padding:18px 22px}
+  .step-n{flex:none;width:28px;height:28px;border-radius:50%;background:var(--accent-bg);color:var(--accent-strong);
+    font-size:var(--fs-caption);font-weight:var(--fw-bold);display:flex;align-items:center;justify-content:center}
+  .step h3{margin:0 0 3px;font-size:var(--fs-subhead);font-weight:var(--fw-bold)}
+  .step p{margin:0;font-size:var(--fs-body);color:var(--text-secondary);line-height:var(--lh-body)}
+  .facts{max-width:720px;margin:32px auto 0;border:1px solid var(--border);border-radius:var(--radius-lg);overflow:hidden;text-align:left}
+  .fact{display:flex;gap:16px;padding:14px 22px;border-bottom:1px solid var(--border);font-size:var(--fs-body)}
+  .fact:last-child{border-bottom:0}
+  .fact dt{flex:none;width:150px;color:var(--text-primary);font-weight:var(--fw-medium);font-size:var(--fs-caption);padding-top:2px}
+  .fact dd{margin:0;color:var(--text-secondary);line-height:var(--lh-body)}
+  .state{max-width:720px;margin:28px auto 0;padding:18px 22px;border-radius:var(--radius-lg);background:var(--warm-bg);
+    font-size:var(--fs-body);line-height:var(--lh-body);color:var(--text-secondary);text-align:left}
+  .state b{color:var(--warm)}
+  .handover{margin-top:32px;border:1px solid var(--border);border-radius:var(--radius-xl);overflow:hidden;text-align:left}
+  .ho{display:grid;grid-template-columns:200px 1fr;gap:18px;padding:15px 24px;border-bottom:1px solid var(--border);
+    font-size:var(--fs-body);line-height:var(--lh-body);color:var(--text-secondary)}
+  .ho:last-child{border-bottom:0}
+  .ho>span:first-child{color:var(--text-primary);font-weight:var(--fw-medium)}
+  .ho b{color:var(--accent-strong);font-weight:var(--fw-bold)}
+  .ho.head{background:var(--surface-sunken);font-size:var(--fs-caption);color:var(--text-tertiary)}
+  .ho.head>span:first-child{color:var(--text-tertiary);font-weight:var(--fw-regular)}
+  .depts{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:32px;text-align:left}
+  .dept{border:1px solid var(--border);border-radius:var(--radius-xl);padding:22px 24px;background:var(--surface)}
+  .dn{margin:0 0 12px;font-size:var(--fs-footnote);font-weight:var(--fw-bold);letter-spacing:.04em;color:var(--accent-strong)}
+  .sk{padding:11px 0;border-top:1px solid var(--border);font-size:var(--fs-caption);line-height:1.65}
+  .sk b{display:block;color:var(--text-primary);font-weight:var(--fw-bold);font-size:var(--fs-body)}
+  .sk span{color:var(--text-secondary)}
+  .sk.soon b{color:var(--text-tertiary);font-weight:var(--fw-medium)}.sk.soon span{color:var(--text-tertiary)}
+  .sk a{color:var(--accent-strong)}
+  @media(max-width:720px){.cmp{grid-template-columns:1fr}.depts{grid-template-columns:1fr}.ho{grid-template-columns:1fr;gap:2px}.ho.head{display:none}.fact{flex-direction:column;gap:2px}.fact dt{width:auto}}
+</style>
+</head>
+<body>
+
+<div class="ds-hero-wrap">
+  <div class="nav">
+    <a class="brand" href="/"><span class="mark">R</span> 리플로</a>
+    <a class="navback" href="/tools/">리플로 실험실 →</a>
+  </div>
+  <header class="ds-hero">
+    <span class="eyebrow">스타터 키트 · 무료</span>
+    <h1>매번 설명하지 말고,<br><span class="accent">한 번 세팅</span>해 두세요</h1>
+    <p class="lead">새로 온 직원에게 근무 수칙과 업무 매뉴얼을 주듯,
+      Claude에게 우리 방식을 한 번 알려 두는 키트예요.</p>
+    <div class="ds-hero-cta">
+      <a class="ds-btn-pill primary" href="#quick" data-track="kit_quick">1분 버전 먼저 써보기</a>
+      <a class="ds-btn-pill ghost" href="/free/reflo-starter-kit.zip" download data-track="download_kit">
+        <i class="ti ti-download"></i> 키트 받기
+      </a>
+    </div>
+    <p class="sec-note"><a href="/kit/see/" data-track="open_see">글 대신 결과부터 보기 →</a> 절차 열한 가지의 넣은 말과 나온 결과를 그대로 보여 드려요</p>
+    <p class="sec-note" style="margin-top:6px">무료 · Claude 앱(claude.ai)용 · 1분 버전은 내려받지 않아요 · 키트는 설치 10분, 전부 메모장으로 열리는 글 파일<br>
+      Claude 공식 안내로는 무료 요금제에서도 프로젝트와 스킬을 쓸 수 있어요. 이 키트는 유료 요금제에서 시험했어요</p>
+  </header>
+</div>
+
+<section class="ds-mkt-section" id="quick">
+  <h2 class="ds-mkt-h2">1분 버전 — 내려받지 않고 먼저 써보기</h2>
+  <p class="ds-mkt-lead">근무 수칙(공통 규칙)만 붙여 넣어도 달라져요. 마음에 들면 그때 키트를 받으세요.</p>
+  <div class="steps">
+    <div class="step"><span class="step-n">1</span><div><h3>규칙 복사하기</h3>
+      <p>아래 버튼을 누르면 공통 규칙 13개가 복사돼요.</p>
+      <p style="margin-top:12px"><button type="button" class="ds-btn-pill primary" id="cprules" style="height:46px;border:0;font-family:inherit"><i class="ti ti-copy"></i> 규칙 복사하기</button>
+        <span id="cpmsg" class="dim" style="margin-left:10px;font-size:var(--fs-caption)"></span></p></div></div>
+    <div class="step"><span class="step-n">2</span><div><h3>Claude 프로젝트의 지침에 붙여 넣기</h3>
+      <p>claude.ai → 프로젝트 → 새 프로젝트 → 오른쪽의 「지침 — 추가」에 붙여 넣어요. 맨 아래 세 줄(이름, 부서, 직무)만 내 것으로 고쳐요.</p></div></div>
+    <div class="step"><span class="step-n">3</span><div><h3>평소처럼 시키기</h3>
+      <p>그 프로젝트에서 「주간보고 써줘」나 「이 메일 답장」. 주지 않은 내용을 지어내는 대신 표시하고 물어보는지 보세요.</p></div></div>
+  </div>
+  <p class="sec-note">채팅창에 붙여 넣으면 그 대화 한 번에만 적용돼요. 꼭 프로젝트의 지침 칸에 넣으세요.<br>
+    1분 버전에는 업무 매뉴얼(절차)과 쌓이는 기록이 없어요. 지어내지는 않지만 목차는 시킬 때마다 달라요. 「매번 같은 양식」까지 가려면 <a href="/free/reflo-starter-kit.zip" download data-track="download_kit">키트를 받으세요</a>.</p>
+</section>
+
+<section class="ds-mkt-section">
+  <h2 class="ds-mkt-h2">AI에게도 인수인계가 필요해요</h2>
+  <p class="ds-mkt-lead">양식을 아무리 많이 받아도 빈칸을 채우는 건 나예요.
+    새로 온 사람에게는 양식이 아니라 <b>우리가 일하는 방식</b>을 알려 주잖아요.</p>
+  <div class="handover wrap">
+    <div class="ho head"><span>새로 온 직원에게 주는 것</span><span>이 키트에서는</span></div>
+    <div class="ho"><span>근무 수칙</span><span><b>공통 규칙 13개</b> — 모르면 지어내지 않는다, 숫자는 받은 자료에서만, 같은 일은 같은 모양으로</span></div>
+    <div class="ho"><span>회사와 팀 소개</span><span><b>내 프로필</b> — 이름, 부서, 말투. 세 줄이면 돼요</span></div>
+    <div class="ho"><span>업무 매뉴얼</span><span><b>절차</b> — 주간보고, 회의록, 반복 문의 답변처럼 일마다 정해진 순서와 양식</span></div>
+    <div class="ho"><span>인수인계 노트</span><span><b>학습 기록 · 답변 자산</b> — 일하면서 알게 된 사람, 용어, 전에 보낸 답. 쓸수록 쌓여요</span></div>
+    <div class="ho"><span>"모르면 물어보세요"</span><span><b>확인필요 표시와 질문</b> — 빈칸을 그럴듯하게 채우지 않고 한 번에 모아 물어봐요</span></div>
+  </div>
+  <p class="sec-note">채팅창은 매번 처음 만나는 사람이에요. 반복하는 일은 우리 방식을 아는 사람에게 맡겨야 해요.</p>
+</section>
+
+<section class="ds-mkt-section" id="diff">
+  <h2 class="ds-mkt-h2">같은 메모로 주간보고를 여러 번 시켰어요</h2>
+  <p class="ds-mkt-lead">「월: 거래처 3곳 견적 회신 / 수: 10월 실적 자료 취합 / 금: 신규 거래처 미팅」 세 줄만 줬어요.</p>
+  <div class="cmp wrap">
+    <div class="col">
+      <h3>채팅창에 그냥 시켰을 때</h3>
+      <p class="sub">세 번의 목차</p>
+      <div class="run"><b>1번째</b><span>금주 업무 실적 · 세부 내용 · 이슈 및 특이사항 · 차주 계획</span></div>
+      <div class="run"><b>2번째</b><span>금주 실적 · 주요 내용 · 차주 계획 · 이슈/건의사항</span></div>
+      <div class="run"><b>3번째</b><span>금주 실적 · 세부 내용 · 차주 계획</span></div>
+      <p class="verdict bad">세 번 다 달라요. 주지 않은 「차주 계획」 세 가지를 채워 넣었어요. 끝에 "임의로 채웠다"고 밝히긴 했어요.</p>
+    </div>
+    <div class="col kit">
+      <h3>키트를 넣었을 때</h3>
+      <p class="sub">네 번의 목차</p>
+      <div class="run"><b>1번째</b><span>요약 · 주요 실적 · 이슈 및 요청사항 · 다음 주 계획</span></div>
+      <div class="run"><b>2번째</b><span>요약 · 주요 실적 · 이슈 및 요청사항 · 다음 주 계획</span></div>
+      <div class="run"><b>3번째</b><span>요약 · 주요 실적 · 이슈 및 요청사항 · 다음 주 계획</span></div>
+      <div class="run"><b>4번째</b><span>요약 · 주요 실적 · 이슈 및 요청사항 · 다음 주 계획</span></div>
+      <p class="verdict ok">제목·목차·표의 칸이 네 번 다 같아요. 계획은 지어내지 않고 「미정」으로 두고, 모르는 것을 질문 세 개로 물어봤어요.</p>
+    </div>
+  </div>
+
+  <h2 class="ds-mkt-h2" style="margin-top:72px">원인을 모르는 문의가 왔을 때</h2>
+  <p class="ds-mkt-lead">「어제부터 직원 두 명이 로그인이 안 됩니다. 원인이 뭔가요?」</p>
+  <div class="cmp wrap">
+    <div class="col">
+      <h3>채팅창에 그냥 시켰을 때</h3>
+      <p class="sub">고객에게 보낼 답장 초안</p>
+      <p class="quote">비밀번호를 맞게 입력했는데도 로그인이 안 될 때는 보통 아래 경우가 많습니다.
+1. 계정 잠금 …
+2. 비밀번호 만료 …
+3. 2단계 인증 문제 …
+4. 계정 비활성화 또는 권한 변경 …
+5. 접속 환경 문제 …</p>
+      <p class="verdict bad">확인하지 않은 원인 다섯 가지를 고객에게 나열했어요.</p>
+    </div>
+    <div class="col kit">
+      <h3>키트를 넣었을 때</h3>
+      <p class="sub">답장 대신 두 통을 만들었어요</p>
+      <p class="quote">① 고객에게 — 로그인 불가 건을 확인하고 있습니다. 확인되는 대로 다시 연락드리겠습니다.
+
+② 사내 담당자에게 — 두 계정의 상태와 로그인 실패 기록 확인 부탁드립니다.</p>
+      <p class="verdict ok">원인을 추측하지 않았어요. 고객을 기다리게 두지도 않았어요.</p>
+    </div>
+  </div>
+  <p class="method">2026년 11월 14일, 키트의 내용만 넣은 Claude(Sonnet)와 아무것도 넣지 않은 Claude에게 같은 요청을 반복해 본 결과예요.
+    claude.ai 화면(Opus)에서도 같은 양식이 나오는 것을 확인했어요. 모르는 것 표시의 개수와 문장은 매번 조금씩 달라요. 같은 것은 뼈대예요.</p>
+</section>
+
+<section class="ds-mkt-section">
+  <h2 class="ds-mkt-h2">들어 있는 것</h2>
+  <p class="ds-mkt-lead">근무 수칙 하나, 업무 매뉴얼 여덟 개, 인수인계 노트 두 개.</p>
+  <div class="depts wrap">
+    <div class="dept">
+      <p class="dn">모든 부서</p>
+      <div class="sk"><b>공통 규칙 13개</b><span>모르는 것은 표시하고 한 번에 물어봐요. 숫자는 받은 자료에서만 써요.</span></div>
+      <div class="sk"><b>내 메일로 익히기</b><span>「내 메일 보고 익혀줘」 — 보낸 메일 10~15통에서 내 말투, 자주 주고받는 사람, 우리 회사 용어를 뽑아요.</span></div>
+      <div class="sk"><b>메일 쓰기 · 다듬기</b><span>「독촉 메일 써줘」, 「이거 괜찮아?」 — 제목에 기한과 요일이 들어가요. 내가 쓴 메일은 다시 쓰지 않고 고친 곳과 이유를 표로 보여 줘요.</span></div>
+      <div class="sk"><b>인수인계서 · 휴가 대행 안내</b><span>「인수인계서 써줘」 — 메모를 여덟 개 절로 정리해요. 받지 않은 절차는 지어내지 않고 「미정」으로 남겨서 빠진 곳이 보여요. 비밀번호는 문서에 넣지 않아요.</span></div>
+    </div>
+    <div class="dept">
+      <p class="dn">기획 · 관리</p>
+      <div class="sk"><b>주간보고</b><span>「주간보고 써줘」 — 흩어진 메모를 매주 같은 양식의 보고서로 만들어요. 없는 성과를 지어내지 않아요.</span></div>
+      <div class="sk"><b>회의록</b><span>「회의 메모 정리해줘」 — 급히 적은 메모를 결정사항, 할 일, 보류로 나눠요. 담당과 기한이 안 정해진 일은 「미정」으로 남겨 빠뜨리지 않아요.</span></div>
+      <div class="sk"><b>품의서 · 공지문</b><span>「품의서 써줘」 — 메모 몇 줄을 일곱 항목의 품의서로 만들어요. 받은 숫자로만 계산하고, 받지 않은 사실은 단정하지 않고 물어봐요.</span></div>
+      <div class="sk"><b>회의 준비</b><span>「회의 준비 도와줘」 — 안건과 시간 배분, 예상 질문을 한 장으로 만들어요. 근거가 없는 답변은 만들지 않고 회의 전에 확인할 목록으로 모아요.</span></div>
+    </div>
+    <div class="dept">
+      <p class="dn">운영 · 고객 응대</p>
+      <div class="sk"><b>반복 문의 답변</b><span>「이 문의 답장」 — 전에 보낸 답을 꺼내 써요. 새로 쓴 답은 쌓아 두고, 모르면 추측하지 않아요.</span></div>
+      <div class="sk soon"><b>규정 문서를 근거로 등록하기</b><span>준비하고 있어요</span></div>
+    </div>
+    <div class="dept">
+      <p class="dn">데이터</p>
+      <div class="sk soon"><b>엑셀 정리 · 집계 리포트</b><span>준비하고 있어요</span></div>
+      <div class="sk"><b>지금 필요하다면</b><span><a href="/tools/merge/">엑셀 파일 합치기</a>는 브라우저에서 바로 쓸 수 있어요.</span></div>
+    </div>
+  </div>
+  <p class="sec-note">준비 중인 것은 실제 업무로 돌려 본 뒤에 하나씩 올려요. 숫자를 채우려고 서두르지 않아요.<br>
+    키트에는 회사 양식으로 바꾸는 법과 내 반복 업무를 새 매뉴얼로 만드는 법도 들어 있어요.</p>
+</section>
+
+<section class="ds-mkt-section">
+  <h2 class="ds-mkt-h2">세팅은 네 단계예요</h2>
+  <p class="ds-mkt-lead">프로그램 설치가 없어요. claude.ai에서 해요.</p>
+  <div class="steps">
+    <div class="step"><span class="step-n">1</span><div><h3>프로필 세 줄 채우기</h3><p>이름, 부서, 직무 한 줄. 나머지는 비워 두면 일하면서 쌓여요.</p></div></div>
+    <div class="step"><span class="step-n">2</span><div><h3>프로젝트에 규칙 넣기</h3><p>새 프로젝트를 만들고 「지침 — 추가」에 규칙 파일의 내용을 붙여 넣어요. 「컨텍스트 — 추가」에는 기록 파일 두 개를 올려요.</p></div></div>
+    <div class="step"><span class="step-n">3</span><div><h3>절차 올리기</h3><p>「사용자 지정 → Skills → Skill 업로드」에 zip 파일을 전부 한꺼번에 끌어다 놓아요.</p></div></div>
+    <div class="step"><span class="step-n">4</span><div><h3>말 한마디로 확인</h3><p>프로젝트에서 「주간보고 써줘」. 위와 같은 목차로 나오면 끝이에요.</p></div></div>
+  </div>
+  <p class="sec-note">자세한 순서는 키트 안의 「시작하기.md」에 있어요 · 2026년 11월 화면 기준<br>
+    하루에 하나씩 따라 하고 싶으시면 <a href="/course/" data-track="open_course">5일 과정</a>으로 가세요. 닷새째에는 내 업무 전용 절차가 생겨요.</p>
+</section>
+
+<section class="ds-mkt-section">
+  <h2 class="ds-mkt-h2">받은 그대로 쓰지 마세요</h2>
+  <p class="ds-mkt-lead">기본형은 누구에게나 맞게 만든 거예요. 내 일에 맞추는 법을 같이 넣었어요.</p>
+  <div class="ds-feature-grid">
+    <div class="ds-feature-card">
+      <div class="ds-feature-ico"><i class="ti ti-user-edit"></i></div>
+      <h3>내 말투와 사람</h3>
+      <p>보낸 메일을 보여 주면 뽑아 줘요. 틀리면 안 되는 호칭과 용어는 「확정」으로 고정해요.</p>
+    </div>
+    <div class="ds-feature-card">
+      <div class="ds-feature-ico"><i class="ti ti-file-text"></i></div>
+      <h3>우리 회사 양식</h3>
+      <p>회사 보고서 한 부를 주고 「출력 형식만 이걸로 바꿔 줘」. 고친 절차를 다시 올리면 그 양식으로 나와요.</p>
+    </div>
+    <div class="ds-feature-card">
+      <div class="ds-feature-ico"><i class="ti ti-books"></i></div>
+      <h3>규정과 자주 나가는 답</h3>
+      <p>이용 안내나 사내 규정을 올려 두면 그 문서를 가장 먼저 근거로 삼아요.</p>
+    </div>
+    <div class="ds-feature-card">
+      <div class="ds-feature-ico"><i class="ti ti-adjustments"></i></div>
+      <h3>규칙 손보기</h3>
+      <p>길이나 언어는 바꿔도 돼요. 「추측 금지」와 「숫자는 원본에서만」은 지우지 않기를 권해요. 이유를 적어 뒀어요.</p>
+    </div>
+    <div class="ds-feature-card">
+      <div class="ds-feature-ico"><i class="ti ti-square-plus"></i></div>
+      <h3>내 반복 업무를 새 절차로</h3>
+      <p>지난 두 달치 자료와 결과를 주면 규칙을 찾아 절차로 써 줘요. 빈 틀과 시키는 문장이 들어 있어요.</p>
+    </div>
+    <div class="ds-feature-card">
+      <div class="ds-feature-ico"><i class="ti ti-repeat"></i></div>
+      <h3>세 번 돌려 보기</h3>
+      <p>새 절차는 같은 자료로 세 번, 값을 하나 지우고 한 번, 지난달 자료로 한 번. 통과하기 전에는 쓰지 않아요.</p>
+    </div>
+  </div>
+  <p class="state"><b>시험판이에요.</b> 공통 규칙은 만든 사람이 매일 쓰는 것이고, 「내 메일로 익히기」는 실제 메일로 써 봤어요.
+    「주간보고」, 「회의록」, 「품의서 · 공지문」, 「메일」, 「인수인계서」, 「회의 준비」, 「반복 문의 답변」은 위 실험처럼 지어낸 자료로만 시험했어요. 어색한 곳이 있으면 알려 주세요. 고쳐서 다시 올려요.</p>
+</section>
+
+<div class="ds-cta-band">
+  <h2>우리 팀 일에 맞춰 한 번에</h2>
+  <p class="ds-mkt-lead" style="margin-bottom:28px">팀이 매달 반복하는 일을 절차로 만들고, 기존 문서로 프로필을 채우고, 세 번 돌려 확인한 뒤에 드려요.</p>
+  <div class="ds-hero-cta">
+    <a class="ds-btn-pill primary" href="/free/reflo-starter-kit.zip" download data-track="download_kit">
+      <i class="ti ti-download"></i> 키트 받기
+    </a>
+    <a class="ds-btn-pill ghost" href="https://kmong.com/@%EB%A6%AC%ED%94%8C%EB%A1%9CReflo" data-track="go_kmong">맞춤 세팅 문의하기</a>
+  </div>
+  <p class="sec-note">회사 자료를 AI에 올려도 되는지는 회사 규정을 먼저 확인하세요</p>
+</div>
+
+<footer>
+  <p>만든 곳 — 리플로 Reflo ·
+    <a href="/tools/">리플로 실험실</a> ·
+    <a href="/">작업물 보기</a> ·
+    <a href="https://kmong.com/@%EB%A6%AC%ED%94%8C%EB%A1%9CReflo">크몽</a> ·
+    <a href="https://blog.naver.com/reflo2026">블로그</a></p>
+  <p style="margin-top:9px">쓰시다 막히는 곳이 있으면
+    <span class="mono">reflo2026@naver.com</span> 으로 알려주세요.</p>
+  <p style="margin-top:9px">방문 수를 세기 위해 Google Analytics 쿠키를 써요. 개인을 식별하지 않아요.</p>
+</footer>
+<script src="rules.js"></script>
+<script>
+document.getElementById("cprules").addEventListener("click", function () {
+  var m = document.getElementById("cpmsg"), t = window.리플로규칙 || "";
+  function 됨() { m.textContent = "복사했어요. 프로젝트의 지침 칸에 붙여 넣으세요."; }
+  function 안됨() { m.textContent = "복사가 막혀 있어요. 키트를 받아 「프로젝트-지침.md」를 여세요."; }
+  if (!t) return 안됨();
+  if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(t).then(됨, 안됨); else 안됨();
+  try { if (window.gtag) window.gtag("event", "copy_rules"); } catch (e) {}
+});
+</script>
+<script src="/analytics.js"></script>
+</body>
+</html>

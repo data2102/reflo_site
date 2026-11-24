@@ -1,0 +1,292 @@
+<!doctype html>
+<html lang="ko" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>엑셀 파일 합치기 — 리플로 무료 도구</title>
+<meta name="description" content="엑셀·CSV 파일 여러 개를 한 장으로 합쳐요. 열 순서가 달라도 이름으로 맞추고, 빠진 줄과 어긋난 열을 보여드려요. 파일은 브라우저 밖으로 나가지 않아요.">
+<link rel="canonical" href="https://reflo-works.netlify.app/tools/merge/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="리플로 Reflo">
+<meta property="og:title" content="엑셀 파일 합치기 — 리플로 무료 도구">
+<meta property="og:description" content="열 순서가 달라도 이름으로 맞춰 합쳐요. 파일은 브라우저 밖으로 나가지 않아요.">
+<meta property="og:url" content="https://reflo-works.netlify.app/tools/merge/">
+<meta property="og:image" content="https://reflo-works.netlify.app/og.png">
+<link rel="stylesheet" href="/tokens.css">
+<link rel="stylesheet" href="/marketing.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.24.0/dist/tabler-icons.min.css">
+<link rel="stylesheet" href="/tools/tools.css">
+</head>
+<body>
+
+<div class="ds-hero-wrap">
+  <div class="nav">
+    <a class="brand" href="/"><span class="mark">R</span> 리플로</a>
+    <a class="navback" href="/tools/">리플로 실험실 →</a>
+  </div>
+  <header class="ds-hero tool-hero">
+    <span class="eyebrow">무료 도구</span>
+    <h1>엑셀 파일 여러 개를<br><span class="accent">한 장으로</span> 합쳐요</h1>
+    <p class="lead">열 순서가 달라도 이름으로 맞춰요.
+      빠진 줄과 어긋난 열은 숨기지 않고 보여드려요.</p>
+  </header>
+</div>
+
+<main class="tool">
+
+  <label class="drop" id="drop" for="pick">
+    <i class="ti ti-files"></i>
+    <b>파일을 여기에 끌어다 놓거나 눌러서 고르세요</b>
+    <span>엑셀(.xlsx, .xls)과 CSV · 여러 개를 한 번에</span>
+    <input type="file" id="pick" multiple accept=".xlsx,.xlsm,.xls,.csv,.txt">
+  </label>
+  <p class="privacy"><i class="ti ti-lock"></i> 파일은 이 브라우저 안에서만 처리돼요. 어디로도 보내지 않아요.
+    <button type="button" class="linkbtn" id="sample">파일이 없으면 예시로 해보기</button></p>
+
+  <section id="work" hidden>
+
+    <h2 class="t-h2">넣은 파일</h2>
+    <div class="tablewrap"><table class="t" id="srcs"></table></div>
+    <div class="opts">
+      <label><input type="checkbox" id="oSrc" checked> 어느 파일에서 왔는지 열을 추가해요</label>
+      <label><input type="checkbox" id="oSum" checked> 합계·소계 줄은 빼요</label>
+      <label><input type="checkbox" id="oAll"> 파일 안의 모든 시트를 합쳐요</label>
+    </div>
+
+    <h2 class="t-h2">합친 결과</h2>
+    <div class="tiles" id="tiles"></div>
+    <p class="check" id="check"></p>
+
+    <div id="diffbox" hidden>
+      <h2 class="t-h2">일부 파일에만 있는 열 <small>이름이 달라서 따로 떨어진 열이 없는지 봐 주세요</small></h2>
+      <div class="tablewrap"><table class="t" id="diff"></table></div>
+    </div>
+
+    <h2 class="t-h2">미리 보기 <small id="pvn"></small></h2>
+    <div class="tablewrap"><table class="t pv" id="pv"></table></div>
+
+    <div class="dl">
+      <button type="button" class="ds-btn-pill primary" id="dlx"><i class="ti ti-download"></i> 엑셀로 받기</button>
+      <button type="button" class="ds-btn-pill ghost" id="dlc">CSV로 받기</button>
+      <button type="button" class="linkbtn" id="reset">처음부터 다시</button>
+    </div>
+    <p class="sec-note">받은 엑셀의 「합치기 기록」 시트에 파일별 줄 수와 뺀 줄이 적혀 있어요</p>
+  </section>
+</main>
+
+<section class="ds-mkt-section">
+  <h2 class="ds-mkt-h2">그냥 이어 붙이면 생기는 일</h2>
+  <p class="ds-mkt-lead">파일을 복사해서 아래로 붙이면 되는 것 같지만, 세 군데서 조용히 틀려요.</p>
+  <div class="ds-feature-grid">
+    <div class="ds-feature-card">
+      <div class="ds-feature-ico"><i class="ti ti-columns"></i></div>
+      <h3>열 순서가 달라요</h3>
+      <p>한 파일은 「거래처, 금액」, 다른 파일은 「금액, 거래처」. 그대로 붙이면 금액 칸에 이름이 들어가요. 이름으로 맞춰서 제자리에 넣어요.</p>
+    </div>
+    <div class="ds-feature-card">
+      <div class="ds-feature-ico"><i class="ti ti-letter-case"></i></div>
+      <h3>열 이름이 조금 달라요</h3>
+      <p>「거래처」와 「거래처명」은 같은 열일까요? 도구가 마음대로 정하지 않아요. 따로 떨어진 열을 보여드리고, 같다고 하시면 합쳐요.</p>
+    </div>
+    <div class="ds-feature-card">
+      <div class="ds-feature-ico"><i class="ti ti-sum"></i></div>
+      <h3>합계 줄이 섞여요</h3>
+      <p>파일마다 맨 아래에 있는 합계 줄까지 붙으면 나중에 더할 때 두 배가 돼요. 빼고, 몇 줄을 뺐는지 적어 드려요.</p>
+    </div>
+  </div>
+  <p class="sec-note">날짜와 금액의 서식, 「00123」 같은 앞자리 0도 그대로 옮겨요</p>
+</section>
+
+<div class="ds-cta-band">
+  <h2>매달 합치고 계신가요</h2>
+  <p class="ds-mkt-lead" style="margin-bottom:28px">합치기부터 집계, 보고 화면까지 파일만 넣으면 끝나게 만들어 드려요.</p>
+  <div class="ds-hero-cta">
+    <a class="ds-btn-pill primary" href="https://kmong.com/@%EB%A6%AC%ED%94%8C%EB%A1%9CReflo" data-track="go_kmong">
+      크몽에서 문의하기
+    </a>
+    <a class="ds-btn-pill ghost" href="/" data-track="see_works">만든 것 보기</a>
+  </div>
+  <p class="sec-note">결제와 환불은 크몽을 통해 진행돼요</p>
+</div>
+
+<footer>
+  <p>만든 곳 — 리플로 Reflo ·
+    <a href="/tools/">리플로 실험실</a> ·
+    <a href="/">작업물 보기</a> ·
+    <a href="https://kmong.com/@%EB%A6%AC%ED%94%8C%EB%A1%9CReflo">크몽</a> ·
+    <a href="https://blog.naver.com/reflo2026">블로그</a></p>
+  <p style="margin-top:9px">잘못 합쳐진 곳이 있으면
+    <span class="mono">reflo2026@naver.com</span> 으로 알려주세요. 고쳐서 다시 올려요.</p>
+  <p style="margin-top:9px">방문 수를 세기 위해 Google Analytics 쿠키를 써요. 넣으신 파일의 내용은 세지도, 보내지도 않아요.</p>
+</footer>
+
+<script src="/tools/lib/xlsx.full.min.js"></script>
+<script src="merge.js"></script>
+<script>
+(function () {
+  "use strict";
+  var T = window.합치기도구, $ = function (id) { return document.getElementById(id); };
+  var 전체 = [], 별칭 = {}, 결과 = null, 쓰는것 = [];
+
+  function esc(s) { return String(s).replace(/[&<>"]/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]; }); }
+  function 수(n) { return Number(n).toLocaleString("ko-KR"); }
+  function 센다(이름, 값) { try { if (window.gtag) window.gtag("event", 이름, 값 || {}); } catch (e) {} }
+
+  function 넣기(name, buf) {
+    try {
+      var 시트들 = T.읽기(name, buf, XLSX);
+      시트들.forEach(function (s, i) { s.순번 = i; s.시트여럿 = 시트들.length > 1; 전체.push(s); });
+    } catch (e) {
+      전체.push({ 파일: name, 시트: "", 줄들: [], 머리글행: -1, 순번: 0, 못엶: true });
+    }
+  }
+
+  function 파일들(list) {
+    var files = Array.prototype.slice.call(list), 남음 = files.length;
+    if (!남음) return;
+    files.forEach(function (f) {
+      var rd = new FileReader();
+      rd.onload = function () { 넣기(f.name, rd.result); if (--남음 === 0) { 센다("tool_merge_run", { files: files.length }); 그리기(); } };
+      rd.onerror = function () { 전체.push({ 파일: f.name, 시트: "", 줄들: [], 머리글행: -1, 순번: 0, 못엶: true }); if (--남음 === 0) 그리기(); };
+      rd.readAsArrayBuffer(f);
+    });
+  }
+
+  function 그리기() {
+    $("work").hidden = !전체.length;
+    if (!전체.length) return;
+    쓰는것 = 전체.filter(function (s) { return !s.못엶 && ($("oAll").checked || s.순번 === 0); });
+
+    // 넣은 파일
+    var h = "<tr><th>파일</th><th>시트</th><th>머리글 행</th><th>줄 수</th><th></th></tr>";
+    전체.forEach(function (s, i) {
+      var 씀 = 쓰는것.indexOf(s) > -1;
+      h += "<tr" + (씀 ? "" : ' class="off"') + "><td>" + esc(s.파일) + "</td><td>" + esc(s.시트) + (s.시트여럿 && !씀 && !s.못엶 ? ' <span class="dim">(안 씀)</span>' : "") + "</td><td>"
+        + (s.못엶 ? '<span class="bad">열지 못했어요 (암호가 걸렸거나 엑셀 파일이 아니에요)</span>'
+          : '<input type="number" min="1" max="' + Math.max(1, s.줄들.length) + '" value="' + (s.머리글행 + 1) + '" data-h="' + i + '" aria-label="머리글 행">')
+        + "</td><td>" + (s.못엶 ? "" : 수(s.줄들.length)) + '</td><td><button type="button" class="linkbtn" data-rm="' + i + '">빼기</button></td></tr>';
+    });
+    $("srcs").innerHTML = h;
+
+    결과 = T.합치기(쓰는것, { 출처열: $("oSrc").checked, 합계빼기: $("oSum").checked, 별칭: 별칭 });
+    var r = 결과;
+
+    $("tiles").innerHTML =
+      '<div class="tile"><span>합친 줄</span><b>' + 수(r.합친줄수) + '</b></div>' +
+      '<div class="tile"><span>파일</span><b>' + 수(쓰는것.length) + '</b></div>' +
+      '<div class="tile"><span>열</span><b>' + 수(r.열.length) + '</b></div>' +
+      '<div class="tile"><span>뺀 줄</span><b>' + 수(r.기록.reduce(function (a, l) { return a + l.빈줄 + l.합계줄; }, 0)) + '</b></div>';
+
+    var 식 = r.기록.map(function (l) { return 수(l.가져옴); }).join(" + ");
+    var 뺀 = r.기록.reduce(function (a, l) { return { 빈: a.빈 + l.빈줄, 합: a.합 + l.합계줄 }; }, { 빈: 0, 합: 0 });
+    var 문제 = r.기록.filter(function (l) { return l.문제; });
+    var 머리없음 = r.기록.reduce(function (a, l) { return a + (l.머리없는칸 || 0); }, 0);
+    $("check").innerHTML =
+      '<span class="' + (r.맞음 ? "ok" : "bad") + '"><i class="ti ti-' + (r.맞음 ? "check" : "alert-triangle") + '"></i> 파일별 ' + 식 + " = " + 수(r.합친줄수) + "줄" + (r.맞음 ? "" : " — 줄 수가 맞지 않아요") + "</span>"
+      + (뺀.빈 || 뺀.합 ? '<span class="dim"> · 뺀 줄: 빈 줄 ' + 수(뺀.빈) + ", 합계·소계 줄 " + 수(뺀.합) + "</span>" : "")
+      + 문제.map(function (l) { return '<br><span class="bad">' + esc(l.파일) + ": " + esc(l.문제) + ". 머리글 행 번호를 고쳐 주세요</span>"; }).join("")
+      + (머리없음 ? '<br><span class="bad">머리글이 없는 칸에 값이 ' + 수(머리없음) + "개 있어요. 그 값은 옮기지 않았어요</span>" : "");
+
+    // 일부 파일에만 있는 열
+    $("diffbox").hidden = !r.일부열.length || 쓰는것.length < 2;
+    var d = "<tr><th>열 이름</th><th>있는 파일</th><th>같은 열이 있다면</th></tr>";
+    r.일부열.forEach(function (x) {
+      var 후보 = x.비슷한열.concat(r.열.filter(function (c) { return c !== x.열 && x.비슷한열.indexOf(c) < 0; }));
+      d += "<tr><td><b>" + esc(x.열) + "</b>" + (x.비슷한열.length ? ' <span class="hint">「' + esc(x.비슷한열[0]) + "」와 비슷해요</span>" : "")
+        + "</td><td>" + x.있는곳.map(function (i) { return esc(쓰는것[i].파일); }).join(", ") + " <span class=\"dim\">(" + x.있는곳.length + "/" + 쓰는것.length + ")</span>"
+        + '</td><td><select data-al="' + esc(x.열) + '"><option value="">따로 둬요</option>'
+        + 후보.map(function (c) { return '<option value="' + esc(c) + '">「' + esc(c) + "」에 합쳐요</option>"; }).join("") + "</select></td></tr>";
+    });
+    var 합친것 = Object.keys(별칭);
+    if (합친것.length) {
+      d += 합친것.map(function (k) {
+        return '<tr class="done"><td><b>' + esc(k) + "</b></td><td>「" + esc(별칭[k]) + '」에 합쳤어요</td><td><button type="button" class="linkbtn" data-un="' + esc(k) + '">되돌리기</button></td></tr>';
+      }).join("");
+      $("diffbox").hidden = false;
+    }
+    $("diff").innerHTML = d;
+
+    // 미리 보기
+    var 머리 = r.열.concat(r.출처열 ? ["출처 파일"] : []);
+    var p = "<tr>" + 머리.map(function (c) { return "<th>" + esc(c) + "</th>"; }).join("") + "</tr>";
+    r.줄.slice(0, 12).forEach(function (o) {
+      p += "<tr>" + r.열.map(function (_, i) { var c = o.값[i]; return "<td" + (c && c.t === "n" ? ' class="num"' : "") + ">" + esc(T.글자(c)) + "</td>"; }).join("")
+        + (r.출처열 ? '<td class="dim">' + esc(쓰는것[o.si].파일) + "</td>" : "") + "</tr>";
+    });
+    $("pv").innerHTML = p;
+    $("pvn").textContent = r.합친줄수 > 12 ? "앞 12줄 · 전체 " + 수(r.합친줄수) + "줄" : "";
+  }
+
+  // ── 이벤트 ──
+  $("pick").addEventListener("change", function (e) { 파일들(e.target.files); e.target.value = ""; });
+  var drop = $("drop");
+  ["dragenter", "dragover"].forEach(function (n) { drop.addEventListener(n, function (e) { e.preventDefault(); drop.classList.add("on"); }); });
+  ["dragleave", "drop"].forEach(function (n) { drop.addEventListener(n, function (e) { e.preventDefault(); drop.classList.remove("on"); }); });
+  drop.addEventListener("drop", function (e) { 파일들(e.dataTransfer.files); });
+
+  ["oSrc", "oSum", "oAll"].forEach(function (id) { $(id).addEventListener("change", 그리기); });
+
+  $("srcs").addEventListener("change", function (e) {
+    var i = e.target.getAttribute("data-h");
+    if (i === null) return;
+    var v = parseInt(e.target.value, 10);
+    if (v >= 1) { 전체[+i].머리글행 = v - 1; 별칭 = {}; 그리기(); }
+  });
+  $("srcs").addEventListener("click", function (e) {
+    var i = e.target.getAttribute("data-rm");
+    if (i === null) return;
+    전체.splice(+i, 1); 별칭 = {}; 그리기();
+  });
+  $("diff").addEventListener("change", function (e) {
+    var k = e.target.getAttribute("data-al");
+    if (k === null || !e.target.value) return;
+    별칭[k] = e.target.value; 그리기();
+  });
+  $("diff").addEventListener("click", function (e) {
+    var k = e.target.getAttribute("data-un");
+    if (k === null) return;
+    delete 별칭[k]; 그리기();
+  });
+  $("reset").addEventListener("click", function () { 전체 = []; 별칭 = {}; 그리기(); window.scrollTo({ top: 0, behavior: "smooth" }); });
+
+  $("dlx").addEventListener("click", function () {
+    if (!결과 || !결과.합친줄수) return;
+    XLSX.writeFile(T.문서만들기(결과, 쓰는것, XLSX), "합친자료.xlsx");
+    센다("tool_merge_download", { kind: "xlsx" });
+  });
+  $("dlc").addEventListener("click", function () {
+    if (!결과 || !결과.합친줄수) return;
+    var wb = T.문서만들기(결과, 쓰는것, XLSX);
+    var csv = "﻿" + XLSX.utils.sheet_to_csv(wb.Sheets["합친 자료"]);       // BOM — 엑셀에서 한글이 깨지지 않게
+    var a = document.createElement("a");
+    a.href = URL.createObjectURL(new Blob([csv], { type: "text/csv;charset=utf-8" }));
+    a.download = "합친자료.csv"; document.body.appendChild(a); a.click(); a.remove();
+    센다("tool_merge_download", { kind: "csv" });
+  });
+
+  // 예시 — 지점 세 곳이 보낸 파일. 열 순서와 이름이 조금씩 달라요.
+  $("sample").addEventListener("click", function () {
+    function 책(aoa) {
+      var wb = XLSX.utils.book_new();
+      XLSX.utils.book_append_sheet(wb, XLSX.utils.aoa_to_sheet(aoa), "Sheet1");
+      return XLSX.write(wb, { type: "array", bookType: "xlsx" });
+    }
+    function 날(n) { return { t: "n", v: n, z: "yyyy-mm-dd" }; }
+    전체 = []; 별칭 = {};
+    넣기("강남지점_10월.xlsx", 책([["강남지점 10월 실적"], [], ["날짜", "거래처", "금액", "담당"],
+      [날(46297), "한빛상사", 1250000, "김"], [날(46301), "대성유통", 830000, "이"], [날(46308), "미래물산", 410000, "김"],
+      [null, "합계", 2490000, null]]));
+    넣기("부산지점_10월.xlsx", 책([["거래처명", "금액", "날짜", "비고"],
+      ["동아기획", 640000, 날(46299), ""], ["새한무역", 290000, 날(46305), "신규"], [null, null, null, null],
+      ["우리산업", 175000, 날(46311), ""], ["소계", 1105000, null, null]]));
+    넣기("대전지점_10월.xlsx", 책([["날짜", "거래처", "담당", "금액"],
+      [날(46300), "한빛상사", "박", 520000], [날(46306), "미래물산", "박", 330000]]));
+    센다("tool_merge_sample");
+    그리기();
+    $("work").scrollIntoView({ behavior: "smooth", block: "start" });
+  });
+})();
+</script>
+<script src="/analytics.js"></script>
+</body>
+</html>

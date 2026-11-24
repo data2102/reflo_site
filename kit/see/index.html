@@ -1,0 +1,280 @@
+<!doctype html>
+<html lang="ko" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>눈으로 보는 키트 — 넣은 말과 나온 결과 | 리플로</title>
+<meta name="description" content="스타터 키트에 든 절차를 하나씩 눌러 보세요. 넣은 말과 Claude가 낸 결과가 그대로 보여요. 설치하지 않고 먼저 확인해요.">
+<link rel="canonical" href="https://reflo-works.netlify.app/kit/see/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="리플로 Reflo">
+<meta property="og:title" content="눈으로 보는 키트 — 넣은 말과 나온 결과">
+<meta property="og:description" content="절차를 누르면 넣은 말과 나온 결과가 그대로 보여요. 설치하지 않고 먼저 확인해요.">
+<meta property="og:url" content="https://reflo-works.netlify.app/kit/see/">
+<meta property="og:image" content="https://reflo-works.netlify.app/og.png">
+<link rel="stylesheet" href="/tokens.css">
+<link rel="stylesheet" href="/marketing.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.24.0/dist/tabler-icons.min.css">
+<link rel="stylesheet" href="/tools/tools.css">
+<style>
+  .see-hero{max-width:820px;margin:0 auto;padding:20px 20px 4px;text-align:center}
+  .see-hero h1{margin:14px 0 10px;font-size:clamp(28px,4.6vw,40px);font-weight:var(--fw-bold);letter-spacing:var(--ls-tight);line-height:1.25;word-break:keep-all}
+  .see-hero p{margin:0 auto;max-width:560px;font-size:var(--fs-subhead);color:var(--text-secondary);line-height:var(--lh-body);word-break:keep-all}
+  .legend{display:flex;gap:8px 16px;flex-wrap:wrap;justify-content:center;margin:20px auto 0;font-size:var(--fs-caption);color:var(--text-secondary)}
+  .legend span{display:inline-flex;align-items:center;gap:7px}
+  .legend i{width:12px;height:12px;border-radius:4px;display:inline-block}
+  .k-unk{background:var(--warm-bg);box-shadow:inset 0 0 0 1px var(--warm)}
+  .k-ask{background:var(--accent-bg);box-shadow:inset 0 0 0 1px var(--accent)}
+
+  .picker{position:sticky;top:0;z-index:5;background:var(--bg);border-bottom:1px solid var(--border);margin-top:28px}
+  .picker-in{max-width:1120px;margin:0 auto;padding:12px 20px;display:flex;gap:8px;overflow-x:auto;scrollbar-width:none}
+  .picker-in::-webkit-scrollbar{display:none}
+  .chip{flex:none;height:38px;padding:0 15px;border-radius:var(--radius-pill);border:1px solid var(--border);background:var(--surface);
+    font:inherit;font-size:var(--fs-caption);color:var(--text-secondary);cursor:pointer;white-space:nowrap}
+  .chip:hover{border-color:var(--accent);color:var(--accent-strong)}
+  .chip[aria-selected="true"]{background:var(--accent);border-color:var(--accent);color:#fff;font-weight:var(--fw-medium)}
+  .chip:focus-visible{outline:none;box-shadow:var(--shadow-focus)}
+
+  .stage{max-width:1120px;margin:0 auto;padding:28px 20px 0;display:grid;grid-template-columns:minmax(0,5fr) minmax(0,8fr);gap:20px;align-items:start}
+  .col-t{margin:0 0 10px;font-size:var(--fs-footnote);font-weight:var(--fw-bold);letter-spacing:.05em;color:var(--text-tertiary)}
+  .say{display:inline-block;margin:0 0 10px;padding:6px 12px;border-radius:var(--radius-pill);background:var(--accent-bg);color:var(--accent-strong);
+    font-size:var(--fs-caption);font-weight:var(--fw-medium)}
+  .bubble{background:var(--surface-sunken);border-radius:16px 16px 16px 4px;padding:16px 18px;font-size:var(--fs-caption);line-height:1.75;
+    color:var(--text-primary);white-space:pre-wrap;word-break:keep-all;overflow-wrap:anywhere;max-height:420px;overflow:auto}
+  .look{margin-top:18px;border:1px solid var(--border);border-radius:var(--radius-lg);padding:16px 18px;background:var(--surface)}
+  .look p{margin:0 0 8px;font-size:var(--fs-caption);font-weight:var(--fw-bold);color:var(--text-primary)}
+  .look ul{margin:0;padding:0;list-style:none}
+  .look li{position:relative;padding:5px 0 5px 22px;font-size:var(--fs-caption);line-height:1.65;color:var(--text-secondary);word-break:keep-all}
+  .look li::before{content:"";position:absolute;left:2px;top:12px;width:9px;height:9px;border-radius:50%;background:var(--accent)}
+  .without{margin:14px 0 0;padding:12px 14px;border-radius:var(--radius-md);background:var(--surface-sunken);font-size:var(--fs-footnote);
+    line-height:1.7;color:var(--text-secondary);word-break:keep-all}
+  .without b{color:var(--text-primary)}
+
+  .paper{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);box-shadow:0 2px 10px rgba(25,45,80,.06);overflow:hidden}
+  .paper-bar{display:flex;align-items:center;gap:8px;padding:10px 16px;border-bottom:1px solid var(--border);font-size:var(--fs-footnote);color:var(--text-tertiary)}
+  .paper-bar b{color:var(--text-secondary);font-weight:var(--fw-medium)}
+  .paper-body{padding:20px 22px 24px;font-size:var(--fs-caption);line-height:1.8;color:var(--text-primary);word-break:keep-all;overflow-wrap:anywhere}
+  .paper-body.clip{max-height:640px;overflow:hidden;position:relative}
+  .paper-body.clip::after{content:"";position:absolute;left:0;right:0;bottom:0;height:90px;background:linear-gradient(transparent,var(--surface))}
+  .more{display:block;width:100%;height:44px;border:0;border-top:1px solid var(--border);background:var(--surface);font:inherit;
+    font-size:var(--fs-caption);color:var(--accent-strong);cursor:pointer}
+  .more:hover{background:var(--surface-sunken)}
+  .paper-body h2{margin:0 0 8px;font-size:18px;font-weight:var(--fw-bold);line-height:1.4}
+  .paper-body h3{margin:20px 0 8px;font-size:15px;font-weight:var(--fw-bold)}
+  .paper-body h4{margin:16px 0 6px;font-size:14px;font-weight:var(--fw-bold)}
+  .paper-body p{margin:0 0 9px}
+  .paper-body ul,.paper-body ol{margin:0 0 10px;padding-left:20px}
+  .paper-body li{margin:3px 0}
+  .paper-body hr{border:0;border-top:1px solid var(--border);margin:18px 0}
+  .paper-body pre{margin:8px 0 12px;padding:12px 14px;border-radius:var(--radius-md);background:var(--surface-sunken);white-space:pre-wrap;
+    font-family:var(--font-sans);font-size:13px;line-height:1.75}
+  .paper-body code{font-family:var(--font-sans);background:var(--surface-sunken);border-radius:4px;padding:1px 5px;font-size:.95em}
+  .tw{overflow-x:auto;margin:8px 0 12px}
+  .paper-body table{border-collapse:collapse;width:100%;font-size:13px;line-height:1.6}
+  .paper-body th,.paper-body td{border:1px solid var(--border);padding:7px 9px;text-align:left;vertical-align:top;min-width:64px}
+  .paper-body th{background:var(--surface-sunken);font-weight:var(--fw-medium);white-space:nowrap}
+  mark.unk{background:var(--warm-bg);color:var(--warm);border-radius:4px;padding:1px 5px;font-weight:var(--fw-medium)}
+  .askbox{margin:14px 0;padding:12px 16px;border-radius:var(--radius-md);background:var(--accent-bg);box-shadow:inset 3px 0 0 var(--accent)}
+  .askbox p{margin:0 0 6px;color:var(--accent-strong);font-weight:var(--fw-medium)}
+  .askbox ol{margin:0;padding-left:20px}
+  .seg{margin-left:auto;display:none;border:1px solid var(--border);border-radius:var(--radius-pill);padding:2px;background:var(--surface-sunken)}
+  .seg.on{display:inline-flex}
+  .seg button{height:28px;padding:0 12px;border:0;border-radius:var(--radius-pill);background:transparent;font:inherit;font-size:var(--fs-footnote);
+    color:var(--text-secondary);cursor:pointer;white-space:nowrap}
+  .seg button[aria-pressed="true"]{background:var(--surface);color:var(--accent-strong);font-weight:var(--fw-medium);box-shadow:0 1px 2px rgba(25,45,80,.12)}
+  .altnote{margin:0;padding:10px 16px;border-bottom:1px solid var(--border);background:var(--accent-bg);font-size:var(--fs-footnote);line-height:1.65;
+    color:var(--accent-strong);word-break:keep-all}
+  .paper-body pre.form{background:transparent;padding:0;margin:0 0 14px;font-size:14px;line-height:1.9}
+  .next{margin-top:14px;display:grid;grid-template-columns:1fr 1fr;gap:10px}
+  .next a{display:block;text-decoration:none;border:1px solid var(--border);border-radius:var(--radius-lg);padding:14px 16px;background:var(--surface)}
+  .next a:hover{border-color:var(--accent)}
+  .next b{display:block;font-size:var(--fs-caption);color:var(--text-primary);font-weight:var(--fw-medium);word-break:keep-all}
+  .next span{display:block;margin-top:3px;font-size:var(--fs-footnote);color:var(--accent-strong)}
+  @media(max-width:560px){.next{grid-template-columns:1fr}.paper-bar{flex-wrap:wrap}.seg{margin-left:0}}
+  .note{max-width:760px;margin:44px auto 0;padding:0 20px;font-size:var(--fs-caption);color:var(--text-tertiary);line-height:1.8;text-align:center;word-break:keep-all}
+  @media(max-width:860px){.stage{grid-template-columns:1fr}.paper-body.clip{max-height:520px}}
+</style>
+</head>
+<body>
+
+<div class="nav" style="max-width:1120px;margin:0 auto;padding:18px 20px 0">
+  <a class="brand" href="/"><span class="mark">R</span> 리플로</a>
+  <a class="navback" href="/kit/">스타터 키트 →</a>
+</div>
+
+<header class="see-hero">
+  <span class="eyebrow">리플로 실험실 · 눈으로 보는 키트</span>
+  <h1>설명은 줄이고,<br>나온 결과를 그대로 보여 드려요</h1>
+  <p>절차를 하나 누르면 넣은 말과 Claude가 낸 결과가 나와요. 고쳐 쓰지 않은 실제 결과예요.</p>
+  <div class="legend">
+    <span><i class="k-unk"></i> 모르는 것 — 지어내지 않고 표시한 곳</span>
+    <span><i class="k-ask"></i> 한 번에 모아 물어본 곳</span>
+  </div>
+</header>
+
+<div class="picker"><div class="picker-in" id="chips" role="tablist" aria-label="절차 고르기"></div></div>
+
+<main class="stage" id="stage">
+  <section>
+    <p class="col-t">이렇게 넣으면</p>
+    <span class="say" id="say"></span>
+    <div class="bubble" id="in"></div>
+    <div class="look"><p>여기를 보세요</p><ul id="look"></ul></div>
+    <p class="without" id="without"></p>
+  </section>
+  <section>
+    <p class="col-t">이렇게 나와요</p>
+    <div class="paper">
+      <div class="paper-bar"><i class="ti ti-file-text"></i> <b id="pname"></b> <span id="pdept"></span>
+        <span class="seg" id="seg"><button type="button" data-v="base" aria-pressed="true">기본 양식</button><button type="button" data-v="alt" aria-pressed="false">회사 양식으로 바꾼 뒤</button></span></div>
+      <p class="altnote" id="altnote" hidden></p>
+      <div class="paper-body clip" id="out"></div>
+      <button type="button" class="more" id="more">전체 보기</button>
+    </div>
+    <div class="next">
+      <a href="/course/#d3" data-track="see_to_d3"><b>이 양식을 우리 회사 양식으로 바꾸려면</b><span>5일 과정 3일차 · 20분 →</span></a>
+      <a href="/course/#d4" data-track="see_to_d4"><b>여기 없는 내 업무를 절차로 만들려면</b><span>5일 과정 4일차 · 30분 →</span></a>
+    </div>
+  </section>
+</main>
+
+<p class="note">2026년 11월, 키트의 규칙과 절차를 넣은 Claude에게 지어낸 자료로 직접 시켜 본 결과예요. 회사명과 이름은 실제가 아니에요.<br>
+  문장은 시킬 때마다 조금씩 달라요. 같은 것은 제목, 목차, 표의 칸 같은 뼈대예요. 예시가 하나씩뿐이라 여러분의 일에서는 다르게 나올 수 있어요.</p>
+
+<div class="ds-cta-band" style="margin-top:56px">
+  <h2>마음에 들면 직접 써 보세요</h2>
+  <p class="ds-mkt-lead" style="margin-bottom:28px">1분 버전은 내려받지 않고 규칙만 붙여 넣어요. 키트는 설치 10분이에요.</p>
+  <div class="ds-hero-cta">
+    <a class="ds-btn-pill primary" href="/kit/#quick" data-track="see_to_quick">1분 버전 써 보기</a>
+    <a class="ds-btn-pill ghost" href="/free/reflo-starter-kit.zip" download data-track="download_kit"><i class="ti ti-download"></i> 키트 받기</a>
+  </div>
+  <p class="sec-note">하루에 하나씩 따라 하고 싶으시면 <a href="/course/" data-track="open_course">5일 과정</a>으로 가세요</p>
+</div>
+
+<footer>
+  <p>만든 곳 — 리플로 Reflo ·
+    <a href="/kit/">스타터 키트</a> ·
+    <a href="/course/">5일 과정</a> ·
+    <a href="/tools/">리플로 실험실</a> ·
+    <a href="https://blog.naver.com/reflo2026">블로그</a></p>
+  <p style="margin-top:9px">방문 수를 세기 위해 Google Analytics 쿠키를 써요.</p>
+</footer>
+
+<script src="data.js"></script>
+<script>
+(function () {
+  "use strict";
+  var D = window.리플로보기 || [];
+  function 센다(n, v) { try { if (window.gtag) window.gtag("event", n, v || {}); } catch (e) {} }
+  function esc(t) { return t.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;"); }
+
+  // 한 줄 안의 꾸밈: 굵게, 코드, 모르는 것 표시
+  function 줄(t) {
+    t = esc(t);
+    t = t.replace(/\[\[확인필요[^\]]*\]\]/g, function (m) { return '<mark class="unk">' + m + "</mark>"; });
+    t = t.replace(/`([^`]+)`/g, "<code>$1</code>");
+    t = t.replace(/\*\*([^*]+)\*\*/g, "<b>$1</b>");
+    t = t.replace(/(^|[\s:|(「])(담당 미정|기한 미정|미정)(?=$|[\s.,)|」<])/g, '$1<mark class="unk">$2</mark>');
+    return t;
+  }
+
+  // 결과 글(마크다운)을 화면으로 옮긴다. 글자는 바꾸지 않는다.
+  function 그리기(src) {
+    var L = src.split("\n"), o = [], i = 0, 질문중 = false;
+    function 질문닫기() { if (질문중) { o.push("</div>"); 질문중 = false; } }
+    while (i < L.length) {
+      var s = L[i], t = s.trim();
+      if (/^```/.test(t)) {                         // 코드 상자
+        var b = []; i++;
+        while (i < L.length && !/^```/.test(L[i].trim())) { b.push(L[i]); i++; }
+        i++; o.push("<pre>" + 줄(b.join("\n")) + "</pre>"); continue;
+      }
+      if (/^\|/.test(t)) {                          // 표
+        var rows = [];
+        while (i < L.length && /^\s*\|/.test(L[i])) { rows.push(L[i].trim()); i++; }
+        var h = '<div class="tw"><table>';
+        rows.forEach(function (r, n) {
+          if (/^\|[\s:|-]+\|?$/.test(r)) return;
+          var c = r.replace(/^\||\|$/g, "").split("|"), tag = n === 0 ? "th" : "td";
+          h += "<tr>" + c.map(function (x) { return "<" + tag + ">" + 줄(x.trim()) + "</" + tag + ">"; }).join("") + "</tr>";
+        });
+        o.push(h + "</table></div>"); continue;
+      }
+      if (!t) { i++; continue; }
+      if (/^---+$/.test(t)) { 질문닫기(); o.push("<hr>"); i++; continue; }
+      var m = t.match(/^(#{1,4})\s+(.*)$/);
+      if (m) { 질문닫기(); var lv = Math.min(m[1].length + 1, 4); o.push("<h" + lv + ">" + 줄(m[2]) + "</h" + lv + ">"); i++; continue; }
+      if (/^(아래|다음)\s.*(알려\s?주시면|여쭙|여쭤)/.test(t.replace(/\*\*/g, ""))) {   // 한 번에 묻는 자리
+        질문닫기(); o.push('<div class="askbox"><p>' + 줄(t) + "</p>"); 질문중 = true; i++; continue;
+      }
+      if (/^\s*([-*·•]|\d+[.)])\s+/.test(s)) {      // 목록
+        var ord = /^\s*\d+[.)]\s+/.test(s), items = [];
+        while (i < L.length && (/^\s*([-*·•]|\d+[.)])\s+/.test(L[i]) || (/^\s{2,}\S/.test(L[i]) && items.length))) {
+          if (/^\s*([-*·•]|\d+[.)])\s+/.test(L[i]) && !/^\s{3,}/.test(L[i])) items.push(L[i].replace(/^\s*([-*·•]|\d+[.)])\s+/, ""));
+          else items[items.length - 1] += "<br>" + L[i].trim().replace(/^([-*·•]|\d+[.)])\s+/, "· ");
+          i++;
+        }
+        o.push((ord ? "<ol>" : "<ul>") + items.map(function (x) {
+          var p = x.split("<br>"); return "<li>" + p.map(줄).join("<br>") + "</li>";
+        }).join("") + (ord ? "</ol>" : "</ul>"));
+        if (질문중 && ord) 질문닫기();
+        continue;
+      }
+      o.push("<p>" + 줄(t) + "</p>"); i++;
+    }
+    질문닫기();
+    return o.join("");
+  }
+
+  var chips = document.getElementById("chips"), out = document.getElementById("out"), more = document.getElementById("more");
+  var seg = document.getElementById("seg"), altnote = document.getElementById("altnote"), 지금 = null;
+  function 결과넣기(v) {
+    var d = 지금, alt = v === "alt" && d.alt;
+    [].forEach.call(seg.children, function (b) { b.setAttribute("aria-pressed", b.dataset.v === (alt ? "alt" : "base") ? "true" : "false"); });
+    altnote.hidden = !alt; altnote.textContent = alt ? d.alt.note : "";
+    out.innerHTML = alt ? '<pre class="form">' + 줄(d.alt.form) + "</pre>" + 그리기(d.alt.rest) : 그리기(d.output);
+    out.classList.add("clip"); more.hidden = false; more.textContent = "전체 보기";
+    if (out.scrollHeight <= out.clientHeight + 4) { out.classList.remove("clip"); more.hidden = true; }
+  }
+  seg.addEventListener("click", function (ev) {
+    var b = ev.target.closest ? ev.target.closest("button") : null;
+    if (!b) return;
+    결과넣기(b.dataset.v);
+    if (b.dataset.v === "alt") 센다("see_alt", { which: 지금.id });
+  });
+  function 보이기(id, 조용히) {
+    var d = D.filter(function (x) { return x.id === id; })[0] || D[0];
+    if (!d) return;
+    [].forEach.call(chips.children, function (c) { c.setAttribute("aria-selected", c.dataset.id === d.id ? "true" : "false"); });
+    document.getElementById("say").textContent = "「" + d.say + "」";
+    document.getElementById("in").textContent = d.input;
+    document.getElementById("pname").textContent = d.name;
+    document.getElementById("pdept").textContent = "· " + d.dept;
+    document.getElementById("look").innerHTML = d.look.map(function (x) { return "<li>" + esc(x) + "</li>"; }).join("");
+    var w = document.getElementById("without");
+    w.hidden = !d.without; w.innerHTML = d.without ? "<b>비교</b> — " + esc(d.without) : "";
+    지금 = d;
+    seg.classList.toggle("on", !!d.alt);
+    결과넣기("base");
+    if (!조용히) {
+      try { history.replaceState(null, "", "#" + d.id); } catch (e) {}
+      센다("see_pick", { which: d.id });
+    }
+  }
+  D.forEach(function (d) {
+    var b = document.createElement("button");
+    b.type = "button"; b.className = "chip"; b.dataset.id = d.id; b.textContent = d.name; b.setAttribute("role", "tab");
+    b.addEventListener("click", function () { 보이기(d.id); });
+    chips.appendChild(b);
+  });
+  more.addEventListener("click", function () {
+    var 접힘 = out.classList.toggle("clip");
+    more.textContent = 접힘 ? "전체 보기" : "접기";
+    if (!접힘) 센다("see_expand", {});
+  });
+  보이기((location.hash || "").slice(1) || (D[0] && D[0].id), true);
+})();
+</script>
+<script src="/analytics.js"></script>
+</body>
+</html>

@@ -1,0 +1,363 @@
+<!doctype html>
+<html lang="ko" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>단체 메일 발송 프로그램 — 리플로</title>
+<meta name="description" content="500명에게 보냈는데 3명이 못 받는 일. 보내기 전에 못 받을 사람을 먼저 알려드려요. 체험판은 무료, 메일 설정은 맞춰서 보내드려요.">
+<link rel="canonical" href="https://reflo-works.netlify.app/mailer/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="리플로 Reflo">
+<meta property="og:title" content="단체 메일 발송 프로그램 — 리플로">
+<meta property="og:description" content="500명에게 보냈는데 3명이 못 받는 일. 보내기 전에 못 받을 사람을 먼저 알려드려요.">
+<meta property="og:url" content="https://reflo-works.netlify.app/mailer/">
+<meta property="og:image" content="https://reflo-works.netlify.app/mailer/og.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="stylesheet" href="/tokens.css">
+<link rel="stylesheet" href="/marketing.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.24.0/dist/tabler-icons.min.css">
+<style>
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--surface);color:var(--text-primary);
+    font-family:var(--font-sans);-webkit-font-smoothing:antialiased}
+  a{color:inherit}
+  .ds-btn-pill{text-decoration:none}
+  .navback{text-decoration:none}
+
+  /* ── 상단 바 ── */
+  .nav{display:flex;align-items:center;justify-content:space-between;
+    max-width:1040px;margin:0 auto;padding:var(--sp-5) var(--sp-6)}
+  .brand{display:flex;align-items:center;gap:9px;font-weight:var(--fw-bold);
+    font-size:var(--fs-heading);text-decoration:none}
+  .mark{width:30px;height:30px;border-radius:9px;background:var(--text-primary);
+    color:var(--surface);display:flex;align-items:center;justify-content:center;
+    font-weight:var(--fw-bold);font-size:15px}
+  .navback{font-size:var(--fs-caption);color:var(--text-tertiary);text-decoration:none}
+  .navback:hover{color:var(--accent-strong)}
+
+  /* ── 제품 목업 ── */
+  .mock-head{display:flex;align-items:center;gap:8px;padding:10px 14px;
+    background:var(--surface-sunken);border-bottom:1px solid var(--border);
+    border-radius:var(--radius-md) var(--radius-md) 0 0;
+    font-size:var(--fs-footnote);color:var(--text-tertiary)}
+  .mock-dot{width:9px;height:9px;border-radius:50%;background:var(--border-strong)}
+  .mock-body{padding:var(--sp-5) var(--sp-6);font-size:14.5px;line-height:1.85;
+    text-align:left;color:var(--text-secondary)}
+  .mock-body b{color:var(--text-primary);font-weight:var(--fw-medium)}
+  .mock-warn{margin-top:14px;padding-top:13px;border-top:1px solid var(--border);
+    color:var(--warning-strong);font-weight:var(--fw-medium)}
+  .mock-list{margin:8px 0 0;font-family:var(--font-mono);font-size:12.5px;
+    line-height:2;color:var(--danger)}
+  .mock-btns{display:flex;gap:8px;justify-content:flex-end;margin-top:16px}
+  .mock-btn{height:36px;padding:0 20px;border-radius:var(--radius-md);
+    font-size:var(--fs-caption);font-weight:var(--fw-medium);
+    display:inline-flex;align-items:center;border:1px solid var(--border-strong);
+    background:var(--surface);color:var(--text-secondary)}
+  .mock-btn.on{background:var(--accent);color:var(--on-accent);border-color:transparent}
+
+  /* 기능 카드 4개 → 2x2 (3열이면 하나가 혼자 떨어진다) */
+  .ds-feature-grid{grid-template-columns:repeat(2,1fr);max-width:860px;margin-left:auto;margin-right:auto}
+  @media(max-width:720px){.ds-feature-grid{grid-template-columns:1fr}}
+
+  /* ── 섹션 보조 ── */
+  .sec-note{max-width:620px;margin:var(--sp-5) auto 0;text-align:center;
+    font-size:var(--fs-caption);color:var(--text-tertiary);line-height:var(--lh-body)}
+  .steps{max-width:720px;margin:var(--sp-10) auto 0;display:grid;gap:var(--sp-3)}
+  .step{display:flex;gap:var(--sp-4);align-items:flex-start;
+    background:var(--surface);border:1px solid var(--border);
+    border-radius:var(--radius-lg);padding:var(--sp-5) var(--sp-6);box-shadow:var(--shadow-card)}
+  .step-n{flex:none;width:28px;height:28px;border-radius:50%;background:var(--accent-bg);
+    color:var(--accent-strong);font-size:var(--fs-caption);font-weight:var(--fw-bold);
+    display:flex;align-items:center;justify-content:center}
+  .step h3{margin:0 0 4px;font-size:var(--fs-subhead);font-weight:var(--fw-bold)}
+  .step p{margin:0;font-size:var(--fs-body);color:var(--text-secondary);line-height:var(--lh-body)}
+  .step em{font-style:normal;color:var(--accent-strong);font-weight:var(--fw-medium)}
+
+  /* ── 안내 박스 ── */
+  .box{max-width:720px;margin:var(--sp-6) auto 0;padding:var(--sp-5) var(--sp-6);
+    border-radius:var(--radius-lg);font-size:var(--fs-body);line-height:var(--lh-body);
+    text-align:left}
+  .box b{font-weight:var(--fw-bold)}
+  .box.warn{background:var(--warning-bg);color:var(--text-secondary)}
+  .box.warn b{color:var(--warning-strong)}
+  .box.tip{background:var(--accent-bg);color:var(--text-secondary)}
+  .box.tip b{color:var(--accent-strong)}
+
+  /* ── 요금 ── */
+  .plans{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--sp-3);
+    margin-top:var(--sp-10);text-align:left}
+  .plan{background:var(--surface);border:1px solid var(--border);
+    border-radius:var(--radius-lg);padding:var(--sp-6);box-shadow:var(--shadow-card)}
+  .plan.pick{border-color:var(--accent);background:var(--accent-bg)}
+  .plan-k{font-size:var(--fs-footnote);font-weight:var(--fw-bold);letter-spacing:.08em;
+    color:var(--text-tertiary)}
+  .plan.pick .plan-k{color:var(--accent-strong)}
+  .plan-p{font-size:var(--fs-title);font-weight:var(--fw-bold);letter-spacing:var(--ls-tight);
+    margin:var(--sp-2) 0 2px}
+  .plan-d{font-size:var(--fs-footnote);color:var(--text-tertiary)}
+  .plan ul{margin:var(--sp-4) 0 0;padding-left:17px;font-size:var(--fs-caption);
+    line-height:1.85;color:var(--text-secondary)}
+  .plan li b{color:var(--text-primary);font-weight:var(--fw-medium)}
+
+  /* ── 체험판 / 환경 표 ── */
+  .facts{max-width:720px;margin:var(--sp-8) auto 0;border:1px solid var(--border);
+    border-radius:var(--radius-lg);overflow:hidden;text-align:left}
+  .fact{display:flex;gap:var(--sp-4);padding:var(--sp-4) var(--sp-6);
+    border-bottom:1px solid var(--border);font-size:var(--fs-body)}
+  .fact:last-child{border-bottom:0}
+  .fact dt{flex:none;width:118px;color:var(--text-tertiary);font-size:var(--fs-caption);
+    padding-top:1px}
+  .fact dd{margin:0;color:var(--text-secondary)}
+  .fact dd b{color:var(--text-primary);font-weight:var(--fw-medium)}
+
+  /* ── 푸터 ── */
+  footer{border-top:1px solid var(--border);padding:var(--sp-10) var(--sp-6);
+    text-align:center;font-size:var(--fs-caption);color:var(--text-tertiary);
+    line-height:var(--lh-body)}
+  footer a{color:var(--accent-strong)}
+  .mono{font-family:var(--font-mono)}
+
+  @media(max-width:720px){
+    .plans{grid-template-columns:1fr}
+    .fact{flex-direction:column;gap:3px}
+    .fact dt{width:auto}
+  }
+  @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+
+<div class="ds-hero-wrap">
+  <div class="nav">
+    <a class="brand" href="/"><span class="mark">R</span> 리플로</a>
+    <a class="navback" href="/">작업물 보기 →</a>
+  </div>
+
+  <header class="ds-hero">
+    <span class="eyebrow">단체 메일 발송 프로그램</span>
+    <h1>보내기 전에,<br><span class="accent">못 받을 사람</span>을 알려드려요</h1>
+    <p class="lead">500명에게 보냈는데 3명이 못 받는 일.
+      그걸 나흘 뒤 전화로 알게 되지 않도록 만들었어요.</p>
+    <div class="ds-hero-cta">
+      <a class="ds-btn-pill primary" id="dl" href="NoticeMailer-Trial.zip" download data-track="download_trial">
+        <i class="ti ti-download"></i> 체험판 받기
+      </a>
+      <a class="ds-btn-pill ghost" href="#order" data-track="see_order">내 메일에 맞춰 받기</a>
+    </div>
+    <p class="sec-note">무료 · 한 번에 30명까지 · Windows · 설치 안 해도 돼요 · 10.8MB</p>
+  </header>
+
+  <div class="ds-shot">
+    <div class="mock-head"><span class="mock-dot"></span> 발송 확인</div>
+    <div class="mock-body">
+      <b>'학부모'</b> 그룹 <b>500건</b> 중<br>
+      <b>497명</b>에게 '3월 안내' 메일을 발송합니다.<br>
+      약 28초 걸립니다.
+      <div class="mock-warn"><i class="ti ti-alert-triangle"></i> 아래 3건은 보내지 않습니다.</div>
+      <div class="mock-list">
+        · park@gmail &nbsp;— 이메일 형식이 아닙니다<br>
+        · choi@ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;— 이메일 형식이 아닙니다<br>
+        · HONG@naver.com — 앞에 같은 주소가 있습니다
+      </div>
+      <div class="mock-btns">
+        <span class="mock-btn">아니오</span><span class="mock-btn on">예</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<section class="ds-mkt-section">
+  <h2 class="ds-mkt-h2">뭐가 다른가요</h2>
+  <p class="ds-mkt-lead">단체 메일 도구는 많아요. 이건 <b>많이 보내기</b>가 아니라 <b>빠짐없이 보내기</b>예요.</p>
+
+  <div class="ds-feature-grid">
+    <div class="ds-feature-card">
+      <div class="ds-feature-ico"><i class="ti ti-eye"></i></div>
+      <h3>보내기 전에 보여줘요</h3>
+      <p>형식이 틀린 주소를 조용히 건너뛰지 않아요. 목록으로 먼저 보여드리고,
+        이대로 보낼지 물어봐요.</p>
+    </div>
+    <div class="ds-feature-card">
+      <div class="ds-feature-ico"><i class="ti ti-lock"></i></div>
+      <h3>명단이 밖으로 안 나가요</h3>
+      <p>쓰시는 PC에서 쓰시는 메일 계정으로 직접 보내요.
+        외부 서비스에 명단을 올리지 않아요.</p>
+    </div>
+    <div class="ds-feature-card">
+      <div class="ds-feature-ico"><i class="ti ti-file-check"></i></div>
+      <h3>누가 받았는지 남아요</h3>
+      <p>성공·실패·제외·안 보냄 네 가지로 나눠 사유와 함께 파일로 남겨요.
+        나중에 물어보셔도 답할 수 있어요.</p>
+    </div>
+    <div class="ds-feature-card">
+      <div class="ds-feature-ico"><i class="ti ti-message-2"></i></div>
+      <h3>오류를 사람 말로</h3>
+      <p>영어 오류 코드를 그대로 보여드리지 않아요.
+        무엇을 고치면 되는지 여덟 갈래로 가려서 알려드려요.</p>
+    </div>
+  </div>
+</section>
+
+<section class="ds-mkt-section">
+  <h2 class="ds-mkt-h2">묶음 하나가 실패해도<br>90명이 사라지지 않아요</h2>
+  <p class="ds-mkt-lead">단체 메일은 보통 90명씩 묶어 숨은참조로 보내요.
+    그 묶음이 실패하면 대부분의 도구는 다음으로 넘어가고, 마지막에 "발송 완료"가 떠요.</p>
+
+  <div class="steps">
+    <div class="step">
+      <div class="step-n">1</div>
+      <div><h3>5초 뒤에 한 번 더</h3>
+        <p>일시적인 문제일 수 있으니 다시 보내봐요.</p></div>
+    </div>
+    <div class="step">
+      <div class="step-n">2</div>
+      <div><h3>그래도 안 되면 <em>한 명씩</em></h3>
+        <p>90명을 하나씩 나눠 보내요. 두 명이 문제였다면 88명은 정상으로 나가요.</p></div>
+    </div>
+    <div class="step">
+      <div class="step-n">3</div>
+      <div><h3>못 간 사람만 파일로</h3>
+        <p>오래 걸려도 이쪽이 맞아요. 빨리 끝나고 90명이 못 받는 것보다요.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="ds-mkt-section">
+  <h2 class="ds-mkt-h2">먼저 써보세요</h2>
+  <p class="ds-mkt-lead">체험판은 무료예요. 기능은 똑같고 인원만 한 번에 30명까지예요.</p>
+
+  <div class="box tip">
+    <b>30명 안쪽 모임이시면 계속 쓰셔도 돼요.</b>
+    그러려고 둔 제한이에요. 30명이 넘으면 앞 30명에게만 보낼지 여쭤보고,
+    못 보낸 분들은 결과 파일에 남겨드려요.
+  </div>
+
+  <div class="facts">
+    <div class="fact"><dt>필요한 것</dt><dd>Windows 10 · 11 PC와 <b>쓰시던 메일 계정</b> 하나</dd></div>
+    <div class="fact"><dt>설치</dt><dd>안 해도 돼요. 받은 폴더에서 더블클릭하면 떠요</dd></div>
+    <div class="fact"><dt>쓸 수 있는 메일</dt><dd>네이버 · 지메일 · 아웃룩 · 다음, 또는 <b>회사 메일 서버</b></dd></div>
+    <div class="fact"><dt>첨부 파일</dt><dd>여러 개를 붙일 수 있어요. <b>합쳐서 10MB까지</b></dd></div>
+    <div class="fact"><dt>앱 비밀번호</dt><dd>암호화해서 저장해요. 저장한 PC에서만 풀려요</dd></div>
+    <div class="fact"><dt>처음 켤 때</dt><dd>「Windows의 PC 보호」 경고가 떠요.
+      <b>[추가 정보] → [실행]</b>을 누르시면 돼요. 서명 인증서가 없는 1인 제작 프로그램에서 늘 나오는 안내예요</dd></div>
+  </div>
+</section>
+
+<section class="ds-mkt-section" id="order">
+  <h2 class="ds-mkt-h2">정작 막히는 건<br>프로그램이 아니에요</h2>
+  <p class="ds-mkt-lead">SMTP 주소가 뭔지, 앱 비밀번호를 어디서 받는지.
+    처음 보면 여기서 멈추게 돼요.</p>
+
+  <div class="box tip">
+    쓰실 <b>메일 주소</b>와 받는 분들께 보일 <b>이름</b>만 알려주시면
+    설정을 채워서 보내드려요. 받으시면 바로 쓰실 수 있어요.
+  </div>
+
+  <div class="box warn">
+    <b>앱 비밀번호는 받지 않아요.</b>
+    그건 메일 계정에 들어갈 수 있는 열쇠라 제가 가지고 있으면 안 되는 거예요.
+    <b>그 한 칸만 비워서</b> 드리고, 받으시는 방법을 쓰시는 메일 서비스에 맞춰 알려드려요.
+  </div>
+
+  <div class="plans">
+    <div class="plan pick">
+      <div class="plan-k">STANDARD</div>
+      <div class="plan-p">99,000원</div>
+      <div class="plan-d">3일 · 수정 1회</div>
+      <ul>
+        <li><b>인원 제한 없음</b></li>
+        <li>메일 설정 채워서 전달</li>
+        <li>비밀번호 받는 법 안내</li>
+        <li>설명서 + 기본 양식 5종</li>
+      </ul>
+    </div>
+    <div class="plan">
+      <div class="plan-k">DELUXE</div>
+      <div class="plan-p">190,000원</div>
+      <div class="plan-d">5일 · 수정 2회</div>
+      <ul>
+        <li>위 전부</li>
+        <li><b>공지 양식 3종</b> 실제 내용으로 제작</li>
+        <li>쓰시는 명단 형태 그대로 맞춤</li>
+        <li>첫 발송 함께 진행</li>
+      </ul>
+    </div>
+    <div class="plan">
+      <div class="plan-k">PREMIUM</div>
+      <div class="plan-p">330,000원</div>
+      <div class="plan-d">7일 · 수정 3회</div>
+      <ul>
+        <li>위 전부</li>
+        <li><b>기능 1개 추가</b></li>
+        <li>예약 발송 / 사람마다 다른 내용 중 하나</li>
+        <li>1개월 질문 응대</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="steps">
+    <div class="step">
+      <div class="step-n">1</div>
+      <div><h3>결제하시면 다섯 가지를 여쭤봐요</h3>
+        <p>메일 주소, 어느 서비스인지, 받는 분들께 보일 이름, 보내시는 인원, 지금 명단 형태.</p></div>
+    </div>
+    <div class="step">
+      <div class="step-n">2</div>
+      <div><h3>답장만 주시면 돼요</h3>
+        <p><em>하실 일은 이것 하나예요.</em> 회사 메일 서버 주소를 모르셔도 제가 찾아드려요.</p></div>
+    </div>
+    <div class="step">
+      <div class="step-n">3</div>
+      <div><h3>설정을 채워서 보내드려요</h3>
+        <p>비밀번호 한 칸만 넣으시면 바로 쓰실 수 있어요.</p></div>
+    </div>
+    <div class="step">
+      <div class="step-n">4</div>
+      <div><h3>첫 발송까지 함께</h3>
+        <p>안 되는 게 있으면 알려주세요. <em>될 때까지</em> 고쳐드려요.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="ds-mkt-section">
+  <h2 class="ds-mkt-h2">이것만 지켜주세요</h2>
+  <p class="ds-mkt-lead">공지에 쓰라고 만든 프로그램이에요.</p>
+
+  <div class="box warn">
+    <b>광고·홍보 메일에는 쓰지 마세요.</b>
+    받는 분께 미리 동의를 받지 않은 광고 메일은 정보통신망법 위반이고,
+    책임은 보내는 분께 있어요. 이미 거래·이용 관계가 있는 분께 보내는 안내·공지용이에요.
+  </div>
+  <div class="box warn">
+    <b>메일 서비스마다 하루 한도가 있어요.</b>
+    한 번에 보낼 인원과 대기 시간을 무리하게 줄이지 마세요. 넘기면 계정이 잠겨요.
+  </div>
+</section>
+
+<div class="ds-cta-band">
+  <h2>먼저 써보고 결정하세요</h2>
+  <p class="ds-mkt-lead" style="margin-bottom:28px">30명까지는 무료예요. 기능은 똑같아요.</p>
+  <div class="ds-hero-cta">
+    <a class="ds-btn-pill primary" href="NoticeMailer-Trial.zip" download data-track="download_trial">
+      <i class="ti ti-download"></i> 체험판 받기
+    </a>
+    <a class="ds-btn-pill ghost" href="https://kmong.com/gig/862873" data-track="go_kmong_mailer">
+      크몽에서 주문하기
+    </a>
+  </div>
+  <p class="sec-note">결제와 환불은 크몽을 통해 진행돼요</p>
+</div>
+
+<footer>
+  <p>만든 곳 — 리플로 Reflo ·
+    <a href="/">작업물 보기</a> ·
+    <a href="https://kmong.com/@%EB%A6%AC%ED%94%8C%EB%A1%9CReflo">크몽</a> ·
+    <a href="https://blog.naver.com/reflo2026">블로그</a></p>
+  <p style="margin-top:9px">쓰시다 막히는 곳이 있으면
+    <span class="mono">reflo2026@naver.com</span> 으로 알려주세요. 고쳐서 다시 올려요.</p>
+  <p style="margin-top:9px">방문 수를 세기 위해 Google Analytics 쿠키를 써요. 개인을 식별하지 않아요.</p>
+</footer>
+
+<script src="/analytics.js"></script>
+</body>
+</html>
