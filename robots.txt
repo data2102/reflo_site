@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://reflo-works.netlify.app/sitemap.xml
+Sitemap: https://refloworks.com/sitemap.xml
