@@ -1,4 +1,4 @@
-/* 주간 업무 화면 — 체험판 (리플로)
+/* 팀 업무 화면 — 체험판 (리플로)
    화면은 이 HTML, 데이터는 엑셀 파일 하나. 서버·DB 없음.
    크롬·엣지·웨일: 고른 파일에 바로 덮어쓴다(File System Access API). 그 밖: 내려받기로 저장.
    저장 직전에 파일이 그새 바뀌었으면 읽어 와서 번호별로 더 늦게 고친 쪽을 남기고 합친다. */
@@ -376,7 +376,7 @@ var SHEETS = {
 };
 function toBook() {
   var wb = XLSX.utils.book_new();
-  var guide = [["리플로 · 주간 업무 화면 데이터 파일"], [""], ["이 파일은 https://refloworks.com/tools/weekly/ 화면에서 열어 쓰는 데이터예요."], ["엑셀로 열어 고쳐도 됩니다. 「번호」와 「고친 때」 열은 지우지 마세요 — 여러 사람이 고친 것을 합칠 때 씁니다."],
+  var guide = [["리플로 · 팀 업무 화면 데이터 파일"], [""], ["이 파일은 https://refloworks.com/tools/weekly/ 화면에서 열어 쓰는 데이터예요."], ["엑셀로 열어 고쳐도 됩니다. 「번호」와 「고친 때」 열은 지우지 마세요 — 여러 사람이 고친 것을 합칠 때 씁니다."],
     ["팀이 같이 쓰려면 이 파일을 공유 폴더(NAS·구글 드라이브·원드라이브)에 두고, 각자 화면에서 이 파일을 여세요."], [""], ["마지막 저장: " + new Date().toLocaleString("ko-KR")]];
   XLSX.utils.book_append_sheet(wb, XLSX.utils.aoa_to_sheet(guide), "안내");
   Object.keys(SHEETS).forEach(function (k) {

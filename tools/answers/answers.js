@@ -1,5 +1,5 @@
 /* 답변집 — 체험판 (리플로). 화면은 HTML, 데이터는 엑셀 파일 하나. 서버·DB 없음.
-   저장 방식은 주간 업무 화면(tools/weekly)과 같다: 고른 파일에 바로 덮어쓰고, 그새 바뀌었으면 번호별로 늦게 고친 쪽을 남겨 합친다. */
+   저장 방식은 팀 업무 화면(tools/weekly)과 같다: 고른 파일에 바로 덮어쓰고, 그새 바뀌었으면 번호별로 늦게 고친 쪽을 남겨 합친다. */
 (function () {
 "use strict";
 var $ = function (id) { return document.getElementById(id); };
