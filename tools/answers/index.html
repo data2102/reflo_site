@@ -1,0 +1,152 @@
+<!doctype html>
+<html lang="ko" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>답변집 체험판 — 같은 문의, 같은 답 | 리플로</title>
+<meta name="description" content="자주 오는 문의와 확인된 답을 한 화면에. 찾아서 누르면 복사돼요. 없던 질문은 적어 두었다가 채워요. 저장하면 엑셀 파일 하나, 공유 폴더에 두면 팀이 같이 써요.">
+<link rel="canonical" href="https://refloworks.com/tools/answers/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="리플로 Reflo">
+<meta property="og:title" content="답변집 체험판 — 같은 문의, 같은 답">
+<meta property="og:description" content="예시 데이터로 바로 써 보세요. 찾아서 누르면 복사, 없던 질문은 적어 두었다가 채워요.">
+<meta property="og:url" content="https://refloworks.com/tools/answers/">
+<meta property="og:image" content="https://refloworks.com/og.png">
+<link rel="stylesheet" href="/tokens.css">
+<link rel="stylesheet" href="/marketing.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.24.0/dist/tabler-icons.min.css">
+<link rel="stylesheet" href="/tools/tools.css">
+<style>
+.tool{max-width:920px}
+.app{background:var(--surface);border-radius:var(--radius-xl);box-shadow:var(--shadow-card);border:1px solid var(--border);overflow:hidden}
+.bar{display:flex;flex-wrap:wrap;align-items:center;gap:10px 14px;padding:14px 18px;border-bottom:1px solid var(--border);background:var(--surface-sunken)}
+.filepill{display:inline-flex;align-items:center;gap:7px;padding:6px 12px;border-radius:var(--radius-pill);font-size:var(--fs-footnote);font-weight:var(--fw-medium);background:var(--warning-bg);color:var(--warning-strong)}
+.filepill.on{background:var(--success-bg);color:var(--success-strong)}
+.bar .sp,.row .sp{flex:1}
+.btn{display:inline-flex;align-items:center;gap:6px;height:36px;padding:0 14px;border-radius:var(--radius-md);border:1px solid var(--border-strong);background:var(--surface);color:var(--text-primary);font:inherit;font-size:var(--fs-caption);font-weight:var(--fw-medium);cursor:pointer;white-space:nowrap}
+.btn:hover{background:var(--surface-sunken)}
+.btn.pri{background:var(--accent);border-color:var(--accent);color:var(--on-accent)}
+.btn.pri:hover{background:var(--accent-hover)}
+.btn.sm{height:30px;padding:0 10px;font-size:var(--fs-footnote)}
+.btn:focus-visible,.tabs button:focus-visible,.chip:focus-visible{outline:none;box-shadow:var(--shadow-focus)}
+.tabs{display:flex;gap:4px;padding:10px 14px 0;border-bottom:1px solid var(--border);overflow-x:auto}
+.tabs button{border:0;background:none;font:inherit;font-size:var(--fs-body);font-weight:var(--fw-medium);color:var(--text-tertiary);padding:10px 14px 12px;border-bottom:2px solid transparent;cursor:pointer;white-space:nowrap}
+.tabs button.on{color:var(--text-primary);border-bottom-color:var(--accent)}
+.tabs .n{display:inline-block;min-width:18px;margin-left:4px;padding:0 6px;border-radius:var(--radius-pill);background:var(--warm-bg);color:var(--warm);font-size:11px;line-height:18px;text-align:center}
+.view{padding:20px 18px 24px}
+.hide{display:none!important}
+.search{display:flex;align-items:center;gap:10px;height:52px;padding:0 16px;border:1.5px solid var(--border-strong);border-radius:var(--radius-lg);background:var(--surface)}
+.search:focus-within{border-color:var(--accent);box-shadow:var(--shadow-focus)}
+.search i{font-size:20px;color:var(--text-tertiary)}
+.search input:focus,.search input:focus-visible{outline:none;box-shadow:none}
+.search input::-webkit-search-cancel-button{cursor:pointer}
+.search input{flex:1;border:0;outline:none;font:inherit;font-size:var(--fs-subhead);background:none;color:var(--text-primary);min-width:0}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin:12px 0 4px}
+.chip{border:1px solid var(--border-strong);background:var(--surface);border-radius:var(--radius-pill);padding:5px 12px;font:inherit;font-size:var(--fs-footnote);color:var(--text-secondary);cursor:pointer}
+.chip.on{background:var(--text-primary);border-color:var(--text-primary);color:var(--surface)}
+.row{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin:14px 0 10px;font-size:var(--fs-footnote);color:var(--text-tertiary)}
+.ans{border:1px solid var(--border);border-radius:var(--radius-lg);padding:16px 18px;margin-bottom:10px;background:var(--surface)}
+.ans h3{margin:0;font-size:var(--fs-subhead);font-weight:var(--fw-bold);line-height:1.45;display:flex;gap:8px;align-items:flex-start}
+.ans h3 .q{flex:1;outline:none;border-radius:6px}
+.ans .body{margin:10px 0 0;padding:12px 14px;border-radius:var(--radius-md);background:var(--surface-sunken);font-size:var(--fs-body);line-height:1.7;white-space:pre-wrap;outline:none;word-break:keep-all}
+.ans [contenteditable="true"]:focus{background:var(--accent-bg)}
+.ans .meta{display:flex;flex-wrap:wrap;align-items:center;gap:6px 10px;margin-top:10px;font-size:var(--fs-footnote);color:var(--text-tertiary)}
+.ans .meta .sp{flex:1}
+.tg{display:inline-block;padding:1px 8px;border-radius:var(--radius-pill);font-size:11px;font-weight:var(--fw-bold);line-height:18px;background:var(--surface-sunken);color:var(--text-tertiary)}
+.tg.cat{background:var(--accent-bg);color:var(--accent-strong)} .tg.old{background:var(--warm-bg);color:var(--warm)} .tg.ok{background:var(--success-bg);color:var(--success-strong)}
+.ans .edit{display:none;gap:8px;flex-wrap:wrap;margin-top:10px;font-size:var(--fs-footnote);color:var(--text-secondary);align-items:center}
+.ans.editing .edit{display:flex}
+.ans .edit input,.gap input[type=text]{height:32px;border:1px solid var(--border-strong);border-radius:8px;padding:0 8px;font:inherit;font-size:var(--fs-footnote);background:var(--surface);color:var(--text-primary)}
+mark{background:var(--warning-bg);color:inherit;border-radius:3px;padding:0 1px}
+.none{padding:22px 18px;border:1px dashed var(--border-strong);border-radius:var(--radius-lg);text-align:center;color:var(--text-secondary);font-size:var(--fs-caption);line-height:1.8}
+.gapadd{display:flex;gap:8px;margin-bottom:14px}
+.gapadd input{flex:1;height:44px;border:1.5px solid var(--border-strong);border-radius:var(--radius-md);padding:0 14px;font:inherit;font-size:var(--fs-body);background:var(--surface);color:var(--text-primary);min-width:0}
+.gap{display:flex;align-items:center;gap:10px;padding:12px 14px;border:1px solid var(--border);border-radius:var(--radius-md);margin-bottom:8px;font-size:var(--fs-caption)}
+.gap .t{flex:1;font-weight:var(--fw-medium);color:var(--text-primary)}
+.gap .c{font-size:var(--fs-footnote);color:var(--text-tertiary);white-space:nowrap}
+.note{font-size:var(--fs-footnote);color:var(--text-tertiary);margin:12px 0 0;line-height:1.7}
+.how3{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:14px}
+.how3 div{padding:18px;border-radius:var(--radius-lg);background:var(--surface);border:1px solid var(--border)}
+.how3 b{display:block;font-size:var(--fs-subhead);margin-bottom:6px}
+.how3 span{font-size:var(--fs-caption);color:var(--text-secondary);line-height:var(--lh-body)}
+.how3 .no{display:inline-flex;width:24px;height:24px;border-radius:7px;background:var(--accent-bg);color:var(--accent-strong);font-weight:var(--fw-bold);font-size:var(--fs-footnote);align-items:center;justify-content:center;margin-bottom:10px}
+.small-limits{margin-top:14px;padding:14px 18px;border-radius:var(--radius-lg);background:var(--surface-sunken);font-size:var(--fs-caption);color:var(--text-secondary);line-height:1.8}
+.toast{position:fixed;left:50%;bottom:28px;transform:translateX(-50%);z-index:var(--z-toast);background:var(--text-primary);color:var(--surface);padding:11px 18px;border-radius:var(--radius-md);font-size:var(--fs-caption);box-shadow:var(--shadow-popover);opacity:0;pointer-events:none;transition:opacity var(--dur-base);max-width:92vw;text-align:center}
+.toast.on{opacity:1}
+@media(max-width:720px){.how3{grid-template-columns:1fr}.view{padding:16px 12px 20px}.bar{padding:12px}.gapadd{flex-direction:column}}
+</style>
+</head>
+<body>
+
+<div class="ds-hero-wrap">
+  <div class="nav">
+    <a class="brand" href="/"><span class="mark">R</span> 리플로</a>
+    <a class="navback" href="/tools/">무료 도구 →</a>
+  </div>
+  <header class="ds-hero tool-hero" style="padding-top:28px;padding-bottom:28px">
+    <span class="eyebrow">체험판 · 예시 데이터</span>
+    <h1 style="font-size:clamp(28px,4.4vw,40px)">같은 문의에는, <span class="accent">같은 답</span></h1>
+    <p class="lead" style="max-width:640px">자주 오는 문의와 확인된 답을 한 곳에 모아 두는 답변집이에요.
+      문의에 나온 말로 찾고, 누르면 복사돼요. 없던 질문은 적어 두었다가 채워요.</p>
+  </header>
+</div>
+
+<main class="tool">
+  <div class="app">
+    <div class="bar">
+      <span class="filepill" id="filePill"><i class="ti ti-flask"></i><span id="fileTxt"></span></span>
+      <span class="sp"></span>
+      <button class="btn" id="btnOpen" data-track="answers_open"><i class="ti ti-folder-open"></i>파일 열기</button>
+      <button class="btn pri" id="btnSave" data-track="answers_save"><i class="ti ti-device-floppy"></i><span id="saveTxt">내 PC에 저장</span></button>
+      <input type="file" id="pick" accept=".xlsx,.xls" hidden>
+    </div>
+    <div class="tabs" role="tablist">
+      <button class="on" data-tab="find" role="tab">답 찾기</button>
+      <button data-tab="gaps" role="tab">없던 질문<span class="n hide" id="nGap"></span></button>
+    </div>
+    <section class="view" id="v-find">
+      <label class="search"><i class="ti ti-search"></i><input id="q" type="search" placeholder="문의에 나온 말로 찾아보세요 — 예: 환불, 세금계산서, 배송" autocomplete="off" aria-label="답 찾기"></label>
+      <div class="chips" id="chips"></div>
+      <div class="row"><span id="count"></span><span class="sp"></span><button class="btn sm" id="newA" data-track="answers_new"><i class="ti ti-plus"></i>새 답변</button></div>
+      <div id="list"></div>
+      <p class="note">제목이나 답을 누르면 바로 고칠 수 있어요. 고치면 「고친 날」이 오늘로 바뀌어요. 여섯 달 넘게 안 고친 답에는 주황색 표시가 붙어요 — 오래된 답이 그대로 나가지 않게요.</p>
+    </section>
+    <section class="view hide" id="v-gaps">
+      <form class="gapadd" id="gapForm"><input id="gapIn" type="text" placeholder="답변집에 없던 질문을 적어 두세요 — 문의한 사람이 쓴 말 그대로" aria-label="없던 질문"><button class="btn pri" style="height:44px">적어 두기</button></form>
+      <div id="gaps"></div>
+      <p class="note">같은 질문이 또 오면 「또 왔어요」를 눌러 횟수를 올리세요. 많이 온 것부터 답을 채우면 돼요. 한 달에 한 번 이 목록만 비워도 답변집이 계속 살아 있어요.</p>
+    </section>
+  </div>
+
+  <h2 class="t-h2" style="margin-top:44px">답변집이 오래 쓰이려면</h2>
+  <div class="how3">
+    <div><span class="no">1</span><b>이름은 문의한 사람의 말로</b><span>우리끼리 부르는 이름으로 지으면 급할 때 못 찾아요. 「로그인 오류」가 아니라 「로그인이 안 돼요」.</span></div>
+    <div><span class="no">2</span><b>한 곳에만</b><span>메일함에도 메모에도 있으면 어느 게 최신인지 몰라요. 이 파일 하나를 공유 폴더에 두고 모두 여기서 꺼내 써요.</span></div>
+    <div><span class="no">3</span><b>마지막으로 고친 날</b><span>답마다 고친 날이 보여요. 정책이 바뀌었는데 예전 답이 나가는 일을 막아 줘요.</span></div>
+  </div>
+  <div class="small-limits">
+    <b>알아 두실 것</b> · 저장하면 엑셀 파일 하나가 생겨요. 크롬·엣지·웨일에서는 고칠 때마다 그 파일에 바로 저장되고, 사파리·파이어폭스에서는 내려받기로 저장돼요.
+    · 넣으신 내용은 이 브라우저와 고르신 파일에만 있어요. 어디로도 보내지 않아요.
+    · 예시의 가게 이름·정책은 지어낸 것이에요.
+  </div>
+
+  <div class="ds-cta-band" style="margin:48px 0 0;border-radius:var(--radius-xl)">
+    <h2>우리 회사 답변집, 같이 만들어 드려요</h2>
+    <p class="ds-mkt-lead" style="margin-bottom:28px">자주 오는 문의 스무 가지를 같이 뽑고, 보낸 메일에서 확인된 답을 찾아 정리해 드려요.<br>문서가 많고 묻는 사람이 많다면, 근거가 있을 때만 답하는 챗봇으로 넓힐 수 있어요.</p>
+    <div class="ds-hero-cta">
+      <a class="ds-btn-pill primary" href="/#contact" data-track="answers_contact">맡기기 문의</a>
+      <a class="ds-btn-pill ghost" href="/tools/weekly/" data-track="open_tool_weekly">주간 업무 화면도 보기</a>
+    </div>
+  </div>
+</main>
+
+<footer>
+  <p>만든 곳 — 리플로 Reflo · <a href="/tools/">무료 도구</a> · <a href="/works/">만든 것</a> · <a href="https://blog.naver.com/reflo2026">블로그</a></p>
+  <p style="margin-top:9px">방문 수를 세기 위해 Google Analytics 쿠키를 써요. 넣으신 내용은 세지도, 보내지도 않아요.</p>
+</footer>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+<script src="/tools/lib/xlsx.full.min.js"></script>
+<script src="answers.js"></script>
+<script src="/analytics.js"></script>
+</body>
+</html>
