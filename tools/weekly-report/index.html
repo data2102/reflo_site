@@ -28,7 +28,9 @@
 .peek{display:block;margin:36px 0 0;border:1px solid var(--border);border-radius:var(--radius-xl);overflow:hidden;background:var(--surface);text-decoration:none;color:inherit;box-shadow:var(--shadow-card)}
 .peek:hover{border-color:var(--accent)}
 .peek .cap{display:block;padding:14px 18px;font-size:var(--fs-caption);color:var(--accent-strong);border-bottom:1px solid var(--border)}
-.peek .cap b{display:block;font-size:var(--fs-subhead);color:var(--text-primary);margin-bottom:2px}
+.peek .cap{line-height:1.6}
+.peek .cap small{display:block;font-size:var(--fs-footnote);color:var(--text-tertiary);margin-bottom:2px}
+.peek .cap b{display:block;font-size:var(--fs-heading);color:var(--text-primary);margin-bottom:4px}
 .peek img{display:block;width:100%;height:auto}
 .steps{margin:14px 0 0;padding-left:20px;font-size:var(--fs-body);line-height:1.9;color:var(--text-secondary)}
 .steps b{color:var(--text-primary)}
@@ -63,7 +65,7 @@
   </div>
 
   <a class="peek" href="/tools/weekly/" data-track="report_peek_weekly">
-    <span class="cap"><b>이 양식을 화면으로 보면 이렇게 돼요</b> 받은 파일을 그대로 열 수 있어요 · 무료 →</span>
+    <span class="cap"><small>엑셀은 혼자 쓰기에 좋아요 · 팀이 같이 쓴다면</small><b>넘기고 세는 일은 자동으로 — 팀 업무 화면</b>아래는 엑셀이 아니라 브라우저에서 돌아가는 화면이에요. 지난주 일 이어받기, 기한 지난 일, 일이 몰리는 주를 알아서 보여 줘요. 받은 양식을 그대로 열 수 있어요 · 무료로 써 보기 →</span>
     <img src="/img/weekly-screen.jpg" alt="주간 업무 화면 — 요일별 칸에 이번 주 일이 카드로 놓이고, 지난주에서 넘어온 일에는 이어받음 표시가 붙어 있다" width="1400" height="867" loading="lazy">
   </a>
 
@@ -86,8 +88,8 @@
 
   <h2 class="t-h2">넘기는 게 번거롭다면</h2>
   <div class="next">
-    <a href="/tools/weekly/" data-track="report_to_weekly"><b>이 양식을 화면으로</b><span>받은 파일을 그대로 열 수 있어요. 버튼 한 번으로 지난주 일을 이어받고, 기한 지난 일과 일이 몰리는 주가 보여요. 무료예요.</span><span class="go">주간 업무 화면 써 보기 →</span></a>
-    <a href="/#contact" data-track="report_contact"><b>우리 회사 양식 그대로</b><span>지금 쓰는 주간보고 양식을 보여 주시면, 그 칸 그대로 화면으로 바꿔 드려요. 팀이 같은 파일을 함께 써요.</span><span class="go">맡기기 문의 →</span></a>
+    <a href="/tools/weekly/" data-track="report_to_weekly"><b>팀 업무 화면으로 써 보기</b><span>엑셀 대신 브라우저에서 돌아가요. 버튼 한 번으로 지난주 일을 이어받고, 기한 지난 일과 일이 몰리는 주가 보여요. 받은 양식을 그대로 열 수 있고 무료예요.</span><span class="go">주간 업무 화면 써 보기 →</span></a>
+    <a href="/#contact" data-track="report_contact"><b>우리 회사 양식 그대로 자동화</b><span>지금 쓰는 주간보고 양식을 보여 주시면, 그 칸 그대로 팀 업무 화면으로 만들어 드려요. 넘기고 모으는 일이 자동이 돼요.</span><span class="go">맡기기 문의 →</span></a>
   </div>
 </main>
 
