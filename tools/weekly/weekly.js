@@ -406,6 +406,29 @@ function fromBook(wb) {
       out[k].push(o);
     });
   });
+  if (!got && wb.Sheets["주간보고"]) {            // 무료 양식 「주간 업무 보고」 (make_weekly.py) — 묶음 제목으로 찾는다
+    var R = XLSX.utils.sheet_to_json(wb.Sheets["주간보고"], { header: 1, raw: false, defval: "" });
+    var dstr = function (v) { v = String(v || "").replace(/\./g, "-").trim(); return /^\d{4}-\d{1,2}-\d{1,2}/.test(v) ? iso(parse(v)) : ""; };
+    var wk = iso(THIS_MON), sec = "";
+    for (var ri = 0; ri < R.length; ri++) { if (String(R[ri][2]).indexOf("주 시작일") >= 0 && R[ri + 1]) { var w0 = dstr(R[ri + 1][2]); if (w0) wk = iso(monday(parse(w0))); } }
+    var prevWk = iso(add(parse(wk), -7));
+    R.forEach(function (r) {
+      var a0 = String(r[0] || "").trim();
+      if (a0 === "이번 주 한 일" || a0 === "다음 주 할 일" || a0 === "막힌 것 · 요청") { sec = a0; return; }
+      if (!sec || !a0 || a0 === "업무" || a0 === "내용" || a0 === "요약" || a0.indexOf("「몇 주째」") === 0) return;
+      if (sec === "이번 주 한 일") {
+        var st = String(r[2]).trim(), n = parseInt(r[3], 10) || 1, done = st === "완료";
+        out.week.push({ id: uid(), wk: wk, row: st === "밀림" ? "진행 중" : "그외", day: 0, text: a0 + (r[1] ? " — " + String(r[1]).trim() : ""), done: done, doneAt: done ? wk : "", carried: Math.max(0, n - 1), u: now() });
+      } else if (sec === "다음 주 할 일") {
+        out.tasks.push({ id: uid(), title: a0, who: "", now: String(r[1] || "").trim(), why: "", unk: "", ask: "", due: dstr(r[4]), status: "진행", doneAt: "", row: "예정", recur: "", u: now() });
+      } else {
+        out.tasks.push({ id: uid(), title: a0, who: String(r[2] || "").trim(), now: "", why: "", unk: String(r[1] || "").trim(), ask: String(r[2] || "").trim(), due: dstr(r[4]), status: "진행", doneAt: "", row: "중요", recur: "", u: now() });
+      }
+    });
+    out.fromReport = out.week.length + out.tasks.length; got = true;
+    if (!out.fromReport) return null;
+    return out;
+  }
   if (!got) {                                    // 업무 인수인계서 양식의 「진행 중인 일」
     var ws = wb.Sheets["진행 중인 일"];
     if (!ws) return null;
@@ -480,7 +503,8 @@ async function loadFile(file, h) {
     if (!data) return toast("이 파일에서 업무 표를 찾지 못했어요. 이 화면에서 저장한 파일이나 업무 인수인계서 양식을 골라 주세요.");
     S = { tasks: data.tasks, week: data.week, rules: data.rules, pins: data.pins };
     fname = file.name; dirty = false;
-    if (data.fromHandover) { handle = null; toast("인수인계서의 「진행 중인 일」 " + data.tasks.length + "건을 가져왔어요. 「왜」 칸을 채우고 저장해 보세요."); TAB = "list"; document.querySelector('[data-tab="list"]').click(); }
+    if (data.fromReport) { handle = null; toast("주간 업무 보고 양식에서 " + data.fromReport + "건을 가져왔어요. 「내 PC에 저장」을 누르면 화면용 파일로 따로 저장돼요."); TAB = "week"; document.querySelector('[data-tab="week"]').click(); }
+    else if (data.fromHandover) { handle = null; toast("인수인계서의 「진행 중인 일」 " + data.tasks.length + "건을 가져왔어요. 「왜」 칸을 채우고 저장해 보세요."); TAB = "list"; document.querySelector('[data-tab="list"]').click(); }
     else { handle = h || null; lastMod = h ? file.lastModified : 0; toast("열었어요. 업무 " + S.tasks.length + "건" + (h ? " · 고치면 이 파일에 바로 저장돼요." : "")); }
     var n = runRules(); if (n) changed("정기 업무 " + n + "건이 생겼어요.", true);
     WK = new Date(THIS_MON); render(); pill(); track("weekly_opened");

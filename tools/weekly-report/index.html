@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="ko" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>주간 업무 보고 양식 (엑셀) — 몇 주째 밀리는지 보이게 | 리플로</title>
+<meta name="description" content="주간업무보고 엑셀 양식을 무료로 받으세요. 이번 주 한 일, 다음 주 할 일, 막힌 것 한 장에. 「몇 주째」 칸이 있어서 밀리는 일이 보여요. 매크로·가입 없음.">
+<link rel="canonical" href="https://refloworks.com/tools/weekly-report/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="리플로 Reflo">
+<meta property="og:title" content="주간 업무 보고 양식 (엑셀) — 리플로">
+<meta property="og:description" content="주간업무보고 엑셀 양식을 무료로 받으세요. 이번 주 한 일, 다음 주 할 일, 막힌 것 한 장에. 「몇 주째」 칸이 있어서 밀리는 일이 보여요. 매크로·가입 없음.">
+<meta property="og:url" content="https://refloworks.com/tools/weekly-report/">
+<meta property="og:image" content="https://refloworks.com/og.png">
+<link rel="stylesheet" href="/tokens.css">
+<link rel="stylesheet" href="/marketing.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.24.0/dist/tabler-icons.min.css">
+<link rel="stylesheet" href="/tools/tools.css">
+<style>
+.sheets{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;margin-top:20px}
+.sheet{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);padding:18px 20px}
+.sheet b{display:block;font-size:var(--fs-subhead);font-weight:var(--fw-bold)}
+.sheet span{display:block;margin-top:6px;font-size:var(--fs-caption);color:var(--text-secondary);line-height:var(--lh-body)}
+.sheet.point{background:var(--warm-bg);border-color:transparent}
+.sheet.point b{color:var(--warm)}
+.get{display:flex;flex-direction:column;align-items:center;gap:10px;margin-top:8px}
+.get .ds-btn-pill{border:0;font-family:inherit}
+.peek{display:block;margin:36px 0 0;border:1px solid var(--border);border-radius:var(--radius-xl);overflow:hidden;background:var(--surface);text-decoration:none;color:inherit;box-shadow:var(--shadow-card)}
+.peek:hover{border-color:var(--accent)}
+.peek .cap{display:block;padding:14px 18px;font-size:var(--fs-caption);color:var(--accent-strong);border-bottom:1px solid var(--border)}
+.peek .cap b{display:block;font-size:var(--fs-subhead);color:var(--text-primary);margin-bottom:2px}
+.peek img{display:block;width:100%;height:auto}
+.steps{margin:14px 0 0;padding-left:20px;font-size:var(--fs-body);line-height:1.9;color:var(--text-secondary)}
+.steps b{color:var(--text-primary)}
+.next{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-top:20px}
+.next a{display:block;text-decoration:none;color:inherit;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);padding:20px}
+.next a:hover{border-color:var(--accent)}
+.next b{display:block;font-size:var(--fs-subhead)}
+.next span{display:block;margin-top:6px;font-size:var(--fs-caption);color:var(--text-secondary);line-height:var(--lh-body)}
+.next .go{margin-top:10px;color:var(--accent-strong);font-weight:var(--fw-medium)}
+@media(max-width:640px){.next{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<div class="ds-hero-wrap">
+  <div class="nav">
+    <a class="brand" href="/"><span class="mark">R</span> 리플로</a>
+    <a class="navback" href="/tools/">무료 도구 →</a>
+  </div>
+  <header class="ds-hero tool-hero">
+    <span class="eyebrow">무료 양식</span>
+    <h1>주간 업무 보고,<br><span class="accent">몇 주째 밀리는지</span> 보이게</h1>
+    <p class="lead">이번 주 한 일, 다음 주 할 일, 막힌 것을 한 장에.
+      못 끝낸 일에는 「몇 주째」를 적어요.</p>
+  </header>
+</div>
+
+<main class="tool">
+  <div class="get">
+    <a class="ds-btn-pill primary" href="/free/weekly-report-template.xlsx" download="주간업무보고-양식.xlsx" data-track="download_weekly_report"><i class="ti ti-download"></i> 엑셀 양식 받기</a>
+    <p class="privacy">엑셀·구글 시트에서 열려요 · 매크로 없음 · 회원가입 없음</p>
+  </div>
+
+  <a class="peek" href="/tools/weekly/" data-track="report_peek_weekly">
+    <span class="cap"><b>이 양식을 화면으로 보면 이렇게 돼요</b> 받은 파일을 그대로 열 수 있어요 · 무료 →</span>
+    <img src="/img/weekly-screen.jpg" alt="주간 업무 화면 — 요일별 칸에 이번 주 일이 카드로 놓이고, 지난주에서 넘어온 일에는 이어받음 표시가 붙어 있다" width="1400" height="867" loading="lazy">
+  </a>
+
+  <h2 class="t-h2">한 장에 세 묶음</h2>
+  <div class="sheets">
+    <div class="sheet"><b>이번 주 한 일</b><span>업무, 결과, 상태(완료·진행 중·밀림), 기한. 아래에 완료·진행·밀림이 몇 건인지 저절로 세어져요.</span></div>
+    <div class="sheet point"><b>몇 주째</b><span>못 끝낸 일을 다음 주로 넘길 때 숫자를 하나 올려요. 3이 되면 칸이 주황색이 돼요.</span></div>
+    <div class="sheet"><b>다음 주 할 일</b><span>업무와 끝난 모습, 기한. 정해지지 않은 건 지어내지 말고 「미정」.</span></div>
+    <div class="sheet"><b>막힌 것 · 요청</b><span>무엇이 필요한지, 누구에게, 언제까지. 보고를 받는 사람이 바로 움직일 수 있게.</span></div>
+  </div>
+
+  <h2 class="t-h2">다음 주로 넘길 때</h2>
+  <ol class="steps">
+    <li>시트를 복사해 이름을 그 주로 바꿔요 (예: 12월 2주).</li>
+    <li>「완료」 줄은 지워요. 지난 시트에 남아 있으니 기록은 사라지지 않아요.</li>
+    <li>남은 줄은 <b>「몇 주째」에 1을 더해요.</b></li>
+    <li>지난주 「다음 주 할 일」을 「이번 주 한 일」로 옮겨요.</li>
+  </ol>
+  <p class="sec-note">못 끝낸 일을 매주 새로 옮겨 적기만 하면, 그 일이 몇 주째 밀리는지 아무도 몰라요.</p>
+
+  <h2 class="t-h2">넘기는 게 번거롭다면</h2>
+  <div class="next">
+    <a href="/tools/weekly/" data-track="report_to_weekly"><b>이 양식을 화면으로</b><span>받은 파일을 그대로 열 수 있어요. 버튼 한 번으로 지난주 일을 이어받고, 기한 지난 일과 일이 몰리는 주가 보여요. 무료예요.</span><span class="go">주간 업무 화면 써 보기 →</span></a>
+    <a href="/#contact" data-track="report_contact"><b>우리 회사 양식 그대로</b><span>지금 쓰는 주간보고 양식을 보여 주시면, 그 칸 그대로 화면으로 바꿔 드려요. 팀이 같은 파일을 함께 써요.</span><span class="go">맡기기 문의 →</span></a>
+  </div>
+</main>
+
+<footer>
+  <p>만든 곳 — 리플로 Reflo · <a href="/tools/">무료 도구</a> · <a href="/works/">만든 것</a> · <a href="https://blog.naver.com/reflo2026">블로그</a></p>
+  <p style="margin-top:9px">양식의 예시 줄은 지어낸 것이에요. 방문 수를 세기 위해 Google Analytics 쿠키를 써요. 개인을 식별하지 않아요.</p>
+</footer>
+<script src="/analytics.js"></script>
+</body>
+</html>
