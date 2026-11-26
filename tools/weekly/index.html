@@ -1,0 +1,197 @@
+<!doctype html>
+<html lang="ko" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>주간 업무 화면 체험판 — 리플로</title>
+<meta name="description" content="팀 업무를 한 화면에서. 기한 지난 일, 몇 주째 밀리는 일, 일이 몰리는 주가 보여요. 저장하면 내 PC에 엑셀 파일이 생기고, 공유 폴더에 두면 팀이 같이 써요. 설치도 서버도 없어요.">
+<link rel="canonical" href="https://refloworks.com/tools/weekly/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="리플로 Reflo">
+<meta property="og:title" content="주간 업무 화면 체험판 — 리플로">
+<meta property="og:description" content="예시 데이터로 바로 써 보세요. 저장하면 내 PC에 엑셀 파일이 생기고, 공유 폴더에 두면 팀이 같은 화면을 봐요.">
+<meta property="og:url" content="https://refloworks.com/tools/weekly/">
+<meta property="og:image" content="https://refloworks.com/og.png">
+<link rel="stylesheet" href="/tokens.css">
+<link rel="stylesheet" href="/marketing.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.24.0/dist/tabler-icons.min.css">
+<link rel="stylesheet" href="/tools/tools.css">
+<style>
+.tool{max-width:1120px}
+.app{background:var(--surface);border-radius:var(--radius-xl);box-shadow:var(--shadow-card);border:1px solid var(--border);overflow:hidden}
+.bar{display:flex;flex-wrap:wrap;align-items:center;gap:10px 14px;padding:14px 18px;border-bottom:1px solid var(--border);background:var(--surface-sunken)}
+.filepill{display:inline-flex;align-items:center;gap:7px;padding:6px 12px;border-radius:var(--radius-pill);font-size:var(--fs-footnote);font-weight:var(--fw-medium);background:var(--warning-bg);color:var(--warning-strong)}
+.filepill.on{background:var(--success-bg);color:var(--success-strong)}
+.filepill i{font-size:15px}
+.bar .sp{flex:1}
+.btn{display:inline-flex;align-items:center;gap:6px;height:36px;padding:0 14px;border-radius:var(--radius-md);border:1px solid var(--border-strong);background:var(--surface);color:var(--text-primary);font:inherit;font-size:var(--fs-caption);font-weight:var(--fw-medium);cursor:pointer;white-space:nowrap}
+.btn:hover{background:var(--surface-sunken)}
+.btn.pri{background:var(--accent);border-color:var(--accent);color:var(--on-accent)}
+.btn.pri:hover{background:var(--accent-hover)}
+.btn.sm{height:28px;padding:0 10px;font-size:var(--fs-footnote)}
+.btn:focus-visible,.tabs button:focus-visible{outline:none;box-shadow:var(--shadow-focus)}
+.tabs{display:flex;gap:4px;padding:10px 14px 0;border-bottom:1px solid var(--border);overflow-x:auto}
+.tabs button{border:0;background:none;font:inherit;font-size:var(--fs-body);font-weight:var(--fw-medium);color:var(--text-tertiary);padding:10px 14px 12px;border-bottom:2px solid transparent;cursor:pointer;white-space:nowrap}
+.tabs button.on{color:var(--text-primary);border-bottom-color:var(--accent)}
+.tabs .n{display:inline-block;min-width:18px;margin-left:4px;padding:0 6px;border-radius:var(--radius-pill);background:var(--danger-bg);color:var(--danger-strong);font-size:11px;line-height:18px;text-align:center}
+.view{padding:20px 18px 24px}
+.hide{display:none!important}
+.sec{margin:26px 0 10px;font-size:var(--fs-subhead);font-weight:var(--fw-bold);display:flex;align-items:baseline;gap:8px;flex-wrap:wrap}
+.sec:first-child{margin-top:0}
+.sec small{font-size:var(--fs-footnote);font-weight:var(--fw-regular);color:var(--text-tertiary)}
+.kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+.kpi{padding:14px 16px;border-radius:var(--radius-lg);background:var(--surface-sunken);border:1px solid var(--border)}
+.kpi span{display:block;font-size:var(--fs-footnote);color:var(--text-tertiary)}
+.kpi b{display:block;margin-top:4px;font-size:26px;font-weight:var(--fw-bold);letter-spacing:var(--ls-tight);font-variant-numeric:tabular-nums}
+.kpi.bad b{color:var(--danger-strong)} .kpi.warn b{color:var(--warm)} .kpi.good b{color:var(--success-strong)}
+.rows{display:flex;flex-direction:column;border:1px solid var(--border);border-radius:var(--radius-lg);overflow:hidden}
+.r{display:grid;grid-template-columns:78px 1fr auto;gap:12px;align-items:center;padding:11px 14px;border-top:1px solid var(--border);font-size:var(--fs-caption)}
+.r:first-child{border-top:0}
+.r .t{font-weight:var(--fw-medium);color:var(--text-primary)}
+.r .s{display:block;margin-top:2px;color:var(--text-tertiary);font-size:var(--fs-footnote)}
+.r .s em{font-style:normal;color:var(--warm)}
+.empty{padding:16px;color:var(--text-tertiary);font-size:var(--fs-caption);text-align:center}
+.dd{display:inline-block;padding:2px 8px;border-radius:var(--radius-pill);font-size:11px;font-weight:var(--fw-bold);text-align:center;font-variant-numeric:tabular-nums}
+.dd.over{background:var(--danger-bg);color:var(--danger-strong)} .dd.soon{background:var(--warm-bg);color:var(--warm)} .dd.later{background:var(--accent-bg);color:var(--accent-strong)} .dd.none{background:var(--surface-sunken);color:var(--text-tertiary)}
+.load{display:grid;grid-template-columns:repeat(8,1fr);gap:8px;align-items:end;height:150px;padding:10px 12px 0;border:1px solid var(--border);border-radius:var(--radius-lg);position:relative}
+.load .col{display:flex;flex-direction:column;align-items:center;justify-content:flex-end;height:100%;gap:4px}
+.load .barv{width:70%;max-width:34px;border-radius:6px 6px 0 0;background:var(--accent-bg);position:relative}
+.load .barv.hot{background:var(--warm)}
+.load .num{font-size:var(--fs-footnote);font-weight:var(--fw-bold);font-variant-numeric:tabular-nums}
+.load .lab{font-size:11px;color:var(--text-tertiary);padding:4px 0 8px;white-space:nowrap}
+.load .line{position:absolute;left:12px;right:12px;border-top:1px dashed var(--warm);pointer-events:none}
+.load .line span{position:absolute;right:0;top:-16px;font-size:10px;color:var(--warm)}
+/* 주간 표 */
+.wkbar{display:flex;flex-wrap:wrap;align-items:center;gap:8px 10px;margin-bottom:12px}
+.wkbar h3{margin:0 6px;font-size:var(--fs-heading);font-weight:var(--fw-bold);min-width:9em;text-align:center}
+.wkbar .sp{flex:1}
+.ask{margin:0 0 12px;padding:10px 14px;border-radius:var(--radius-md);background:var(--accent-bg);color:var(--accent-strong);font-size:var(--fs-caption);display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.gridwrap{overflow-x:auto;border:1px solid var(--border);border-radius:var(--radius-lg)}
+table.wk{border-collapse:collapse;width:100%;min-width:880px;table-layout:fixed}
+.wk th,.wk td{border-left:1px solid var(--border);border-top:1px solid var(--border);vertical-align:top;padding:8px}
+.wk thead th{border-top:0;background:var(--surface-sunken);font-size:var(--fs-footnote);color:var(--text-secondary);font-weight:var(--fw-medium);text-align:left}
+.wk thead th.today{color:var(--accent-strong)}
+.wk th:first-child,.wk td:first-child{border-left:0}
+.wk th.rh{width:84px;background:var(--surface-sunken);font-size:var(--fs-footnote);color:var(--text-secondary);font-weight:var(--fw-bold);text-align:left}
+.wk td.cell{min-height:64px;height:64px}
+.wk td.cell.drop-on{background:var(--accent-bg)}
+.cd{position:relative;margin-bottom:6px;padding:7px 8px 7px 10px;border-radius:8px;background:var(--surface);border:1px solid var(--border);border-left:3px solid var(--text-disabled);font-size:var(--fs-footnote);line-height:1.45;cursor:grab;box-shadow:var(--shadow-card)}
+.cd.auto{border-left-color:var(--accent)} .cd.recur{border-left-color:var(--success)}
+.cd.done{opacity:.6;border-style:dashed}
+.cd.done .tx{text-decoration:line-through}
+.cd .tx{outline:none;display:block;min-height:1.4em;word-break:keep-all}
+.cd .tx[contenteditable="true"]{cursor:text}
+.cd .tags{display:flex;flex-wrap:wrap;gap:4px;margin-top:4px}
+.tg{display:inline-block;padding:0 6px;border-radius:var(--radius-pill);font-size:10.5px;font-weight:var(--fw-bold);line-height:17px;background:var(--surface-sunken);color:var(--text-tertiary)}
+.tg.carry{background:var(--warm-bg);color:var(--warm)} .tg.due{background:var(--accent-bg);color:var(--accent-strong)} .tg.over{background:var(--danger-bg);color:var(--danger-strong)} .tg.fin{background:var(--success-bg);color:var(--success-strong)} .tg.rc{background:var(--success-bg);color:var(--success-strong)}
+.cd .ops{position:absolute;right:4px;top:4px;display:none;gap:2px;background:var(--surface);border-radius:6px;box-shadow:var(--shadow-popover);padding:2px}
+.cd:hover .ops,.cd:focus-within .ops{display:flex}
+.cd .ops button{border:0;background:none;width:22px;height:22px;border-radius:5px;cursor:pointer;color:var(--text-secondary);font-size:13px;display:flex;align-items:center;justify-content:center}
+.cd .ops button:hover{background:var(--surface-sunken);color:var(--text-primary)}
+.addc{display:block;width:100%;border:1px dashed var(--border-strong);background:none;border-radius:8px;color:var(--text-tertiary);font:inherit;font-size:11px;padding:3px;cursor:pointer;opacity:0;transition:opacity var(--dur-fast)}
+.wk td.cell:hover .addc,.addc:focus-visible{opacity:1}
+.legend{display:flex;flex-wrap:wrap;gap:6px 16px;margin-top:10px;font-size:var(--fs-footnote);color:var(--text-tertiary)}
+.legend i{display:inline-block;width:10px;height:10px;border-radius:2px;margin-right:5px;vertical-align:-1px}
+/* 업무 목록 */
+.lbar{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-bottom:12px}
+.lbar .seg{display:flex;border:1px solid var(--border-strong);border-radius:var(--radius-md);overflow:hidden}
+.lbar .seg button{border:0;background:var(--surface);font:inherit;font-size:var(--fs-caption);padding:0 12px;height:34px;cursor:pointer;color:var(--text-secondary)}
+.lbar .seg button.on{background:var(--text-primary);color:var(--surface)}
+.lbar .sp{flex:1}
+table.ed{border-collapse:collapse;width:100%;min-width:1040px;font-size:var(--fs-caption)}
+.ed th{position:sticky;top:0;background:var(--surface-sunken);text-align:left;font-weight:var(--fw-medium);color:var(--text-secondary);font-size:var(--fs-footnote);padding:9px 8px;border-bottom:1px solid var(--border);white-space:nowrap}
+.ed td{border-bottom:1px solid var(--border);padding:4px;vertical-align:top}
+.ed td [contenteditable]{display:block;min-height:22px;padding:4px 6px;border-radius:6px;outline:none;line-height:1.5;word-break:keep-all}
+.ed td [contenteditable]:focus{background:var(--accent-bg)}
+.ed td.why-empty [contenteditable]{background:var(--warm-bg)}
+.ed input[type=date],.ed select,.rl input,.rl select{height:30px;border:1px solid var(--border);border-radius:6px;font:inherit;font-size:var(--fs-footnote);padding:0 6px;background:var(--surface);color:var(--text-primary)}
+.ed tr.done td{color:var(--text-tertiary)}
+.ed tr.new td{background:var(--warning-bg)}
+.rl{border-collapse:collapse;width:100%;min-width:720px;font-size:var(--fs-caption)}
+.rl th{text-align:left;font-size:var(--fs-footnote);color:var(--text-secondary);font-weight:var(--fw-medium);padding:9px 8px;background:var(--surface-sunken);border-bottom:1px solid var(--border)}
+.rl td{padding:6px 8px;border-bottom:1px solid var(--border)}
+.rl input[type=text]{width:100%}
+.note{font-size:var(--fs-footnote);color:var(--text-tertiary);margin:10px 0 0;line-height:1.6}
+/* 아래 설명 */
+.how3{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:14px}
+.how3 div{padding:18px;border-radius:var(--radius-lg);background:var(--surface);border:1px solid var(--border)}
+.how3 b{display:block;font-size:var(--fs-subhead);margin-bottom:6px}
+.how3 span{font-size:var(--fs-caption);color:var(--text-secondary);line-height:var(--lh-body)}
+.how3 .no{display:inline-flex;width:24px;height:24px;border-radius:7px;background:var(--accent-bg);color:var(--accent-strong);font-weight:var(--fw-bold);font-size:var(--fs-footnote);align-items:center;justify-content:center;margin-bottom:10px}
+.small-limits{margin-top:14px;padding:14px 18px;border-radius:var(--radius-lg);background:var(--surface-sunken);font-size:var(--fs-caption);color:var(--text-secondary);line-height:1.8}
+.toast{position:fixed;left:50%;bottom:28px;transform:translateX(-50%);z-index:var(--z-toast);background:var(--text-primary);color:var(--surface);padding:11px 18px;border-radius:var(--radius-md);font-size:var(--fs-caption);box-shadow:var(--shadow-popover);opacity:0;pointer-events:none;transition:opacity var(--dur-base)}
+.toast.on{opacity:1}
+@media(max-width:720px){.kpis{grid-template-columns:repeat(2,1fr)}.how3{grid-template-columns:1fr}.view{padding:16px 12px 20px}.bar{padding:12px}.load{gap:4px}.load .lab{font-size:10px}}
+</style>
+</head>
+<body>
+
+<div class="ds-hero-wrap">
+  <div class="nav">
+    <a class="brand" href="/"><span class="mark">R</span> 리플로</a>
+    <a class="navback" href="/tools/">무료 도구 →</a>
+  </div>
+  <header class="ds-hero tool-hero" style="padding-top:28px;padding-bottom:28px">
+    <span class="eyebrow">체험판 · 예시 데이터</span>
+    <h1 style="font-size:clamp(28px,4.4vw,40px)">우리 팀 업무를, <span class="accent">한 화면에서</span></h1>
+    <p class="lead" style="max-width:640px">아래는 예시 데이터예요. 눌러 보고, 끌어 보고, 고쳐 보세요.
+      저장하면 내 PC에 엑셀 파일이 생기고, 팀 공유 폴더에 두면 모두 같은 화면을 봐요.</p>
+  </header>
+</div>
+
+<main class="tool">
+
+  <div class="app" id="app">
+    <div class="bar">
+      <span class="filepill" id="filePill"><i class="ti ti-flask"></i><span id="fileTxt">체험 중 · 예시 데이터 (아직 저장 안 함)</span></span>
+      <span class="sp"></span>
+      <button class="btn" id="btnOpen" data-track="weekly_open"><i class="ti ti-folder-open"></i>파일 열기</button>
+      <button class="btn pri" id="btnSave" data-track="weekly_save"><i class="ti ti-device-floppy"></i><span id="saveTxt">내 PC에 저장</span></button>
+      <input type="file" id="pick" accept=".xlsx,.xls" hidden>
+    </div>
+    <div class="tabs" role="tablist">
+      <button class="on" data-tab="today" role="tab">오늘<span class="n hide" id="nOver"></span></button>
+      <button data-tab="week" role="tab">주간 업무</button>
+      <button data-tab="list" role="tab">업무 목록</button>
+      <button data-tab="rules" role="tab">정기 업무</button>
+    </div>
+
+    <section class="view" id="v-today"></section>
+    <section class="view hide" id="v-week"></section>
+    <section class="view hide" id="v-list"></section>
+    <section class="view hide" id="v-rules"></section>
+  </div>
+
+  <h2 class="t-h2" style="margin-top:44px">팀에서는 이렇게 굴러가요</h2>
+  <div class="how3">
+    <div><span class="no">1</span><b>공유 폴더에 한 번 저장</b><span>회사 NAS나 구글 드라이브·원드라이브 폴더에 저장하면 엑셀 파일 하나가 생겨요. 서버도, 가입도 없어요.</span></div>
+    <div><span class="no">2</span><b>누구 PC에서든 열기</b><span>이 화면에서 그 파일을 열면 같은 내용이 보여요. 고치는 즉시 그 파일에 저장돼요. 급하면 엑셀로 바로 열어도 돼요.</span></div>
+    <div><span class="no">3</span><b>같이 고쳐도 안 겹치게</b><span>저장하기 전에 그새 다른 사람이 고쳤는지 확인하고, 고쳤으면 두 사람 것을 합쳐서 저장해요.</span></div>
+  </div>
+  <div class="small-limits">
+    <b>알아 두실 것</b> · 바로 저장은 크롬·엣지·웨일에서 돼요. 사파리·파이어폭스에서는 저장할 때 파일로 내려받아져요.
+    · 넣으신 내용은 이 브라우저와 고르신 파일에만 있어요. 어디로도 보내지 않아요.
+    · 업무 인수인계서 양식의 「진행 중인 일」 시트도 그대로 열려요. <a href="/tools/handover/">양식 받기</a>
+  </div>
+
+  <div class="ds-cta-band" style="margin:48px 0 0;border-radius:var(--radius-xl)">
+    <h2>우리 회사 일에 맞춰 만들어 드려요</h2>
+    <p class="ds-mkt-lead" style="margin-bottom:28px">지금 쓰는 엑셀·주간표를 보여 주시면, 그 칸 그대로 이런 화면으로 바꿔 드려요.<br>점검, 정산, 문의처럼 되풀이되는 일도 한 화면에 모을 수 있어요.</p>
+    <div class="ds-hero-cta">
+      <a class="ds-btn-pill primary" href="/#contact" data-track="weekly_contact">맡기기 문의</a>
+      <a class="ds-btn-pill ghost" href="/works/" data-track="see_works">만든 것 보기</a>
+    </div>
+  </div>
+</main>
+
+<footer>
+  <p>만든 곳 — 리플로 Reflo · <a href="/tools/">무료 도구</a> · <a href="/works/">만든 것</a> · <a href="https://blog.naver.com/reflo2026">블로그</a></p>
+  <p style="margin-top:9px">예시 데이터의 업무·이름은 지어낸 것이에요. 방문 수를 세기 위해 Google Analytics 쿠키를 써요. 넣으신 내용은 세지도, 보내지도 않아요.</p>
+</footer>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+<script src="/tools/lib/xlsx.full.min.js"></script>
+<script src="weekly.js"></script>
+<script src="/analytics.js"></script>
+</body>
+</html>
