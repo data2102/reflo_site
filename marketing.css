@@ -23,8 +23,8 @@
   font-size: 16px; font-weight: var(--fw-bold); display: inline-flex; align-items: center; justify-content: center;
   gap: 8px; border: 1px solid transparent; cursor: pointer;
   transition: background var(--dur-fast) var(--ease-standard), box-shadow var(--dur-fast), transform var(--dur-fast); }
-.ds-btn-pill.primary { background: var(--accent); color: var(--on-accent); }  /* 색 그림자(글로우) 뺌 — 2026-11-26 디자인 점검 */
-.ds-btn-pill.primary:hover { background: var(--accent-hover); }
+.ds-btn-pill.primary { background: var(--accent-strong); color: var(--on-accent); }  /* 색 그림자(글로우) 뺌 — 2026-11-26 디자인 점검 */
+.ds-btn-pill.primary:hover { background: var(--accent-pressed); }
 .ds-btn-pill.ghost { background: var(--surface); border-color: var(--border-strong); color: var(--text-primary); }
 .ds-btn-pill.ghost:hover { background: var(--surface-sunken); }
 .ds-btn-pill:focus-visible { outline: none; box-shadow: var(--shadow-focus); }
@@ -85,7 +85,7 @@
 .ds-tile .pic > i { font-size: 44px; color: var(--accent-strong); }
 .ds-tile .pic.plain { background: var(--surface-sunken); }
 .ds-tile .pic.plain > i { color: var(--text-tertiary); }
-.ds-tile .kind { position: absolute; right: 10px; top: 10px; padding: 3px 9px; border-radius: var(--radius-pill); background: var(--text-primary); color: var(--surface); font-size: 11px; font-weight: var(--fw-bold); }
+.ds-tile .kind { position: absolute; right: 10px; top: 10px; padding: 3px 9px; border-radius: var(--radius-pill); background: var(--text-primary); color: var(--surface); font-size: 12px; font-weight: var(--fw-bold); }
 .ds-tile .kind.new { background: var(--warm); }
 .ds-tile .txt { padding: 14px 16px 16px; }
 .ds-tile .txt b { display: block; font-size: var(--fs-body); font-weight: var(--fw-bold); line-height: 1.45; letter-spacing: var(--ls-tight); color: var(--text-primary); word-break: keep-all; }

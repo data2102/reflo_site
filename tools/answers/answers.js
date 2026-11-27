@@ -55,7 +55,7 @@ function render() {
   $("count").textContent = (toks.length ? "찾은 답 " : "답변 ") + rows.length + "개" + (toks.length ? "" : " · 많이 꺼내 쓴 순");
   $("list").innerHTML = rows.map(function (r) {
     var a = r.a, d = daysSince(a.fixed), old = d !== null && d > 180, ed = a.id === EDIT;
-    return '<article class="ans' + (ed ? " editing" : "") + '" data-id="' + a.id + '"><h3><span class="q" contenteditable="true" data-k="title">' + (ed ? esc(a.title) : hl(a.title, toks)) + "</span></h3>" +
+    return '<article class="ans' + (ed ? " editing" : "") + '" data-id="' + a.id + '"><h2 class="anst"><span class="q" contenteditable="true" data-k="title">' + (ed ? esc(a.title) : hl(a.title, toks)) + "</span></h2>" +
       '<div class="body" contenteditable="true" data-k="body">' + (ed ? esc(a.body) : hl(a.body, toks)) + "</div>" +
       '<div class="edit">분류 <input data-k="cat" value="' + esc(a.cat) + '" size="10"> 찾을 때 쓸 말 <input data-k="keys" value="' + esc(a.keys) + '" size="22"> 근거 <input data-k="src" value="' + esc(a.src) + '" size="18"></div>' +
       '<div class="meta"><span class="tg cat">' + esc(a.cat || "분류 없음") + '</span><span class="tg ' + (old ? "old" : "ok") + '">고친 날 ' + esc(a.fixed) + (old ? " · 여섯 달 지남" : "") + "</span>" +

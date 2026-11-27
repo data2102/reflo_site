@@ -17,13 +17,13 @@
   --on-accent:         #ffffff;   /* 파란 버튼 위 글자 */
 
   /* 따뜻한 포인트(개인 도구/기억비서용 보조 액센트, 선택) */
-  --warm:              #c96f4c;
+  --warm:              #a8522f;   /* 2026-11-27 글자·흰 글자 바탕 모두 대비 4.5 넘게 (전: #c96f4c 3.6) */
   --warm-bg:           #faece7;
 
   /* ===== 색: 텍스트 (무채색으로 조용히) ===== */
   --text-primary:      #191f28;   /* 본문/제목 */
   --text-secondary:    #4e5968;   /* 보조 설명 */
-  --text-tertiary:     #8b95a1;   /* 힌트/메타/캡션 */
+  --text-tertiary:     #5f6a78;   /* 힌트/메타/캡션 — 2026-11-27 대비 4.5 넘게 (전: #8b95a1 3.0) */
   --text-disabled:     #b0b8c1;
 
   /* ===== 색: 표면 / 배경 ===== */
@@ -170,3 +170,21 @@
 /* 줄바꿈 다듬기 (2026-11-27, Impeccable 품질 규칙): 제목은 줄 길이를 고르게, 글은 마지막 줄에 한 낱말만 남지 않게 */
 h1, h2, h3 { text-wrap: balance; word-break: keep-all; }  /* 한국어는 낱말 중간에서 끊지 않게 */
 p, li { text-wrap: pretty; word-break: keep-all; }
+
+/* 읽기·누르기 바닥 (2026-11-27 UX 점검, Impeccable 품질 규칙)
+   · 줄 길이: 한글 본문은 한 줄 45자 안팎까지
+   · 휴대폰에서 누르는 것은 높이 40px 넘게 */
+footer p, .privacy, .sec-note, .ds-mkt-lead, .limits li { max-width: 46em; margin-left: auto; margin-right: auto; }
+@media (max-width: 720px) {
+  .navback, .toplink, .ds-chip, .linkbtn { min-height: 40px; display: inline-flex; align-items: center; }
+  .ds-chip { height: 40px; }
+}
+
+/* 작은 마무리 (2026-11-27, orr.design 「디자이너가 만든 것처럼 바꾸는 작은 팁」에서)
+   · 글자를 끌어 고를 때 나오는 색을 우리 파랑으로
+   · 긴 영어 낱말·주소가 화면 밖으로 넘치지 않게 */
+::selection { background: var(--accent-strong); color: var(--on-accent); }
+body { overflow-wrap: break-word; }
+
+/* 밖으로 나가는 글 링크에만 ↗ (새 창으로 열린다는 표시). 타일·카드·버튼은 뺀다. 2026-11-27 */
+a[target="_blank"]:not(.ds-tile):not(.card):not(.ds-btn-pill):not(.peek):not(.brand)::after { content: "\00a0↗"; font-size: .9em; }

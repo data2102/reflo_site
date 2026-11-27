@@ -25,14 +25,14 @@
 .bar .sp,.row .sp{flex:1}
 .btn{display:inline-flex;align-items:center;gap:6px;height:36px;padding:0 14px;border-radius:var(--radius-md);border:1px solid var(--border-strong);background:var(--surface);color:var(--text-primary);font:inherit;font-size:var(--fs-caption);font-weight:var(--fw-medium);cursor:pointer;white-space:nowrap}
 .btn:hover{background:var(--surface-sunken)}
-.btn.pri{background:var(--accent);border-color:var(--accent);color:var(--on-accent)}
-.btn.pri:hover{background:var(--accent-hover)}
+.btn.pri{background:var(--accent-strong);border-color:var(--accent-strong);color:var(--on-accent)}
+.btn.pri:hover{background:var(--accent-pressed)}
 .btn.sm{height:30px;padding:0 10px;font-size:var(--fs-footnote)}
 .btn:focus-visible,.tabs button:focus-visible,.chip:focus-visible{outline:none;box-shadow:var(--shadow-focus)}
 .tabs{display:flex;gap:4px;padding:10px 14px 0;border-bottom:1px solid var(--border);overflow-x:auto}
 .tabs button{border:0;background:none;font:inherit;font-size:var(--fs-body);font-weight:var(--fw-medium);color:var(--text-tertiary);padding:10px 14px 12px;border-bottom:2px solid transparent;cursor:pointer;white-space:nowrap}
 .tabs button.on{color:var(--text-primary);border-bottom-color:var(--accent)}
-.tabs .n{display:inline-block;min-width:18px;margin-left:4px;padding:0 6px;border-radius:var(--radius-pill);background:var(--warm-bg);color:var(--warm);font-size:11px;line-height:18px;text-align:center}
+.tabs .n{display:inline-block;min-width:18px;margin-left:4px;padding:0 6px;border-radius:var(--radius-pill);background:var(--warm-bg);color:var(--warm);font-size:12px;line-height:18px;text-align:center}
 .view{padding:20px 18px 24px}
 .hide{display:none!important}
 .search{display:flex;align-items:center;gap:10px;height:52px;padding:0 16px;border:1.5px solid var(--border-strong);border-radius:var(--radius-lg);background:var(--surface)}
@@ -46,13 +46,13 @@
 .chip.on{background:var(--text-primary);border-color:var(--text-primary);color:var(--surface)}
 .row{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin:14px 0 10px;font-size:var(--fs-footnote);color:var(--text-tertiary)}
 .ans{border:1px solid var(--border);border-radius:var(--radius-lg);padding:16px 18px;margin-bottom:10px;background:var(--surface)}
-.ans h3{margin:0;font-size:var(--fs-subhead);font-weight:var(--fw-bold);line-height:1.45;display:flex;gap:8px;align-items:flex-start}
-.ans h3 .q{flex:1;outline:none;border-radius:6px}
+.ans .anst{margin:0;font-size:var(--fs-subhead);font-weight:var(--fw-bold);line-height:1.45;display:flex;gap:8px;align-items:flex-start}
+.ans .anst .q{flex:1;outline:none;border-radius:6px}
 .ans .body{margin:10px 0 0;padding:12px 14px;border-radius:var(--radius-md);background:var(--surface-sunken);font-size:var(--fs-body);line-height:1.7;white-space:pre-wrap;outline:none;word-break:keep-all}
 .ans [contenteditable="true"]:focus{background:var(--accent-bg)}
 .ans .meta{display:flex;flex-wrap:wrap;align-items:center;gap:6px 10px;margin-top:10px;font-size:var(--fs-footnote);color:var(--text-tertiary)}
 .ans .meta .sp{flex:1}
-.tg{display:inline-block;padding:1px 8px;border-radius:var(--radius-pill);font-size:11px;font-weight:var(--fw-bold);line-height:18px;background:var(--surface-sunken);color:var(--text-tertiary)}
+.tg{display:inline-block;padding:1px 8px;border-radius:var(--radius-pill);font-size:12px;font-weight:var(--fw-bold);line-height:18px;background:var(--surface-sunken);color:var(--text-tertiary)}
 .tg.cat{background:var(--accent-bg);color:var(--accent-strong)} .tg.old{background:var(--warm-bg);color:var(--warm)} .tg.ok{background:var(--success-bg);color:var(--success-strong)}
 .ans .edit{display:none;gap:8px;flex-wrap:wrap;margin-top:10px;font-size:var(--fs-footnote);color:var(--text-secondary);align-items:center}
 .ans.editing .edit{display:flex}
@@ -74,6 +74,7 @@ mark{background:var(--warning-bg);color:inherit;border-radius:3px;padding:0 1px}
 .toast{position:fixed;left:50%;bottom:28px;transform:translateX(-50%);z-index:var(--z-toast);background:var(--text-primary);color:var(--surface);padding:11px 18px;border-radius:var(--radius-md);font-size:var(--fs-caption);box-shadow:var(--shadow-popover);opacity:0;pointer-events:none;transition:opacity var(--dur-base);max-width:92vw;text-align:center}
 .toast.on{opacity:1}
 @media(max-width:720px){.how3{grid-template-columns:1fr}.view{padding:16px 12px 20px}.bar{padding:12px}.gapadd{flex-direction:column}}
+@media(max-width:720px){.btn,.btn.sm,.chip{min-height:40px}}
 </style>
 </head>
 <body>
@@ -141,7 +142,7 @@ mark{background:var(--warning-bg);color:inherit;border-radius:3px;padding:0 1px}
 </main>
 
 <footer>
-  <p>만든 곳 — 리플로 Reflo · <a href="/tools/">무료 도구</a> · <a href="/works/">만든 것</a> · <a href="https://blog.naver.com/reflo2026">블로그</a></p>
+  <p>만든 곳 — 리플로 Reflo · <a href="/tools/">무료 도구</a> · <a href="/works/">만든 것</a> · <a href="https://blog.naver.com/reflo2026" target="_blank" rel="noopener">블로그</a></p>
   <p style="margin-top:9px">방문 수를 세기 위해 Google Analytics 쿠키를 써요. 넣으신 내용은 세지도, 보내지도 않아요.</p>
 </footer>
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
