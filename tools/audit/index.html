@@ -4,12 +4,12 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>내 파일, 자동화될까 — 리플로 무료 도구</title>
-<meta name="description" content="손으로 만드는 엑셀 파일, 자동화가 될지 먼저 봐 드려요. 받은 자료와 만든 결과를 넣으면 이어지는지 보고, 합계가 틀릴 자리도 같이 찾아요. 파일은 브라우저 밖으로 나가지 않아요. 검토는 무료예요.">
+<meta name="description" content="손으로 만드는 엑셀 파일, 자동화가 될지 먼저 봐 드려요. 완성된 파일 하나만 넣으면 수식과 표 모양을 읽고, 합계가 틀릴 자리도 같이 찾아요. 파일은 브라우저 밖으로 나가지 않아요. 검토는 무료예요.">
 <link rel="canonical" href="https://refloworks.com/tools/audit/">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="리플로 Reflo">
 <meta property="og:title" content="내 파일, 자동화될까 — 리플로 무료 도구">
-<meta property="og:description" content="받은 자료와 만든 결과를 넣어 보세요. 자동화가 될지, 합계가 틀릴 자리는 없는지 같이 봐요. 검토는 무료예요.">
+<meta property="og:description" content="완성된 파일 하나만 넣어 보세요. 자동화가 될지, 합계가 틀릴 자리는 없는지 같이 봐요. 검토는 무료예요.">
 <meta property="og:url" content="https://refloworks.com/tools/audit/">
 <meta property="og:image" content="https://refloworks.com/og.png">
 <link rel="stylesheet" href="/tokens.css">
@@ -97,7 +97,7 @@ details.fix summary small{font-size:var(--fs-caption);font-weight:var(--fw-regul
   <header class="ds-hero tool-hero">
     <span class="eyebrow">무료 도구</span>
     <h1>손으로 만드는 이 파일,<br><span class="accent">자동화될까요?</span></h1>
-    <p class="lead">받은 자료와 그걸로 만든 결과를 넣어 보세요. 둘이 어떻게 이어지는지 보고, 자동화가 될지 먼저 말씀드려요.
+    <p class="lead">지금 손으로 만드는 완성된 파일을 넣어 보세요. 어떻게 만들어졌는지 읽고, 자동화가 될지 먼저 말씀드려요. 원본까지 넣으면 더 정확해요.
       합계가 틀릴 자리도 같이 찾아요.</p>
   </header>
 </div>
@@ -106,26 +106,27 @@ details.fix summary small{font-size:var(--fs-caption);font-weight:var(--fw-regul
 
   <div class="drops">
     <label class="drop" id="drop1" for="pick1">
-      <span class="step">1 · 받은 자료</span>
-      <i class="ti ti-file-import"></i>
-      <b>내려받거나 받은 원본</b>
-      <span id="fn1">엑셀·CSV · 끌어다 놓거나 눌러서 고르기</span>
+      <span class="step">1 · 완성된 파일</span>
+      <i class="ti ti-file-search"></i>
+      <b>지금 손으로 만드는 보고·정리본</b>
+      <span id="fn1">이것만 넣어도 자동화될지 볼 수 있어요</span>
       <input type="file" id="pick1" accept=".xlsx,.xlsm,.xls,.csv,.txt">
     </label>
     <label class="drop" id="drop2" for="pick2">
-      <span class="step">2 · 만든 결과 (있으면)</span>
-      <i class="ti ti-file-export"></i>
-      <b>그걸로 만든 보고·정리본</b>
-      <span id="fn2">둘을 같이 봐야 정확해요</span>
+      <span class="step">2 · 받은 자료 (있으면)</span>
+      <i class="ti ti-file-import"></i>
+      <b>그 파일을 만들 때 쓰는 원본</b>
+      <span id="fn2">같이 넣으면 더 정확하게 확인할 수 있어요</span>
       <input type="file" id="pick2" accept=".xlsx,.xlsm,.xls,.csv,.txt">
     </label>
   </div>
+  <p class="privacy" style="margin-top:12px;color:var(--text-secondary)">완성된 파일만 넣어도 자동화될지 볼 수 있어요. 원본까지 넣으면 둘이 어떻게 이어지는지 보고 더 정확하게 말씀드려요.</p>
   <p class="privacy"><i class="ti ti-lock"></i> 이 화면에 넣은 파일은 브라우저 안에서만 읽어요. 어디로도 보내지 않아요.
     <button type="button" class="linkbtn" id="sample">파일이 없으면 예시로 해 보기</button></p>
   <p class="privacy" style="margin-top:6px">그래도 이름·연락처·주민번호·계좌 같은 개인정보는 지우고 넣어 주세요. 열 이름과 표 모양만 있으면 충분해요.</p>
 
   <section id="work" hidden>
-    <h2 class="t-h2">파일이 못 알려 주는 것 <small>세 가지만 골라 주세요</small></h2>
+    <h2 class="t-h2">파일이 못 알려 주는 것 <small>네 가지만 골라 주세요</small></h2>
     <form id="qs"></form>
 
     <div id="verdict"></div>
@@ -144,8 +145,9 @@ details.fix summary small{font-size:var(--fs-caption);font-weight:var(--fw-regul
     <div class="limits">
       <b>이 화면이 본 것과 보지 않은 것</b>
       <ul>
-        <li>본 것: 받은 자료의 머리글과 열, 줄 수, 합계가 틀릴 자리 다섯 가지(섞인 합계·소계 줄, 날짜 열의 글자, 숫자 열의 글자, 같은 줄, 표기만 다른 이름). 만든 결과를 넣었다면 겹치는 열과, 합계가 받은 자료와 같은 열.</li>
-        <li>보지 않은 것: 매번 자료 모양이 같은지, 중간에 사람이 판단하는 곳, 다른 시트와 수식. 그래서 이 판정은 어림이에요. 확정은 검토에서 말씀드려요.</li>
+        <li>본 것: 고른 시트의 머리글과 열, 수식으로 계산된 칸과 손으로 넣은 칸, 다른 시트나 다른 파일을 가리키는 수식, 파일 안에 원본처럼 보이는 시트, 합계가 틀릴 자리 다섯 가지. 받은 자료를 넣었다면 겹치는 열과, 합계가 같은 열.</li>
+        <li>보지 않은 것: 숫자가 실제로 어디서 오는지, 받는 자료가 매번 같은 모양인지, 중간에 사람이 판단하는 곳. 그래서 이 판정은 어림이에요. 확정은 검토에서 말씀드려요.</li>
+        <li>다른 파일을 가리키는 수식이 있어도 그 경로는 화면에도, 메일 본문에도 옮기지 않아요.</li>
         <li>아무것도 고치지 않아요. 넣으신 파일은 그대로예요.</li>
       </ul>
     </div>
@@ -159,7 +161,7 @@ details.fix summary small{font-size:var(--fs-caption);font-weight:var(--fw-regul
   <div class="ways">
     <div>
       <b>파일 그대로</b>
-      <p>받은 자료와 만든 결과를 같이 보내 주시면 가장 정확해요.</p>
+      <p>완성된 파일에 받은 자료(원본)까지 있으면 가장 정확해요. 없으면 완성된 파일만으로도 돼요.</p>
     </div>
     <div>
       <b>가려서</b>
@@ -217,17 +219,19 @@ details.fix summary small{font-size:var(--fs-caption);font-weight:var(--fw-regul
 (function () {
   "use strict";
   var M = window.합치기도구, A = window.검산도구, $ = function (id) { return document.getElementById(id); };
-  var 원 = null, 결 = null, 최대줄 = 15, 센판정 = false;
-  // 원 / 결 = { 이름, 시트들, csv, r(검산 결과) }
+  var 파 = null, 원 = null, 최대줄 = 15, 센판정 = false;
+  // 원 = 받은 자료(있으면) { 이름, 시트들, csv, r }
+  // 파 = { 이름, 시트들, csv, r(고른 시트 검산), 식(수식 읽기) }
 
   function esc(s) { return String(s).replace(/[&<>"]/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]; }); }
   function 수(n) { return (Math.round(n * 100) / 100).toLocaleString("ko-KR"); }
   function 센다(이름, 값) { try { if (window.gtag) window.gtag("event", 이름, 값 || {}); } catch (e) {} }
 
   var Q = [
-    { k: "freq", q: "얼마나 자주 하나요?", a: [["매일", 240], ["매주", 50], ["매달", 12], ["가끔", 4]] },
-    { k: "dur", q: "한 번 할 때 얼마나 걸리나요?", a: [["10분 안쪽", 1 / 6], ["30분 ~ 1시간", 0.75], ["반나절", 4], ["하루 이상", 8]] },
-    { k: "rule", q: "하는 순서를 다른 사람에게 말로 알려 줄 수 있나요?", a: [["순서대로 설명할 수 있어요", 3], ["대부분은 되는데 몇 군데는 감으로 해요", 2], ["그때그때 보고 판단해요", 0]] }
+    { k: "src", q: "이 파일의 숫자는 어디서 오나요?", a: [["시스템에서 내려받은 파일", 3], ["다른 사람이 보내 주는 엑셀", 2], ["제가 손으로 입력해요", 1], ["종이, 사진, 스캔한 PDF", 0]] },
+    { k: "freq", q: "얼마나 자주 만드나요?", a: [["매일", 240], ["매주", 50], ["매달", 12], ["가끔", 4]] },
+    { k: "dur", q: "한 번 만들 때 얼마나 걸리나요?", a: [["10분 안쪽", 1 / 6], ["30분 ~ 1시간", 0.75], ["반나절", 4], ["하루 이상", 8]] },
+    { k: "rule", q: "만드는 순서를 다른 사람에게 말로 알려 줄 수 있나요?", a: [["순서대로 설명할 수 있어요", 3], ["대부분은 되는데 몇 군데는 감으로 해요", 2], ["그때그때 보고 판단해요", 0]] }
   ];
   $("qs").innerHTML = Q.map(function (x, i) {
     return '<fieldset class="q"><legend><span>' + (i + 1) + "</span>" + esc(x.q) + '</legend><div class="as">'
@@ -243,11 +247,31 @@ details.fix summary small{font-size:var(--fs-caption);font-weight:var(--fw-regul
     o.n = n; return o;
   }
 
-  function 읽기(name, buf) {
-    var o = { 이름: name, csv: /\.(csv|txt|tsv)$/i.test(name), 시트들: [] };
-    try { o.시트들 = M.읽기(name, buf, XLSX); } catch (e) { o.시트들 = []; }
-    if (o.시트들.length) o.r = A.검산(o.시트들[0], XLSX, { csv: o.csv });
-    return o;
+  // 수식 읽기 — 시트 이름·파일 경로는 세기만 하고 밖으로 옮기지 않는다
+  function 수식보기(시트들, 고른) {
+    var s = 시트들[고른], 숫자칸 = 0, 식칸 = 0, 시트참조 = 0, 바깥참조 = 0, 가리킨 = {};
+    var 다른이름 = 시트들.map(function (x) { return x.시트; });
+    s.줄들.forEach(function (row) {
+      row.forEach(function (c) {
+        if (!c) return;
+        if (c.t === "n") 숫자칸++;
+        if (!c.f) return;
+        식칸++;
+        var f = String(c.f);
+        if (/\[[^\]]*\]|\.xls/i.test(f)) { 바깥참조++; return; }
+        if (f.indexOf("!") >= 0) {
+          시트참조++;
+          다른이름.forEach(function (n, i) { if (i !== 고른 && (f.indexOf(n + "!") >= 0 || f.indexOf("'" + n + "'!") >= 0)) 가리킨[i] = 1; });
+        }
+      });
+    });
+    // 파일 안에서 원본처럼 보이는 시트: 고른 시트보다 줄이 세 배 넘게 많은 시트, 또는 수식이 가리키는 시트
+    var 원본시트 = [];
+    시트들.forEach(function (x, i) {
+      if (i === 고른) return;
+      if (가리킨[i] || x.줄들.length >= Math.max(20, s.줄들.length * 3)) 원본시트.push({ i: i, 이름: x.시트, 줄: x.줄들.length, 가리킴: !!가리킨[i] });
+    });
+    return { 숫자칸: 숫자칸, 식칸: 식칸, 시트참조: 시트참조, 바깥참조: 바깥참조, 원본시트: 원본시트 };
   }
 
   function 표(머리, 줄들) {
@@ -290,25 +314,29 @@ details.fix summary small{font-size:var(--fs-caption);font-weight:var(--fw-regul
     return '<div class="find">' + h + "</div>";
   }
 
-  // ── 받은 자료: 손볼 곳 (예전 검산기 화면) ──
+  // ── 고른 시트: 손볼 곳 (예전 검산기 화면) ──
   function 시트목록() {
-    $("fname").textContent = 원.이름;
-    $("sheetbox").hidden = 원.시트들.length < 2;
-    $("sheet").innerHTML = 원.시트들.map(function (s, i) { return '<option value="' + i + '">' + esc(s.시트) + " (" + 수(s.줄들.length) + "줄)</option>"; }).join("");
-    $("sheet").value = "0";
+    $("fname").textContent = 파.이름;
+    $("sheetbox").hidden = 파.시트들.length < 2;
+    $("sheet").innerHTML = 파.시트들.map(function (s, i) { return '<option value="' + i + '">' + esc(s.시트) + " (" + 수(s.줄들.length) + "줄)</option>"; }).join("");
+    // 시작 시트: 다른 시트를 가리키는 수식이 가장 많은 시트(보고 시트일 가능성), 없으면 첫 시트
+    var 고른 = 0, 최고 = 0;
+    파.시트들.forEach(function (x, i) { var k = 수식보기(파.시트들, i).시트참조; if (k > 최고) { 최고 = k; 고른 = i; } });
+    $("sheet").value = String(고른);
     시트고름();
   }
   function 시트고름() {
-    var s = 원.시트들[+$("sheet").value];
+    var s = 파.시트들[+$("sheet").value];
     $("head").max = Math.max(1, s.줄들.length);
     $("head").value = s.머리글행 + 1;
     손볼곳();
   }
   function 손볼곳() {
-    var s = 원.시트들[+$("sheet").value];
+    var i = +$("sheet").value, s = 파.시트들[i];
     var v = parseInt($("head").value, 10);
     if (v >= 1 && v <= s.줄들.length) s.머리글행 = v - 1;
-    var r = 원.r = A.검산(s, XLSX, { csv: 원.csv });
+    var r = 파.r = A.검산(s, XLSX, { csv: 파.csv });
+    파.식 = 수식보기(파.시트들, i);
     if (r.문제) { $("fixn").textContent = ""; $("out").innerHTML = '<p class="verdict warn"><b>' + esc(r.문제) + ".</b><small>머리글이 있는 줄 번호를 직접 넣어 주세요.</small></p>"; 판정(); return; }
     var 열들 = r.열.filter(function (c) { return c.이름; });
     $("headhint").textContent = "머리글: " + 열들.slice(0, 6).map(function (c) { return c.이름; }).join(", ") + (열들.length > 6 ? " 외 " + (열들.length - 6) + "개" : "");
@@ -330,44 +358,56 @@ details.fix summary small{font-size:var(--fs-caption);font-weight:var(--fw-regul
     판정();
   }
 
-  // ── 받은 자료와 만든 결과가 이어지는지 ──
   function 잇기() {
-    if (!원 || !원.r || 원.r.문제 || !결 || !결.r || 결.r.문제) return null;
+    if (!원 || !원.r || 원.r.문제 || !파 || !파.r || 파.r.문제) return null;
     var 이름 = function (c) { return String(c.이름 || "").replace(/\s/g, ""); };
-    var 원열 = 원.r.열.map(이름).filter(Boolean), 결열 = 결.r.열.map(이름).filter(Boolean);
+    var 원열 = 원.r.열.map(이름).filter(Boolean), 결열 = 파.r.열.map(이름).filter(Boolean);
     var 같은열 = 결열.filter(function (c) { return 원열.indexOf(c) >= 0; });
     var 같은합 = [];
-    결.r.숫자열.forEach(function (y) {
+    파.r.숫자열.forEach(function (y) {
       if (!y.걸러) return;
       원.r.숫자열.forEach(function (x) { if (Math.abs(x.걸러 - y.걸러) < 0.5 && 같은합.indexOf(y.열) < 0) 같은합.push(y.열); });
     });
-    return { 같은열: 같은열, 결열수: 결열.length, 같은합: 같은합, 원줄: 원.r.줄수.자료, 결줄: 결.r.줄수.자료 };
+    return { 같은열: 같은열, 결열수: 결열.length, 같은합: 같은합, 원줄: 원.r.줄수.자료, 결줄: 파.r.줄수.자료 };
   }
 
   function 판정() {
-    var a = 답(), 이음 = 잇기(), 이유 = [], 급, 제목, 설명;
-    if (!원) return;
-    if (a.n < Q.length) { $("verdict").innerHTML = '<div class="res wait">세 가지를 고르면 판정이 나와요.</div>'; 요약(); return; }
-    var 원ok = 원.r && !원.r.문제;
-    이유.push(원ok ? ["ok", "<b>받은 자료가 표 모양이에요.</b> 머리글 한 줄 아래로 " + 수(원.r.줄수.자료) + "줄이 이어져요."]
-      : ["no", "<b>받은 자료에서 머리글을 찾지 못했어요.</b> 표 모양이 아니면 그 부분부터 봐야 해요."]);
-    if (원ok && !원.r.깨끗) 이유.push(["mid", "<b>손볼 곳이 " + 원.r.찾은것.length + "가지 있어요.</b> 자동화할 때 같이 처리할 수 있어요. 아래에서 줄 번호까지 볼 수 있어요."]);
-    var 이어짐 = false;
-    if (!결) 이유.push(["mid", "<b>만든 결과는 아직 안 넣었어요.</b> 같이 넣으면 받은 자료에서 결과까지 어떻게 가는지 볼 수 있어요."]);
-    else if (!이음) 이유.push(["no", "<b>만든 결과 파일에서 표를 찾지 못했어요.</b> 보고서 모양이면 검토에서 봐 드려요."]);
-    else {
-      if (이음.같은합.length) { 이어짐 = true; 이유.push(["ok", "<b>결과의 「" + 이음.같은합.map(esc).join("」「") + "」 합계가 받은 자료와 같아요.</b> 받은 자료를 모아 더해서 만든 표라는 뜻이에요. 이런 일은 순서대로 자동으로 돌릴 수 있어요."]); }
-      if (이음.같은열.length) { 이어짐 = true; 이유.push(["ok", "<b>결과의 열 " + 이음.결열수 + "개 중 " + 이음.같은열.length + "개가 받은 자료에 있어요</b> (" + 이음.같은열.slice(0, 4).map(esc).join(", ") + ")."]); }
-      if (이음.결줄 < 이음.원줄) 이유.push(["mid", "받은 자료 " + 수(이음.원줄) + "줄이 결과에서 " + 수(이음.결줄) + "줄로 줄었어요. 묶어서 더하는 단계가 있어요."]);
-      if (!이어짐) 이유.push(["no", "<b>결과와 받은 자료 사이에 겹치는 열도, 같은 합계도 없어요.</b> 중간에 다른 자료가 들어가거나 손으로 판단하는 단계가 있는지 봐야 해요."]);
-    }
-    if (a.rule.값 === 0) 이유.push(["no", "<b>그때그때 판단하는 일이에요.</b> 판단은 사람에게 남기고, 판단하기 전까지의 준비(모으기·정리·표시)만 자동으로 하는 게 맞아요."]);
+    var a = 답(), 이유 = [], 급, 제목, 설명;
+    if (!파) return;
+    if (a.n < Q.length) { $("verdict").innerHTML = '<div class="res wait">네 가지를 고르면 판정이 나와요.</div>'; 요약(); return; }
+    var ok = 파.r && !파.r.문제, 식 = 파.식 || { 숫자칸: 0, 식칸: 0, 시트참조: 0, 바깥참조: 0, 원본시트: [] };
+    var 식비율 = 식.숫자칸 ? 식.식칸 / 식.숫자칸 : 0;
+
+    이유.push(ok ? ["ok", "<b>표 모양이 일정해요.</b> 머리글 한 줄 아래로 " + 수(파.r.줄수.자료) + "줄, 열 " + 파.r.열.filter(function (c) { return c.이름; }).length + "개예요. 모양이 매번 같다면 자동으로 채우기 좋아요."]
+      : ["no", "<b>머리글을 찾지 못했어요.</b> 보고서처럼 칸을 합친 모양이면 검토에서 봐 드려요. 시트를 바꿔 보셔도 돼요."]);
+    var 단서 = false;
+    if (식.원본시트.length) { 단서 = true; 이유.push(["ok", "<b>파일 안에 원본처럼 보이는 시트가 " + 식.원본시트.length + "개 있어요</b>" + (식.원본시트.some(function (x) { return x.가리킴; }) ? " (이 시트의 수식이 그 시트를 가리켜요)." : " (줄이 훨씬 많아요).") + " 원본이 같은 파일에 있으면 어디서 무엇을 가져오는지 그대로 따라갈 수 있어요."]); }
+    if (식.식칸 && 식비율 >= 0.3) { 단서 = true; 이유.push(["ok", "<b>숫자 칸의 " + Math.round(식비율 * 100) + "%가 수식이에요.</b> 계산은 이미 정해져 있어요. 자동화는 자료를 붙여 넣는 단계를 없애는 쪽이에요."]); }
+    else if (식.숫자칸) 이유.push(["mid", "<b>숫자 칸 대부분이 손으로 넣은 값이에요</b> (수식 " + 수(식.식칸) + "칸 / 숫자 " + 수(식.숫자칸) + "칸). 어딘가에서 옮겨 적고 있다는 뜻이에요. 그 옮기는 단계가 자동화할 자리예요."]);
+    var 이음 = 잇기();
+    if (원 && !이음) 이유.push(["mid", "<b>받은 자료에서 표를 찾지 못했어요.</b> 받은 자료는 빼고 완성된 파일로만 봤어요."]);
+    else if (이음) {
+      if (이음.같은합.length) { 단서 = true; 이유.push(["ok", "<b>완성된 파일의 「" + 이음.같은합.map(esc).join("」「") + "」 합계가 받은 자료와 같아요.</b> 받은 자료를 모아 더해서 만든 표라는 뜻이에요."]); }
+      if (이음.같은열.length) { 단서 = true; 이유.push(["ok", "<b>완성된 파일의 열 " + 이음.결열수 + "개 중 " + 이음.같은열.length + "개가 받은 자료에 있어요</b> (" + 이음.같은열.slice(0, 4).map(esc).join(", ") + ")."]); }
+      if (이음.결줄 < 이음.원줄) 이유.push(["mid", "받은 자료 " + 수(이음.원줄) + "줄이 완성된 파일에서 " + 수(이음.결줄) + "줄로 줄었어요. 묶어서 더하는 단계가 있어요."]);
+      if (!이음.같은합.length && !이음.같은열.length) 이유.push(["no", "<b>받은 자료와 겹치는 열도, 같은 합계도 없어요.</b> 중간에 다른 자료가 들어가거나 손으로 판단하는 단계가 있는지 봐야 해요."]);
+    } else if (!식.원본시트.length) 이유.push(["mid", "<b>받은 자료는 아직 안 넣었어요.</b> 같이 넣으면 둘이 어떻게 이어지는지 보고 더 정확하게 말씀드려요."]);
+    if (식.바깥참조) 이유.push(["mid", "<b>다른 파일을 가리키는 수식이 " + 수(식.바깥참조) + "칸 있어요.</b> 그 파일을 같은 폴더에 두면 같이 읽을 수 있어요. (경로는 옮기지 않았어요)"]);
+    var 손볼수 = ok ? 파.r.찾은것.filter(function (f) { return !(f.종류 === "합계줄" && f.건수 === 1); }).length : 0;  // 맨 아래 합계 한 줄은 보고서에 흔한 것
+    if (손볼수) 이유.push(["mid", "<b>손볼 곳이 " + 손볼수 + "가지 있어요.</b> 자동화할 때 같이 처리할 수 있어요. 아래에서 줄 번호까지 볼 수 있어요."]);
+
+    if (a.src.값 === 3) 이유.push(["ok", "<b>시스템에서 내려받는 자료예요.</b> 받는 모양이 매번 같아서 가장 자동화하기 좋은 경우예요."]);
+    else if (a.src.값 === 2) 이유.push(["mid", "<b>남이 보내 주는 엑셀이에요.</b> 보내는 사람마다 모양이 다르면 받는 양식부터 맞춰야 해요."]);
+    else if (a.src.값 === 1) 이유.push(["mid", "<b>손으로 입력하는 자료예요.</b> 입력은 남아요. 입력한 뒤의 정리·집계부터 자동으로 할 수 있어요."]);
+    else 이유.push(["no", "<b>종이·사진·스캔 자료예요.</b> 글자를 읽어 내는 단계에서 틀린 값이 섞여요. 같은 자료를 엑셀로 받을 수 있는지부터 봐야 해요."]);
+
+    if (a.rule.값 === 0) 이유.push(["no", "<b>그때그때 판단하는 일이에요.</b> 판단은 사람에게 남기고, 판단하기 전까지의 준비만 자동으로 하는 게 맞아요."]);
     else if (a.rule.값 === 2) 이유.push(["mid", "<b>감으로 하는 곳이 몇 군데 있어요.</b> 그 부분은 사람에게 남기고 나머지를 자동으로 하는 방법이 있어요."]);
     else 이유.push(["ok", "<b>순서를 말로 설명할 수 있어요.</b> 설명할 수 있는 순서는 대부분 자동으로 바꿀 수 있어요."]);
 
-    if (a.rule.값 === 0 && !이어짐) { 급 = " low"; 제목 = "지금은 어려워요"; 설명 = "판단이 많이 들어가고, 받은 자료와 결과가 이어지는 모습이 아직 안 보여요. 그래도 준비 단계만은 줄일 수 있는 경우가 많아요. 글로 적어 보내 주시면 봐 드려요."; }
-    else if (이어짐 && 원ok && a.rule.값 >= 2) { 급 = ""; 제목 = "자동화될 가능성이 커요"; 설명 = "받은 자료에서 결과까지 이어지는 모습이 보이고, 순서도 설명할 수 있어요. 자료 모양이 매번 같은지만 확인하면 돼요."; }
-    else { 급 = " mid"; 제목 = "한 번 봐야 알아요"; 설명 = 결 ? "될 수도 있는데, 이 화면만으로는 이어지는 모습을 다 못 봤어요." : "받은 자료만으로는 반쪽만 보여요. 만든 결과를 같이 넣거나, 하는 순서를 글로 적어 보내 주시면 봐 드려요."; }
+    if (a.src.값 === 0 || (a.rule.값 === 0 && !단서)) { 급 = " low"; 제목 = "지금은 어려워요"; 설명 = "이대로 자동화하면 틀린 결과가 빨리 나올 뿐이에요. 그래도 준비 단계는 줄일 수 있는 경우가 많아요. 글로 적어 보내 주시면 봐 드려요."; }
+    else if (ok && a.src.값 >= 2 && a.rule.값 >= 2 && (단서 || a.src.값 === 3)) { 급 = ""; 제목 = "자동화될 가능성이 커요"; 설명 = "표 모양이 일정하고, 자료가 파일로 오고, 순서를 설명할 수 있어요. 받는 자료 모양이 매번 같은지만 확인하면 돼요."; }
+    else { 급 = " mid"; 제목 = "한 번 봐야 알아요"; 설명 = 원 ? "될 수도 있는데, 두 파일만으로는 이어지는 모습을 다 못 봤어요. 하는 순서를 글로 적어 보내 주시면 봐 드려요." : "될 수도 있는데, 이 파일만으로는 숫자가 어떻게 들어오는지 다 못 봤어요. 받은 자료를 같이 넣거나, 하는 순서를 글로 적어 보내 주시면 봐 드려요."; }
 
     var 순서 = 만드는순서(a, 이음);
     var 시간 = Math.round(a.freq.값 * a.dur.값);
@@ -380,51 +420,70 @@ details.fix summary small{font-size:var(--fs-caption);font-weight:var(--fw-regul
         var ic = x[0] === "ok" ? "ti-circle-check ok" : x[0] === "no" ? "ti-alert-circle no" : "ti-point mid";
         return '<li><i class="ti ' + ic + '"></i><span>' + x[1] + "</span></li>";
       }).join("") + "</ul>"
-      + (순서.length ? '<h3>이렇게 만들 수 있어요</h3><ol class="how">' + 순서.map(function (x) { return "<li>" + x + "</li>"; }).join("") + '</ol><p class="note">넣은 파일만 보고 짠 어림이에요. 검토 답장에서는 실제 순서에 맞춰 다시 적어 드려요.</p>' : "")
+      + (순서.length ? '<h3>이렇게 만들 수 있어요</h3><ol class="how">' + 순서.map(function (x) { return "<li>" + x + "</li>"; }).join("") + '</ol><p class="note">넣은 파일과 답만 보고 짠 어림이에요. 검토 답장에서는 실제 순서에 맞춰 다시 적어 드려요.</p>' : "")
       + '<div class="two"><div><span>지금 이 일에 드는 시간</span><b>1년에 약 ' + 시간.toLocaleString("ko-KR") + "시간</b><small>" + esc(a.freq.글) + " × " + esc(a.dur.글) + " 으로 어림한 값</small></div>"
       + "<div><span>다음</span><b>검토는 무료예요</b><small>" + 값어치 + "</small></div></div>"
       + '<p style="margin:16px 0 0"><a class="ds-btn-pill primary" href="#review" data-track="audit_to_review">이 결과로 검토 받기</a></p>'
       + "</section>";
-    window.진단결과 = { 제목: 제목, 시간: 시간, 이어짐: 이어짐, 순서: 순서 };
-    if (!센판정) { 센판정 = true; 센다("tool_audit_verdict", { verdict: 제목, linked: 이어짐 ? 1 : 0, hours: 시간 }); }
+    window.진단결과 = { 제목: 제목, 시간: 시간, 단서: 단서, 순서: 순서 };
+    if (!센판정) { 센판정 = true; 센다("tool_audit_verdict", { verdict: 제목, clue: 단서 ? 1 : 0, hours: 시간 }); }
     요약(제목, 시간, 순서);
   }
 
-  // 넣은 파일에서 읽은 것만으로 짜는 순서 (지어내지 않는다)
+  // 넣은 파일과 답에서 읽은 것만으로 짜는 순서 (지어내지 않는다)
   function 만드는순서(a, 이음) {
     var 줄 = [];
-    if (!원 || !원.r || 원.r.문제) return 줄;
-    var 쓴 = {};
-    줄.push("받은 자료를 <b>정해 둔 폴더에 넣거나 붙여 넣으면</b> 시작돼요.");
-    원.r.찾은것.forEach(function (f) {
+    if (!파 || !파.r || 파.r.문제) return 줄;
+    var 식 = 파.식, 쓴 = {};
+    줄.push({ 3: "시스템에서 받은 파일을 <b>정해 둔 폴더에 넣으면</b> 시작돼요.",
+      2: "보내 주는 엑셀의 <b>받는 양식을 하나로 맞추고</b>, 받은 파일을 한 폴더에 모아 넣으면 시작돼요.",
+      1: "입력은 지금처럼 하시고, <b>입력한 뒤의 정리·집계부터</b> 자동으로 해요.",
+      0: "자료를 <b>엑셀이나 CSV로 받을 수 있는지</b>부터 알아봐요. 그게 되면 그다음은 자동으로 할 수 있어요." }[a.src.값]);
+    if (식.원본시트.length) 줄.push("파일 안의 <b>원본 시트를 그대로 원본으로</b> 써요. 새 자료를 그 자리에 넣으면 돼요.");
+    if (식.바깥참조) 줄.push("다른 파일에서 가져오는 칸은 <b>그 파일을 같은 폴더에 두면</b> 같이 읽어요.");
+    // 손볼 곳: 원본 시트가 있으면 그 시트에서, 없으면 고른 시트에서. 맨 아래 합계 한 줄은 보고서에 있는 게 보통이라 빼고 센다
+    var 볼 = 파.r, 앞 = "";
+    if (이음) { 볼 = 원.r; 앞 = "받은 자료의 "; }
+    else if (식.원본시트.length) {
+      var 안원본 = 식.원본시트.filter(function (x) { return x.가리킴; })[0] || 식.원본시트[0];
+      var r원 = A.검산(파.시트들[안원본.i], XLSX, { csv: 파.csv });
+      if (!r원.문제) { 볼 = r원; 앞 = "원본 시트의 "; }
+    }
+    볼.찾은것.forEach(function (f) {
       if (쓴[f.종류 + f.열]) return; 쓴[f.종류 + f.열] = 1;
-      if (f.종류 === "합계줄") 줄.push("사이사이 섞인 <b>소계·합계 줄을 빼요.</b>");
-      else if (f.종류 === "표기") 줄.push("「" + esc(f.열) + "」 열의 <b>표기만 다른 이름을 하나로 맞춰요.</b>");
-      else if (f.종류 === "날짜" || f.종류 === "날짜전부글자") 줄.push("「" + esc(f.열) + "」 열의 <b>글자로 된 날짜를 날짜로 바꿔요.</b>");
-      else if (f.종류 === "숫자") 줄.push("「" + esc(f.열) + "」 열의 <b>「원」이 붙은 금액은 숫자로 바꾸고, 읽을 수 없는 칸은 따로 표시해요.</b>");
-      else if (f.종류 === "중복") 줄.push("<b>모든 칸이 같은 줄은 지우지 않고 표시해서</b> 맞는지 확인받아요.");
+      if (f.종류 === "합계줄") { if (!앞 && f.건수 === 1) return; 줄.push(앞 + "사이사이 섞인 <b>소계·합계 줄을 빼고</b> 마지막에 한 번만 더해요."); }
+      else if (f.종류 === "표기") 줄.push(앞 + "「" + esc(f.열) + "」 열의 <b>표기만 다른 이름을 하나로 맞춰요.</b>");
+      else if (f.종류 === "날짜" || f.종류 === "날짜전부글자") 줄.push(앞 + "「" + esc(f.열) + "」 열의 <b>글자로 된 날짜를 날짜로 바꿔요.</b>");
+      else if (f.종류 === "숫자") 줄.push(앞 + "「" + esc(f.열) + "」 열의 <b>「원」이 붙은 금액은 숫자로 바꾸고, 읽을 수 없는 칸은 따로 표시해요.</b>");
+      else if (f.종류 === "중복") 줄.push(앞 + "<b>모든 칸이 같은 줄은 지우지 않고 표시해서</b> 맞는지 확인받아요.");
     });
     if (이음) {
-      var 결숫자 = 결.r.숫자열.map(function (x) { return String(x.열).replace(/\s/g, ""); });
+      var 결숫자 = 파.r.숫자열.map(function (x) { return String(x.열).replace(/\s/g, ""); });
       var 기준 = 이음.같은열.filter(function (c) { return 결숫자.indexOf(c) < 0; });
       var 더할 = 이음.같은합.length ? 이음.같은합 : 이음.같은열.filter(function (c) { return 결숫자.indexOf(c) >= 0; });
       if (이음.결줄 < 이음.원줄 && 기준.length && 더할.length) 줄.push("「" + 기준.map(esc).join("」「") + "」별로 묶어 <b>「" + 더할.map(esc).join("」「") + "」을 더해요.</b>");
-      줄.push("만든 결과와 <b>같은 모양</b>(" + 결.r.열.filter(function (c) { return c.이름; }).slice(0, 6).map(function (c) { return esc(c.이름); }).join(", ") + ")으로 내요.");
-    } else 줄.push("지금 만드시는 결과와 <b>같은 모양</b>으로 내요. (결과 파일을 넣으면 이 줄이 구체적으로 바뀌어요)");
+    }
+    if (식.숫자칸 && 식.식칸 / 식.숫자칸 >= 0.3) 줄.push("이미 있는 <b>수식은 그대로 살리고</b>, 자료를 붙여 넣는 단계만 없애요.");
+    else if (식.숫자칸) 줄.push("지금 <b>손으로 옮겨 적는 숫자 칸을 자동 계산으로</b> 바꿔요.");
+    줄.push("지금 만드시는 이 표와 <b>같은 모양</b>(" + 파.r.열.filter(function (c) { return c.이름; }).slice(0, 6).map(function (c) { return esc(c.이름); }).join(", ") + ")으로 내요.");
     if (a.rule.값 === 2) 줄.push("감으로 하는 곳은 <b>비워 두고 표시만</b> 해요. 그 칸은 사람이 채워요.");
     if (a.rule.값 === 0) 줄.push("판단하는 곳 <b>앞까지만</b> 자동으로 해요. 판단은 사람이 하고, 그 뒤 정리는 다시 자동으로 해요.");
     줄.push("마지막에 <b>원본 합계와 결과 합계를 나란히</b> 보여 줘서 맞는지 바로 확인해요.");
     return 줄;
   }
 
-  // ── 검토 요청 글 ──
+  // ── 검토 요청 글 (시트 이름·파일 경로는 넣지 않는다) ──
   function 요약(제목, 시간, 순서) {
     var a = 답(), 줄 = ["[자동화 검토 요청]", "· 하는 일: (두서없이 적어 주세요. 어디서 받아서, 무엇을 하고, 누구에게 내는지)"];
+    if (a.src) 줄.push("· 숫자가 오는 곳: " + a.src.글);
     if (a.freq) 줄.push("· 얼마나 자주: " + a.freq.글);
     if (a.dur) 줄.push("· 한 번 걸리는 시간: " + a.dur.글);
     if (a.rule) 줄.push("· 순서 설명: " + a.rule.글);
-    if (원 && 원.r && !원.r.문제) 줄.push("· 받은 자료 열: " + 원.r.열.filter(function (c) { return c.이름; }).map(function (c) { return c.이름; }).slice(0, 12).join(", ") + " (" + 원.r.줄수.자료 + "줄)");
-    if (결 && 결.r && !결.r.문제) 줄.push("· 만든 결과 열: " + 결.r.열.filter(function (c) { return c.이름; }).map(function (c) { return c.이름; }).slice(0, 12).join(", "));
+    if (파 && 파.r && !파.r.문제) {
+      줄.push("· 완성된 파일의 열: " + 파.r.열.filter(function (c) { return c.이름; }).map(function (c) { return c.이름; }).slice(0, 12).join(", ") + " (" + 파.r.줄수.자료 + "줄)");
+      if (파.식) 줄.push("· 시트 " + 파.시트들.length + "개 · 수식 " + 파.식.식칸 + "칸 / 숫자 " + 파.식.숫자칸 + "칸" + (파.식.원본시트.length ? " · 원본처럼 보이는 시트 " + 파.식.원본시트.length + "개" : "") + (파.식.바깥참조 ? " · 다른 파일을 가리키는 수식 있음" : ""));
+    }
+    if (원 && 원.r && !원.r.문제) 줄.push("· 받은 자료의 열: " + 원.r.열.filter(function (c) { return c.이름; }).map(function (c) { return c.이름; }).slice(0, 12).join(", ") + " (" + 원.r.줄수.자료 + "줄)");
     if (제목) 줄.push("", "[화면 판정] " + 제목 + " · 1년에 약 " + 시간 + "시간");
     if (순서 && 순서.length) { 줄.push("[화면이 짠 순서 · 어림]"); 순서.forEach(function (x, i) { 줄.push((i + 1) + ". " + x.replace(/<[^>]+>/g, "")); }); }
     줄.push("", "파일은 붙여도, 가려서 붙여도, 안 붙여도 괜찮아요.");
@@ -440,15 +499,20 @@ details.fix summary small{font-size:var(--fs-caption);font-weight:var(--fw-regul
   });
 
   // ── 파일 넣기 ──
+  function 읽기(name, buf) {
+    var o = { 이름: name, csv: /\.(csv|txt|tsv)$/i.test(name), 시트들: [] };
+    try { o.시트들 = M.읽기(name, buf, XLSX); } catch (e) { o.시트들 = []; }
+    return o;
+  }
   function 보이기() {
-    $("work").hidden = !원;
-    $("drop1").classList.toggle("done", !!원); $("drop2").classList.toggle("done", !!결);
-    $("fn1").innerHTML = 원 ? '<span class="fn">' + esc(원.이름) + "</span>" : "엑셀·CSV · 끌어다 놓거나 눌러서 고르기";
-    $("fn2").innerHTML = 결 ? '<span class="fn">' + esc(결.이름) + "</span>" : "둘을 같이 봐야 정확해요";
-    if (원) {
-      if (!원.시트들.length) { $("out").innerHTML = '<p class="verdict warn"><b>파일을 열지 못했어요.</b><small>암호가 걸렸거나 엑셀·CSV 파일이 아니에요.</small></p>'; $("fixbox").open = true; 판정(); }
-      else 시트목록();
-    }
+    $("work").hidden = !파;
+    $("drop1").classList.toggle("done", !!파); $("drop2").classList.toggle("done", !!원);
+    $("fn1").innerHTML = 파 ? '<span class="fn">' + esc(파.이름) + "</span>" : "이것만 넣어도 자동화될지 볼 수 있어요";
+    $("fn2").innerHTML = 원 ? '<span class="fn">' + esc(원.이름) + "</span>" : "같이 넣으면 더 정확하게 확인할 수 있어요";
+    if (원 && 원.시트들.length) 원.r = A.검산(원.시트들[0], XLSX, { csv: 원.csv });
+    if (!파) return;
+    if (!파.시트들.length) { 파.r = null; 파.식 = null; $("out").innerHTML = '<p class="verdict warn"><b>파일을 열지 못했어요.</b><small>암호가 걸렸거나 엑셀·CSV 파일이 아니에요.</small></p>'; $("fixbox").open = true; 판정(); }
+    else 시트목록();
   }
   function 파일(list, 어디) {
     var f = list && list[0];
@@ -456,9 +520,8 @@ details.fix summary small{font-size:var(--fs-caption);font-weight:var(--fw-regul
     var rd = new FileReader();
     rd.onload = function () {
       var o = 읽기(f.name, rd.result);
-      if (어디 === 1) { 원 = o; 센다("tool_audit_run", { issues: o.r ? o.r.찾은것.length : -1 }); } else { 결 = o; 센다("tool_audit_result_file"); }
-      보이기();
-      if (어디 === 1) $("work").scrollIntoView({ behavior: "smooth", block: "start" });
+      if (어디 === 1) { 파 = o; 보이기(); 센다("tool_audit_run", { issues: 파.r ? 파.r.찾은것.length : -1, sheets: 파.시트들.length }); $("work").scrollIntoView({ behavior: "smooth", block: "start" }); }
+      else { 원 = o; 센다("tool_audit_source_file"); 보이기(); if (!파) $("drop1").scrollIntoView({ behavior: "smooth", block: "center" }); }
     };
     rd.readAsArrayBuffer(f);
   }
@@ -473,14 +536,13 @@ details.fix summary small{font-size:var(--fs-caption);font-weight:var(--fw-regul
   $("sheet").addEventListener("change", 시트고름);
   $("head").addEventListener("change", 손볼곳);
   $("reset").addEventListener("click", function () {
-    원 = 결 = null; $("qs").reset(); $("verdict").innerHTML = ""; $("out").innerHTML = ""; 보이기(); 요약();
+    파 = 원 = null; $("qs").reset(); $("verdict").innerHTML = ""; $("out").innerHTML = ""; 보이기(); 요약();
     window.scrollTo({ top: 0, behavior: "smooth" });
   });
 
-  // 예시 — 지어낸 11월 거래 내역과, 그걸 거래처별로 더한 보고 표
+  // 예시 — 지어낸 11월 거래 내역(원본 시트)과, 그걸 수식으로 더한 거래처별 보고 시트가 한 파일에
   $("sample").addEventListener("click", function () {
     function 날(n) { return { t: "n", v: n, z: "yyyy-mm-dd" }; }
-    function 책(aoa, 시트) { var wb = XLSX.utils.book_new(); XLSX.utils.book_append_sheet(wb, XLSX.utils.aoa_to_sheet(aoa), 시트); return XLSX.write(wb, { type: "array", bookType: "xlsx" }); }
     var 원본 = [["11월 거래 내역 (예시 자료 · 지어낸 값)"], [],
       ["날짜", "거래처", "품목", "수량", "금액"],
       [날(46327), "한빛상사", "사무용품", 12, 384000],
@@ -494,14 +556,26 @@ details.fix summary small{font-size:var(--fs-caption);font-weight:var(--fw-regul
       [날(46336), "새봄상회", "포장재", 30, 390000],
       [날(46336), "새봄상회", "포장재", 30, 390000],
       [날(46337), "대성유통", "소모품", 14, 168000],
-      [null, "소계", null, 103, 1188000],
-      [null, "합계", null, 193, 2348000]];
-    var 결과 = [["11월 거래처별 매출 (보고용 · 예시)"], [],
-      ["거래처", "건수", "금액"],
-      ["대성유통", 2, 688000], ["새봄상회", 2, 780000], ["한빛상사", 2, 544000], ["미래물산", 2, 336000],
-      ["합계", 8, 2348000]];
-    원 = 읽기("예시_11월거래내역.xlsx", 책(원본, "11월"));
-    결 = 읽기("예시_11월거래처별보고.xlsx", 책(결과, "보고"));
+      [날(46338), "미래물산", "포장재", 6, 72000],
+      [날(46339), "새봄상회", "소모품", 11, 132000],
+      [날(46340), "대성유통", "사무용품", 7, 224000],
+      [날(46341), "한빛상사", "포장재", 18, 234000],
+      [날(46342), "미래물산", "사무용품", 4, 128000],
+      [날(46343), "새봄상회", "포장재", 22, 286000],
+      [날(46344), "대성유통", "소모품", 9, 108000],
+      [null, "소계", null, 200, 2512000],
+      [null, "합계", null, 290, 3672000]];
+    var 보고 = [["11월 거래처별 매출 (보고용 · 예시)"], [], ["거래처", "건수", "금액"]];
+    var 값 = { "대성유통": [5, 1020000], "새봄상회": [4, 1198000], "한빛상사": [2, 618000], "미래물산": [4, 536000] };
+    ["대성유통", "새봄상회", "한빛상사", "미래물산"].forEach(function (n, i) {
+      var r = 4 + i;
+      보고.push([n, { t: "n", v: 값[n][0], f: 'COUNTIF(\'11월 거래내역\'!B:B,A' + r + ')' }, { t: "n", v: 값[n][1], f: 'SUMIF(\'11월 거래내역\'!B:B,A' + r + ',\'11월 거래내역\'!E:E)' }]);
+    });
+    보고.push(["합계", { t: "n", v: 15, f: "SUM(B4:B7)" }, { t: "n", v: 3372000, f: "SUM(C4:C7)" }]);
+    var wb = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(wb, XLSX.utils.aoa_to_sheet(보고), "거래처별 보고");
+    XLSX.utils.book_append_sheet(wb, XLSX.utils.aoa_to_sheet(원본), "11월 거래내역");
+    파 = 읽기("예시_11월보고.xlsx", XLSX.write(wb, { type: "array", bookType: "xlsx" }));
     보이기();
     센다("tool_audit_sample");
     $("work").scrollIntoView({ behavior: "smooth", block: "start" });
