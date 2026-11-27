@@ -34,15 +34,14 @@
   .cards{max-width:960px;margin:0 auto;padding:8px 20px 8px;display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:14px}
   a.card,div.card{display:block;text-decoration:none;background:var(--surface);border:1px solid var(--border);
     border-radius:var(--radius-xl);padding:26px 24px;box-shadow:var(--shadow-card);transition:border-color var(--dur-fast),transform var(--dur-fast)}
-  a.card:hover{border-color:var(--accent);transform:translateY(-2px)}
+  a.card:hover{border-color:var(--accent)}
   a.card:focus-visible{outline:none;box-shadow:var(--shadow-focus)}
-  .card .ico{width:46px;height:46px;border-radius:13px;background:var(--accent-bg);color:var(--accent-strong);
-    display:flex;align-items:center;justify-content:center;font-size:24px;margin-bottom:16px}
+  .card .ico{float:left;margin:1px 10px 0 0;font-size:22px;line-height:1;color:var(--accent-strong)}
   .card h2{margin:0 0 6px;font-size:var(--fs-subhead);font-weight:var(--fw-bold)}
-  .card p{margin:0;font-size:var(--fs-body);color:var(--text-secondary);line-height:var(--lh-body)}
+  .card p{clear:left;margin:0;font-size:var(--fs-body);color:var(--text-secondary);line-height:var(--lh-body)}
   .card .go{display:inline-block;margin-top:14px;font-size:var(--fs-caption);font-weight:var(--fw-medium);color:var(--accent-strong)}
   div.card{background:var(--surface-sunken);box-shadow:none}
-  div.card .ico{background:var(--surface);color:var(--text-tertiary)}
+  div.card .ico{color:var(--text-tertiary)}
   div.card .go{color:var(--text-tertiary)}
 </style>
 </head>
@@ -51,10 +50,9 @@
 <div class="ds-hero-wrap">
   <div class="nav">
     <a class="brand" href="/"><span class="mark">R</span> 리플로</a>
-    <a class="navback" href="https://blog.naver.com/reflo2026" data-track="go_blog">운영 노트 →</a>
+    <a class="navback" href="https://blog.naver.com/reflo2026" data-track="go_blog">운영 노트</a>
   </div>
   <header class="ds-hero tool-hero">
-    <span class="eyebrow">무료 도구</span>
     <h1>자주 끊기는 곳에,<br><span class="accent">바로 쓰는 양식과 도구</span></h1>
     <p class="lead">설치도 가입도 없어요. 넣으신 파일은 이 브라우저 밖으로 나가지 않아요.</p>
   </header>
@@ -65,49 +63,49 @@
     <div class="ico" style="background:var(--surface)"><i class="ti ti-layout-kanban"></i></div>
     <h2>팀 업무 화면 — 체험판</h2>
     <p>기한 지난 일, 몇 주째 밀리는 일, 일이 몰리는 주가 한 화면에 보여요. 저장하면 엑셀 파일 하나가 생기고, 공유 폴더에 두면 팀이 같이 써요.</p>
-    <span class="go">써 보기 →</span>
+    <span class="go">써 보기</span>
   </a>
   <a class="card" href="handover/" data-track="open_tool_handover">
     <div class="ico"><i class="ti ti-file-text"></i></div>
     <h2>업무 인수인계서 양식</h2>
     <p>퇴사할 때가 아니라 평소에 채워 두는 엑셀 장부. 하는 일, 권한·계정, 업체·연락처, 진행 중인 일.</p>
-    <span class="go">양식 받기 →</span>
+    <span class="go">양식 받기</span>
   </a>
   <a class="card" href="weekly-report/" data-track="open_tool_weekly_report">
     <div class="ico"><i class="ti ti-report"></i></div>
     <h2>주간 업무 보고 양식</h2>
     <p>이번 주 한 일, 다음 주 할 일, 막힌 것을 한 장에. 「몇 주째」 칸이 있어서 밀리는 일이 보여요. 엑셀.</p>
-    <span class="go">양식 받기 →</span>
+    <span class="go">양식 받기</span>
   </a>
   <a class="card" href="audit/" data-track="open_tool_audit">
     <div class="ico"><i class="ti ti-file-search"></i></div>
     <h2>내 파일, 자동화될까</h2>
     <p>받은 자료와 만든 결과를 넣으면 자동화가 될지 먼저 봐 드려요. 합계가 틀릴 자리도 같이 찾아요. 검토는 무료예요.</p>
-    <span class="go">써 보기 →</span>
+    <span class="go">써 보기</span>
   </a>
   <a class="card" href="merge/" data-track="open_tool_merge">
     <div class="ico"><i class="ti ti-files"></i></div>
     <h2>엑셀 파일 합치기</h2>
     <p>여러 파일을 한 장으로 합쳐요. 열 순서가 달라도 이름으로 맞추고, 합계 줄은 빼요.</p>
-    <span class="go">써 보기 →</span>
+    <span class="go">써 보기</span>
   </a>
   <a class="card" href="answers/" data-track="open_tool_answers">
     <div class="ico"><i class="ti ti-messages"></i></div>
     <h2>답변집 — 체험판</h2>
     <p>자주 오는 문의와 확인된 답을 한 화면에. 문의에 나온 말로 찾고, 누르면 복사돼요. 없던 질문은 적어 두었다가 채워요.</p>
-    <span class="go">써 보기 →</span>
+    <span class="go">써 보기</span>
   </a>
   <a class="card" href="/free/yoy-report.xlsx" download data-track="download_yoy">
     <div class="ico"><i class="ti ti-table-down"></i></div>
     <h2>전년 대비 실적표 (엑셀 양식)</h2>
     <p>올해와 작년을 같은 기간끼리 비교해요. 날짜·거래처·금액을 붙여 넣으면 표와 막대가 바뀌어요. 매크로 없이 수식만 썼어요.</p>
-    <span class="go">엑셀 받기 →</span>
+    <span class="go">엑셀 받기</span>
   </a>
   <a class="card" href="prompts/" data-track="open_prompts">
     <div class="ico"><i class="ti ti-message-code"></i></div>
     <h2>AI에게 엑셀 일을 시키는 문장 10개</h2>
     <p>챗GPT·클로드에 그대로 붙여 넣는 문장과, 받은 결과가 맞는지 확인하는 법을 짝으로 적었어요.</p>
-    <span class="go">문장 보기 →</span>
+    <span class="go">문장 보기</span>
   </a>
 </div>
 
@@ -117,25 +115,25 @@
     <div class="ico"><i class="ti ti-package"></i></div>
     <h2>스타터 키트</h2>
     <p>Claude에 규칙과 절차를 한 번 세팅해 두는 틀이에요. 같은 요청에 같은 모양이 나오고, 모르는 것은 물어봐요.</p>
-    <span class="go">살펴보고 받기 →</span>
+    <span class="go">살펴보고 받기</span>
   </a>
   <a class="card" href="/course/" data-track="open_course">
     <div class="ico"><i class="ti ti-calendar-check"></i></div>
     <h2>5일 과정</h2>
     <p>퇴근 후 20분씩 닷새. 내 반복 업무 하나를 골라 Claude가 매번 같은 모양으로 해내게 만들어요. 혼자 따라 해요.</p>
-    <span class="go">1일차 시작하기 →</span>
+    <span class="go">1일차 시작하기</span>
   </a>
   <a class="card" href="/kit/see/" data-track="open_see">
     <div class="ico"><i class="ti ti-eye"></i></div>
     <h2>결과 먼저 보기</h2>
     <p>주간보고, 회의록, 품의서, 인수인계서… 절차를 누르면 넣은 말과 나온 결과가 그대로 보여요. 설치하기 전에 먼저 확인해요.</p>
-    <span class="go">결과부터 보기 →</span>
+    <span class="go">결과부터 보기</span>
   </a>
   <a class="card" href="https://blog.naver.com/reflo2026/224478750439" data-track="open_blog9">
     <div class="ico"><i class="ti ti-notebook"></i></div>
     <h2>실험 기록 — 주간보고를 세 번 시켰더니</h2>
     <p>같은 메모로 세 번 시키니 목차가 세 번 다 달랐어요. 규칙을 넣고 네 번 다시 시킨 과정을 적었어요.</p>
-    <span class="go">블로그에서 읽기 →</span>
+    <span class="go">블로그에서 읽기</span>
   </a>
 </div>
 

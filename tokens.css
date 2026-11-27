@@ -166,3 +166,7 @@
 .ds-badge-danger  { background: var(--danger-bg);  color: var(--danger-strong); }
 
 :focus-visible { outline: none; box-shadow: var(--shadow-focus); }
+
+/* 줄바꿈 다듬기 (2026-11-27, Impeccable 품질 규칙): 제목은 줄 길이를 고르게, 글은 마지막 줄에 한 낱말만 남지 않게 */
+h1, h2, h3 { text-wrap: balance; word-break: keep-all; }  /* 한국어는 낱말 중간에서 끊지 않게 */
+p, li { text-wrap: pretty; word-break: keep-all; }

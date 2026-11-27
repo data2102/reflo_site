@@ -6,14 +6,14 @@
    ============================================================ */
 
 /* ---- 히어로: 은은한 액센트 틴트 배경 + 중앙 정렬 임팩트 ---- */
-.ds-hero-wrap { background: linear-gradient(180deg, var(--accent-bg) 0%, var(--surface) 70%);
+.ds-hero-wrap { background: var(--surface);  /* 장식용 그라데이션 뺌 — 2026-11-27 디자인 스킬 분석 */
   border-bottom: 1px solid var(--border); }
 .ds-hero { text-align: center; max-width: 760px; margin: 0 auto; padding: 52px 28px 40px; }
 .ds-hero .eyebrow { display: inline-block; font-size: var(--fs-caption); font-weight: var(--fw-medium);
   color: var(--accent-strong); }  /* 알약 모양 뺌 — 글씨만 (2026-11-26 디자인 점검) */
 .ds-hero h1 { font-size: clamp(38px, 6.4vw, 60px); font-weight: var(--fw-bold); line-height: 1.18;
   letter-spacing: -2px; margin: 20px 0 18px; color: var(--text-primary); }
-.ds-hero h1 .accent { color: var(--accent); }
+.ds-hero h1 .accent { color: inherit; }  /* 제목 한 구절만 색칠하기 = AI 티 1순위 (frontend-design) — 강조는 크기·굵기로. 2026-11-27 */
 .ds-hero .lead { font-size: clamp(16px, 2.4vw, 19px); color: var(--text-secondary); line-height: var(--lh-body);
   max-width: 26em; margin: 0 auto; }
 .ds-hero-cta { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; margin-top: 32px; }
@@ -45,13 +45,14 @@
 .ds-feature-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 16px; margin-top: 44px; }
 .ds-feature-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg);
   padding: 24px; box-shadow: var(--shadow-card); }
-.ds-feature-ico { width: 46px; height: 46px; border-radius: 13px; background: var(--accent-bg); color: var(--accent);
-  display: flex; align-items: center; justify-content: center; font-size: 23px; }
-.ds-feature-card h3 { font-size: var(--fs-subhead); font-weight: var(--fw-bold); margin: 14px 0 6px; color: var(--text-primary); }
+/* 제목 위 둥근 아이콘 상자 = AI 티 (Impeccable 「Icon tile stacked above heading」) → 상자 없이 제목 옆에. 2026-11-27 */
+.ds-feature-ico { float: left; margin: 1px 10px 0 0; font-size: 22px; line-height: 1; color: var(--accent-strong); }
+.ds-feature-card h3 { font-size: var(--fs-subhead); font-weight: var(--fw-bold); margin: 0 0 8px; color: var(--text-primary); }
+.ds-feature-card p { clear: left; }
 .ds-feature-card p { font-size: var(--fs-body); color: var(--text-secondary); line-height: var(--lh-body); }
 
 /* ---- 마무리 CTA 밴드 ---- */
-.ds-cta-band { text-align: center; padding: 88px 24px; background: linear-gradient(180deg, var(--surface) 0%, var(--accent-bg) 100%); }
+.ds-cta-band { text-align: center; padding: 88px 24px; background: var(--surface-sunken); }
 .ds-cta-band h2 { font-size: clamp(28px, 4.4vw, 40px); font-weight: var(--fw-bold); letter-spacing: -1px; color: var(--text-primary); }
 
 @media (max-width: 640px) {
@@ -63,7 +64,7 @@
    짧은 머리말 + 찾기 + 갈래 칩 + 타일. 큰 히어로 대신 쓴다. 색·크기는 전부 토큰. */
 .ds-hub { max-width: 1040px; margin: 0 auto; padding: 8px 24px 8px; }
 .ds-hub-head h1 { margin: 0; font-size: clamp(28px, 4.6vw, 40px); font-weight: var(--fw-bold); line-height: 1.25; letter-spacing: -1px; color: var(--text-primary); }
-.ds-mark { white-space: nowrap; background: linear-gradient(transparent 58%, var(--accent-bg) 58%); color: var(--accent-strong); padding: 0 4px; border-radius: 4px; }
+.ds-mark { white-space: nowrap; }  /* 형광펜 강조 뺌 — 제목 한 구절만 꾸미지 않는다. 2026-11-27 */
 .ds-hub-head p { margin: 10px 0 0; font-size: var(--fs-subhead); color: var(--text-secondary); line-height: var(--lh-body); }
 .ds-search { display: flex; align-items: center; gap: 10px; height: 52px; margin-top: 20px; padding: 0 16px; border: 1.5px solid var(--border-strong); border-radius: var(--radius-lg); background: var(--surface); }
 .ds-search:focus-within { border-color: var(--accent); box-shadow: var(--shadow-focus); }
