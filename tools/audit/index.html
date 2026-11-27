@@ -82,6 +82,16 @@ details.fix summary small{font-size:var(--fs-caption);font-weight:var(--fw-regul
 .how li{display:list-item;margin-top:2px}
 .how b{color:var(--text-primary);font-weight:var(--fw-medium)}
 .res .note{margin:8px 0 0;font-size:var(--fs-footnote);color:var(--text-tertiary)}
+.say{display:block;margin-top:22px}
+.say b{display:block;font-size:var(--fs-subhead)}
+.say span{display:block;margin-top:4px;font-size:var(--fs-caption);color:var(--text-tertiary)}
+.say textarea{display:block;width:100%;box-sizing:border-box;margin-top:10px;padding:12px 14px;border:1px solid var(--border-strong);border-radius:var(--radius-md);font:inherit;font-size:var(--fs-body);line-height:1.6;color:var(--text-primary);background:var(--surface);resize:vertical}
+.say textarea:focus{outline:none;border-color:var(--accent)}
+details.att{margin-top:12px}
+details.att summary{cursor:pointer;font-size:var(--fs-caption);color:var(--text-secondary)}
+details.att summary small{color:var(--text-tertiary);margin-left:6px}
+.att-tip{margin:8px 0 0;font-size:var(--fs-footnote);color:var(--text-tertiary)}
+.sendrow .tip{flex-basis:100%;font-size:var(--fs-footnote);color:var(--text-tertiary)}
 .sendrow{display:flex;flex-wrap:wrap;align-items:center;gap:10px 14px;margin-top:16px}
 .sendrow .mono{font-size:var(--fs-caption);color:var(--text-secondary)}
 @media(max-width:640px){.drops,.ways,.two{grid-template-columns:1fr}.q{padding:16px}.res{padding:22px 18px}}
@@ -173,11 +183,20 @@ details.fix summary small{font-size:var(--fs-caption);font-weight:var(--fw-regul
       <span class="ex">예: 「매주 월요일에 시스템에서 받아서, 필요 없는 줄 지우고, 거래처별로 더해서 보고해요」</span>
     </div>
   </div>
-  <div class="brief" id="brief"></div>
+  <label class="say"><b>하는 일을 여기에 적어 주세요</b>
+    <span>두서없어도 괜찮아요. 어디서 받아서, 무엇을 하고, 누구에게 내는지 정도면 돼요.</span>
+    <textarea id="say" rows="5" placeholder="예: 매달 초에 시스템에서 실적 파일을 받아서, 필요 없는 줄 지우고, 담당자별로 더해서 표로 만들어 보고해요. 지난달과 견주는 칸은 손으로 계산해요."></textarea>
+  </label>
+  <details class="att" id="att">
+    <summary>같이 보낼 화면 결과 <small id="attn">파일을 넣으면 자동으로 붙어요</small></summary>
+    <div class="brief" id="brief"></div>
+  </details>
+  <p class="att-tip">보내기 전에 「같이 보낼 화면 결과」를 펼쳐 확인해 주세요. 열 이름에 회사가 드러나는 말이 있으면 메일에서 지우셔도 돼요.</p>
   <div class="sendrow">
     <a class="ds-btn-pill primary" id="mail" href="mailto:reflo2026@naver.com" data-track="audit_review_mail"><i class="ti ti-mail"></i> 메일로 보내기</a>
     <button type="button" class="ds-btn-pill ghost" id="cp"><i class="ti ti-copy"></i> 내용 복사</button>
     <span class="mono">reflo2026@naver.com</span>
+    <span class="tip">메일 앱이 열리지 않으면 [내용 복사]를 누르고, 쓰시는 메일에서 위 주소로 붙여 넣어 보내 주세요.</span>
   </div>
 </section>
 
@@ -449,13 +468,20 @@ details.fix summary small{font-size:var(--fs-caption);font-weight:var(--fw-regul
       var r원 = A.검산(파.시트들[안원본.i], XLSX, { csv: 파.csv });
       if (!r원.문제) { 볼 = r원; 앞 = "원본 시트의 "; }
     }
+    var 모음 = {}, 차례 = [];
     볼.찾은것.forEach(function (f) {
-      if (쓴[f.종류 + f.열]) return; 쓴[f.종류 + f.열] = 1;
-      if (f.종류 === "합계줄") { if (!앞 && f.건수 === 1) return; 줄.push(앞 + "사이사이 섞인 <b>소계·합계 줄을 빼고</b> 마지막에 한 번만 더해요."); }
-      else if (f.종류 === "표기") 줄.push(앞 + "「" + esc(f.열) + "」 열의 <b>표기만 다른 이름을 하나로 맞춰요.</b>");
-      else if (f.종류 === "날짜" || f.종류 === "날짜전부글자") 줄.push(앞 + "「" + esc(f.열) + "」 열의 <b>글자로 된 날짜를 날짜로 바꿔요.</b>");
-      else if (f.종류 === "숫자") 줄.push(앞 + "「" + esc(f.열) + "」 열의 <b>「원」이 붙은 금액은 숫자로 바꾸고, 읽을 수 없는 칸은 따로 표시해요.</b>");
-      else if (f.종류 === "중복") 줄.push(앞 + "<b>모든 칸이 같은 줄은 지우지 않고 표시해서</b> 맞는지 확인받아요.");
+      var k = f.종류 === "날짜전부글자" ? "날짜" : f.종류;
+      if (k === "합계줄" && !앞 && f.건수 === 1) return;     // 보고서 맨 아래 합계 한 줄은 보통이라 뺀다
+      if (!모음[k]) { 모음[k] = []; 차례.push(k); }
+      if (f.열 && 모음[k].indexOf(f.열) < 0) 모음[k].push(f.열);
+    });
+    function 열들(k) { var c = 모음[k]; return c.length ? "「" + c.slice(0, 3).map(esc).join("」「") + "」" + (c.length > 3 ? " 외 " + (c.length - 3) + "개" : "") + " 열의 " : ""; }
+    차례.forEach(function (k) {
+      if (k === "합계줄") 줄.push(앞 + "사이사이 섞인 <b>소계·합계 줄을 빼고</b> 마지막에 한 번만 더해요.");
+      else if (k === "표기") 줄.push(앞 + 열들(k) + "<b>표기만 다른 이름을 하나로 맞춰요.</b>");
+      else if (k === "날짜") 줄.push(앞 + 열들(k) + "<b>글자로 된 날짜를 날짜로 바꿔요.</b>");
+      else if (k === "숫자") 줄.push(앞 + 열들(k) + "<b>숫자 사이에 섞인 글자 칸</b>(「-」, 「12%」, 「1,200원」 같은 것)은 숫자로 읽거나 따로 표시해요.");
+      else if (k === "중복") 줄.push(앞 + "<b>모든 칸이 같은 줄은 지우지 않고 표시해서</b> 맞는지 확인받아요.");
     });
     if (이음) {
       var 결숫자 = 파.r.숫자열.map(function (x) { return String(x.열).replace(/\s/g, ""); });
@@ -474,7 +500,7 @@ details.fix summary small{font-size:var(--fs-caption);font-weight:var(--fw-regul
 
   // ── 검토 요청 글 (시트 이름·파일 경로는 넣지 않는다) ──
   function 요약(제목, 시간, 순서) {
-    var a = 답(), 줄 = ["[자동화 검토 요청]", "· 하는 일: (두서없이 적어 주세요. 어디서 받아서, 무엇을 하고, 누구에게 내는지)"];
+    var a = 답(), 줄 = [];
     if (a.src) 줄.push("· 숫자가 오는 곳: " + a.src.글);
     if (a.freq) 줄.push("· 얼마나 자주: " + a.freq.글);
     if (a.dur) 줄.push("· 한 번 걸리는 시간: " + a.dur.글);
@@ -486,15 +512,25 @@ details.fix summary small{font-size:var(--fs-caption);font-weight:var(--fw-regul
     if (원 && 원.r && !원.r.문제) 줄.push("· 받은 자료의 열: " + 원.r.열.filter(function (c) { return c.이름; }).map(function (c) { return c.이름; }).slice(0, 12).join(", ") + " (" + 원.r.줄수.자료 + "줄)");
     if (제목) 줄.push("", "[화면 판정] " + 제목 + " · 1년에 약 " + 시간 + "시간");
     if (순서 && 순서.length) { 줄.push("[화면이 짠 순서 · 어림]"); 순서.forEach(function (x, i) { 줄.push((i + 1) + ". " + x.replace(/<[^>]+>/g, "")); }); }
-    줄.push("", "파일은 붙여도, 가려서 붙여도, 안 붙여도 괜찮아요.");
-    var 글 = 줄.join("\n");
-    $("brief").textContent = 글;
-    $("mail").href = "mailto:reflo2026@naver.com?subject=" + encodeURIComponent("[자동화 검토] ") + "&body=" + encodeURIComponent(글);
+    var 글 = 줄.join("\n").replace(/^\n+/, "");
+    $("brief").textContent = 글 || "아직 넣은 파일이 없어요. 글만 보내셔도 돼요.";
+    $("attn").textContent = 글 ? (제목 ? "판정과 순서까지 붙어요" : "고른 답이 붙어요") : "파일을 넣으면 자동으로 붙어요";
+    화면결과 = 글;
+    메일();
   }
+  var 화면결과 = "";
+  function 보낼글() {
+    var 적은 = $("say").value.trim();
+    return "[자동화 검토 요청]\n\n[하는 일]\n" + (적은 || "(적지 않음)") + (화면결과 ? "\n\n[화면 결과]\n" + 화면결과 : "") + "\n\n파일은 붙여도, 가려서 붙여도, 안 붙여도 괜찮아요.";
+  }
+  function 메일() {
+    $("mail").href = "mailto:reflo2026@naver.com?subject=" + encodeURIComponent("[자동화 검토] ") + "&body=" + encodeURIComponent(보낼글());
+  }
+  $("say").addEventListener("input", 메일);
   요약();
   $("cp").addEventListener("click", function () {
     var b = this;
-    if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText($("brief").textContent).then(function () { b.innerHTML = '<i class="ti ti-check"></i> 복사했어요'; }, function () {});
+    if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(보낼글()).then(function () { b.innerHTML = '<i class="ti ti-check"></i> 복사했어요'; }, function () {});
     센다("audit_review_copy");
   });
 
