@@ -32,7 +32,7 @@
   .chip{flex:none;height:38px;padding:0 15px;border-radius:var(--radius-pill);border:1px solid var(--border);background:var(--surface);
     font:inherit;font-size:var(--fs-caption);color:var(--text-secondary);cursor:pointer;white-space:nowrap}
   .chip:hover{border-color:var(--accent);color:var(--accent-strong)}
-  .chip[aria-selected="true"]{background:var(--accent);border-color:var(--accent);color:#fff;font-weight:var(--fw-medium)}
+  .chip[aria-selected="true"]{background:var(--accent-strong);border-color:var(--accent-strong);color:#fff;font-weight:var(--fw-medium)}
   .chip:focus-visible{outline:none;box-shadow:var(--shadow-focus)}
 
   .stage{max-width:1120px;margin:0 auto;padding:28px 20px 0;display:grid;grid-template-columns:minmax(0,5fr) minmax(0,8fr);gap:20px;align-items:start}
@@ -81,6 +81,7 @@
   .seg.on{display:inline-flex}
   .seg button{height:28px;padding:0 12px;border:0;border-radius:var(--radius-pill);background:transparent;font:inherit;font-size:var(--fs-footnote);
     color:var(--text-secondary);cursor:pointer;white-space:nowrap}
+  @media(max-width:720px){.chip,.seg button{min-height:40px}}
   .seg button[aria-pressed="true"]{background:var(--surface);color:var(--accent-strong);font-weight:var(--fw-medium);box-shadow:0 1px 2px rgba(25,45,80,.12)}
   .altnote{margin:0;padding:10px 16px;border-bottom:1px solid var(--border);background:var(--accent-bg);font-size:var(--fs-footnote);line-height:1.65;
     color:var(--accent-strong);word-break:keep-all}
@@ -91,7 +92,7 @@
   .next b{display:block;font-size:var(--fs-caption);color:var(--text-primary);font-weight:var(--fw-medium);word-break:keep-all}
   .next span{display:block;margin-top:3px;font-size:var(--fs-footnote);color:var(--accent-strong)}
   @media(max-width:560px){.next{grid-template-columns:1fr}.paper-bar{flex-wrap:wrap}.seg{margin-left:0}}
-  .note{max-width:760px;margin:44px auto 0;padding:0 20px;font-size:var(--fs-caption);color:var(--text-tertiary);line-height:1.8;text-align:center;word-break:keep-all}
+  .note{max-width:46em;margin:44px auto 0;padding:0 20px;font-size:var(--fs-caption);color:var(--text-tertiary);line-height:1.8;text-align:center;word-break:keep-all}
   @media(max-width:860px){.stage{grid-template-columns:1fr}.paper-body.clip{max-height:520px}}
 </style>
 </head>
@@ -112,7 +113,7 @@
   <h1>설명은 줄이고,<br>나온 결과를 그대로 보여 드려요</h1>
   <p>절차를 하나 누르면 넣은 말과 Claude가 낸 결과가 나와요. 고쳐 쓰지 않은 실제 결과예요.</p>
   <div class="legend">
-    <span><i class="k-unk"></i> 모르는 것 — 지어내지 않고 표시한 곳</span>
+    <span><i class="k-unk"></i> 모르는 것: 지어내지 않고 표시한 곳</span>
     <span><i class="k-ask"></i> 한 번에 모아 물어본 곳</span>
   </div>
 </header>

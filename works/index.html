@@ -93,11 +93,11 @@ a{color:var(--accent-ink);text-underline-offset:3px}
 .brand{display:flex;align-items:baseline;gap:11px;margin-bottom:28px}
 .brand b{font:600 16px/1 var(--mono);letter-spacing:-.01em;color:var(--ink)}
 .brand span{font:400 12px/1 var(--mono);letter-spacing:.12em;color:var(--ink3);text-transform:uppercase}
-.hero h1 em{font-style:normal;color:var(--accent)}
+.hero h1 em{font-style:normal;color:var(--accent-ink)}
 .cta{display:flex;flex-wrap:wrap;gap:10px;margin-top:26px}
 .btn{display:inline-flex;align-items:center;padding:12px 19px;border-radius:7px;
   font-size:15px;font-weight:600;text-decoration:none;border:1px solid transparent}
-.btn.fill{background:var(--accent);color:#fff}
+.btn.fill{background:var(--accent-strong);color:#fff}
 .btn.line{border-color:var(--rule2);color:var(--ink)}
 .btn:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
 .prod{display:block;border:1px solid var(--rule2);border-radius:var(--radius-lg);
@@ -105,8 +105,8 @@ a{color:var(--accent-ink);text-underline-offset:3px}
   transition:border-color .12s ease,background-color .12s ease}
 .prod:hover{border-color:var(--accent);background:var(--accent-soft)}
 .prod:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
-.prod .tag{display:block;font:600 11.5px/1 var(--mono);letter-spacing:.1em;
-  text-transform:uppercase;color:var(--accent);margin-bottom:11px}
+.prod .tag{display:block;font:600 12px/1 var(--mono);letter-spacing:.1em;
+  text-transform:uppercase;color:var(--accent-ink);margin-bottom:11px}
 .prod b{display:block;font-size:clamp(18px,3vw,21px);font-weight:600;
   letter-spacing:-.02em;margin-bottom:8px;color:var(--ink)}
 .prod .d{display:block;font-size:15px;line-height:1.75;color:var(--ink2)}
@@ -127,17 +127,17 @@ a{color:var(--accent-ink);text-underline-offset:3px}
 .work summary h2{margin:0 0 6px;font-size:clamp(19px,3vw,23px)}
 .work summary p{margin:0;font-size:15px}
 .work-no{display:block;font:600 12px/1 var(--mono);letter-spacing:.1em;
-  color:var(--accent);margin-bottom:9px}
+  color:var(--accent-ink);margin-bottom:9px}
 .work .more{display:inline-flex;align-items:center;gap:6px;margin-top:12px;
   font:600 13.5px/1 var(--sans);color:var(--accent-ink)}
-.work .more::after{content:"▾";font-size:11px}
+.work .more::after{content:"▾";font-size:12px}
 .work[open] .more::after{content:"▴"}
 .work[open] summary{border-bottom:1px solid var(--rule)}
 .work summary:focus-visible{outline:2px solid var(--accent);outline-offset:-2px}
 .work summary:hover .more{text-decoration:underline}
 .facts{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:1px;background:var(--rule)}
 .fact{background:var(--card);padding:14px 20px;min-width:0}
-.fact dt{font:500 11px/1 var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--ink3);margin-bottom:6px}
+.fact dt{font:500 12px/1 var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--ink3);margin-bottom:6px}
 .fact dd{margin:0;font-size:14.5px;line-height:1.6;color:var(--ink2)}
 .fact dd b{color:var(--ink);font-weight:600;font-variant-numeric:tabular-nums}
 .note{padding:0 24px 20px;font-size:13px;color:var(--ink3);margin:0}
@@ -148,14 +148,14 @@ a{color:var(--accent-ink);text-underline-offset:3px}
 .dh b{color:var(--ink)}
 .dg{display:grid;grid-template-columns:1fr 1fr;gap:14px}
 @media (max-width:660px){.dg{grid-template-columns:1fr}}
-.dt{margin:0 0 7px;font:600 11.5px/1 var(--mono);letter-spacing:.09em;
+.dt{margin:0 0 7px;font:600 12px/1 var(--mono);letter-spacing:.09em;
   text-transform:uppercase;color:var(--ink3)}
-.dt em{font-style:normal;color:var(--accent);margin-left:5px;text-transform:none;letter-spacing:0}
+.dt em{font-style:normal;color:var(--accent-ink);margin-left:5px;text-transform:none;letter-spacing:0}
 .tw{overflow-x:auto;border:1px solid var(--rule);border-radius:8px;background:var(--card);min-width:0}
 .tw table{border-collapse:collapse;width:100%;font-size:13px;font-variant-numeric:tabular-nums}
 .tw th,.tw td{border-bottom:1px solid var(--rule);border-right:1px solid var(--rule);
   padding:7px 9px;text-align:left;white-space:nowrap}
-.tw th{background:var(--paper);font-weight:600;font-size:11.5px;color:var(--ink3)}
+.tw th{background:var(--paper);font-weight:600;font-size:12px;color:var(--ink3)}
 .tw tr:last-child td{border-bottom:0}
 .tw th:last-child,.tw td:last-child{border-right:0}
 .tw td.ed{background:var(--accent-soft);cursor:text}
@@ -174,7 +174,7 @@ textarea.din:focus{outline:2px solid var(--accent);outline-offset:-2px}
 .tally{display:grid;grid-template-columns:repeat(auto-fit,minmax(110px,1fr));gap:1px;
   background:var(--rule);border:1px solid var(--rule);border-radius:8px;overflow:hidden;margin:14px 0}
 .tally div{background:var(--card);padding:12px 14px;min-width:0}
-.tally dt{font:500 11px/1 var(--mono);letter-spacing:.08em;text-transform:uppercase;
+.tally dt{font:500 12px/1 var(--mono);letter-spacing:.08em;text-transform:uppercase;
   color:var(--ink3);margin-bottom:6px}
 .tally dd{margin:0;font-size:21px;font-weight:700;font-variant-numeric:tabular-nums;letter-spacing:-.02em}
 .tally dd small{font-size:13px;font-weight:500;color:var(--ink3);margin-left:3px}
@@ -184,11 +184,11 @@ textarea.din:focus{outline:2px solid var(--accent);outline-offset:-2px}
 .seg button{border:0;background:var(--card);color:var(--ink2);font:600 13.5px/1 var(--sans);
   padding:10px 15px;cursor:pointer}
 .seg button+button{border-left:1px solid var(--rule2)}
-.seg button[aria-pressed="true"]{background:var(--accent);color:#fff}
+.seg button[aria-pressed="true"]{background:var(--accent-strong);color:#fff}
 .seg button:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
 .bars{display:flex;align-items:flex-end;gap:2px;height:72px;margin:4px 0 12px;
   border-bottom:1px solid var(--rule2);padding-bottom:1px}
-.bars i{flex:1;background:var(--accent);border-radius:2px 2px 0 0;min-width:3px;
+.bars i{flex:1;background:var(--accent-strong);border-radius:2px 2px 0 0;min-width:3px;
   transition:height .25s ease}
 .bars i.z{background:var(--no)}
 @media (prefers-reduced-motion:reduce){.bars i{transition:none}}
@@ -213,7 +213,7 @@ pre.vba .c{color:#7ee2b8}
 .ways.major p{font-size:16px}
 .way{background:var(--card);min-width:0}
 .way h3{display:flex;align-items:baseline;gap:10px}
-.way h3 i{font:600 12px/1 var(--mono);color:var(--accent);font-style:normal;flex:none}
+.way h3 i{font:600 12px/1 var(--mono);color:var(--accent-ink);font-style:normal;flex:none}
 .way p{margin:0}
 .way .ev{margin-top:12px;background:var(--paper);border:1px solid var(--rule);
   border-radius:7px;padding:10px 12px;overflow-x:auto;
@@ -267,7 +267,7 @@ footer{padding-block:30px 52px;border-top:1px solid var(--rule);
 .more-ways summary{cursor:pointer;list-style:none;display:inline-flex;align-items:center;gap:7px;
   font:600 14px/1 var(--sans);color:var(--accent-ink);padding:9px 0}
 .more-ways summary::-webkit-details-marker{display:none}
-.more-ways summary::after{content:"▾";font-size:11px}
+.more-ways summary::after{content:"▾";font-size:12px}
 .more-ways[open] summary::after{content:"▴"}
 .more-ways summary:hover span{text-decoration:underline}
 .more-ways .ways{margin-top:10px}
@@ -284,13 +284,15 @@ footer{padding-block:30px 52px;border-top:1px solid var(--rule);
 /* ───── 마케팅 섹션 리듬 (/mailer 와 같은 뼈대) ───── */
 .wrap{max-width:1040px}
 section{padding-block:clamp(56px,7vw,80px);text-align:center}
-section > :not(.eyebrow):not(h2):not(.lead){text-align:left}
+section > :not(.eyebrow):not(h2):not(h1):not(.lead){text-align:left}
 section > .eyebrow{display:inline-flex;align-items:center;background:var(--card);
   border:1px solid var(--rule2);border-radius:999px;padding:7px 15px;margin-bottom:16px;
   font:500 13px/1 var(--sans);letter-spacing:0;text-transform:none;
   color:var(--accent-strong);box-shadow:var(--shadow-card)}
 section > .eyebrow::after{display:none}
-section > h2{font-size:clamp(26px,4vw,36px);letter-spacing:-.8px;line-height:1.3}
+section > h2,section > h1.pg-h1{font-size:clamp(26px,4vw,36px);letter-spacing:-.8px;line-height:1.3}
+section > h1.pg-h1{font-weight:700;margin:0 0 12px}
+@media(max-width:720px){.seg button,.more-ways summary{min-height:40px}}
 section > .lead{max-width:30em;margin-left:auto;margin-right:auto;
   font-size:16.5px;color:var(--ink2)}
 /* 본문 블록은 읽기 좋은 폭으로 되돌린다 */
@@ -305,7 +307,7 @@ section > ol,section > table,section > .rows,section > p:not(.lead):not(.eyebrow
 .job{background:var(--card);border:1px solid var(--rule);border-radius:var(--radius-lg);
   padding:22px 24px;box-shadow:var(--shadow-card)}
 .job .ico{width:44px;height:44px;border-radius:13px;background:var(--accent-bg);
-  color:var(--accent);display:flex;align-items:center;justify-content:center;font-size:22px}
+  color:var(--accent-ink);display:flex;align-items:center;justify-content:center;font-size:22px}
 .job p{margin:13px 0 0;font-size:15px;line-height:1.7;color:var(--ink2)}
 .job p strong{color:var(--ink);font-weight:600}
 @media(max-width:860px){.jobs{grid-template-columns:1fr 1fr}}
@@ -319,14 +321,14 @@ section > ol,section > table,section > .rows,section > p:not(.lead):not(.eyebrow
 .rrow .tr{position:relative;height:22px;cursor:default}
 .rrow .tr::before{content:"";position:absolute;left:50%;top:0;bottom:0;width:1px;background:var(--rule2)}
 .rrow .br{position:absolute;top:5px;height:12px}
-.rrow .br.up{left:50%;background:var(--accent);border-radius:0 4px 4px 0}
+.rrow .br.up{left:50%;background:var(--accent-strong);border-radius:0 4px 4px 0}
 .rrow .br.dn{right:50%;background:var(--warm);border-radius:4px 0 0 4px}
 .rrow .vl{text-align:right;font-variant-numeric:tabular-nums;color:var(--ink);font-weight:600}
 .rrow:hover .nm{color:var(--ink)}
 .rleg{display:flex;gap:16px;margin:10px 0 0;font-size:12.5px;color:var(--ink3)}
 .rleg span{display:inline-flex;align-items:center;gap:6px}
 .rk{width:10px;height:10px;border-radius:3px;display:inline-block}
-.rk.up{background:var(--accent)}.rk.dn{background:var(--warm)}
+.rk.up{background:var(--accent-strong)}.rk.dn{background:var(--warm)}
 .rtip{position:fixed;z-index:1500;pointer-events:none;background:var(--ink);color:var(--card);
   font-size:12.5px;line-height:1.6;padding:8px 11px;border-radius:8px;opacity:0;transition:opacity .1s;
   font-variant-numeric:tabular-nums;white-space:nowrap}
@@ -377,7 +379,7 @@ a.job:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
 <div class="wrap">
 <section>
   <p class="eyebrow">작업물</p>
-  <h2>만든 것 — 직접 돌려 보세요</h2>
+  <h1 class="pg-h1">만든 것, 직접 돌려 보세요</h1>
   <p class="lead" style="margin-bottom:26px">건마다 <strong>직접 돌려보실 데모</strong>가 있어요. 값을 바꿔 가며 눌러보세요.<br>
     만드는 건 누구나 하니까, <strong>조용히 틀릴 뻔한 걸 어떻게 잡았는지</strong>도 같이 적었어요.</p>
 
@@ -395,7 +397,7 @@ a.job:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
       <div class="fact"><dt>한 일</dt><dd><b>같은 기간끼리</b> 비교하고 합계를 원본과 대조</dd></div>
     </dl>
     <div class="demo">
-      <p class="dh"><b>직접 해보세요</b> — 숫자를 고치면 아래 보고가 바로 바뀝니다 (거래처｜작년 전체｜작년 1~10월｜올해 1~10월)</p>
+      <p class="dh"><b>직접 해보세요.</b> 숫자를 고치면 아래 보고가 바로 바뀝니다 (거래처｜작년 전체｜작년 1~10월｜올해 1~10월)</p>
       <textarea class="din" id="rIn" spellcheck="false" aria-label="거래처별 실적"></textarea>
       <div class="seg" id="rSeg" style="margin-top:14px">
         <button type="button" data-v="raw" aria-pressed="true">작년 전체와 비교</button>
@@ -426,7 +428,7 @@ a.job:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
       <div class="fact"><dt>한 일</dt><dd>그 열만 <b>만들지 않고</b> 질문으로 돌려드림</dd></div>
     </dl>
     <div class="demo">
-      <p class="dh"><b>직접 해보세요</b> — 오른쪽 표의 값을 고치면 일치율이 바로 바뀝니다</p>
+      <p class="dh"><b>직접 해보세요.</b> 오른쪽 표의 값을 고치면 일치율이 바로 바뀝니다</p>
       <div class="dg">
         <div><p class="dt">전 · 받으신 파일</p><div class="tw"><table id="tA"></table></div></div>
         <div><p class="dt">후 · 손으로 고치신 파일 <em>고쳐 보세요</em></p><div class="tw"><table id="tB"></table></div></div>
@@ -453,7 +455,7 @@ a.job:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
       <div class="fact"><dt>한 일</dt><dd>지우지 않고 <b>사유와 함께</b> 표시</dd></div>
     </dl>
     <div class="demo">
-      <p class="dh"><b>직접 해보세요</b> — 줄을 고치거나 더 넣어 보시면 결과가 바로 바뀝니다</p>
+      <p class="dh"><b>직접 해보세요.</b> 줄을 고치거나 더 넣어 보시면 결과가 바로 바뀝니다</p>
       <p class="dt">받은 명단 <em>고쳐 보세요</em></p>
       <textarea class="din" id="nIn" spellcheck="false"></textarea>
       <dl class="tally" id="nTally"></dl>
@@ -476,14 +478,14 @@ a.job:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
       <div class="fact"><dt>또 하나</dt><dd>“가장 적은 날”이 <b>사실이 아님</b></dd></div>
     </dl>
     <div class="demo">
-      <p class="dh"><b>직접 해보세요</b> — 버튼을 눌러 보시면 같은 자료로 두 개의 평균이 나옵니다</p>
+      <p class="dh"><b>직접 해보세요.</b> 버튼을 눌러 보시면 같은 자료로 두 개의 평균이 나옵니다</p>
       <div class="seg" id="zSeg">
         <button type="button" data-v="raw" aria-pressed="true">원본 그대로</button>
         <button type="button" data-v="fill" aria-pressed="false">0건인 날 채우기</button>
       </div>
       <div class="bars" id="zBars"></div>
       <dl class="tally" id="zTally"></dl>
-      <p id="zSay" style="margin:0;font-size:15px"></p>
+      <p id="zSay" style="margin:0;font-size:15px;max-width:46em"></p>
     </div>
     <p class="note">예시 데이터입니다. 10월 31일치이고 0건인 날이 6일 섞여 있습니다.</p>
   </details>
@@ -502,7 +504,7 @@ a.job:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
       <div class="fact"><dt>한 일</dt><dd>버리지 않고 <b>왜 빠지는지</b>와 함께 돌려드림</dd></div>
     </dl>
     <div class="demo">
-      <p class="dh"><b>직접 해보세요</b> — 500줄짜리 예시 명단입니다. 줄을 고치거나 지워 보세요</p>
+      <p class="dh"><b>직접 해보세요.</b> 500줄짜리 예시 명단입니다. 줄을 고치거나 지워 보세요</p>
       <p class="dt">붙여넣은 명단 <em>고쳐 보세요</em></p>
       <textarea class="din" id="mIn" spellcheck="false" style="min-height:120px"></textarea>
       <dl class="tally" id="mTally"></dl>
@@ -525,7 +527,7 @@ a.job:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
       <div class="fact"><dt>매주</dt><dd>전부 다시 읽는 대신 <b>달라진 줄만</b></dd></div>
     </dl>
     <div class="demo">
-      <p class="dh"><b>직접 해보세요</b> — 이번 수집 표의 값을 고치면 변경 목록이 바로 바뀝니다</p>
+      <p class="dh"><b>직접 해보세요.</b> 이번 수집 표의 값을 고치면 변경 목록이 바로 바뀝니다</p>
       <div class="dg">
         <div><p class="dt">지난번 수집</p><div class="tw"><table id="dA"></table></div></div>
         <div><p class="dt">이번 수집 <em>고쳐 보세요</em></p><div class="tw"><table id="dB"></table></div></div>
@@ -549,7 +551,7 @@ a.job:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
       <div class="fact"><dt>원칙</dt><dd><b>고치지 않고 보고만</b> 합니다</dd></div>
     </dl>
     <div class="demo">
-      <p class="dh"><b>직접 해보세요</b> — 글을 고치거나 붙여넣으면 바로 다시 검사합니다</p>
+      <p class="dh"><b>직접 해보세요.</b> 글을 고치거나 붙여넣으면 바로 다시 검사합니다</p>
       <p class="dt">검사할 문서 <em>고쳐 보세요</em></p>
       <textarea class="din" id="cIn" spellcheck="false"></textarea>
       <dl class="tally" id="cTally"></dl>
@@ -573,7 +575,7 @@ a.job:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
       <div class="fact"><dt>원칙</dt><dd>지우지 않고 <b>옮기고, 되돌릴 수 있게</b></dd></div>
     </dl>
     <div class="demo">
-      <p class="dh"><b>직접 해보세요</b> — 줄을 고치면 판정이 바로 바뀝니다 (이름｜크기｜수정시각｜폴더)</p>
+      <p class="dh"><b>직접 해보세요.</b> 줄을 고치면 판정이 바로 바뀝니다 (이름｜크기｜수정시각｜폴더)</p>
       <p class="dt">파일 목록 <em>고쳐 보세요</em></p>
       <textarea class="din" id="fIn" spellcheck="false" style="min-height:150px"></textarea>
       <dl class="tally" id="fTally"></dl>
@@ -584,7 +586,7 @@ a.job:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
     <p class="note">예시 목록입니다. 실제로는 내용을 열지 않고 이름·크기·시각만 봅니다.</p>
   </details>
 
-  <p class="note" style="margin-top:22px;padding:0;text-align:center">위 작업물은 보여드리려고 <strong>예시 데이터로 다시 만든 것</strong>이에요.
+  <p class="note" style="margin:22px auto 0;padding:0;text-align:center;max-width:46em">위 작업물은 보여드리려고 <strong>예시 데이터로 다시 만든 것</strong>이에요.
     실제 의뢰 건의 자료는 쓰지 않고, 받은 파일은 작업이 끝나면 지워요.</p>
 </section>
 

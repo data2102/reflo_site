@@ -95,11 +95,11 @@ a{color:var(--accent-ink);text-underline-offset:3px}
 .brand{display:flex;align-items:baseline;gap:11px;margin-bottom:28px}
 .brand b{font:600 16px/1 var(--mono);letter-spacing:-.01em;color:var(--ink)}
 .brand span{font:400 12px/1 var(--mono);letter-spacing:.12em;color:var(--ink3);text-transform:uppercase}
-.hero h1 em{font-style:normal;color:var(--accent)}
+.hero h1 em{font-style:normal;color:var(--accent-ink)}
 .cta{display:flex;flex-wrap:wrap;gap:10px;margin-top:26px}
 .btn{display:inline-flex;align-items:center;padding:12px 19px;border-radius:7px;
   font-size:15px;font-weight:600;text-decoration:none;border:1px solid transparent}
-.btn.fill{background:var(--accent);color:#fff}
+.btn.fill{background:var(--accent-strong);color:#fff}
 .btn.line{border-color:var(--rule2);color:var(--ink)}
 .btn:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
 .prod{display:block;border:1px solid var(--rule2);border-radius:var(--radius-lg);
@@ -107,8 +107,8 @@ a{color:var(--accent-ink);text-underline-offset:3px}
   transition:border-color .12s ease,background-color .12s ease}
 .prod:hover{border-color:var(--accent);background:var(--accent-soft)}
 .prod:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
-.prod .tag{display:block;font:600 11.5px/1 var(--mono);letter-spacing:.1em;
-  text-transform:uppercase;color:var(--accent);margin-bottom:11px}
+.prod .tag{display:block;font:600 12px/1 var(--mono);letter-spacing:.1em;
+  text-transform:uppercase;color:var(--accent-ink);margin-bottom:11px}
 .prod b{display:block;font-size:clamp(18px,3vw,21px);font-weight:600;
   letter-spacing:-.02em;margin-bottom:8px;color:var(--ink)}
 .prod .d{display:block;font-size:15px;line-height:1.75;color:var(--ink2)}
@@ -129,17 +129,17 @@ a{color:var(--accent-ink);text-underline-offset:3px}
 .work summary h2{margin:0 0 6px;font-size:clamp(19px,3vw,23px)}
 .work summary p{margin:0;font-size:15px}
 .work-no{display:block;font:600 12px/1 var(--mono);letter-spacing:.1em;
-  color:var(--accent);margin-bottom:9px}
+  color:var(--accent-ink);margin-bottom:9px}
 .work .more{display:inline-flex;align-items:center;gap:6px;margin-top:12px;
   font:600 13.5px/1 var(--sans);color:var(--accent-ink)}
-.work .more::after{content:"▾";font-size:11px}
+.work .more::after{content:"▾";font-size:12px}
 .work[open] .more::after{content:"▴"}
 .work[open] summary{border-bottom:1px solid var(--rule)}
 .work summary:focus-visible{outline:2px solid var(--accent);outline-offset:-2px}
 .work summary:hover .more{text-decoration:underline}
 .facts{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:1px;background:var(--rule)}
 .fact{background:var(--card);padding:14px 20px;min-width:0}
-.fact dt{font:500 11px/1 var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--ink3);margin-bottom:6px}
+.fact dt{font:500 12px/1 var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--ink3);margin-bottom:6px}
 .fact dd{margin:0;font-size:14.5px;line-height:1.6;color:var(--ink2)}
 .fact dd b{color:var(--ink);font-weight:600;font-variant-numeric:tabular-nums}
 .note{padding:0 24px 20px;font-size:13px;color:var(--ink3);margin:0}
@@ -150,14 +150,14 @@ a{color:var(--accent-ink);text-underline-offset:3px}
 .dh b{color:var(--ink)}
 .dg{display:grid;grid-template-columns:1fr 1fr;gap:14px}
 @media (max-width:660px){.dg{grid-template-columns:1fr}}
-.dt{margin:0 0 7px;font:600 11.5px/1 var(--mono);letter-spacing:.09em;
+.dt{margin:0 0 7px;font:600 12px/1 var(--mono);letter-spacing:.09em;
   text-transform:uppercase;color:var(--ink3)}
-.dt em{font-style:normal;color:var(--accent);margin-left:5px;text-transform:none;letter-spacing:0}
+.dt em{font-style:normal;color:var(--accent-ink);margin-left:5px;text-transform:none;letter-spacing:0}
 .tw{overflow-x:auto;border:1px solid var(--rule);border-radius:8px;background:var(--card);min-width:0}
 .tw table{border-collapse:collapse;width:100%;font-size:13px;font-variant-numeric:tabular-nums}
 .tw th,.tw td{border-bottom:1px solid var(--rule);border-right:1px solid var(--rule);
   padding:7px 9px;text-align:left;white-space:nowrap}
-.tw th{background:var(--paper);font-weight:600;font-size:11.5px;color:var(--ink3)}
+.tw th{background:var(--paper);font-weight:600;font-size:12px;color:var(--ink3)}
 .tw tr:last-child td{border-bottom:0}
 .tw th:last-child,.tw td:last-child{border-right:0}
 .tw td.ed{background:var(--accent-soft);cursor:text}
@@ -176,7 +176,7 @@ textarea.din:focus{outline:2px solid var(--accent);outline-offset:-2px}
 .tally{display:grid;grid-template-columns:repeat(auto-fit,minmax(110px,1fr));gap:1px;
   background:var(--rule);border:1px solid var(--rule);border-radius:8px;overflow:hidden;margin:14px 0}
 .tally div{background:var(--card);padding:12px 14px;min-width:0}
-.tally dt{font:500 11px/1 var(--mono);letter-spacing:.08em;text-transform:uppercase;
+.tally dt{font:500 12px/1 var(--mono);letter-spacing:.08em;text-transform:uppercase;
   color:var(--ink3);margin-bottom:6px}
 .tally dd{margin:0;font-size:21px;font-weight:700;font-variant-numeric:tabular-nums;letter-spacing:-.02em}
 .tally dd small{font-size:13px;font-weight:500;color:var(--ink3);margin-left:3px}
@@ -186,11 +186,11 @@ textarea.din:focus{outline:2px solid var(--accent);outline-offset:-2px}
 .seg button{border:0;background:var(--card);color:var(--ink2);font:600 13.5px/1 var(--sans);
   padding:10px 15px;cursor:pointer}
 .seg button+button{border-left:1px solid var(--rule2)}
-.seg button[aria-pressed="true"]{background:var(--accent);color:#fff}
+.seg button[aria-pressed="true"]{background:var(--accent-strong);color:#fff}
 .seg button:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
 .bars{display:flex;align-items:flex-end;gap:2px;height:72px;margin:4px 0 12px;
   border-bottom:1px solid var(--rule2);padding-bottom:1px}
-.bars i{flex:1;background:var(--accent);border-radius:2px 2px 0 0;min-width:3px;
+.bars i{flex:1;background:var(--accent-strong);border-radius:2px 2px 0 0;min-width:3px;
   transition:height .25s ease}
 .bars i.z{background:var(--no)}
 @media (prefers-reduced-motion:reduce){.bars i{transition:none}}
@@ -215,7 +215,7 @@ pre.vba .c{color:#7ee2b8}
 .ways.major p{font-size:16px}
 .way{background:var(--card);min-width:0}
 .way h3{display:flex;align-items:baseline;gap:10px}
-.way h3 i{font:600 12px/1 var(--mono);color:var(--accent);font-style:normal;flex:none}
+.way h3 i{font:600 12px/1 var(--mono);color:var(--accent-ink);font-style:normal;flex:none}
 .way p{margin:0}
 .way .ev{margin-top:12px;background:var(--paper);border:1px solid var(--rule);
   border-radius:7px;padding:10px 12px;overflow-x:auto;
@@ -250,6 +250,7 @@ pre.vba .c{color:#7ee2b8}
 .sc.m{background:var(--warn-soft)} .sc.m h3{color:var(--warn)}
 .sc.n{background:var(--no-soft)} .sc.n h3{color:var(--no)}
 
+.contact.maker p{max-width:46em}
 .contact{background:var(--card);border:1px solid var(--rule);border-radius:12px;padding:26px 25px}
 .rows{display:grid;gap:1px;background:var(--rule);border-top:1px solid var(--rule);margin-top:18px}
 .row{background:var(--card);display:flex;flex-wrap:wrap;gap:6px 16px;align-items:baseline;padding:13px 0}
@@ -269,7 +270,7 @@ footer{padding-block:30px 52px;border-top:1px solid var(--rule);
 .more-ways summary{cursor:pointer;list-style:none;display:inline-flex;align-items:center;gap:7px;
   font:600 14px/1 var(--sans);color:var(--accent-ink);padding:9px 0}
 .more-ways summary::-webkit-details-marker{display:none}
-.more-ways summary::after{content:"▾";font-size:11px}
+.more-ways summary::after{content:"▾";font-size:12px}
 .more-ways[open] summary::after{content:"▴"}
 .more-ways summary:hover span{text-decoration:underline}
 .more-ways .ways{margin-top:10px}
@@ -307,7 +308,7 @@ section > ol,section > table,section > .rows,section > p:not(.lead):not(.eyebrow
 .job{background:var(--card);border:1px solid var(--rule);border-radius:var(--radius-lg);
   padding:22px 24px;box-shadow:var(--shadow-card)}
 .job .ico{width:44px;height:44px;border-radius:13px;background:var(--accent-bg);
-  color:var(--accent);display:flex;align-items:center;justify-content:center;font-size:22px}
+  color:var(--accent-ink);display:flex;align-items:center;justify-content:center;font-size:22px}
 .job p{margin:13px 0 0;font-size:15px;line-height:1.7;color:var(--ink2)}
 .job p strong{color:var(--ink);font-weight:600}
 @media(max-width:860px){.jobs{grid-template-columns:1fr 1fr}}
@@ -321,14 +322,14 @@ section > ol,section > table,section > .rows,section > p:not(.lead):not(.eyebrow
 .rrow .tr{position:relative;height:22px;cursor:default}
 .rrow .tr::before{content:"";position:absolute;left:50%;top:0;bottom:0;width:1px;background:var(--rule2)}
 .rrow .br{position:absolute;top:5px;height:12px}
-.rrow .br.up{left:50%;background:var(--accent);border-radius:0 4px 4px 0}
+.rrow .br.up{left:50%;background:var(--accent-strong);border-radius:0 4px 4px 0}
 .rrow .br.dn{right:50%;background:var(--warm);border-radius:4px 0 0 4px}
 .rrow .vl{text-align:right;font-variant-numeric:tabular-nums;color:var(--ink);font-weight:600}
 .rrow:hover .nm{color:var(--ink)}
 .rleg{display:flex;gap:16px;margin:10px 0 0;font-size:12.5px;color:var(--ink3)}
 .rleg span{display:inline-flex;align-items:center;gap:6px}
 .rk{width:10px;height:10px;border-radius:3px;display:inline-block}
-.rk.up{background:var(--accent)}.rk.dn{background:var(--warm)}
+.rk.up{background:var(--accent-strong)}.rk.dn{background:var(--warm)}
 .rtip{position:fixed;z-index:1500;pointer-events:none;background:var(--ink);color:var(--card);
   font-size:12.5px;line-height:1.6;padding:8px 11px;border-radius:8px;opacity:0;transition:opacity .1s;
   font-variant-numeric:tabular-nums;white-space:nowrap}
@@ -395,7 +396,7 @@ a.job:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
     </a>
   </div>
   <h2 class="ds-hub-sec">이런 순간, 있으셨죠 <small>누르면 그 순간에 바로 쓸 수 있는 것으로 가요</small></h2>
-  <label class="ds-search"><i class="ti ti-search"></i><input id="hubQ" type="search" placeholder="찾기 — 예: 인수인계, 합계, 주간" autocomplete="off" aria-label="양식·도구·글 찾기"></label>
+  <label class="ds-search"><i class="ti ti-search"></i><input id="hubQ" type="search" placeholder="찾기 (예: 인수인계, 합계, 주간)" autocomplete="off" aria-label="양식·도구·글 찾기"></label>
   <div class="ds-chips" id="hubChips" role="group" aria-label="갈래">
     <button class="ds-chip" data-c="" aria-pressed="true">전체</button><button class="ds-chip" data-c="양식" aria-pressed="false">양식</button><button class="ds-chip" data-c="도구" aria-pressed="false">도구</button><button class="ds-chip" data-c="글" aria-pressed="false">글</button>
     <span class="count" id="hubCount"></span>

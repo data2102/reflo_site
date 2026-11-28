@@ -59,7 +59,8 @@
   .pass .pt{margin:0 0 8px;font-size:var(--fs-caption);font-weight:var(--fw-bold);color:var(--success-strong)}
   .pass label{display:flex;gap:10px;align-items:flex-start;font-size:var(--fs-body);line-height:1.6;color:var(--text-secondary);padding:4px 0;cursor:pointer}
   .pass input{margin-top:4px;width:16px;height:16px;accent-color:var(--accent);flex:none}
-  .stuck{margin:16px 0 0;font-size:var(--fs-caption);color:var(--text-tertiary);line-height:1.7}
+  .ex p{max-width:46em}
+  .stuck{max-width:46em;margin:16px 0 0;font-size:var(--fs-caption);color:var(--text-tertiary);line-height:1.7}
   .honest{max-width:720px;margin:64px auto 0;padding:18px 22px;border-radius:var(--radius-lg);background:var(--warm-bg);
     font-size:var(--fs-body);line-height:var(--lh-body);color:var(--text-secondary);text-align:left}
   .honest b{color:var(--warm)}
@@ -97,11 +98,11 @@
   <h2 class="ds-mkt-h2">닷새 동안 하는 일</h2>
   <p class="ds-mkt-lead">하루에 하나씩, 끝나면 손에 남는 것이 있어요.</p>
   <div class="plan" id="plan">
-    <a href="#d1" data-d="1"><b>1일차</b><span>근무 수칙 주기 — 같은 요청을 두 번 시켜 보기</span><em>지어내지 않는 Claude</em></a>
-    <a href="#d2" data-d="2"><b>2일차</b><span>회사와 나를 소개하기 — 내 메일로 말투 익히게 하기</span><em>내 말투가 담긴 프로필</em></a>
-    <a href="#d3" data-d="3"><b>3일차</b><span>업무 매뉴얼을 우리 양식으로 — 보고서 양식 바꾸기</span><em>회사 양식으로 나오는 절차</em></a>
-    <a href="#d4" data-d="4"><b>4일차</b><span>내 일을 인수인계하기 — 반복 업무 하나를 새 절차로</span><em>내 업무 전용 절차</em></a>
-    <a href="#d5" data-d="5"><b>5일차</b><span>수습 평가 — 세 번 돌려 보고 팀과 나누기</span><em>믿고 맡길 근거</em></a>
+    <a href="#d1" data-d="1"><b>1일차</b><span>근무 수칙 주기: 같은 요청을 두 번 시켜 보기</span><em>지어내지 않는 Claude</em></a>
+    <a href="#d2" data-d="2"><b>2일차</b><span>회사와 나를 소개하기: 내 메일로 말투 익히게 하기</span><em>내 말투가 담긴 프로필</em></a>
+    <a href="#d3" data-d="3"><b>3일차</b><span>업무 매뉴얼을 우리 양식으로: 보고서 양식 바꾸기</span><em>회사 양식으로 나오는 절차</em></a>
+    <a href="#d4" data-d="4"><b>4일차</b><span>내 일을 인수인계하기: 반복 업무 하나를 새 절차로</span><em>내 업무 전용 절차</em></a>
+    <a href="#d5" data-d="5"><b>5일차</b><span>수습 평가: 세 번 돌려 보고 팀과 나누기</span><em>믿고 맡길 근거</em></a>
   </div>
   <p class="sec-note">각 날의 「통과」 칸을 모두 체크하면 위 목록에 표시돼요. 이 브라우저에만 저장돼요.</p>
 </section>
@@ -140,7 +141,7 @@
     <label><input type="checkbox"> 주지 않은 계획이나 숫자를 채워 넣지 않았어요</label>
     <label><input type="checkbox"> 끝에 "아래 몇 가지만 알려주시면…" 하고 한 번에 물어봐요</label>
   </div>
-  <p class="stuck">규칙이 안 먹는 것 같다면 — 규칙을 채팅창에 붙여 넣지 않았는지 보세요. 프로젝트의 「지침」 칸에 넣어야 매번 적용돼요.</p>
+  <p class="stuck">규칙이 안 먹는 것 같다면, 규칙을 채팅창에 붙여 넣지 않았는지 보세요. 프로젝트의 「지침」 칸에 넣어야 매번 적용돼요.</p>
 </section>
 
 <!-- ───────── 2일차 ───────── -->
@@ -159,7 +160,7 @@
     <li><b>보낸 메일을 보여 줘요.</b> 보낸편지함에서 10~15통을 골라 프로젝트에 붙여 넣고 이렇게 말해요.
       <div class="pbox"><pre id="t2">내 메일 보고 익혀줘. 내가 보낸 메일이야.
 
-[메일을 여기에 붙여 넣기 — 이름·연락처·금액은 지우거나 바꿔도 돼요]</pre><button type="button" class="cp" data-cp="t2"><i class="ti ti-copy"></i> 복사</button></div></li>
+[메일을 여기에 붙여 넣기: 이름·연락처·금액은 지우거나 바꿔도 돼요]</pre><button type="button" class="cp" data-cp="t2"><i class="ti ti-copy"></i> 복사</button></div></li>
     <li><b>추정에 답해요.</b> Claude가 「확실 / 추정 / 모르겠는 것」으로 나눠 보여 줘요. 추정에는 맞다·틀리다만 답하면 돼요.</li>
     <li><b>기록을 반영해요.</b> 보여 준 줄을 내 PC의 <b>학습-기록.md</b>에 붙여 넣고, 「컨텍스트」의 옛 파일을 지운 뒤 다시 올려요.</li>
   </ol>
@@ -176,9 +177,9 @@
     <label><input type="checkbox"> Claude가 뽑은 내 말투가 실제 내 메일과 같아요</label>
     <label><input type="checkbox"> 틀리게 뽑은 것을 고치거나 지웠어요. 틀리면 안 되는 호칭에는 「확정 O」를 적었어요</label>
   </div>
-  <p class="stuck">이름이 비어 나오거나 질문이 여섯 개씩 온다면 — 프로젝트 밖에서 시킨 거예요. 절차(스킬)는 어느 대화에서나 불리지만,
+  <p class="stuck">이름이 비어 나오거나 질문이 여섯 개씩 온다면, 프로젝트 밖에서 시킨 거예요. 절차(스킬)는 어느 대화에서나 불리지만,
     규칙과 프로필은 <b>그 프로젝트 안에서만</b> 적용돼요. 왼쪽 「프로젝트」에서 프로젝트를 열고 그 안의 입력창에서 시키세요.</p>
-  <p class="stuck">회사 메일을 AI에 올려도 되는지 모르겠다면 — 이 단계는 건너뛰고 프로필 세 줄만으로 가도 돼요. 회사 규정이 먼저예요.</p>
+  <p class="stuck">회사 메일을 AI에 올려도 되는지 모르겠다면, 이 단계는 건너뛰고 프로필 세 줄만으로 가도 돼요. 회사 규정이 먼저예요.</p>
 </section>
 
 <!-- ───────── 3일차 ───────── -->
@@ -226,7 +227,7 @@
     <label><input type="checkbox"> 두 번의 제목과 항목 순서가 같아요</label>
     <label><input type="checkbox"> Claude가 물어본 규칙에 답해서 절차에 넣었어요</label>
   </div>
-  <p class="stuck">한 번은 맞고 한 번은 다르다면 — 다른 부분을 보여 주고 "출력 형식에 이 부분을 못 박아 줘"라고 하세요. 만든 사람도 제목의 날짜 표기를 그렇게 고쳤어요.</p>
+  <p class="stuck">한 번은 맞고 한 번은 다르다면, 다른 부분을 보여 주고 "출력 형식에 이 부분을 못 박아 줘"라고 하세요. 만든 사람도 제목의 날짜 표기를 그렇게 고쳤어요.</p>
 </section>
 
 <!-- ───────── 4일차 ───────── -->
@@ -268,7 +269,7 @@
   </ol>
 
   <div class="ex">
-    <p class="et">만든 사람이 해 봤을 때 — 매달 보내는 정산 안내 메일</p>
+    <p class="et">만든 사람이 해 봤을 때: 매달 보내는 정산 안내 메일</p>
     <p>두 달치 메일을 줬더니 절차를 쓰지 않고 이것부터 물었어요.</p>
     <pre>1. 입금 기한은 어떻게 정하나요? 10월 15일(목)과 11월 16일(월)만 보입니다.
    보내는 달 15일이고 주말이면 다음 월요일인가요? 공휴일도 다음 영업일로 미루나요?
@@ -284,7 +285,7 @@
     <label><input type="checkbox"> 질문에 답하면서 "아, 이건 내가 감으로 하던 거구나" 싶은 규칙을 하나 이상 찾았어요</label>
     <label><input type="checkbox"> 받은 절차의 「출력 형식」이 내가 실제로 만들던 결과물과 같아요</label>
   </div>
-  <p class="stuck">질문에 답을 못 하겠다면 — 그 규칙은 나도 정해 두지 않은 거예요. 절차로 만들기 전에 팀에서 먼저 정해야 해요.<br>
+  <p class="stuck">질문에 답을 못 하겠다면, 그 규칙은 나도 정해 두지 않은 거예요. 절차로 만들기 전에 팀에서 먼저 정해야 해요.<br>
     여기서 막히는 분이 가장 많아요. 팀의 일을 한 번에 절차로 만들고 싶으시면 <a href="https://kmong.com/@%EB%A6%AC%ED%94%8C%EB%A1%9CReflo" data-track="go_kmong" target="_blank" rel="noopener">맡기실 수도 있어요</a>.</p>
 </section>
 
@@ -305,17 +306,17 @@
   </ol>
 
   <div class="ex">
-    <p class="et">만든 사람이 해 봤을 때 — 4일차의 정산 안내 절차</p>
-    <p><b>같은 자료로 세 번</b> — 제목과 본문 네 줄이 세 번 모두 글자까지 같았어요.</p>
+    <p class="et">만든 사람이 해 봤을 때: 4일차의 정산 안내 절차</p>
+    <p><b>같은 자료로 세 번</b>: 제목과 본문 네 줄이 세 번 모두 글자까지 같았어요.</p>
     <pre>제목: [정산] 미래물산 10월 이용료 안내
 
 안녕하세요, 서비스운영팀 김민지입니다.
 10월 이용료는 512,500원입니다. (2,050건 × 250원, 부가세 별도)
 입금 기한은 11월 16일(월)입니다.
 감사합니다.</pre>
-    <p style="margin-top:10px"><b>단가를 빼고</b> — 금액을 만들지 않고 "건당 단가가 얼마인가요?"라고 물었어요.<br>
-      <b>이용이 0건인 자료</b> — 메일을 만들지 않고 "0건이라 만들지 않았습니다" 한 줄만 냈어요. 4일차에 답해 준 규칙 그대로예요.<br>
-      <b>몇 월분인지 빼고</b> — claude.ai 화면에서 월 없이 자료만 넣었더니 메일을 쓰지 않고 "몇 월 이용분인가요?"부터 물었어요.
+    <p style="margin-top:10px"><b>단가를 빼고</b>: 금액을 만들지 않고 "건당 단가가 얼마인가요?"라고 물었어요.<br>
+      <b>이용이 0건인 자료</b>: 메일을 만들지 않고 "0건이라 만들지 않았습니다" 한 줄만 냈어요. 4일차에 답해 준 규칙 그대로예요.<br>
+      <b>몇 월분인지 빼고</b>: claude.ai 화면에서 월 없이 자료만 넣었더니 메일을 쓰지 않고 "몇 월 이용분인가요?"부터 물었어요.
       이용료 512,500원은 월과 상관없다고 먼저 계산해 두고요.</p>
   </div>
 
