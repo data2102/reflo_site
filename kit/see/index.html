@@ -97,10 +97,15 @@
 </head>
 <body>
 
-<div class="nav" style="max-width:1120px;margin:0 auto;padding:18px 20px 0">
-  <a class="brand" href="/"><span class="mark">R</span> 리플로</a>
-  <a class="navback" href="/kit/">스타터 키트</a>
-</div>
+<header class="site-nav">
+    <a class="brand" href="/"><span class="mark">R</span> 리플로</a>
+    <nav aria-label="주 메뉴">
+      <a href="/tools/">무료 도구</a>
+      <a href="/works/">만든 것</a>
+      <a href="/log/">관리 기록</a>
+    </nav>
+    <a class="site-nav-cta" href="/#contact" data-track="nav_contact">맡기기 문의</a>
+  </header>
 
 <header class="see-hero">
   <span class="eyebrow">눈으로 보는 키트</span>
@@ -151,13 +156,39 @@
   <p class="sec-note">하루에 하나씩 따라 하고 싶으시면 <a href="/course/" data-track="open_course">5일 과정</a>으로 가세요</p>
 </div>
 
-<footer>
-  <p>만든 곳 — 리플로 Reflo ·
-    <a href="/kit/">스타터 키트</a> ·
-    <a href="/course/">5일 과정</a> ·
-    <a href="/tools/">무료 도구</a> ·
-    <a href="https://blog.naver.com/reflo2026" target="_blank" rel="noopener">블로그</a></p>
-  <p style="margin-top:9px">방문 수를 세기 위해 Google Analytics 쿠키를 써요.</p>
+<footer class="site-foot">
+  <div class="site-foot-in">
+    <div class="sf-about">
+      <p class="sf-name">리플로 Reflo</p>
+      <p>작은 회사의 업무 양식과 반복 업무를 정리해요. 사업자등록을 한 개인사업자가 운영해요.</p>
+    </div>
+    <div>
+      <p class="sf-h">둘러보기</p>
+      <ul>
+        <li><a href="/tools/">무료 도구</a></li>
+        <li><a href="/works/">만든 것</a></li>
+        <li><a href="/log/">사이트 관리 기록</a></li>
+      </ul>
+    </div>
+    <div>
+      <p class="sf-h">운영 노트</p>
+      <ul>
+        <li><a href="https://blog.naver.com/reflo2026" target="_blank" rel="noopener">블로그</a></li>
+        <li><a href="https://www.instagram.com/reflo.note" target="_blank" rel="noopener">인스타그램</a></li>
+      </ul>
+    </div>
+    <div>
+      <p class="sf-h">문의</p>
+      <ul>
+        <li><a href="/#contact" data-track="foot_contact">맡기기 문의</a></li>
+        <li><a href="mailto:reflo2026@naver.com">reflo2026@naver.com</a></li>
+        <li><a href="/privacy/">개인정보 안내</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="sf-note">
+    <p>방문 수를 세기 위해 Google Analytics 쿠키를 써요.</p>
+  </div>
 </footer>
 
 <script src="data.js"></script>

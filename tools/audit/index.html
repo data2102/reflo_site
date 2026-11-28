@@ -97,10 +97,15 @@ details.fix summary small{font-size:var(--fs-caption);font-weight:var(--fw-regul
 <body>
 
 <div class="ds-hero-wrap">
-  <div class="nav">
+  <header class="site-nav">
     <a class="brand" href="/"><span class="mark">R</span> 리플로</a>
-    <a class="navback" href="/tools/">무료 도구</a>
-  </div>
+    <nav aria-label="주 메뉴">
+      <a href="/tools/" aria-current="page">무료 도구</a>
+      <a href="/works/">만든 것</a>
+      <a href="/log/">관리 기록</a>
+    </nav>
+    <a class="site-nav-cta" href="/#contact" data-track="nav_contact">맡기기 문의</a>
+  </header>
   <header class="ds-hero tool-hero">
     <h1>손으로 만드는 이 파일,<br><span class="accent">자동화될까요?</span></h1>
     <p class="lead">지금 손으로 만드는 완성된 파일을 넣어 보세요. 어떻게 만들어졌는지 읽고, 자동화가 될지 먼저 말씀드려요. 원본까지 넣으면 더 정확해요.
@@ -210,13 +215,40 @@ details.fix summary small{font-size:var(--fs-caption);font-weight:var(--fw-regul
   </div>
 </section>
 
-<footer>
-  <p>만든 곳 — 리플로 Reflo ·
-    <a href="/tools/">무료 도구</a> ·
-    <a href="/works/">만든 것</a> ·
-    <a href="https://blog.naver.com/reflo2026" target="_blank" rel="noopener">블로그</a></p>
-  <p style="margin-top:9px">잘못 본 곳이 있으면 <span class="mono">reflo2026@naver.com</span> 으로 알려 주세요. 고쳐서 다시 올려요.</p>
-  <p style="margin-top:9px">방문 수를 세기 위해 Google Analytics 쿠키를 써요. 넣으신 파일의 이름과 내용은 세지도, 보내지도 않아요.</p>
+<footer class="site-foot">
+  <div class="site-foot-in">
+    <div class="sf-about">
+      <p class="sf-name">리플로 Reflo</p>
+      <p>작은 회사의 업무 양식과 반복 업무를 정리해요. 사업자등록을 한 개인사업자가 운영해요.</p>
+    </div>
+    <div>
+      <p class="sf-h">둘러보기</p>
+      <ul>
+        <li><a href="/tools/">무료 도구</a></li>
+        <li><a href="/works/">만든 것</a></li>
+        <li><a href="/log/">사이트 관리 기록</a></li>
+      </ul>
+    </div>
+    <div>
+      <p class="sf-h">운영 노트</p>
+      <ul>
+        <li><a href="https://blog.naver.com/reflo2026" target="_blank" rel="noopener">블로그</a></li>
+        <li><a href="https://www.instagram.com/reflo.note" target="_blank" rel="noopener">인스타그램</a></li>
+      </ul>
+    </div>
+    <div>
+      <p class="sf-h">문의</p>
+      <ul>
+        <li><a href="/#contact" data-track="foot_contact">맡기기 문의</a></li>
+        <li><a href="mailto:reflo2026@naver.com">reflo2026@naver.com</a></li>
+        <li><a href="/privacy/">개인정보 안내</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="sf-note">
+    <p>잘못 본 곳이 있으면 <span class="mono">reflo2026@naver.com</span> 으로 알려 주세요. 고쳐서 다시 올려요.</p>
+    <p>방문 수를 세기 위해 Google Analytics 쿠키를 써요. 넣으신 파일의 이름과 내용은 세지도, 보내지도 않아요.</p>
+  </div>
 </footer>
 
 <script src="/tools/lib/xlsx.full.min.js"></script>

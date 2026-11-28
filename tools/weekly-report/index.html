@@ -47,10 +47,15 @@
 <body>
 
 <div class="ds-hero-wrap">
-  <div class="nav">
+  <header class="site-nav">
     <a class="brand" href="/"><span class="mark">R</span> 리플로</a>
-    <a class="navback" href="/tools/">무료 도구</a>
-  </div>
+    <nav aria-label="주 메뉴">
+      <a href="/tools/" aria-current="page">무료 도구</a>
+      <a href="/works/">만든 것</a>
+      <a href="/log/">관리 기록</a>
+    </nav>
+    <a class="site-nav-cta" href="/#contact" data-track="nav_contact">맡기기 문의</a>
+  </header>
   <header class="ds-hero tool-hero">
     <h1>주간 업무 보고,<br><span class="accent">몇 주째 밀리는지</span> 보이게</h1>
     <p class="lead">이번 주 한 일, 다음 주 할 일, 막힌 것을 한 장에.
@@ -99,9 +104,40 @@
   </div>
 </main>
 
-<footer>
-  <p>만든 곳 — 리플로 Reflo · <a href="/tools/">무료 도구</a> · <a href="/works/">만든 것</a> · <a href="https://blog.naver.com/reflo2026" target="_blank" rel="noopener">블로그</a></p>
-  <p style="margin-top:9px">양식의 예시 줄은 지어낸 것이에요. 방문 수를 세기 위해 Google Analytics 쿠키를 써요. 개인을 식별하지 않아요.</p>
+<footer class="site-foot">
+  <div class="site-foot-in">
+    <div class="sf-about">
+      <p class="sf-name">리플로 Reflo</p>
+      <p>작은 회사의 업무 양식과 반복 업무를 정리해요. 사업자등록을 한 개인사업자가 운영해요.</p>
+    </div>
+    <div>
+      <p class="sf-h">둘러보기</p>
+      <ul>
+        <li><a href="/tools/">무료 도구</a></li>
+        <li><a href="/works/">만든 것</a></li>
+        <li><a href="/log/">사이트 관리 기록</a></li>
+      </ul>
+    </div>
+    <div>
+      <p class="sf-h">운영 노트</p>
+      <ul>
+        <li><a href="https://blog.naver.com/reflo2026" target="_blank" rel="noopener">블로그</a></li>
+        <li><a href="https://www.instagram.com/reflo.note" target="_blank" rel="noopener">인스타그램</a></li>
+      </ul>
+    </div>
+    <div>
+      <p class="sf-h">문의</p>
+      <ul>
+        <li><a href="/#contact" data-track="foot_contact">맡기기 문의</a></li>
+        <li><a href="mailto:reflo2026@naver.com">reflo2026@naver.com</a></li>
+        <li><a href="/privacy/">개인정보 안내</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="sf-note">
+    <p>양식의 예시 줄은 지어낸 것이에요.</p>
+    <p>방문 수를 세기 위해 Google Analytics 쿠키를 써요. 개인을 식별하지 않아요.</p>
+  </div>
 </footer>
 <script src="/analytics.js"></script>
 </body>

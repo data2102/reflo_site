@@ -40,10 +40,15 @@
 <body>
 
 <div class="ds-hero-wrap">
-  <div class="nav">
+  <header class="site-nav">
     <a class="brand" href="/"><span class="mark">R</span> 리플로</a>
-    <a class="navback" href="/tools/">무료 도구</a>
-  </div>
+    <nav aria-label="주 메뉴">
+      <a href="/tools/">무료 도구</a>
+      <a href="/works/">만든 것</a>
+      <a href="/log/" aria-current="page">관리 기록</a>
+    </nav>
+    <a class="site-nav-cta" href="/#contact" data-track="nav_contact">맡기기 문의</a>
+  </header>
   <header class="ds-hero tool-hero">
     <h1>사이트 관리 기록</h1>
     <p class="lead">이 사이트를 언제, 무엇을, 왜 고쳤는지 적어 둬요. 점검한 날짜와 결과도 같이 적어요.</p>
@@ -81,6 +86,8 @@
     <li><b>양식 쪽에 양식 그림을 넣었어요</b>인수인계서와 주간 업무 보고 양식이 어떻게 생겼는지 받기 전에 볼 수 없었어요. 받으면 열리는 모습 그대로 넣었어요.</li>
     <li><b>검색 결과에 나오는 제목을 찾는 말에 맞췄어요</b>「내 파일, 자동화될까」처럼 우리끼리 부르는 이름이라 검색하는 사람 말과 달랐어요. 「엑셀 자동화」「주간업무보고 양식」 같은 말을 제목 앞에 뒀어요.</li>
     <li><b>네이버와 구글 검색에 사이트를 등록했어요</b>두 곳에서 사이트 주인임을 확인받고, 쪽 목록(사이트맵)을 냈어요. 검색에 나오기까지는 며칠에서 몇 주가 걸려요.</li>
+    <li><b>모든 쪽의 위 메뉴와 맨 아래를 하나로 맞췄어요</b>쪽마다 메뉴가 달라서 「만든 것」이나 이 관리 기록으로 가는 길이 어떤 쪽에는 없었어요. 이제 어느 쪽에서든 같은 자리에 있어요.</li>
+    <li><b>개인정보 안내 쪽을 만들었어요</b>무엇을 세고 무엇을 받지 않는지 한 쪽에 적었어요. 맨 아래에서 갈 수 있어요.</li>
   </ul></div>
 
   <div class="day"><time datetime="2026-11-27">11월 27일</time><ul>
@@ -119,9 +126,39 @@
   </div>
 </main>
 
-<footer>
-  <p>만든 곳 — 리플로 Reflo · <a href="/tools/">무료 도구</a> · <a href="/works/">만든 것</a> · <a href="https://blog.naver.com/reflo2026" target="_blank" rel="noopener">블로그</a></p>
-  <p style="margin-top:9px">방문 수를 세기 위해 Google Analytics 쿠키를 써요. 개인을 식별하지 않아요.</p>
+<footer class="site-foot">
+  <div class="site-foot-in">
+    <div class="sf-about">
+      <p class="sf-name">리플로 Reflo</p>
+      <p>작은 회사의 업무 양식과 반복 업무를 정리해요. 사업자등록을 한 개인사업자가 운영해요.</p>
+    </div>
+    <div>
+      <p class="sf-h">둘러보기</p>
+      <ul>
+        <li><a href="/tools/">무료 도구</a></li>
+        <li><a href="/works/">만든 것</a></li>
+        <li><a href="/log/">사이트 관리 기록</a></li>
+      </ul>
+    </div>
+    <div>
+      <p class="sf-h">운영 노트</p>
+      <ul>
+        <li><a href="https://blog.naver.com/reflo2026" target="_blank" rel="noopener">블로그</a></li>
+        <li><a href="https://www.instagram.com/reflo.note" target="_blank" rel="noopener">인스타그램</a></li>
+      </ul>
+    </div>
+    <div>
+      <p class="sf-h">문의</p>
+      <ul>
+        <li><a href="/#contact" data-track="foot_contact">맡기기 문의</a></li>
+        <li><a href="mailto:reflo2026@naver.com">reflo2026@naver.com</a></li>
+        <li><a href="/privacy/">개인정보 안내</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="sf-note">
+    <p>방문 수를 세기 위해 Google Analytics 쿠키를 써요. 개인을 식별하지 않아요.</p>
+  </div>
 </footer>
 <script src="/analytics.js"></script>
 </body>

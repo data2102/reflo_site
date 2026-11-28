@@ -363,11 +363,15 @@ a.job:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
 <body>
 
 <div class="ds-hero-wrap">
-  <div class="topnav">
-    <a class="brandmark" href="/" style="text-decoration:none"><span class="mark">R</span> 리플로</a>
-    <span class="toplinks"><a class="toplink keep" href="/tools/" data-track="view_tools">무료 도구</a>
-      <a class="toplink keep" href="https://blog.naver.com/reflo2026" data-track="go_blog" target="_blank" rel="noopener">운영 노트</a></span>
-  </div>
+  <header class="site-nav">
+    <a class="brand" href="/"><span class="mark">R</span> 리플로</a>
+    <nav aria-label="주 메뉴">
+      <a href="/tools/">무료 도구</a>
+      <a href="/works/" aria-current="page">만든 것</a>
+      <a href="/log/">관리 기록</a>
+    </nav>
+    <a class="site-nav-cta" href="/#contact" data-track="nav_contact">맡기기 문의</a>
+  </header>
 </div>
 
 <div class="wrap">
@@ -673,10 +677,40 @@ a.job:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
 
 </div>
 
-<footer>
-  <span><a href="/" style="color:inherit">리플로(Reflo) · 작은 회사 운영 노트</a> · <a href="/tools/" data-track="view_tools" style="color:inherit">무료 도구</a></span>
-  <span>작업물의 수치는 예시 데이터로 재현한 거예요</span>
-  <span>방문 수를 세기 위해 Google Analytics 쿠키를 써요. 개인을 식별하지 않아요.</span>
+<footer class="site-foot">
+  <div class="site-foot-in">
+    <div class="sf-about">
+      <p class="sf-name">리플로 Reflo</p>
+      <p>작은 회사의 업무 양식과 반복 업무를 정리해요. 사업자등록을 한 개인사업자가 운영해요.</p>
+    </div>
+    <div>
+      <p class="sf-h">둘러보기</p>
+      <ul>
+        <li><a href="/tools/">무료 도구</a></li>
+        <li><a href="/works/">만든 것</a></li>
+        <li><a href="/log/">사이트 관리 기록</a></li>
+      </ul>
+    </div>
+    <div>
+      <p class="sf-h">운영 노트</p>
+      <ul>
+        <li><a href="https://blog.naver.com/reflo2026" target="_blank" rel="noopener">블로그</a></li>
+        <li><a href="https://www.instagram.com/reflo.note" target="_blank" rel="noopener">인스타그램</a></li>
+      </ul>
+    </div>
+    <div>
+      <p class="sf-h">문의</p>
+      <ul>
+        <li><a href="/#contact" data-track="foot_contact">맡기기 문의</a></li>
+        <li><a href="mailto:reflo2026@naver.com">reflo2026@naver.com</a></li>
+        <li><a href="/privacy/">개인정보 안내</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="sf-note">
+    <p>작업물의 수치는 예시 데이터로 재현한 거예요</p>
+    <p>방문 수를 세기 위해 Google Analytics 쿠키를 써요. 개인을 식별하지 않아요.</p>
+  </div>
 </footer>
 
 <script>
