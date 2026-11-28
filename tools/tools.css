@@ -72,3 +72,9 @@ table.t{border-collapse:collapse;width:100%;font-size:var(--fs-caption);font-var
 .dl .ds-btn-pill.ghost{border-color:var(--border-strong)}
 @media(max-width:640px){.tiles{grid-template-columns:repeat(2,1fr)}.tool{padding:8px 14px 56px}}
 @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+
+/* 양식 미리보기 (2026-11-28) — 받기 전에 어떻게 생겼는지 보이게 */
+.pv{margin:32px 0 0}
+.pv img{display:block;width:100%;height:auto;border:1px solid var(--border-strong);border-radius:var(--radius-md);background:var(--surface)}
+.pv figcaption{margin-top:8px;font-size:var(--fs-caption);color:var(--text-tertiary);text-align:center}
+.pv + .pv{margin-top:20px}
