@@ -34,13 +34,6 @@
 .peek img{display:block;width:100%;height:auto}
 .steps{margin:14px 0 0;padding-left:20px;font-size:var(--fs-body);line-height:1.9;color:var(--text-secondary)}
 .steps b{color:var(--text-primary)}
-.next{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-top:20px}
-.next a{display:block;text-decoration:none;color:inherit;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);padding:20px}
-.next a:hover{border-color:var(--accent)}
-.next b{display:block;font-size:var(--fs-subhead)}
-.next span{display:block;margin-top:6px;font-size:var(--fs-caption);color:var(--text-secondary);line-height:var(--lh-body)}
-.next .go{margin-top:10px;color:var(--accent-strong);font-weight:var(--fw-medium)}
-@media(max-width:640px){.next{grid-template-columns:1fr}}
 </style>
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "DigitalDocument", "name": "주간업무보고 양식 (엑셀)", "description": "이번 주 한 일, 다음 주 할 일, 막힌 것을 한 장에 적는 주간 업무 보고 엑셀 양식. 못 끝낸 일이 몇 주째 밀리는지 보인다.", "url": "https://refloworks.com/tools/weekly-report/", "image": "https://refloworks.com/img/preview-weekly-report.jpg", "encodingFormat": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "contentUrl": "https://refloworks.com/free/weekly-report-template.xlsx", "inLanguage": "ko", "isAccessibleForFree": true, "offers": {"@type": "Offer", "price": "0", "priceCurrency": "KRW"}, "publisher": {"@type": "Organization", "name": "리플로 Reflo", "url": "https://refloworks.com/", "email": "reflo2026@naver.com", "sameAs": ["https://blog.naver.com/reflo2026", "https://www.instagram.com/reflo.note/"]}}</script>
 </head>
@@ -74,9 +67,19 @@
     <figcaption>받으면 이렇게 생겼어요. 회색 줄은 예시라서 지우고 쓰면 돼요.</figcaption>
   </figure>
 
+
+  <dl class="fileinfo" aria-label="파일 정보">
+    <div><dt>형식</dt><dd>엑셀 파일 (.xlsx)</dd></div>
+    <div><dt>크기</dt><dd>10KB</dd></div>
+    <div><dt>시트</dt><dd>2장</dd></div>
+    <div><dt>열리는 곳</dt><dd>엑셀, 구글 시트</dd></div>
+    <div><dt>올린 날</dt><dd>2026년 11월 26일</dd></div>
+    <div><dt>마지막으로 고친 날</dt><dd>2026년 11월 28일</dd></div>
+  </dl>
+
   <a class="peek" href="/tools/weekly/" data-track="report_peek_weekly">
     <span class="cap"><small>엑셀은 혼자 쓰기에 좋아요 · 팀이 같이 쓴다면</small><b>넘기고 세는 일은 자동으로 — 팀 업무 화면</b>아래는 엑셀이 아니라 브라우저에서 돌아가는 화면이에요. 지난주 일 이어받기, 기한 지난 일, 일이 몰리는 주를 알아서 보여 줘요. 받은 양식을 그대로 열 수 있어요 · 무료로 써 보기</span>
-    <img src="/img/weekly-screen.jpg" alt="팀 업무 화면 — 요일별 칸에 이번 주 일이 카드로 놓이고, 지난주에서 넘어온 일에는 이어받음 표시가 붙어 있다" width="1400" height="867" loading="lazy">
+    <img src="/img/weekly-screen.jpg" alt="팀 업무 화면 — 요일별 칸에 이번 주 일이 카드로 놓이고, 지난주에서 넘어온 일에는 이어받음 표시가 붙어 있다" width="2000" height="1240" loading="lazy">
   </a>
 
   <h2 class="t-h2">한 장에 세 묶음</h2>
@@ -97,9 +100,17 @@
   <p class="sec-note">못 끝낸 일을 매주 새로 옮겨 적기만 하면, 그 일이 몇 주째 밀리는지 아무도 몰라요.</p>
   <p class="sec-note"><a href="https://blog.naver.com/reflo2026/224493819130" target="_blank" rel="noopener" data-track="report_to_blog_ops02">이 양식을 어떻게 쓰는지 (블로그)</a></p>
 
+  <h2 class="t-h2">자주 하는 실수 세 가지</h2>
+  <ul class="miss">
+    <li><b>못 끝낸 일을 새 일처럼 다시 적어요</b>매주 옮겨 적기만 하면 그 일은 늘 「이번 주 할 일」로만 보여요. 몇 주째인지가 어디에도 남지 않아요. 넘길 때 숫자를 하나 올리세요.</li>
+    <li><b>보고용 양식을 따로 만들어요</b>평소 적는 곳과 보고하는 곳이 둘이면, 못 끝낸 일이 그 사이에서 빠져요. 한 주 동안 이 표에 바로 적고, 보고하는 날에는 그대로 보여 주세요.</li>
+    <li><b>결과 칸에 한 일만 적어요</b>「견적 회신」이라고만 쓰면 받는 사람이 다시 물어야 해요. 「세 곳에 회신, 한 곳은 수량 조정 요청 받음」처럼 끝난 모습을 적으세요.</li>
+  </ul>
+
   <h2 class="t-h2">넘기는 게 번거롭다면</h2>
-  <div class="next">
+  <div class="next three">
     <a href="/tools/weekly/" data-track="report_to_weekly"><b>팀 업무 화면으로 써 보기</b><span>엑셀 대신 브라우저에서 돌아가요. 버튼 한 번으로 지난주 일을 이어받고, 기한 지난 일과 일이 몰리는 주가 보여요. 받은 양식을 그대로 열 수 있고 무료예요.</span><span class="go">팀 업무 화면 써 보기</span></a>
+    <a href="/tools/handover/" data-track="report_to_handover"><b>업무 인수인계서 양식</b><span>매주 하는 일이 정리되면 다음은 「누가 나가도 이어지게」예요. 하는 일, 권한, 업체를 평소에 적어 두는 양식이에요.</span><span class="go">양식 보기</span></a>
     <a href="/#contact" data-track="report_contact"><b>우리 회사 양식 그대로 자동화</b><span>지금 쓰는 주간보고 양식을 보여 주시면, 그 칸 그대로 팀 업무 화면으로 만들어 드려요. 넘기고 모으는 일이 자동이 돼요.</span><span class="go">맡기기 문의</span></a>
   </div>
 </main>
@@ -139,6 +150,7 @@
     <p>방문 수를 세기 위해 Google Analytics 쿠키를 써요. 개인을 식별하지 않아요.</p>
   </div>
 </footer>
+<script src="/tools/zoom.js"></script>
 <script src="/analytics.js"></script>
 </body>
 </html>
