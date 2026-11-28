@@ -5,8 +5,8 @@
    그 다음 값은 var(--이름) 으로 참조.  절대 하드코딩 색을 쓰지 말 것.
    ============================================================ */
 
-/* ---- 폰트 (Noto Sans KR: 부드럽고 인간적, 무료) ---- */
-@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&display=swap");
+/* ---- 폰트 (Pretendard: 단정하고 숫자·영문이 한글과 잘 어울림. SIL OFL 1.1, 무료) — 2026-11-28 Noto Sans KR 에서 바꿈 ---- */
+@import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css");
 
 :root {
   /* ===== 색: 브랜드 / 행동 (파랑은 "누를 수 있는 것"에만) ===== */
@@ -48,7 +48,7 @@
   --danger-strong:     #c0261e;
 
   /* ===== 타이포 ===== */
-  --font-sans: "Noto Sans KR", "Pretendard", -apple-system, "Malgun Gothic", "맑은 고딕", sans-serif;
+  --font-sans: "Pretendard Variable", "Pretendard", -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", "맑은 고딕", sans-serif;
   --font-mono: "JetBrains Mono", "D2Coding", Consolas, monospace;
 
   --fs-display:  30px;  /* 화면당 주인공 숫자 하나 */

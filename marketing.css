@@ -165,3 +165,8 @@ footer.site-foot{display:block;max-width:none;margin:0}
 .ds-steps li::before{content:counter(st);display:block;margin-bottom:var(--sp-1);font-family:var(--font-mono);font-size:var(--fs-caption);color:var(--text-tertiary)}
 .ds-steps li b{display:block;margin-bottom:2px;font-size:var(--fs-body);font-weight:var(--fw-medium);color:var(--text-primary)}
 @media(max-width:720px){.ds-steps{grid-template-columns:1fr;gap:var(--sp-2)}}
+
+/* 휴대폰: 문장 안 링크도 누르는 높이 40px. 줄 사이는 그대로 두고 누르는 자리만 넓힌다 (2026-11-28) */
+@media(max-width:720px){
+  .row dd a, .sec-note a, .privacy a, .foot-hint a, p.sec-note a, .wrap p a, .wrap li a, .small-limits a{padding:13px 0}
+}
