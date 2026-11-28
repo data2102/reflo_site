@@ -148,3 +148,20 @@ footer.site-foot{border-top:1px solid var(--border);background:var(--surface-sun
 }
 footer.site-foot{display:block;max-width:none;margin:0}
 .site-foot .sf-note a{color:var(--accent-strong)}
+
+/* ── 첫 화면 머리: 글 옆에 실제 화면 한 장 (2026-11-28) ── */
+.ds-hub-split{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,460px);gap:var(--sp-10);align-items:center;padding:var(--sp-6) 0 var(--sp-8)}
+.ds-hub-cta{justify-content:flex-start;margin-top:var(--sp-5)}
+.ds-hub-shot{display:block;text-decoration:none;color:var(--text-tertiary)}
+.ds-hub-shot img{display:block;width:100%;height:auto;border:1px solid var(--border-strong);border-radius:var(--radius-lg);background:var(--surface)}
+.ds-hub-shot span{display:block;margin-top:var(--sp-2);font-size:var(--fs-footnote);text-align:center}
+.ds-hub-shot:hover img{border-color:var(--text-tertiary)}
+@media(max-width:860px){.ds-hub-split{grid-template-columns:1fr;gap:var(--sp-6);padding:var(--sp-2) 0 var(--sp-4)}}
+
+/* 진행 절차: 실제로 차례가 있는 것에만 번호 */
+.ds-steps{list-style:none;counter-reset:st;margin:var(--sp-5) 0 0;padding:0;display:grid;grid-template-columns:repeat(3,1fr);gap:var(--sp-4)}
+.ds-steps li{counter-increment:st;margin:0;padding:var(--sp-4);background:var(--surface-sunken);border-radius:var(--radius-md,12px);
+  font-size:var(--fs-caption);line-height:var(--lh-body);color:var(--text-secondary);max-width:none}
+.ds-steps li::before{content:counter(st);display:block;margin-bottom:var(--sp-1);font-family:var(--font-mono);font-size:var(--fs-caption);color:var(--text-tertiary)}
+.ds-steps li b{display:block;margin-bottom:2px;font-size:var(--fs-body);font-weight:var(--fw-medium);color:var(--text-primary)}
+@media(max-width:720px){.ds-steps{grid-template-columns:1fr;gap:var(--sp-2)}}

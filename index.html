@@ -378,11 +378,21 @@ a.job:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
 </div>
 
 <main class="ds-hub" id="hub">
-  <div class="ds-hub-head">
-    <span class="ds-hub-eyebrow">작은 회사 운영 노트</span>
-    <h1>사람 하나 빠져도 <span class="ds-mark">안쪽 일이 돌아가게</span></h1>
-    <p>한 사람이 여러 일을 맡고 있는 회사에서 자주 끊기는 곳을 정리해요. 사장님은 영업에 집중하시도록.</p>
-    <p class="note">서비스 운영 일을 하면서 겪고 정리한 것들이에요 · 가입·구독 없이 쓰고, 파일은 회사 밖으로 나가지 않아요</p>
+  <div class="ds-hub-head ds-hub-split">
+    <div>
+      <span class="ds-hub-eyebrow">작은 회사 운영 노트</span>
+      <h1>사람 하나 빠져도 안쪽 일이 돌아가게</h1>
+      <p>한 사람이 여러 일을 맡고 있는 회사에서 자주 끊기는 곳을 정리해요. 사장님은 영업에 집중하시도록.</p>
+      <p class="note">서비스 운영 일을 하면서 겪고 정리한 것들이에요 · 가입·구독 없이 쓰고, 파일은 회사 밖으로 나가지 않아요</p>
+      <div class="ds-hero-cta ds-hub-cta">
+        <a class="ds-btn-pill primary" href="tools/" data-track="main_tools_top">무료 도구 써 보기</a>
+        <a class="ds-btn-pill ghost" href="#contact" data-track="main_contact_top">맡기기 문의</a>
+      </div>
+    </div>
+    <a class="ds-hub-shot" href="tools/weekly/" data-track="main_shot_weekly">
+      <img src="img/hero-weekly.jpg" width="1360" height="890" alt="팀 업무 화면. 기한 지난 일 1건, 7일 안에 마감인 일 2건이 위에 숫자로 보이고, 그 아래에 먼저 볼 일이 기한 순으로 놓여 있다.">
+      <span>팀 업무 화면 · 예시 데이터 · 눌러서 써 보기</span>
+    </a>
   </div>
   <h2 class="ds-hub-sec">이런 순간, 있으셨죠 <small>누르면 그 순간에 바로 쓸 수 있는 것으로 가요</small></h2>
   <label class="ds-search"><i class="ti ti-search"></i><input id="hubQ" type="search" placeholder="찾기 — 예: 인수인계, 합계, 주간" autocomplete="off" aria-label="양식·도구·글 찾기"></label>
@@ -395,7 +405,7 @@ a.job:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
       <div class="pic"><img src="img/card-01.jpg" alt="" loading="lazy" width="720" height="405"><span class="kind">양식</span></div>
       <div class="txt"><b>직원이 갑자기 그만뒀는데 관리자 계정을 아무도 몰라요</b><span>업무 인수인계서 양식 · 엑셀</span></div></a>
     <a class="ds-tile" href="tools/weekly/" data-track="hub_weekly" data-cat="도구">
-      <div class="pic"><img src="img/card-05.jpg" alt="" loading="lazy" width="720" height="405"><span class="kind">써 보기</span></div>
+      <div class="pic"><img src="img/card-05.jpg" alt="" loading="lazy" width="720" height="405"><span class="kind">도구</span></div>
       <div class="txt"><b>못 끝낸 일이 몇 주째 밀리는지 안 보여요</b><span>팀 업무 화면 · 바로 써 보기</span></div></a>
     <a class="ds-tile" href="tools/audit/" data-track="hub_audit" data-cat="도구">
       <div class="pic"><img src="img/card-03.jpg" alt="" loading="lazy" width="720" height="405"><span class="kind">도구</span></div>
@@ -404,7 +414,7 @@ a.job:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
       <div class="pic"><img src="img/card-04.jpg" alt="" loading="lazy" width="720" height="405"><span class="kind">글</span></div>
       <div class="txt"><b>인수인계 안 하고 퇴사하면? 업무 인수인계는 평소에</b><span>운영 노트 · 블로그</span></div></a>
     <a class="ds-tile" href="tools/weekly-report/" data-track="hub_weekly_report" data-cat="양식">
-      <div class="pic plain"><i class="ti ti-report"></i><span class="kind new">새 양식</span></div>
+      <div class="pic plain"><i class="ti ti-report"></i><span class="kind new">양식</span></div>
       <div class="txt"><b>주간보고를 매주 처음부터 다시 써요</b><span>주간 업무 보고 양식 · 엑셀</span></div></a>
     <a class="ds-tile" href="tools/merge/" data-track="hub_merge" data-cat="도구">
       <div class="pic plain"><i class="ti ti-arrows-join"></i><span class="kind">도구</span></div>
@@ -453,6 +463,11 @@ a.job:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
   <div class="contact">
     <h2>어디서부터 정리할지 같이 봐요</h2>
     <p>지금 어떤 일이 사람에 묶여 있는지 한두 줄만 적어 보내 주세요. <strong>가능 여부와 범위</strong>를 먼저 말씀드려요.</p>
+    <ol class="ds-steps">
+      <li><b>하는 일을 한두 줄 적어 보내요</b>파일은 없어도 돼요. 붙이실 때는 개인정보를 가리고 보내 주세요.</li>
+      <li><b>되는지와 범위를 먼저 답해요</b>검토는 무료예요. 안 되는 일은 안 된다고 말씀드려요.</li>
+      <li><b>범위를 같이 정한 뒤에 만들어요</b>정하지 않은 일을 먼저 시작하지 않아요.</li>
+    </ol>
     <dl class="rows">
       <div class="row"><dt>메일</dt><dd><span class="mono">reflo2026@naver.com</span></dd></div>
       <div class="row"><dt>운영 노트</dt><dd><a href="https://blog.naver.com/reflo2026" target="_blank" rel="noopener">blog.naver.com/reflo2026</a> · 인스타그램 <a href="https://www.instagram.com/reflo.note/" target="_blank" rel="noopener">@reflo.note</a></dd></div>
@@ -463,14 +478,6 @@ a.job:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
 
 </div>
 
-<div class="endband">
-  <h2>사람 하나 빠져도 돌아가게</h2>
-  <p>양식과 도구는 무료예요. 가입 없이 바로 써 보세요.</p>
-  <div class="ds-hero-cta">
-    <a class="ds-btn-pill primary" href="tools/" data-track="main_tools_end">무료 도구 써 보기</a>
-    <a class="ds-btn-pill ghost" href="#contact">맡기기 문의</a>
-  </div>
-</div>
 
 <footer class="site-foot">
   <div class="site-foot-in">
