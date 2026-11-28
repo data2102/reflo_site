@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="ko" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>사이트 관리 기록 | 리플로</title>
+<meta name="description" content="리플로 사이트를 언제, 무엇을, 왜 고쳤는지 적어 둔 기록이에요. 점검한 날짜와 결과도 같이 적어요.">
+<link rel="canonical" href="https://refloworks.com/log/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="리플로 Reflo">
+<meta property="og:title" content="사이트 관리 기록 — 리플로">
+<meta property="og:description" content="언제, 무엇을, 왜 고쳤는지 적어 둔 기록이에요. 점검한 날짜와 결과도 같이 적어요.">
+<meta property="og:url" content="https://refloworks.com/log/">
+<meta property="og:image" content="https://refloworks.com/og.png">
+<link rel="stylesheet" href="/tokens.css">
+<link rel="stylesheet" href="/marketing.css">
+<link rel="stylesheet" href="/tools/tools.css">
+<style>
+.wrap{max-width:760px;margin:0 auto;padding:8px 20px 56px}
+.wrap h2{font-size:var(--fs-heading);font-weight:var(--fw-bold);margin:44px 0 12px;letter-spacing:var(--ls-tight)}
+.wrap h2 small{font-size:var(--fs-caption);font-weight:var(--fw-regular);color:var(--text-tertiary);margin-left:8px}
+.check{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px}
+.check div{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);padding:14px 16px}
+.check span{display:block;font-size:var(--fs-footnote);color:var(--text-tertiary)}
+.check b{display:block;margin-top:2px;font-size:var(--fs-title);font-weight:var(--fw-bold);letter-spacing:var(--ls-tight)}
+.check small{display:block;margin-top:2px;font-size:var(--fs-footnote);color:var(--text-tertiary)}
+.left{margin:12px 0 0;padding-left:18px;font-size:var(--fs-caption);color:var(--text-secondary);line-height:1.8}
+.how{margin:0;padding-left:18px;font-size:var(--fs-body);color:var(--text-secondary);line-height:1.8}
+.how b{color:var(--text-primary);font-weight:var(--fw-medium)}
+.day{border-top:1px solid var(--border);padding:18px 0 4px;display:grid;grid-template-columns:96px 1fr;gap:8px 16px}
+.day:first-of-type{border-top:0}
+.day time{font-size:var(--fs-caption);color:var(--text-tertiary);font-variant-numeric:tabular-nums;padding-top:2px}
+.day ul{margin:0;padding:0;list-style:none}
+.day li{margin:0 0 12px;font-size:var(--fs-body);line-height:1.65;color:var(--text-secondary)}
+.day li b{display:block;color:var(--text-primary);font-weight:var(--fw-medium)}
+.num{font-family:var(--font-mono);font-variant-numeric:tabular-nums;white-space:nowrap}
+@media(max-width:560px){.day{grid-template-columns:1fr;gap:4px}}
+</style>
+</head>
+<body>
+
+<div class="ds-hero-wrap">
+  <div class="nav">
+    <a class="brand" href="/"><span class="mark">R</span> 리플로</a>
+    <a class="navback" href="/tools/">무료 도구</a>
+  </div>
+  <header class="ds-hero tool-hero">
+    <h1>사이트 관리 기록</h1>
+    <p class="lead">이 사이트를 언제, 무엇을, 왜 고쳤는지 적어 둬요. 점검한 날짜와 결과도 같이 적어요.</p>
+  </header>
+</div>
+
+<main class="wrap">
+
+  <h2>가장 최근 점검 <small>2026년 11월 28일</small></h2>
+  <div class="check">
+    <div><span>죽은 링크</span><b>0</b><small>17쪽, 안쪽 링크 191개를 다 확인함</small></div>
+    <div><span>휴대폰에서 가로로 넘침</span><b>0</b><small>주요 9쪽, 폭 390px</small></div>
+    <div><span>화면 오류</span><b>0</b><small>주요 9쪽</small></div>
+    <div><span>글자 대비 4.5 아래</span><b>0</b><small>주요 9쪽</small></div>
+  </div>
+  <p class="sec-note" style="text-align:left;margin:14px 0 0;max-width:none">아직 남은 것이 일곱 곳 있어요. 작아서 다음에 그 쪽을 손볼 때 고쳐요.</p>
+  <ul class="left">
+    <li>휴대폰에서 누르기 작은 링크 네 곳 (메인 문의 칸의 주소 세 곳, 팀 업무 화면 아래 링크 한 곳)</li>
+    <li>한 줄이 조금 긴 곳 세 곳 (메인 소개, 자동화 검토 안내, 답변집 안내)</li>
+  </ul>
+
+  <h2>이렇게 관리해요</h2>
+  <ul class="how">
+    <li><b>고친 것은 날짜와 이유를 적어요.</b> 무엇이 바뀌었는지 모르는 사이트가 되지 않게요.</li>
+    <li><b>쪽 주소를 바꾸면 옛 주소를 살려 둬요.</b> 옛 주소로 들어와도 새 쪽으로 넘어가요.</li>
+    <li><b>눈대중으로 보지 않고 재요.</b> 글자가 읽히는지, 버튼이 눌리는지, 링크가 살아 있는지를 숫자로 확인해요.</li>
+    <li><b>올리기 전에 무엇이 바뀌는지 먼저 봐요.</b> 지워지는 파일이 있으면 올리지 않고 확인해요.</li>
+    <li><b>넣으신 파일은 받지 않아요.</b> 도구는 전부 브라우저 안에서만 돌아요.</li>
+  </ul>
+
+  <h2>고친 기록</h2>
+
+  <div class="day"><time datetime="2026-11-28">11월 28일</time><ul>
+    <li><b>이 관리 기록을 만들었어요</b>고친 내용을 저만 알고 있을 이유가 없어서요. 죽은 링크를 찾는 점검도 같이 만들었어요.</li>
+  </ul></div>
+
+  <div class="day"><time datetime="2026-11-27">11월 27일</time><ul>
+    <li><b>옅은 글자를 진하게 고쳤어요</b>회색 안내 글의 대비가 <span class="num">3.0</span>이라 햇빛 아래 휴대폰에서 잘 안 읽혔어요. <span class="num">5.5</span>로 올렸어요. 파란 버튼의 흰 글자는 <span class="num">3.7 → 5.7</span>, 주황 글자는 <span class="num">3.1 → 5.4</span>예요. 읽기 편한 기준은 4.5예요.</li>
+    <li><b>휴대폰에서 누르기 쉽게 키웠어요</b>위 메뉴와 갈래 버튼의 높이가 19~30px이라 손가락으로 누르기 어려웠어요. 40px 넘게 키웠어요. 12px보다 작은 글씨도 없앴어요.</li>
+    <li><b>꾸밈을 덜어 냈어요</b>제목 한 구절만 파랗게 칠한 것, 제목 위 아이콘 상자, 버튼 끝 화살표 서른세 곳, 장식용 물빛 바탕을 뺐어요. 읽을 것만 남기려고요.</li>
+    <li><b>밖으로 나가는 링크에 ↗ 표시를 달았어요</b>블로그나 인스타그램처럼 다른 사이트로 가는 링크 서른다섯 곳이 새 창으로 열리게 하고, 표시를 붙였어요.</li>
+    <li><b>문의 버튼의 이름을 하나로 맞췄어요</b>쪽마다 「크몽에서 문의하기」「맡기기 문의」로 달랐어요. 어디서나 「맡기기 문의」예요.</li>
+    <li><b>도구 두 개를 하나로 합쳤어요</b>「내 파일 검산기」와 「3분 진단」을 「내 파일, 자동화될까」로 합쳤어요. 옛 주소는 새 쪽으로 넘어가요.</li>
+    <li><b>값을 적은 문구를 뺐어요</b>검토는 무료이고, 만드는 일은 검토한 내용을 보고 이야기해요.</li>
+  </ul></div>
+
+  <div class="day"><time datetime="2026-11-26">11월 26일</time><ul>
+    <li><b>첫 화면을 찾기 쉽게 바꿨어요</b>긴 소개 대신 찾기 칸, 갈래 버튼, 타일을 뒀어요. 인스타그램에서 본 것을 바로 찾을 수 있게요.</li>
+    <li><b>주간 업무 보고 양식과 팀 업무 화면을 올렸어요</b>양식은 엑셀로, 팀 업무 화면은 브라우저에서 돌아가요.</li>
+    <li><b>마우스를 올리면 떠오르는 효과를 뺐어요</b>색 있는 그림자도 같이 뺐어요.</li>
+  </ul></div>
+
+  <div class="day"><time datetime="2026-11-25">11월 25일</time><ul>
+    <li><b>주소를 refloworks.com 으로 옮겼어요</b>쓰던 곳의 무료 한도에 걸려 고친 것이 올라가지 않았어요. 주소를 사서 한도 걱정이 없는 곳으로 옮겼어요. 블로그와 인스타그램에 걸어 둔 링크도 다 새 주소로 바꿨어요.</li>
+    <li><b>항상 안전한 연결(https)로 열리게 했어요</b></li>
+    <li><b>첫 화면을 절반으로 줄였어요</b>길이가 <span class="num">8,539px</span>이라 화면 열 장을 내려야 끝났어요. <span class="num">3,938px</span>로 줄이고, 예전 작업물은 「만든 것」 쪽으로 옮겼어요.</li>
+    <li><b>눌러도 없는 칸을 뺐어요</b>「준비하고 있어요」라고만 적힌 칸들이에요.</li>
+  </ul></div>
+
+  <div class="day"><time datetime="2026-11-24">11월 24일</time><ul>
+    <li><b>업무 인수인계서 양식을 올렸어요</b>비밀번호를 적는 칸은 일부러 두지 않았어요.</li>
+  </ul></div>
+
+  <div class="ds-cta-band" style="margin:48px 0 0;border-radius:var(--radius-xl);padding:48px 24px">
+    <h2 style="margin:0">우리 회사 홈페이지도 이렇게 관리하고 싶다면</h2>
+    <p class="ds-mkt-lead" style="margin-bottom:24px">누가 언제 무엇을 고쳤는지, 주소와 계정이 누구 이름인지부터 같이 정리해요.</p>
+    <div class="ds-hero-cta">
+      <a class="ds-btn-pill primary" href="/#contact" data-track="log_contact">맡기기 문의</a>
+    </div>
+  </div>
+</main>
+
+<footer>
+  <p>만든 곳 — 리플로 Reflo · <a href="/tools/">무료 도구</a> · <a href="/works/">만든 것</a> · <a href="https://blog.naver.com/reflo2026" target="_blank" rel="noopener">블로그</a></p>
+  <p style="margin-top:9px">방문 수를 세기 위해 Google Analytics 쿠키를 써요. 개인을 식별하지 않아요.</p>
+</footer>
+<script src="/analytics.js"></script>
+</body>
+</html>
